@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Driftline · Know before your AI model disappears</title>
+<meta name="description" content="A GitHub Action that finds OpenAI, Anthropic and Google model IDs in your code, warns before they are retired, and tests your prompts on the replacement model.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/">
+<meta property="og:title" content="Driftline · Know before your AI model disappears">
+<meta property="og:description" content="Finds AI model IDs in your code, warns before they are retired, and tests your prompts on the replacement.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Driftline home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>
+      driftline
+    </a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#drift">Drift tests</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn small" href="#install">Add to GitHub <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">GitHub Action · OpenAI · Anthropic · Google</span>
+      <h1>
+        <span class="line"><span>Know before</span></span>
+        <span class="line"><span>your model</span></span>
+        <span class="line"><span><em>disappears.</em></span></span>
+      </h1>
+      <p class="lede">AI providers retire models on a schedule. Driftline finds every model ID in your code, flags the ones that are going away, and runs your real prompts on the replacement so you see what changes before you switch.</p>
+      <div class="ctas">
+        <a class="btn lime" href="#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#drift">See a drift test</a>
+      </div>
+      <p class="fine">Runs in your CI with your own keys. No account, no server.</p>
+    </div>
+
+    <div class="editor" role="img" aria-label="Code editor showing a Driftline warning on line 6: gpt-4o-2024-05-13 retires on 23 October 2026, replacement gpt-5.6-sol.">
+      <div class="countdown" id="countdown"><b id="cd-num">13 days</b><small id="cd-label">until gpt-4o-2024-05-13 retires</small></div>
+      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="tab">src/invoice.ts <small>· pull request #214</small></span></div>
+      <div class="code" id="code">
+        <div class="scan" id="scan"></div>
+<div class="ln"><b>1</b><span><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;</span></div>
+<div class="ln"><b>2</b><span><span class="k">const</span> openai = <span class="k">new</span> <span class="f">OpenAI</span>();</span></div>
+<div class="ln"><b>3</b><span> </span></div>
+<div class="ln"><b>4</b><span><span class="k">export async function</span> <span class="f">extractInvoice</span>(text) {</span></div>
+<div class="ln"><b>5</b><span>  <span class="k">const</span> res = <span class="k">await</span> openai.chat.completions.<span class="f">create</span>({</span></div>
+<div class="ln hit" id="hit"><b>6</b><span>    model: <span class="s model">"gpt-4o-2024-05-13"</span>,</span></div>
+<div class="annot" id="annot"><i class="ic" aria-hidden="true">!</i><div><strong>Driftline</strong><span id="annot-text"><code>gpt-4o-2024-05-13</code> retires soon (2026-10-23). Replacement: <code>gpt-5.6-sol</code>.</span></div></div>
+<div class="ln"><b>7</b><span>    response_format: { type: <span class="s">"json_object"</span> },</span></div>
+<div class="ln"><b>8</b><span>    messages: [{ role: <span class="s">"user"</span>, content: text }],</span></div>
+<div class="ln"><b>9</b><span>  });</span></div>
+<div class="ln"><b>10</b><span>  <span class="k">return</span> <span class="f">JSON</span>.<span class="f">parse</span>(res.choices[<span class="s">0</span>].message.content);</span></div>
+<div class="ln"><b>11</b><span>}</span></div>
+      </div>
+      <div class="status"><span class="live">driftline scan</span><span>223 model IDs tracked · checked 10 Oct 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-label="Upcoming model retirements">
+  <div class="head">Retiring</div>
+  <div class="track" id="ticker"></div>
+</div>
+
+<!-- HOW -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">How it works</span>
+        <h2 class="reveal d1">Three checks.<br><span class="dim">Every push.</span></h2>
+      </div>
+      <p class="lede reveal d2">Driftline runs as one step in your GitHub workflow. It reads your repository, compares what it finds with the providers' own retirement pages, and reports back on the pull request.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <span class="n">01 · Scan</span>
+        <svg class="glyph" viewBox="0 0 46 46" aria-hidden="true"><rect x="1" y="1" width="44" height="44" rx="10" fill="none" stroke="rgba(250,250,250,.16)"/><path d="M12 15h22M12 23h14M12 31h18" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/><rect x="28" y="20" width="8" height="6" rx="2" fill="#C6F432"/></svg>
+        <h3>Finds every model ID</h3>
+        <p>Code, <code>.env</code> files and configs, in JavaScript, Python, Go and 20 more file types. It skips <code>node_modules</code> and build folders.</p>
+      </div>
+      <div class="step reveal d1">
+        <span class="n">02 · Check</span>
+        <svg class="glyph" viewBox="0 0 46 46" aria-hidden="true"><rect x="1" y="1" width="44" height="44" rx="10" fill="none" stroke="rgba(250,250,250,.16)"/><rect x="11" y="13" width="24" height="22" rx="3" fill="none" stroke="#FAFAFA" stroke-width="2"/><path d="M11 19h24M17 10v6M29 10v6" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/><rect x="25" y="24" width="6" height="6" rx="1.5" fill="#C6F432"/></svg>
+        <h3>Knows the dates</h3>
+        <p>Each ID is matched against the official OpenAI, Anthropic and Google retirement pages. You get a warning on the exact file and line.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="n">03 · Test · Pro</span>
+        <svg class="glyph" viewBox="0 0 46 46" aria-hidden="true"><rect x="1" y="1" width="44" height="44" rx="10" fill="none" stroke="rgba(250,250,250,.16)"/><rect x="10" y="13" width="11" height="20" rx="3" fill="none" stroke="#FAFAFA" stroke-width="2"/><rect x="25" y="13" width="11" height="20" rx="3" fill="#C6F432"/></svg>
+        <h3>Runs your prompts on both</h3>
+        <p>Your saved prompts run on the current model and its replacement. Each one gets a similarity score, and a hard fail if JSON stops parsing.</p>
+      </div>
+    </div>
+
+    <div class="install" id="install">
+      <div class="reveal">
+        <h3>Two minutes to install.</h3>
+        <p>Add one workflow file. The scan is free and needs no key. Add a license key and your provider keys to turn on drift tests.</p>
+        <ul>
+          <li><span><b>Annotations</b> on the file and line of every retired or retiring model.</span></li>
+          <li><span><b>A report</b> in the job summary, plus one GitHub issue that updates itself.</span></li>
+          <li><span><b>Fail the build</b> on retired models, on soon-to-retire models, or never.</span></li>
+        </ul>
+      </div>
+      <div class="yaml reveal d1">
+        <div class="bar"><span>.github/workflows/driftline.yml</span><button class="copy" data-copy="yaml-src" type="button">Copy</button></div>
+<pre id="yaml-src"><span class="y-k">name</span>: Driftline
+<span class="y-k">on</span>:
+  <span class="y-k">schedule</span>:
+    - <span class="y-k">cron</span>: <span class="y-s">"17 6 * * 1"</span>   <span class="y-c"># every Monday</span>
+  <span class="y-k">pull_request</span>:
+
+<span class="y-k">jobs</span>:
+  <span class="y-k">driftline</span>:
+    <span class="y-k">runs-on</span>: ubuntu-latest
+    <span class="y-k">permissions</span>: { <span class="y-k">contents</span>: read, <span class="y-k">issues</span>: write }
+    <span class="y-k">steps</span>:
+      - <span class="y-k">uses</span>: actions/checkout@v4
+      - <span class="y-k">uses</span>: <span class="y-s">AI-Driftline/driftline@v0</span>
+        <span class="y-k">with</span>:
+          <span class="y-k">create-issue</span>: <span class="y-s">"true"</span>
+          <span class="y-k">fail-on</span>: retired
+          <span class="y-c"># Pro: license-key: ${{ secrets.DRIFTLINE_LICENSE_KEY }}</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIFT TESTS -->
+<section class="sec light" id="drift">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Drift tests · Pro</span>
+        <h2 class="reveal d1">Same prompt.<br>New model.<br><span class="dim">See what changes.</span></h2>
+      </div>
+      <p class="lede reveal d2">List the 5 to 20 prompts your app really sends in <code>.driftline/prompts.yml</code>. Driftline runs each one on the current model and on its replacement, then scores the difference.</p>
+    </div>
+
+    <div class="cases">
+      <article class="case same reveal" style="--w:100%">
+        <div class="meta"><b>sentiment</b><span>gpt-4o-2024-05-13</span><span class="arrow">↓</span><span>gpt-5.6-sol</span></div>
+        <div class="ans"><small>Current model</small><p>negative</p></div>
+        <div class="ans"><small>Replacement</small><p>negative</p></div>
+        <div class="score"><span class="num">1.00</span><div class="meter"><i></i></div><span class="tag same">✓ Same</span></div>
+      </article>
+      <article class="case changed reveal d1" style="--w:76%">
+        <div class="meta"><b>ticket-summary</b><span>claude-sonnet-4-5-20250929</span><span class="arrow">↓</span><span>claude-sonnet-5-5</span></div>
+        <div class="ans"><small>Current model</small><p>The customer's printer keeps jamming and they need <del>someone to fix it</del> today.</p></div>
+        <div class="ans"><small>Replacement</small><p>The customer's printer keeps jamming and they need <ins>it fixed</ins> today.</p></div>
+        <div class="score"><span class="num">0.76</span><div class="meter"><i></i></div><span class="tag changed">● Changed</span></div>
+      </article>
+      <article class="case broken reveal d2" style="--w:4%">
+        <div class="meta"><b>invoice-json</b><span>expect: json</span><span>gpt-4o-2024-05-13</span><span class="arrow">↓</span><span>gpt-5.6-sol</span></div>
+        <div class="ans"><small>Current model</small><p><code>{"vendor": "ACME GmbH", "total": 1250.00, "currency": "EUR"}</code></p></div>
+        <div class="ans"><small>Replacement</small><p><del>Vendor: ACME GmbH. Total: 1,250.00 EUR.</del></p></div>
+        <div class="score"><span class="num">0.00</span><div class="meter"><i></i></div><span class="tag broken">✕ Broken · not JSON</span></div>
+      </article>
+    </div>
+
+    <div class="legend reveal">
+      <span><span class="tag same">✓ Same</span>similarity 0.90 or higher</span>
+      <span><span class="tag changed">● Changed</span>0.60 to 0.90, worth a look</span>
+      <span><span class="tag broken">✕ Broken</span>below 0.60, or JSON stopped parsing</span>
+    </div>
+    <p class="note reveal">Example answers written for this page. The scores are what Driftline's scoring code returns for them. Text is compared by word and word-pair overlap; JSON field by field.</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec" id="timeline">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Retirement timeline</span>
+        <h2 class="reveal d1">The clock<br><span class="dim">is already running.</span></h2>
+      </div>
+      <p class="lede reveal d2">Text models with a fixed retirement date, from the providers' own pages. If any of these IDs are in your code, they stop answering on that day.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-axis" id="tl-axis"><span class="today" id="tl-today"></span></div>
+      <div class="tl-months" id="tl-months"></div>
+      <div class="tl-rows" id="tl-rows"></div>
+    </div>
+    <p class="src reveal">Checked against <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener" target="_blank">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener" target="_blank">Anthropic</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener" target="_blank">Google</a> on 10 Oct 2026. Google publishes only earliest shutdown dates, so Driftline reports those as "may stop working".</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap trust">
+    <div>
+      <span class="eyebrow reveal">Privacy by design</span>
+      <h2 class="reveal d1">Your keys and prompts<br><span class="dim">never leave your pipeline.</span></h2>
+      <p class="lede reveal d2" style="margin-top:26px">Driftline is code that runs inside your own GitHub Actions job. There is no Driftline server to send anything to.</p>
+      <div class="facts reveal d3">
+        <div><b>0</b><span>servers between you and your AI provider</span></div>
+        <div><b>223</b><span>model IDs tracked across three providers</span></div>
+        <div><b>0</b><span>dependencies. Plain Node, easy to audit</span></div>
+      </div>
+    </div>
+    <div class="flow reveal d1" aria-label="Data flow: your GitHub runner talks directly to the AI provider. Only the license key goes to Lemon Squeezy.">
+      <div class="box you"><b>Your GitHub runner</b><span>your code, your keys</span></div>
+      <div class="pipe"></div>
+      <div class="box"><b>OpenAI · Anthropic · Google</b><span>prompts, with your API key</span></div>
+      <div class="pipe" style="opacity:.5"></div>
+      <div class="box" style="opacity:.75"><b>Lemon Squeezy</b><span>license key only (Pro)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Pricing</span>
+        <h2 class="reveal d1">Cheaper than<br><span class="dim">one outage.</span></h2>
+      </div>
+      <div class="reveal d2">
+        <p class="lede">The scan is free forever. Pro adds drift tests. API calls in drift tests run on your own provider keys: two calls per prompt per run.</p>
+        <div class="billing" role="group" aria-label="Billing period">
+          <span class="pill" id="pill"></span>
+          <button type="button" data-period="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" data-period="yearly" aria-pressed="false">Yearly <em>2 months free</em></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plans">
+      <div class="plan free reveal">
+        <span class="name">Free</span>
+        <div class="price">$0</div>
+        <div class="per">forever, any number of repositories</div>
+        <ul>
+          <li><span><b>Scan</b> for OpenAI, Anthropic and Google model IDs</span></li>
+          <li><span>Retirement warnings on the exact file and line</span></li>
+          <li><span>Job summary report and a self-updating issue</span></li>
+          <li><span>Fail the build on retired models</span></li>
+        </ul>
+        <a class="btn ghost" href="#install">Add the free Action</a>
+        <p class="small-print">No account. No key.</p>
+      </div>
+      <div class="plan pro reveal d1">
+        <svg class="mark-bg" viewBox="0 0 64 64" aria-hidden="true"><g fill="#0A0A0A"><rect x="10" y="14" width="19" height="19" rx="3"/><rect x="37" y="8" width="19" height="19" rx="3"/><rect x="10" y="35" width="19" height="19" rx="3"/><rect x="31" y="35" width="19" height="19" rx="3"/></g></svg>
+        <span class="name">Pro</span>
+        <div class="price"><span id="price">$19</span><small id="price-unit">/ month</small></div>
+        <div class="per" id="price-note">billed monthly, cancel any time</div>
+        <ul>
+          <li><span>Everything in Free</span></li>
+          <li><span><b>Drift tests</b>: your prompts on the current and the replacement model</span></li>
+          <li><span>Similarity score per prompt</span></li>
+          <li><span>Hard fail when a JSON answer stops parsing</span></li>
+          <li><span>Full before and after answers in the report</span></li>
+        </ul>
+        <a class="btn" id="buy" href="mailto:hello@aidriftline.com?subject=Driftline%20Pro">Get Pro <span class="arrow" aria-hidden="true">→</span></a>
+        <p class="small-print">Secure checkout by Lemon Squeezy. 14-day refund.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap faq">
+    <div>
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="reveal d1" style="margin-top:22px">Questions,<br><span class="dim">answered.</span></h2>
+    </div>
+    <div class="reveal d1">
+      <details>
+        <summary>Does Driftline see my code or my API keys?</summary>
+        <p>No. Driftline is a step inside your own GitHub Actions job. Prompts go from your runner straight to OpenAI, Anthropic or Google with your own keys. The only call Driftline makes for itself is the Pro license check with Lemon Squeezy, and that sends only the license key.</p>
+      </details>
+      <details>
+        <summary>Where do the retirement dates come from?</summary>
+        <p>From the providers' official deprecation pages, checked by hand and dated in the registry. Google lists only the earliest shutdown date, so those models are reported as "may stop working". Anthropic's "not sooner than" dates are shown for information and never fail a build.</p>
+      </details>
+      <details>
+        <summary>Which models does it cover?</summary>
+        <p>223 OpenAI, Anthropic and Google model IDs, including audio, image, video and embedding models. All of them are scanned and reported. Drift tests run on text models only.</p>
+      </details>
+      <details>
+        <summary>What does a drift test cost me in API usage?</summary>
+        <p>Two calls per prompt per run: one to the current model, one to the replacement. Ten prompts on a weekly schedule is 20 calls a week, billed by your provider on your own key. If the current model is already retired, only the replacement is called.</p>
+      </details>
+      <details>
+        <summary>What happens if I cancel Pro?</summary>
+        <p>Drift tests stop at the end of your paid period. The free scan keeps running. You can cancel any time from the Lemon Squeezy receipt email, and you can ask for a full refund within 14 days of your first payment.</p>
+      </details>
+      <details>
+        <summary>Who is behind Driftline?</summary>
+        <p>Driftline is built and run by one developer, Mirza Tontowi. Questions go straight to me at <a href="mailto:hello@aidriftline.com" style="color:var(--lime)">hello@aidriftline.com</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <canvas class="blocks" id="field2" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h2 class="reveal">Ship on your schedule.<br><em>Not theirs.</em></h2>
+    <div class="ctas reveal d1">
+      <a class="btn lime" href="#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="#pricing">See Pro</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Driftline home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>
+      driftline
+    </a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="#pricing">Pricing</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Mirza Tontowi. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
