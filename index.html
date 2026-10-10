@@ -125,7 +125,7 @@
     <div class="install" id="install">
       <div class="reveal">
         <h3>Two minutes to install.</h3>
-        <p>Add one workflow file. The scan is free and needs no key. Add a license key and your provider keys to turn on drift tests.</p>
+        <p>Add one workflow file. The scan is free and needs no key. For drift tests, activate your Pro key once with <code>npx github:AI-Driftline/driftline activate</code> and add your provider keys.</p>
         <ul>
           <li><span><b>Annotations</b> on the file and line of every retired or retiring model.</span></li>
           <li><span><b>A report</b> in the job summary, plus one GitHub issue that updates itself.</span></li>
@@ -148,7 +148,7 @@
       - <span class="y-k">uses</span>: actions/checkout@v4
       - <span class="y-k">uses</span>: <span class="y-s">AI-Driftline/driftline@v0</span>
         <span class="y-k">with</span>:
-          <span class="y-k">create-issue</span>: <span class="y-s">"true"</span>
+          <span class="y-k">create-issue</span>: <span class="y-s">${{ github.event_name != 'pull_request' }}</span>
           <span class="y-k">fail-on</span>: retired
           <span class="y-c"># Pro: license-key: ${{ secrets.DRIFTLINE_LICENSE_KEY }}</span></pre>
       </div>
@@ -221,8 +221,8 @@
   <div class="wrap trust">
     <div>
       <span class="eyebrow reveal">Privacy by design</span>
-      <h2 class="reveal d1">Your keys and prompts<br><span class="dim">never leave your pipeline.</span></h2>
-      <p class="lede reveal d2" style="margin-top:26px">Driftline is code that runs inside your own GitHub Actions job. There is no Driftline server to send anything to.</p>
+      <h2 class="reveal d1">Your keys and prompts<br><span class="dim">never touch our servers.</span></h2>
+      <p class="lede reveal d2" style="margin-top:26px">Driftline is code that runs inside your own GitHub Actions job. Prompts go straight from your runner to your AI provider. There is no Driftline server in between.</p>
       <div class="facts reveal d3">
         <div><b>0</b><span>servers between you and your AI provider</span></div>
         <div><b>223</b><span>model IDs tracked across three providers</span></div>
@@ -282,6 +282,7 @@
           <li><span>Similarity score per prompt</span></li>
           <li><span>Hard fail when a JSON answer stops parsing</span></li>
           <li><span>Full before and after answers in the report</span></li>
+          <li><span>Use on up to 3 GitHub accounts or organizations</span></li>
         </ul>
         <a class="btn" id="buy" href="mailto:hello@aidriftline.com?subject=Driftline%20Pro">Get Pro <span class="arrow" aria-hidden="true">→</span></a>
         <p class="small-print">Secure checkout by Lemon Squeezy. 14-day refund.</p>
@@ -313,6 +314,10 @@
       <details>
         <summary>What does a drift test cost me in API usage?</summary>
         <p>Two calls per prompt per run: one to the current model, one to the replacement. Ten prompts on a weekly schedule is 20 calls a week, billed by your provider on your own key. If the current model is already retired, only the replacement is called.</p>
+      </details>
+      <details>
+        <summary>Can I use one Pro key in several places?</summary>
+        <p>Yes, in every repository of up to 3 GitHub accounts or organizations, for example your own account and your company's. You activate the key once per account. To move a slot, deactivate one account and activate another. Need more? Write to <a href="mailto:hello@aidriftline.com" style="color:var(--lime)">hello@aidriftline.com</a>.</p>
       </details>
       <details>
         <summary>What happens if I cancel Pro?</summary>
