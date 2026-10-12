@@ -1,8 +1,10 @@
 // Driftline landing. No dependencies.
 
-// Lemon Squeezy checkout links. Paste them here once the Pro product exists.
-// While empty, "Get Pro" opens an email instead.
-const CHECKOUT = { monthly: "", yearly: "" };
+// Lemon Squeezy checkout links (live mode). If one is empty, "Get Pro" opens an email instead.
+const CHECKOUT = {
+  monthly: "https://aidriftline.lemonsqueezy.com/checkout/buy/bf8d4d8c-de7c-4250-a484-502684504d23?enabled=2237388",
+  yearly: "https://aidriftline.lemonsqueezy.com/checkout/buy/55745667-82c5-423d-baf4-5248c0f629bb?enabled=2237389",
+};
 
 const DAY = 86400000;
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
