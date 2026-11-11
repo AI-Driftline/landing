@@ -187,13 +187,21 @@
   <url><loc>https://aidriftline.com/models/gemini-2.5-pro/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-image-1-mini/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-image-1.5/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-image-1.5-2025-12-16/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gemini-omni-1.1-flash/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5-2025-08-07/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5-mini/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5-mini-2025-08-07/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5-nano/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5-nano-2025-08-07/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5-pro/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5-pro-2025-10-06/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/o3/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/o3-2025-04-16/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/o3-pro/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/o3-pro-2025-06-10/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-4o-mini-tts/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-mini-tts-2025-03-20/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-mini-tts-2025-12-15/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/tts-1/</loc><lastmod>2026-11-11</lastmod></url>
@@ -209,22 +217,29 @@
   <url><loc>https://aidriftline.com/models/gpt-4o-mini-transcribe-2025-03-20/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-realtime/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-audio/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-audio-2025-08-28/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-audio-mini/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-audio-mini-2025-12-15/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-realtime/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-realtime-2025-08-28/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-realtime-mini/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-realtime-mini-2025-12-15/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5.5-cyber-preview/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-opus-4-6/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-image-2/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-image-2-2026-04-21/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-sonnet-4-6/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-mini-transcribe/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-4o-mini-transcribe-2025-12-15/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-transcribe/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-4o-transcribe-diarize/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/whisper-1/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gemini-2.5-flash-image/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5.1/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5.1-2025-11-13/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5.3-codex/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gpt-5.4-nano/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/gpt-5.4-nano-2026-03-17/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-opus-4-7/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gemini-3.1-flash-lite/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-opus-4-8/</loc><lastmod>2026-11-11</lastmod></url>
@@ -237,6 +252,8 @@
   <url><loc>https://aidriftline.com/models/claude-opus-5-5/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-sonnet-5-5/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-haiku-5-5/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/claude-fable-5-2/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aidriftline.com/models/claude-mythos-5-2/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/gemini-embedding-001/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-3-sonnet/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aidriftline.com/models/claude-3-5-sonnet/</loc><lastmod>2026-11-11</lastmod></url>

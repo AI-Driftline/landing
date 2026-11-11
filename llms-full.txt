@@ -5,7 +5,7 @@
 - Free scan: `npx -y github:AI-Driftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks 235 model IDs (checked 2026-11-11), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- Tracks 252 model IDs (checked 2026-11-11), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
@@ -36,18 +36,26 @@
 - gemini-3.1-flash-tts-preview (Google, audio): earliest shutdown 2026-11-17, replacement gemini-3.8-flash-tts
 - claude-opus-4-5-20251101 (Anthropic): not before 2026-11-24
 - claude-sonnet-4-5-20250929 (Anthropic): shutdown 2026-11-30, replacement claude-sonnet-5-5
-- chatgpt-image-latest (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.5-sunburst
+- chatgpt-image-latest (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
 - gemini-2.5-flash (Google): routing starts 2026-12-01, replacement gemini-3.5-flash-lite (requests routed to the replacement)
 - gemini-2.5-pro (Google): routing starts 2026-12-01, replacement gemini-3.8-flash (requests routed to the replacement)
-- gpt-image-1-mini (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.5-sunburst
-- gpt-image-1.5 (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.5-sunburst
+- gpt-image-1-mini (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
+- gpt-image-1.5 (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
+- gpt-image-1.5-2025-12-16 (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
 - gemini-omni-1.1-flash (Google, video): routing starts 2026-12-03, replacement gemini-omni-1.2-flash (requests routed to the replacement)
+- gpt-5 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
 - gpt-5-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
+- gpt-5-mini (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-terra
 - gpt-5-mini-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-terra
+- gpt-5-nano (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-luna
 - gpt-5-nano-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-luna
+- gpt-5-pro (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
 - gpt-5-pro-2025-10-06 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
+- o3 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
 - o3-2025-04-16 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
+- o3-pro (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
 - o3-pro-2025-06-10 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
+- gpt-4o-mini-tts (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
 - gpt-4o-mini-tts-2025-03-20 (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
 - gpt-4o-mini-tts-2025-12-15 (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
 - tts-1 (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
@@ -63,22 +71,29 @@
 - gpt-4o-mini-transcribe-2025-03-20 (OpenAI, audio): shutdown 2027-01-20, replacement gpt-4o-mini-transcribe-2025-12-15
 - gpt-4o-realtime (OpenAI, audio): shutdown 2027-01-20, replacement gpt-realtime-2.1
 - gpt-audio (OpenAI, audio): shutdown 2027-01-20, replacement gpt-audio-1.5
+- gpt-audio-2025-08-28 (OpenAI, audio): shutdown 2027-01-20, replacement gpt-audio-1.5
 - gpt-audio-mini (OpenAI, audio): shutdown 2027-01-20, replacement gpt-audio-1.5
+- gpt-audio-mini-2025-12-15 (OpenAI, audio): shutdown 2027-01-20, replacement gpt-audio-1.5
 - gpt-realtime (OpenAI, audio): shutdown 2027-01-20, replacement gpt-realtime-2.1
+- gpt-realtime-2025-08-28 (OpenAI, audio): shutdown 2027-01-20, replacement gpt-realtime-2.1
 - gpt-realtime-mini (OpenAI, audio): shutdown 2027-01-20, replacement gpt-realtime-2.1-mini
+- gpt-realtime-mini-2025-12-15 (OpenAI, audio): shutdown 2027-01-20, replacement gpt-realtime-2.1-mini
 - gpt-5.5-cyber-preview (OpenAI): shutdown 2027-02-01
 - claude-opus-4-6 (Anthropic): not before 2027-02-05
 - gpt-image-2 (OpenAI, image): shutdown 2027-02-10, replacement gpt-image-2.6-sunburst
 - gpt-image-2-2026-04-21 (OpenAI, image): shutdown 2027-02-10, replacement gpt-image-2.6-sunburst
 - claude-sonnet-4-6 (Anthropic): not before 2027-02-17
 - gpt-4o-mini-transcribe (OpenAI, audio): shutdown 2027-02-26, replacement gpt-transcribe
+- gpt-4o-mini-transcribe-2025-12-15 (OpenAI, audio): shutdown 2027-02-26, replacement gpt-transcribe
 - gpt-4o-transcribe (OpenAI, audio): shutdown 2027-02-26, replacement gpt-transcribe
 - gpt-4o-transcribe-diarize (OpenAI, audio): shutdown 2027-02-26, replacement gpt-transcribe
 - whisper-1 (OpenAI, audio): shutdown 2027-02-26, replacement gpt-transcribe
 - gemini-2.5-flash-image (Google, image): earliest shutdown 2027-03-15, replacement gemini-3.1-flash-lite-image
 - gpt-5.1 (OpenAI): shutdown 2027-04-01, replacement gpt-6-sol
+- gpt-5.1-2025-11-13 (OpenAI): shutdown 2027-04-01, replacement gpt-6-sol
 - gpt-5.3-codex (OpenAI): shutdown 2027-04-01, replacement gpt-6-sol
 - gpt-5.4-nano (OpenAI): shutdown 2027-04-01, replacement gpt-6-luna
+- gpt-5.4-nano-2026-03-17 (OpenAI): shutdown 2027-04-01, replacement gpt-6-luna
 - claude-opus-4-7 (Anthropic): not before 2027-04-16
 - gemini-3.1-flash-lite (Google): earliest shutdown 2027-05-07, replacement gemini-3.5-flash-lite
 - claude-opus-4-8 (Anthropic): not before 2027-05-28
@@ -91,6 +106,8 @@
 - claude-opus-5-5 (Anthropic): not before 2027-09-22
 - claude-sonnet-5-5 (Anthropic): not before 2027-09-28
 - claude-haiku-5-5 (Anthropic): not before 2027-10-07
+- claude-fable-5-2 (Anthropic): not before 2027-11-09
+- claude-mythos-5-2 (Anthropic): not before 2027-11-09
 - gemini-embedding-001 (Google, embedding): earliest shutdown 2028-05-14, replacement gemini-embedding-2
 
 ## Past retirement dates

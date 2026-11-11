@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>o1-preview retirement date: 28 Jul 2025 · Driftline</title>
-<meta name="description" content="OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3.">
+<meta name="description" content="OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3 (which is itself retiring; move to gpt-5.6-sol).">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://aidriftline.com/models/o1-preview/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aidriftline.com/models/o1-preview/">
 <meta property="og:title" content="o1-preview retirement date: 28 Jul 2025 · Driftline">
-<meta property="og:description" content="OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3.">
+<meta property="og:description" content="OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3 (which is itself retiring; move to gpt-5.6-sol).">
 <meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@aidriftline">
@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is o1-preview retired?","acceptedAnswer":{"@type":"Answer","text":"OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3."}},{"@type":"Question","name":"What replaces o1-preview?","acceptedAnswer":{"@type":"Answer","text":"OpenAI recommends o3. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"How do I find o1-preview in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y github:AI-Driftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is o1-preview retired?","acceptedAnswer":{"@type":"Answer","text":"OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3 (which is itself retiring; move to gpt-5.6-sol)."}},{"@type":"Question","name":"What replaces o1-preview?","acceptedAnswer":{"@type":"Answer","text":"OpenAI recommends o3, which is itself retiring; the model to move to is gpt-5.6-sol. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"How do I find o1-preview in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y github:AI-Driftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Model retirement dates","item":"https://aidriftline.com/models/"},{"@type":"ListItem","position":2,"name":"o1-preview","item":"https://aidriftline.com/models/o1-preview/"}]}</script>
 </head>
 <body>
@@ -33,19 +33,19 @@
   <div class="wrap">
     <p class="crumbs"><a href="/models/">Model retirement dates</a> / OpenAI</p>
     <h1 class="model-h1"><code>o1-preview</code></h1>
-    <p class="answer">OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3.</p>
+    <p class="answer">OpenAI retired o1-preview on 28 July 2025. API calls to it now fail. The recommended replacement is o3 (which is itself retiring; move to gpt-5.6-sol).</p>
     <table class="kv"><tbody>
       <tr><th scope="row">Provider</th><td>OpenAI</td></tr>
       <tr><th scope="row">Status</th><td>Retired <span class="dim">(as of 11 Nov 2026)</span></td></tr>
       <tr><th scope="row">Shutdown</th><td>28 July 2025</td></tr>
-      <tr><th scope="row">Replacement</th><td><code>o3</code></td></tr>
+      <tr><th scope="row">Replacement</th><td><a href="/models/o3/"><code>o3</code></a> → move to <code>gpt-5.6-sol</code></td></tr>
       <tr><th scope="row">Model type</th><td>Text</td></tr>
       <tr><th scope="row">Announced</th><td>28 April 2025</td></tr>
       <tr><th scope="row">Source</th><td><a href="https://developers.openai.com/api/docs/deprecations" rel="noopener">OpenAI deprecations page</a></td></tr>
     </tbody></table>
 
     <h2>Before you switch</h2>
-    <p>A replacement model answers the same prompt differently: tone, length, format, and whether JSON still parses. Driftline Pro runs your real prompts on o3 in CI, so you see the new answers before you ship the switch. <a href="/#drift">See a drift test</a>.</p>
+    <p>A replacement model answers the same prompt differently: tone, length, format, and whether JSON still parses. Driftline Pro runs your real prompts on gpt-5.6-sol in CI, so you see the new answers before you ship the switch. <a href="/#drift">See a drift test</a>.</p>
 
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
