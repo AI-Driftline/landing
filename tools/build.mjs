@@ -297,7 +297,7 @@ for (const f of ["index.html", "agents/index.html"]) {
   const p = join(ROOT, f);
   if (!existsSync(p)) continue;
   const s = readFileSync(p, "utf8")
-    .replace(/(<span data-reg="count">)[^<]*(<\/span>)/g, `$1${models.length}$2`)
+    .replace(/(<(span|b) data-reg="count">)[^<]*(<\/\2>)/g, `$1${models.length}$3`)
     .replace(/(<span data-reg="checked">)[^<]*(<\/span>)/g, `$1${short(reg.checked)}$2`);
   writeFileSync(p, f === "index.html" ? withFaqLd(s) : s);
 }
