@@ -149,6 +149,15 @@ const save = () => {
   writeFileSync(STATE, JSON.stringify(state, null, 2) + "\n");
 };
 
+// Started by hand from the Actions tab: prove the keys work with a read-only call (posts nothing).
+if (live && process.env.GITHUB_EVENT_NAME === "workflow_dispatch") {
+  const url = "https://api.x.com/2/users/me";
+  const res = await fetch(url, { headers: { Authorization: oauthHeader("GET", url) } });
+  const body = await res.text();
+  console.log(res.ok ? `X keys OK: signed in as @${JSON.parse(body).data?.username}` : `X keys NOT working (${res.status}): ${body.slice(0, 300)}`);
+  if (!res.ok) process.exitCode = 1;
+}
+
 let failed = null;
 let sent = 0;
 for (const p of posts) {
