@@ -108,8 +108,9 @@ function derive({ checked, count, models }) {
     const map = new Map();
     for (const m of list.filter((m) => inWindow(m.retires)).sort(byDate)) {
       const key = m.retires + m.provider;
-      if (!map.has(key)) map.set(key, { date: m.retires, who: WHO[m.provider] || m.provider, ids: [] });
+      if (!map.has(key)) map.set(key, { date: m.retires, who: WHO[m.provider] || m.provider, ids: [], routes: true });
       map.get(key).ids.push(m.id);
+      if (!m.routes) map.get(key).routes = false; // routed IDs keep answering, from another model
     }
     const groups = [...map.values()];
     groups.forEach((g) => g.ids.sort((a, b) => rank(a) - rank(b)));
@@ -141,6 +142,7 @@ onScroll();
 function render({ checked, count, hero, groups, extras }) {
   $("#reg-status").textContent = `${count} model IDs tracked · checked ${fmt(checked)}`;
   $("#reg-checked").textContent = fmt(checked);
+  document.querySelectorAll('[data-reg="count"]').forEach((el) => { el.textContent = count; });
 
   // hero countdown + annotation
   if (hero) {
@@ -194,7 +196,7 @@ function render({ checked, count, hero, groups, extras }) {
       <span class="date">${fmt(g.date)}</span>
       <span class="who">${g.who} · ${g.ids.length}</span>
       <span class="ids">${shown.map((id) => `<code>${id}</code>`).join("")}${more > 0 ? `<code class="more">+${more} more</code>` : ""}</span>
-      <span class="rel">${d <= 0 ? "retired " : ""}${rel(d)}</span>
+      <span class="rel">${d <= 0 ? (g.routes ? "routed " : "retired ") : g.routes ? "switches model " : ""}${rel(d)}</span>
     </div>`;
   }).join("");
 }

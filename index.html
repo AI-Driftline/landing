@@ -19,7 +19,10 @@
 <link rel="apple-touch-icon" href="assets/favicon-180.png">
 <link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Driftline","alternateName":"Driftline AI Model Check","url":"https://aidriftline.com/","description":"GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in your code, warns before they are retired, and tests your prompts on the replacement model.","applicationCategory":"DeveloperApplication","operatingSystem":"GitHub Actions, Linux, macOS, Windows (Node 20+)","codeRepository":"https://github.com/AI-Driftline/driftline","license":"https://www.elastic.co/licensing/elastic-license","offers":[{"@type":"Offer","name":"Free scan","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Pro (monthly)","price":"19","priceCurrency":"USD"},{"@type":"Offer","name":"Pro (yearly)","price":"190","priceCurrency":"USD"}],"sameAs":["https://github.com/AI-Driftline/driftline","https://github.com/marketplace/actions/driftline-ai-model-check","https://x.com/aidriftline"]}</script>
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json" id="faq-ld">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Driftline see my code or my API keys?","acceptedAnswer":{"@type":"Answer","text":"No. Driftline is a step inside your own GitHub Actions job. Prompts go from your runner straight to OpenAI, Anthropic or Google with your own keys. The only call Driftline makes for itself is the Pro license check with Lemon Squeezy, and that sends only the license key."}},{"@type":"Question","name":"Where do the retirement dates come from?","acceptedAnswer":{"@type":"Answer","text":"From the providers' official deprecation pages, checked by hand and dated in the registry. Google lists only the earliest shutdown date, so those models are reported as \"may stop working\". Some Google IDs are routed to a newer model instead of being switched off; Driftline flags those too, because the call keeps working while the answers change. Anthropic's \"not sooner than\" dates are shown for information and never fail a build."}},{"@type":"Question","name":"Which models does it cover?","acceptedAnswer":{"@type":"Answer","text":"235 OpenAI, Anthropic and Google model IDs, including audio, image, video and embedding models, plus Bedrock, Vertex and OpenRouter spellings and Claude short names. All of them are scanned and reported. Drift tests run on text models only. The full list, with one page per model, is at aidriftline.com/models."}},{"@type":"Question","name":"What does a drift test cost me in API usage?","acceptedAnswer":{"@type":"Answer","text":"Two calls per prompt per run: one to the current model, one to the replacement. Ten prompts on a weekly schedule is 20 calls a week, billed by your provider on your own key. If the current model is already retired, only the replacement is called."}},{"@type":"Question","name":"Can I use one Pro key in several places?","acceptedAnswer":{"@type":"Answer","text":"Yes, in every repository of up to 3 GitHub accounts or organizations, for example your own account and your company's. You activate the key once per account. To move a slot, deactivate one account and activate another. Need more? Write to hello@aidriftline.com."}},{"@type":"Question","name":"What happens if I cancel Pro?","acceptedAnswer":{"@type":"Answer","text":"Drift tests stop at the end of your paid period. The free scan keeps running. You can cancel any time from the Lemon Squeezy receipt email, and you can ask for a full refund within 14 days of your first payment."}},{"@type":"Question","name":"Can my AI coding agent use it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Agents like Claude Code, Cursor or Copilot can run npx -y github:AI-Driftline/driftline . --json to check model IDs before writing them, or read models.json. There is a ready-made snippet for AGENTS.md and CLAUDE.md on the agent guide."}},{"@type":"Question","name":"Who is behind Driftline?","acceptedAnswer":{"@type":"Answer","text":"Driftline is an independent product, built and run by one developer. Questions go straight to me at hello@aidriftline.com."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -80,7 +83,7 @@
 <div class="ln"><b>10</b><span>  <span class="k">return</span> <span class="f">JSON</span>.<span class="f">parse</span>(res.choices[<span class="s">0</span>].message.content);</span></div>
 <div class="ln"><b>11</b><span>}</span></div>
       </div>
-      <div class="status"><span class="live">driftline scan</span><span id="reg-status">223 model IDs tracked · checked 12 Oct 2026</span></div>
+      <div class="status"><span class="live">driftline scan</span><span id="reg-status"><span data-reg="count">235</span> model IDs tracked · checked <span data-reg="checked">11 Nov 2026</span></span></div>
     </div>
   </div>
 </section>
@@ -213,7 +216,7 @@
       <div class="tl-months" id="tl-months"></div>
       <div class="tl-rows" id="tl-rows"></div>
     </div>
-    <p class="src reveal">Checked against <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener" target="_blank">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener" target="_blank">Anthropic</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener" target="_blank">Google</a> on <span id="reg-checked">12 Oct 2026</span>. Google publishes only earliest shutdown dates, so Driftline reports those as "may stop working".</p>
+    <p class="src reveal">Checked against <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener" target="_blank">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener" target="_blank">Anthropic</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener" target="_blank">Google</a> on <span id="reg-checked"><span data-reg="checked">11 Nov 2026</span></span>. Google publishes only earliest shutdown dates, so Driftline reports those as "may stop working". <a href="/models/" style="color:var(--lime)">See all <span data-reg="count">235</span> dates →</a></p>
   </div>
 </section>
 
@@ -226,7 +229,7 @@
       <p class="lede reveal d2" style="margin-top:26px">Driftline is code that runs inside your own GitHub Actions job. Prompts go straight from your runner to your AI provider. There is no Driftline server in between.</p>
       <div class="facts reveal d3">
         <div><b>0</b><span>servers between you and your AI provider</span></div>
-        <div><b>223</b><span>model IDs tracked across three providers</span></div>
+        <div><b><span data-reg="count">235</span></b><span>model IDs tracked across three providers</span></div>
         <div><b>0</b><span>dependencies. Plain Node, easy to audit</span></div>
       </div>
     </div>
@@ -306,11 +309,11 @@
       </details>
       <details>
         <summary>Where do the retirement dates come from?</summary>
-        <p>From the providers' official deprecation pages, checked by hand and dated in the registry. Google lists only the earliest shutdown date, so those models are reported as "may stop working". Anthropic's "not sooner than" dates are shown for information and never fail a build.</p>
+        <p>From the providers' official deprecation pages, checked by hand and dated in the registry. Google lists only the earliest shutdown date, so those models are reported as "may stop working". Some Google IDs are routed to a newer model instead of being switched off; Driftline flags those too, because the call keeps working while the answers change. Anthropic's "not sooner than" dates are shown for information and never fail a build.</p>
       </details>
       <details>
         <summary>Which models does it cover?</summary>
-        <p>223 OpenAI, Anthropic and Google model IDs, including audio, image, video and embedding models. All of them are scanned and reported. Drift tests run on text models only.</p>
+        <p><span data-reg="count">235</span> OpenAI, Anthropic and Google model IDs, including audio, image, video and embedding models, plus Bedrock, Vertex and OpenRouter spellings and Claude short names. All of them are scanned and reported. Drift tests run on text models only. The full list, with one page per model, is at <a href="/models/" style="color:var(--lime)">aidriftline.com/models</a>.</p>
       </details>
       <details>
         <summary>What does a drift test cost me in API usage?</summary>
@@ -323,6 +326,10 @@
       <details>
         <summary>What happens if I cancel Pro?</summary>
         <p>Drift tests stop at the end of your paid period. The free scan keeps running. You can cancel any time from the Lemon Squeezy receipt email, and you can ask for a full refund within 14 days of your first payment.</p>
+      </details>
+      <details>
+        <summary>Can my AI coding agent use it?</summary>
+        <p>Yes. Agents like Claude Code, Cursor or Copilot can run <code>npx -y github:AI-Driftline/driftline . --json</code> to check model IDs before writing them, or read <a href="/models.json" style="color:var(--lime)">models.json</a>. There is a ready-made snippet for <code>AGENTS.md</code> and <code>CLAUDE.md</code> on the <a href="/agents/" style="color:var(--lime)">agent guide</a>.</p>
       </details>
       <details>
         <summary>Who is behind Driftline?</summary>
@@ -353,6 +360,8 @@
       driftline
     </a>
     <nav aria-label="Footer">
+      <a href="/models/">Retirement dates</a>
+      <a href="/agents/">For AI agents</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
       <a href="https://x.com/aidriftline" rel="noopener">X</a>
       <a href="#pricing">Pricing</a>

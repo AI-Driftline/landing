@@ -1,0 +1,316 @@
+#!/usr/bin/env node
+// Builds the pages that search engines and AI assistants read, from the product registry:
+//   models/index.html            every tracked model, by date
+//   models/<id>/index.html       one page per model ID (date, replacement, source, how to check)
+//   models.json                  the registry, served from aidriftline.com for scripts and agents
+//   llms.txt, llms-full.txt      plain-text summary for AI assistants (llmstxt.org)
+//   sitemap.xml, robots.txt
+// It also refreshes the model count and "checked" date written into index.html and agents/index.html.
+//
+// Run after every registry change:  node tools/build.mjs [path/to/models.json]
+// Default registry path: ../product/registry/models.json (the product repo next to this one).
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const SITE = "https://aidriftline.com";
+const regPath = resolve(process.argv[2] || join(ROOT, "..", "product", "registry", "models.json"));
+const reg = JSON.parse(readFileSync(regPath, "utf8"));
+const models = [...reg.models].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
+const byId = new Map(models.map((m) => [m.id, m]));
+// Claude short names ("claude-sonnet-4-5") get a page too: people search for those, not the dated snapshot.
+// Same rule as the Action: only when every snapshot behind the name shares one date.
+const aliases = [];
+{
+  const groups = new Map();
+  for (const m of models) {
+    const base = m.provider === "anthropic" && m.id.match(/^(claude-.+)-\d{8}$/)?.[1];
+    if (base) groups.set(base, [...(groups.get(base) || []), m]);
+  }
+  for (const [base, snaps] of groups) {
+    if (byId.has(base) || snaps.some((s) => s.retires !== snaps[0].retires || s.qualifier !== snaps[0].qualifier)) continue;
+    const latest = snaps.reduce((a, b) => (a.id > b.id ? a : b));
+    aliases.push({ ...latest, id: base, aliasOf: latest.id });
+  }
+  for (const a of aliases) byId.set(a.id, a);
+}
+const TODAY = new Date().toISOString().slice(0, 10);
+
+const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google" };
+const KIND = { text: "Text", audio: "Audio", image: "Image", video: "Video", embedding: "Embedding", moderation: "Moderation", agent: "Agent" };
+const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const long = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+const short = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const past = (m) => m.retires <= TODAY;
+const url = (id) => `/models/${id}/`;
+const link = (id) => (byId.has(id) ? `<a href="${url(id)}"><code>${esc(id)}</code></a>` : `<code>${esc(id)}</code>`);
+
+// Follow replacement chains (a replacement that is itself retiring) to the model to move to, like the Action does.
+function finalReplacement(m) {
+  const seen = new Set([m.id]);
+  let next = m.replacement;
+  while (next && byId.get(next)?.replacement && byId.get(next).qualifier !== "not-before" && !seen.has(next)) {
+    seen.add(next);
+    next = byId.get(next).replacement;
+  }
+  return next;
+}
+
+// The one-paragraph answer that leads each page (and its meta description).
+function answer(m) {
+  const who = WHO[m.provider] || m.provider;
+  const d = long(m.retires);
+  let s = m.aliasOf ? `${m.id} is the short name for the snapshot ${m.aliasOf}. ` : "";
+  if (m.routes) {
+    s += past(m)
+      ? `Since ${d}, ${who} routes API requests for ${m.id} to ${m.replacement}. Calls to ${m.id} still succeed, but the answers come from a different model.`
+      : `On ${d}, ${who} starts routing API requests for ${m.id} to ${m.replacement}. Calls to ${m.id} will keep succeeding, but the answers will come from a different model.`;
+  } else if (m.qualifier === "earliest") {
+    s += past(m)
+      ? `${who} listed ${d} as the earliest shutdown date for ${m.id}. That date has passed, so ${m.id} may stop working at any time.`
+      : `${who} lists ${d} as the earliest shutdown date for ${m.id}. Google gives earliest dates only; the model can be switched off from that day on.`;
+  } else if (m.qualifier === "not-before") {
+    s += `${who} has deprecated ${m.id} and will retire it no sooner than ${d}. The exact date has not been announced yet.`;
+  } else {
+    s += past(m) ? `${who} retired ${m.id} on ${d}. API calls to it now fail.` : `${who} will retire ${m.id} on ${d}. After that date, API calls to it fail.`;
+  }
+  const r = finalReplacement(m);
+  if (m.replacement && !m.routes) s += ` The recommended replacement is ${m.replacement}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.`;
+  else if (!m.replacement) s += ` ${who} names no direct replacement.`;
+  return s;
+}
+
+const dateKind = (m) => (m.routes ? "Routing starts" : m.qualifier === "earliest" ? "Earliest shutdown" : m.qualifier === "not-before" ? "Not before" : "Shutdown");
+const status = (m) => (m.routes ? (past(m) ? "Routed to the replacement" : "Will be routed")
+  : m.qualifier === "not-before" ? "Deprecated, date not final"
+  : past(m) ? (m.qualifier === "earliest" ? "May already be off" : "Retired") : "Retiring");
+
+// ---------- shared page frame ----------
+const LOGO = `<svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>`;
+function page({ path, title, description, body, jsonld = [] }) {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="${SITE}${path}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${SITE}${path}">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:image" content="${SITE}/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="stylesheet" href="/styles.css">
+${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home">${LOGO}driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+${body}
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home">${LOGO}driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+`;
+}
+
+const CHECK_BLOCK = (id) => `
+    <h2>Check your code for it</h2>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
+    <pre class="cmd"><code>npx -y github:AI-Driftline/driftline .</code></pre>
+    <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
+    <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
+
+// ---------- one page per model ----------
+rmSync(join(ROOT, "models"), { recursive: true, force: true });
+for (const m of [...models, ...aliases]) {
+  const who = WHO[m.provider] || m.provider;
+  const kind = m.kind || "text";
+  const r = finalReplacement(m);
+  const same = models.filter((o) => o.id !== m.id && o.provider === m.provider && o.retires === m.retires).slice(0, 12);
+  const text = answer(m);
+  const title = m.routes
+    ? `${m.id}: switches to ${m.replacement} on ${short(m.retires)} · Driftline`
+    : `${m.id} retirement date: ${short(m.retires)}${m.qualifier === "earliest" ? " (earliest)" : m.qualifier === "not-before" ? " (not before)" : ""} · Driftline`;
+  const q1 = m.routes ? `What happens to ${m.id} on ${long(m.retires)}?` : `When is ${m.id} retired?`;
+  const faq = [{ q: q1, a: text }];
+  if (m.replacement) faq.push({ q: `What replaces ${m.id}?`, a: `${who} recommends ${m.replacement}${r && r !== m.replacement ? `, which is itself retiring; the model to move to is ${r}` : ""}. Test your prompts on it before you switch: answers, formats and JSON output can change.` });
+  faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y github:AI-Driftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
+
+  const rows = [
+    ["Provider", who],
+    ["Status", `${status(m)} <span class="dim">(as of ${short(reg.checked)})</span>`],
+    [dateKind(m), long(m.retires)],
+    ...(m.replacement ? [["Replacement", link(m.replacement) + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
+    ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
+    ["Model type", KIND[kind] || kind],
+    ...(m.announced ? [["Announced", long(m.announced)]] : []),
+    ["Source", `<a href="${esc(reg.sources[m.provider])}" rel="noopener">${who} deprecations page</a>`],
+  ];
+  const body = `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / ${who}</p>
+    <h1 class="model-h1"><code>${esc(m.id)}</code></h1>
+    <p class="answer">${esc(text)}</p>
+    <table class="kv"><tbody>
+${rows.map(([k, v]) => `      <tr><th scope="row">${k}</th><td>${v}</td></tr>`).join("\n")}
+    </tbody></table>
+${kind === "text" ? `
+    <h2>Before you switch</h2>
+    <p>A replacement model answers the same prompt differently: tone, length, format, and whether JSON still parses. ${past(m) && !m.replacement ? "Pick the new model yourself and test your prompts on it before you ship." : past(m) && m.qualifier === "exact" && !m.routes
+      ? `Driftline Pro runs your real prompts on ${esc(r || m.replacement)} in CI, so you see the new answers before you ship the switch.`
+      : `Driftline Pro runs your real prompts on ${esc(m.id)} and ${esc(r || m.replacement || "the replacement")} side by side in CI and shows what changed.`} <a href="/#drift">See a drift test</a>.</p>` : ""}
+${CHECK_BLOCK(m.id)}
+${same.length ? `
+    <h2>Same date at ${who}</h2>
+    <p class="ids">${same.map((o) => link(o.id)).join(" ")}</p>` : ""}
+    <p class="updated" style="margin-top:48px">Checked against ${who}'s official page on ${long(reg.checked)}. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>`;
+  const jsonld = [
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Model retirement dates", item: `${SITE}/models/` },
+      { "@type": "ListItem", position: 2, name: m.id, item: `${SITE}${url(m.id)}` },
+    ] },
+  ];
+  const dir = join(ROOT, "models", m.id);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page({ path: url(m.id), title, description: text, body, jsonld }));
+}
+
+// ---------- the full list ----------
+const upcoming = models.filter((m) => !past(m));
+const gone = models.filter(past).reverse();
+const table = (list) => `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th><th scope="col">Provider</th><th scope="col">Date</th><th scope="col">Replacement</th></tr></thead>
+      <tbody>
+${list.map((m) => `        <tr><td>${link(m.id)}${m.kind && m.kind !== "text" ? ` <span class="dim">${m.kind}</span>` : ""}</td><td>${WHO[m.provider]}</td><td>${short(m.retires)}${m.routes ? " <span class=\"dim\">routing</span>" : m.qualifier === "earliest" ? " <span class=\"dim\">earliest</span>" : m.qualifier === "not-before" ? " <span class=\"dim\">not before</span>" : ""}</td><td>${m.replacement ? `<code>${esc(m.replacement)}</code>` : ""}</td></tr>`).join("\n")}
+      </tbody>
+    </table></div>`;
+const listDesc = `Retirement and shutdown dates for ${models.length} OpenAI, Anthropic and Google model IDs, with recommended replacements. From the providers' official deprecation pages, checked ${long(reg.checked)}.`;
+writeFileSync(join(ROOT, "models", "index.html"), page({
+  path: "/models/",
+  title: "AI model retirement dates: OpenAI, Anthropic, Google · Driftline",
+  description: listDesc,
+  body: `    <span class="eyebrow">Registry</span>
+    <h1>AI model retirement dates</h1>
+    <p class="updated">${models.length} model IDs · checked ${long(reg.checked)}</p>
+    <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
+    <p>To check your own code against this list: <code>npx -y github:AI-Driftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
+    <h2>Coming up (${upcoming.length})</h2>
+${table(upcoming)}
+    <h2>Already past (${gone.length})</h2>
+${table(gone)}`,
+  jsonld: [{ "@context": "https://schema.org", "@type": "Dataset", name: "AI model retirement dates", description: listDesc, url: `${SITE}/models/`,
+    dateModified: reg.checked, license: "https://github.com/AI-Driftline/driftline/blob/main/LICENSE", creator: { "@type": "Organization", name: "Driftline", url: SITE },
+    distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
+}));
+
+// ---------- data + files for crawlers and agents ----------
+writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
+
+const LLMS = `# Driftline
+
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+
+- Free scan: \`npx -y github:AI-Driftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
+- GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
+- Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
+- Tracks ${models.length} model IDs (checked ${reg.checked}), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
+
+## Retirement data
+
+- [All retirement dates](${SITE}/models/): every tracked model with date, replacement and source
+- [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
+- Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
+
+## For AI coding agents
+
+- [Agent guide](${SITE}/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
+- Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
+
+## Docs
+
+- [README](https://github.com/AI-Driftline/driftline#readme): inputs, scoring, local use
+- [Example workflow](https://github.com/AI-Driftline/driftline/blob/main/examples/driftline.yml)
+- [Example prompts file](https://github.com/AI-Driftline/driftline/blob/main/examples/prompts.yml)
+- [GitHub Marketplace](https://github.com/marketplace/actions/driftline-ai-model-check)
+- [Pricing and FAQ](${SITE}/#pricing)
+`;
+writeFileSync(join(ROOT, "llms.txt"), LLMS);
+
+const line = (m) => `- ${m.id} (${WHO[m.provider]}${m.kind && m.kind !== "text" ? `, ${m.kind}` : ""}): ${dateKind(m).toLowerCase()} ${m.retires}${m.replacement ? `, replacement ${m.replacement}` : ""}${m.routes ? " (requests routed to the replacement)" : ""}`;
+writeFileSync(join(ROOT, "llms-full.txt"), `${LLMS}
+## Upcoming retirements (as of ${reg.checked})
+
+${upcoming.map(line).join("\n")}
+
+## Past retirement dates
+
+${gone.map(line).join("\n")}
+`);
+
+const pages = ["/", "/models/", "/agents/", ...[...models, ...aliases].map((m) => url(m.id)), "/terms.html", "/privacy.html", "/refunds.html"];
+writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
+</urlset>
+`);
+// Everyone, AI crawlers included, is welcome: being quoted by assistants is the point.
+writeFileSync(join(ROOT, "robots.txt"), `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`);
+
+// ---------- refresh the numbers written into static pages ----------
+for (const f of ["index.html", "agents/index.html"]) {
+  const p = join(ROOT, f);
+  if (!existsSync(p)) continue;
+  const s = readFileSync(p, "utf8")
+    .replace(/(<span data-reg="count">)[^<]*(<\/span>)/g, `$1${models.length}$2`)
+    .replace(/(<span data-reg="checked">)[^<]*(<\/span>)/g, `$1${short(reg.checked)}$2`);
+  writeFileSync(p, f === "index.html" ? withFaqLd(s) : s);
+}
+
+// The home page FAQ, copied into FAQPage structured data so assistants can quote it.
+function withFaqLd(html) {
+  const strip = (t) => t.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+  const qa = [...html.matchAll(/<details>\s*<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>\s*<\/details>/g)]
+    .map(([, q, a]) => ({ "@type": "Question", name: strip(q), acceptedAnswer: { "@type": "Answer", text: strip(a) } }));
+  const tag = `<script type="application/ld+json" id="faq-ld">${JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: qa }).replace(/</g, "\\u003c")}</script>`;
+  return /<script type="application\/ld\+json" id="faq-ld">[\s\S]*?<\/script>/.test(html)
+    ? html.replace(/<script type="application\/ld\+json" id="faq-ld">[\s\S]*?<\/script>/, tag)
+    : html.replace("</head>", `${tag}\n</head>`);
+}
+
+console.log(`Built ${models.length} model pages + ${aliases.length} Claude short-name pages, models/index.html, models.json, llms.txt, llms-full.txt, sitemap.xml (${pages.length} URLs), robots.txt. Registry checked ${reg.checked}.`);
