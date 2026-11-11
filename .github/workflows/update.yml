@@ -1,0 +1,51 @@
+# Keeps aidriftline.com and @aidriftline in step with the product registry, four times a day:
+# rebuild the model pages from the registry on product main, commit if anything changed, post alerts to X.
+name: update
+on:
+  schedule:
+    - cron: "40 */6 * * *"
+  workflow_dispatch:
+
+concurrency: update
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: AI-Driftline/driftline
+          ref: main
+          path: product-src
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Rebuild pages
+        id: build
+        run: node tools/build.mjs product-src/registry/models.json
+      - name: Post to X
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node tools/x-feed.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit and publish
+        if: always() && steps.build.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rm -rf product-src
+          git add -A
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update from registry $(date -u +%F)"
+          git push
+          # Pushes made with the workflow token may not start a Pages build on their own.
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Pages build request failed (the push may still deploy)."
