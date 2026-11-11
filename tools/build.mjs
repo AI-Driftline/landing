@@ -4,6 +4,8 @@
 //   models/<id>/index.html       one page per model ID (date, replacement, source, how to check)
 //   models.json                  the registry, served from aidriftline.com for scripts and agents
 //   llms.txt, llms-full.txt      plain-text summary for AI assistants (llmstxt.org)
+//   feed.xml                     RSS: one item per announced retirement (models sharing date + replacement grouped)
+//   retirements.ics              the same as a calendar to subscribe to (all-day events)
 //   sitemap.xml, robots.txt
 // It also refreshes the model count and "checked" date written into index.html and agents/index.html.
 //
@@ -109,6 +111,7 @@ function page({ path, title, description, body, jsonld = [] }) {
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
@@ -132,6 +135,7 @@ ${body}
       <a href="/agents/">For AI agents</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
       <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
       <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
     </nav>
     <div class="legal">
@@ -225,6 +229,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <p class="updated">${models.length} model IDs · checked ${long(reg.checked)}</p>
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
     <p>To check your own code against this list: <code>npx -y github:AI-Driftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
+    <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
     <h2>Already past (${gone.length})</h2>
@@ -252,10 +257,12 @@ const LLMS = `# Driftline
 - [All retirement dates](${SITE}/models/): every tracked model with date, replacement and source
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
+- [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
 
 ## For AI coding agents
 
 - [Agent guide](${SITE}/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
+- MCP server: \`claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp\` (tools: check_models, scan_project, upcoming_retirements)
 - Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
 
 ## Docs
@@ -278,6 +285,95 @@ ${upcoming.map(line).join("\n")}
 
 ${gone.map(line).join("\n")}
 `);
+
+
+// ---------- feeds: RSS + calendar ----------
+// One entry per retirement event: models from one provider sharing date, qualifier, replacement and routing.
+// Anthropic "not sooner than" dates are minimum lifetimes, not announcements, so they stay out.
+const events = (() => {
+  const map = new Map();
+  for (const m of models) {
+    if (m.qualifier === "not-before") continue;
+    const key = [m.provider, m.retires, m.qualifier, m.replacement || "", m.routes ? "routes" : ""].join("|");
+    if (!map.has(key)) map.set(key, { key, provider: m.provider, retires: m.retires, qualifier: m.qualifier, replacement: m.replacement, routes: !!m.routes, ids: [], announced: "" });
+    const e = map.get(key);
+    e.ids.push(m.id);
+    if (m.announced && m.announced > e.announced) e.announced = m.announced;
+  }
+  return [...map.values()];
+})();
+const names = (ids) => ids.length <= 3 ? ids.join(", ") : `${ids.slice(0, 2).join(", ")} and ${ids.length - 2} more`;
+function eventTitle(e) {
+  const who = WHO[e.provider];
+  if (e.routes) return `${who} routes ${names(e.ids)} to ${e.replacement} from ${short(e.retires)}`;
+  if (e.qualifier === "earliest") return `${who} may shut down ${names(e.ids)} from ${short(e.retires)}`;
+  return `${who} retires ${names(e.ids)} on ${short(e.retires)}`;
+}
+function eventText(e) {
+  const who = WHO[e.provider];
+  const what = e.routes ? `From ${long(e.retires)}, ${who} answers requests for these models with ${e.replacement}. Nothing errors, but the answers come from a different model.`
+    : e.qualifier === "earliest" ? `${who} lists ${long(e.retires)} as the earliest shutdown date. The models can be switched off from that day on.`
+    : `${who} shuts these models down on ${long(e.retires)}. Calls to them fail after that.`;
+  return [what, `Models: ${e.ids.join(", ")}`, e.replacement && !e.routes ? `Replacement: ${e.replacement}` : "",
+    `Source: ${reg.sources[e.provider]}`, `Details: ${SITE}${url(e.ids[0])}`, "Check your code: npx -y github:AI-Driftline/driftline ."].filter(Boolean).join("\n");
+}
+const rfc822 = (d) => new Date(d + "T00:00:00Z").toUTCString();
+const xml = (t) => esc(t).replace(/'/g, "&apos;");
+const feedItems = events.filter((e) => e.retires >= addDays(TODAY, -60))
+  .sort((a, b) => (b.announced || "").localeCompare(a.announced || "") || a.retires.localeCompare(b.retires));
+function addDays(d, n) { return new Date(Date.parse(d + "T00:00:00Z") + n * 86400000).toISOString().slice(0, 10); }
+writeFileSync(join(ROOT, "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>AI model retirements (Driftline)</title>
+  <link>${SITE}/models/</link>
+  <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>When OpenAI, Anthropic and Google retire or re-route their models, from the official deprecation pages, checked daily.</description>
+  <language>en</language>
+  <lastBuildDate>${rfc822(reg.checked)}</lastBuildDate>
+  <ttl>360</ttl>
+${feedItems.map((e) => `  <item>
+    <title>${xml(eventTitle(e))}</title>
+    <link>${SITE}${url(e.ids[0])}</link>
+    <guid isPermaLink="false">driftline:${xml(e.key)}</guid>${e.announced ? `\n    <pubDate>${rfc822(e.announced)}</pubDate>` : ""}
+    <description>${xml(eventText(e))}</description>
+  </item>`).join("\n")}
+</channel>
+</rss>
+`);
+
+// iCalendar text: escape, then fold lines at 75 octets (RFC 5545).
+const icsEsc = (t) => String(t).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+function fold(lineText) {
+  const out = [];
+  let cur = "";
+  for (const ch of lineText) {
+    if (Buffer.byteLength(cur + ch) > (out.length ? 74 : 75)) { out.push(cur); cur = ""; }
+    cur += ch;
+  }
+  out.push(cur);
+  return out.join("\r\n ");
+}
+const ymd = (d) => d.replace(/-/g, "");
+const calEvents = events.filter((e) => e.retires >= addDays(TODAY, -90)).sort((a, b) => a.retires.localeCompare(b.retires));
+writeFileSync(join(ROOT, "retirements.ics"), [
+  "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Driftline//AI model retirements//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+  "X-WR-CALNAME:AI model retirements", "X-WR-CALDESC:OpenAI\\, Anthropic and Google model retirement dates from aidriftline.com",
+  "REFRESH-INTERVAL;VALUE=DURATION:PT12H", "X-PUBLISHED-TTL:PT12H",
+  ...calEvents.flatMap((e) => [
+    "BEGIN:VEVENT",
+    `UID:${e.key.replace(/[^\w.-]+/g, "-")}@aidriftline.com`,
+    `DTSTAMP:${ymd(reg.checked)}T000000Z`,
+    `DTSTART;VALUE=DATE:${ymd(e.retires)}`,
+    `DTEND;VALUE=DATE:${ymd(addDays(e.retires, 1))}`,
+    `SUMMARY:${icsEsc(eventTitle(e).replace(/ (on|from) \d+ \w+ \d{4}$/, ""))}`,
+    `DESCRIPTION:${icsEsc(eventText(e))}`,
+    `URL:${SITE}${url(e.ids[0])}`,
+    "TRANSP:TRANSPARENT",
+    "END:VEVENT",
+  ]),
+  "END:VCALENDAR",
+].map(fold).join("\r\n") + "\r\n");
 
 const pages = ["/", "/models/", "/agents/", ...[...models, ...aliases].map((m) => url(m.id)), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
@@ -313,4 +409,4 @@ function withFaqLd(html) {
     : html.replace("</head>", `${tag}\n</head>`);
 }
 
-console.log(`Built ${models.length} model pages + ${aliases.length} Claude short-name pages, models/index.html, models.json, llms.txt, llms-full.txt, sitemap.xml (${pages.length} URLs), robots.txt. Registry checked ${reg.checked}.`);
+console.log(`Built ${models.length} model pages + ${aliases.length} Claude short-name pages, models/index.html, models.json, llms.txt, llms-full.txt, feed.xml (${feedItems.length} items), retirements.ics (${calEvents.length} events), sitemap.xml (${pages.length} URLs), robots.txt. Registry checked ${reg.checked}.`);

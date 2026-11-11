@@ -18,6 +18,7 @@
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"AI model retirement dates","description":"Retirement and shutdown dates for 252 OpenAI, Anthropic and Google model IDs, with recommended replacements. From the providers' official deprecation pages, checked 11 November 2026.","url":"https://aidriftline.com/models/","dateModified":"2026-11-11","license":"https://github.com/AI-Driftline/driftline/blob/main/LICENSE","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
 </head>
@@ -35,6 +36,7 @@
     <p class="updated">252 model IDs · checked 11 November 2026</p>
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="https://developers.openai.com/api/docs/deprecations" rel="noopener">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener">Anthropic</a>, <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
     <p>To check your own code against this list: <code>npx -y github:AI-Driftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
+    <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>https://aidriftline.com/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
     <h2>Coming up (80)</h2>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model</th><th scope="col">Provider</th><th scope="col">Date</th><th scope="col">Replacement</th></tr></thead>
@@ -309,6 +311,7 @@
       <a href="/agents/">For AI agents</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
       <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
       <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
     </nav>
     <div class="legal">

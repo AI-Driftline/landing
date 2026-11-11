@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Driftline for AI coding agents · Check model IDs before you ship them</title>
-<meta name="description" content="How AI coding agents (Claude Code, Cursor, Copilot, Codex) can check OpenAI, Anthropic and Google model IDs for retirement dates before writing or keeping them. One command, JSON output, no key.">
+<meta name="description" content="How AI coding agents (Claude Code, Cursor, Copilot, Codex) can check OpenAI, Anthropic and Google model IDs for retirement dates before writing or keeping them. One command or an MCP server, JSON output, no key.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://aidriftline.com/agents/">
 <meta property="og:type" content="website">
@@ -18,8 +18,9 @@
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Check AI model IDs for retirement before using them","step":[{"@type":"HowToStep","text":"In the repository, run: npx -y github:AI-Driftline/driftline . --json"},{"@type":"HowToStep","text":"For each finding with status retired or at-risk, use the replacement field, and tell the user that the model is being retired."},{"@type":"HowToStep","text":"Without a shell, fetch https://aidriftline.com/models.json or https://aidriftline.com/models/<model-id>/ and read the retires and replacement fields."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Check AI model IDs for retirement before using them","step":[{"@type":"HowToStep","text":"In the repository, run: npx -y github:AI-Driftline/driftline . --json"},{"@type":"HowToStep","text":"For each finding with status retired or at-risk, use the replacement field, and tell the user that the model is being retired."},{"@type":"HowToStep","text":"Or add the MCP server: claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp, then call check_models or scan_project."},{"@type":"HowToStep","text":"Without a shell, fetch https://aidriftline.com/models.json or https://aidriftline.com/models/<model-id>/ and read the retires and replacement fields."}]}</script>
 </head>
 <body>
 <header class="nav scrolled">
@@ -67,6 +68,23 @@ Never introduce a model whose status is "retired". If it is "at-risk" or
 Model pages: https://aidriftline.com/models/&lt;model-id&gt;/</code></pre>
     <p>For a check on every pull request and a warning before each retirement date, add the <a href="/#install">Driftline GitHub Action</a> (free scan; drift tests on your prompts with Pro).</p>
 
+    <h2>Add it as an MCP server</h2>
+    <p>Driftline also runs as an <a href="https://modelcontextprotocol.io">MCP</a> server, so the agent can ask it directly instead of running a command. Free, no key, Node 20 or later.</p>
+    <p>Claude Code:</p>
+    <pre class="cmd"><code>claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp</code></pre>
+    <p>Cursor, Windsurf, Claude Desktop and other clients, in <code>mcp.json</code> or <code>claude_desktop_config.json</code>:</p>
+<pre class="cmd"><code>{
+  "mcpServers": {
+    "driftline": { "command": "npx", "args": ["-y", "github:AI-Driftline/driftline", "mcp"] }
+  }
+}</code></pre>
+    <ul>
+      <li><code>check_models</code>: status, retirement date and replacement for a list of model IDs</li>
+      <li><code>scan_project</code>: retired and retiring IDs in a folder, with file and line</li>
+      <li><code>upcoming_retirements</code>: what retires or gets re-routed in the next N days</li>
+    </ul>
+    <p>The server reads the list from aidriftline.com, which is checked against the providers' pages every day, and falls back to the copy in the package when offline.</p>
+
     <h2>Why this matters</h2>
     <p>Providers retire models every few weeks. OpenAI, Anthropic and Google together have <span data-reg="count">252</span> model IDs with a published date in the <a href="/models/">registry</a>. Some Google IDs are not switched off but quietly routed to a different model, so nothing errors and the output still changes. An agent that checks first avoids shipping code that breaks on a known date.</p>
   </div>
@@ -81,6 +99,7 @@ Model pages: https://aidriftline.com/models/&lt;model-id&gt;/</code></pre>
       <a href="/models/">All retirement dates</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
       <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
       <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
     </nav>
     <div class="legal">

@@ -13,10 +13,12 @@
 - [All retirement dates](https://aidriftline.com/models/): every tracked model with date, replacement and source
 - [models.json](https://aidriftline.com/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: https://aidriftline.com/models/<model-id>/ (for example https://aidriftline.com/models/gemini-2.5-pro/)
+- [RSS feed](https://aidriftline.com/feed.xml) and [calendar](https://aidriftline.com/retirements.ics) of retirement dates
 
 ## For AI coding agents
 
 - [Agent guide](https://aidriftline.com/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
+- MCP server: `claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp` (tools: check_models, scan_project, upcoming_retirements)
 - Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
 
 ## Docs
