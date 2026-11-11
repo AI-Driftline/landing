@@ -152,7 +152,7 @@ ${body}
 const CHECK_BLOCK = (id) => `
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
-    <pre class="cmd"><code>npx -y github:AI-Driftline/driftline .</code></pre>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
 
@@ -170,7 +170,7 @@ for (const m of [...models, ...aliases]) {
   const q1 = m.routes ? `What happens to ${m.id} on ${long(m.retires)}?` : `When is ${m.id} retired?`;
   const faq = [{ q: q1, a: text }];
   if (m.replacement) faq.push({ q: `What replaces ${m.id}?`, a: `${who} recommends ${m.replacement}${r && r !== m.replacement ? `, which is itself retiring; the model to move to is ${r}` : ""}. Test your prompts on it before you switch: answers, formats and JSON output can change.` });
-  faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y github:AI-Driftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
+  faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y @aidriftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
 
   const rows = [
     ["Provider", who],
@@ -228,7 +228,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <h1>AI model retirement dates</h1>
     <p class="updated">${models.length} model IDs · checked ${long(reg.checked)}</p>
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
-    <p>To check your own code against this list: <code>npx -y github:AI-Driftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
+    <p>To check your own code against this list: <code>npx -y @aidriftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
     <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
@@ -246,7 +246,7 @@ const LLMS = `# Driftline
 
 > Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
-- Free scan: \`npx -y github:AI-Driftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
+- Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
 - Tracks ${models.length} model IDs (checked ${reg.checked}), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
@@ -262,7 +262,7 @@ const LLMS = `# Driftline
 ## For AI coding agents
 
 - [Agent guide](${SITE}/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
-- MCP server: \`claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp\` (tools: check_models, scan_project, upcoming_retirements)
+- MCP server: \`claude mcp add driftline -- npx -y @aidriftline/driftline mcp\` (tools: check_models, scan_project, upcoming_retirements)
 - Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
 
 ## Docs
@@ -315,7 +315,7 @@ function eventText(e) {
     : e.qualifier === "earliest" ? `${who} lists ${long(e.retires)} as the earliest shutdown date. The models can be switched off from that day on.`
     : `${who} shuts these models down on ${long(e.retires)}. Calls to them fail after that.`;
   return [what, `Models: ${e.ids.join(", ")}`, e.replacement && !e.routes ? `Replacement: ${e.replacement}` : "",
-    `Source: ${reg.sources[e.provider]}`, `Details: ${SITE}${url(e.ids[0])}`, "Check your code: npx -y github:AI-Driftline/driftline ."].filter(Boolean).join("\n");
+    `Source: ${reg.sources[e.provider]}`, `Details: ${SITE}${url(e.ids[0])}`, "Check your code: npx -y @aidriftline/driftline ."].filter(Boolean).join("\n");
 }
 const rfc822 = (d) => new Date(d + "T00:00:00Z").toUTCString();
 const xml = (t) => esc(t).replace(/'/g, "&apos;");

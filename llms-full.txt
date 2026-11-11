@@ -2,7 +2,7 @@
 
 > Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
-- Free scan: `npx -y github:AI-Driftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
+- Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
 - Tracks 252 model IDs (checked 2026-11-11), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
@@ -18,7 +18,7 @@
 ## For AI coding agents
 
 - [Agent guide](https://aidriftline.com/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
-- MCP server: `claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp` (tools: check_models, scan_project, upcoming_retirements)
+- MCP server: `claude mcp add driftline -- npx -y @aidriftline/driftline mcp` (tools: check_models, scan_project, upcoming_retirements)
 - Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
 
 ## Docs

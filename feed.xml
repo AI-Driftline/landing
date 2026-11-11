@@ -18,7 +18,7 @@ Models: gpt-image-2, gpt-image-2-2026-04-21
 Replacement: gpt-image-2.6-sunburst
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-image-2/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5.5-cyber-preview on 1 Feb 2027</title>
@@ -29,7 +29,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gpt-5.5-cyber-preview
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5.5-cyber-preview/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14 and 3 more on 14 Jan 2027</title>
@@ -41,7 +41,7 @@ Models: gpt-4.1-2025-04-14, gpt-4.1-mini-2025-04-14, gpt-4o-2024-08-06, gpt-4o-2
 Replacement: gpt-6-luna
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4.1-2025-04-14/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5.1, gpt-5.1-2025-11-13, gpt-5.3-codex on 1 Apr 2027</title>
@@ -53,7 +53,7 @@ Models: gpt-5.1, gpt-5.1-2025-11-13, gpt-5.3-codex
 Replacement: gpt-6-sol
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5.1/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5.4-nano, gpt-5.4-nano-2026-03-17 on 1 Apr 2027</title>
@@ -65,7 +65,7 @@ Models: gpt-5.4-nano, gpt-5.4-nano-2026-03-17
 Replacement: gpt-6-luna
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5.4-nano/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Anthropic retires claude-sonnet-4-5-20250929 on 30 Nov 2026</title>
@@ -77,7 +77,7 @@ Models: claude-sonnet-4-5-20250929
 Replacement: claude-sonnet-5-5
 Source: https://platform.claude.com/docs/en/about-claude/model-deprecations
 Details: https://aidriftline.com/models/claude-sonnet-4-5-20250929/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5, gpt-5-2025-08-07 and 6 more on 11 Dec 2026</title>
@@ -89,7 +89,7 @@ Models: gpt-5, gpt-5-2025-08-07, gpt-5-pro, gpt-5-pro-2025-10-06, o3, o3-2025-04
 Replacement: gpt-5.6-sol
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5-mini, gpt-5-mini-2025-08-07 on 11 Dec 2026</title>
@@ -101,7 +101,7 @@ Models: gpt-5-mini, gpt-5-mini-2025-08-07
 Replacement: gpt-5.6-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5-mini/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5-nano, gpt-5-nano-2025-08-07 on 11 Dec 2026</title>
@@ -113,7 +113,7 @@ Models: gpt-5-nano, gpt-5-nano-2025-08-07
 Replacement: gpt-5.6-luna
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5-nano/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-3.5-turbo, gpt-3.5-turbo-0125 and 2 more on 23 Oct 2026</title>
@@ -125,7 +125,7 @@ Models: gpt-3.5-turbo, gpt-3.5-turbo-0125, o4-mini, o4-mini-2025-04-16
 Replacement: gpt-5.6-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-3.5-turbo/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4, gpt-4-0613 and 10 more on 23 Oct 2026</title>
@@ -137,7 +137,7 @@ Models: gpt-4, gpt-4-0613, gpt-4-1106-preview, gpt-4-turbo, gpt-4-turbo-2024-04-
 Replacement: gpt-5.6-sol
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4.1-nano, gpt-4.1-nano-2025-04-14 on 23 Oct 2026</title>
@@ -149,7 +149,7 @@ Models: gpt-4.1-nano, gpt-4.1-nano-2025-04-14
 Replacement: gpt-5.6-luna
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4.1-nano/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires babbage-002, davinci-002 and 2 more on 28 Sept 2026</title>
@@ -161,7 +161,7 @@ Models: babbage-002, davinci-002, gpt-3.5-turbo-1106, gpt-3.5-turbo-instruct
 Replacement: gpt-5.6-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/babbage-002/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires sora-2, sora-2-2025-10-06 and 3 more on 24 Sept 2026</title>
@@ -171,7 +171,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: sora-2, sora-2-2025-10-06, sora-2-2025-12-08, sora-2-pro, sora-2-pro-2025-10-06
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/sora-2/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-5.4-cyber on 1 Oct 2026</title>
@@ -181,7 +181,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gpt-5.4-cyber
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5.4-cyber/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down antigravity-preview-05-2026 from 5 Oct 2026</title>
@@ -192,7 +192,7 @@ Models: antigravity-preview-05-2026
 Replacement: antigravity-preview-09-2026
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/antigravity-preview-05-2026/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-omni-flash-preview, veo-3.1-fast-generate-preview and 2 more from 22 Oct 2026</title>
@@ -203,7 +203,7 @@ Models: gemini-omni-flash-preview, veo-3.1-fast-generate-preview, veo-3.1-genera
 Replacement: gemini-omni-1.2-flash
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-omni-flash-preview/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down deep-research-pro-preview-12-2025 from 23 Oct 2026</title>
@@ -214,7 +214,7 @@ Models: deep-research-pro-preview-12-2025
 Replacement: deep-research-preview-04-2026
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/deep-research-pro-preview-12-2025/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-image-1 on 23 Oct 2026</title>
@@ -225,7 +225,7 @@ Models: gpt-image-1
 Replacement: gpt-image-2.5-sunburst
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-image-1/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google routes gemini-embedding-2-preview to gemini-embedding-2 from 6 Nov 2026</title>
@@ -235,7 +235,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gemini-embedding-2-preview
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-embedding-2-preview/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-2.5-flash-native-audio-preview-12-2025, gemini-3.1-flash-live-preview from 17 Nov 2026</title>
@@ -246,7 +246,7 @@ Models: gemini-2.5-flash-native-audio-preview-12-2025, gemini-3.1-flash-live-pre
 Replacement: gemini-3.8-live
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12-2025/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-flash-tts-preview from 17 Nov 2026</title>
@@ -257,7 +257,7 @@ Models: gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-fla
 Replacement: gemini-3.8-flash-tts
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires chatgpt-image-latest, gpt-image-1-mini and 2 more on 1 Dec 2026</title>
@@ -268,7 +268,7 @@ Models: chatgpt-image-latest, gpt-image-1-mini, gpt-image-1.5, gpt-image-1.5-202
 Replacement: gpt-image-2.6-sunburst
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/chatgpt-image-latest/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google routes gemini-2.5-flash to gemini-3.5-flash-lite from 1 Dec 2026</title>
@@ -278,7 +278,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gemini-2.5-flash
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-flash/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google routes gemini-2.5-pro to gemini-3.8-flash from 1 Dec 2026</title>
@@ -288,7 +288,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gemini-2.5-pro
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-pro/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google routes gemini-omni-1.1-flash to gemini-omni-1.2-flash from 3 Dec 2026</title>
@@ -298,7 +298,7 @@ Check your code: npx -y github:AI-Driftline/driftline .</description>
 Models: gemini-omni-1.1-flash
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-omni-1.1-flash/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-mini-tts, gpt-4o-mini-tts-2025-03-20 and 3 more on 6 Jan 2027</title>
@@ -309,7 +309,7 @@ Models: gpt-4o-mini-tts, gpt-4o-mini-tts-2025-03-20, gpt-4o-mini-tts-2025-12-15,
 Replacement: gpt-realtime-2.1-mini
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-mini-tts/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-audio, gpt-4o-mini-audio and 4 more on 20 Jan 2027</title>
@@ -320,7 +320,7 @@ Models: gpt-4o-audio, gpt-4o-mini-audio, gpt-audio, gpt-audio-2025-08-28, gpt-au
 Replacement: gpt-audio-1.5
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-audio/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-mini-realtime, gpt-realtime-mini, gpt-realtime-mini-2025-12-15 on 20 Jan 2027</title>
@@ -331,7 +331,7 @@ Models: gpt-4o-mini-realtime, gpt-realtime-mini, gpt-realtime-mini-2025-12-15
 Replacement: gpt-realtime-2.1-mini
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-mini-realtime/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-mini-transcribe-2025-03-20 on 20 Jan 2027</title>
@@ -342,7 +342,7 @@ Models: gpt-4o-mini-transcribe-2025-03-20
 Replacement: gpt-4o-mini-transcribe-2025-12-15
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-mini-transcribe-2025-03-20/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-realtime, gpt-realtime, gpt-realtime-2025-08-28 on 20 Jan 2027</title>
@@ -353,7 +353,7 @@ Models: gpt-4o-realtime, gpt-realtime, gpt-realtime-2025-08-28
 Replacement: gpt-realtime-2.1
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-realtime/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>OpenAI retires gpt-4o-mini-transcribe, gpt-4o-mini-transcribe-2025-12-15 and 3 more on 26 Feb 2027</title>
@@ -364,7 +364,7 @@ Models: gpt-4o-mini-transcribe, gpt-4o-mini-transcribe-2025-12-15, gpt-4o-transc
 Replacement: gpt-transcribe
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-mini-transcribe/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-2.5-flash-image from 15 Mar 2027</title>
@@ -375,7 +375,7 @@ Models: gemini-2.5-flash-image
 Replacement: gemini-3.1-flash-lite-image
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-flash-image/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-3.1-flash-lite from 7 May 2027</title>
@@ -386,7 +386,7 @@ Models: gemini-3.1-flash-lite
 Replacement: gemini-3.5-flash-lite
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-3.1-flash-lite/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
     <title>Google may shut down gemini-embedding-001 from 14 May 2028</title>
@@ -397,7 +397,7 @@ Models: gemini-embedding-001
 Replacement: gemini-embedding-2
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-embedding-001/
-Check your code: npx -y github:AI-Driftline/driftline .</description>
+Check your code: npx -y @aidriftline/driftline .</description>
   </item>
 </channel>
 </rss>

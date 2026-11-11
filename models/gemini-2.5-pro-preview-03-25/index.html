@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is gemini-2.5-pro-preview-03-25 retired?","acceptedAnswer":{"@type":"Answer","text":"Google listed 2 December 2025 as the earliest shutdown date for gemini-2.5-pro-preview-03-25. That date has passed, so gemini-2.5-pro-preview-03-25 may stop working at any time. The recommended replacement is gemini-3.8-flash."}},{"@type":"Question","name":"What replaces gemini-2.5-pro-preview-03-25?","acceptedAnswer":{"@type":"Answer","text":"Google recommends gemini-3.8-flash. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"How do I find gemini-2.5-pro-preview-03-25 in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y github:AI-Driftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is gemini-2.5-pro-preview-03-25 retired?","acceptedAnswer":{"@type":"Answer","text":"Google listed 2 December 2025 as the earliest shutdown date for gemini-2.5-pro-preview-03-25. That date has passed, so gemini-2.5-pro-preview-03-25 may stop working at any time. The recommended replacement is gemini-3.8-flash."}},{"@type":"Question","name":"What replaces gemini-2.5-pro-preview-03-25?","acceptedAnswer":{"@type":"Answer","text":"Google recommends gemini-3.8-flash. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"How do I find gemini-2.5-pro-preview-03-25 in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y @aidriftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Model retirement dates","item":"https://aidriftline.com/models/"},{"@type":"ListItem","position":2,"name":"gemini-2.5-pro-preview-03-25","item":"https://aidriftline.com/models/gemini-2.5-pro-preview-03-25/"}]}</script>
 </head>
 <body>
@@ -49,7 +49,7 @@
 
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
-    <pre class="cmd"><code>npx -y github:AI-Driftline/driftline .</code></pre>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "gemini-2.5-pro-preview-03-25" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>
 

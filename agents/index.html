@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Check AI model IDs for retirement before using them","step":[{"@type":"HowToStep","text":"In the repository, run: npx -y github:AI-Driftline/driftline . --json"},{"@type":"HowToStep","text":"For each finding with status retired or at-risk, use the replacement field, and tell the user that the model is being retired."},{"@type":"HowToStep","text":"Or add the MCP server: claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp, then call check_models or scan_project."},{"@type":"HowToStep","text":"Without a shell, fetch https://aidriftline.com/models.json or https://aidriftline.com/models/<model-id>/ and read the retires and replacement fields."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Check AI model IDs for retirement before using them","step":[{"@type":"HowToStep","text":"In the repository, run: npx -y @aidriftline/driftline . --json"},{"@type":"HowToStep","text":"For each finding with status retired or at-risk, use the replacement field, and tell the user that the model is being retired."},{"@type":"HowToStep","text":"Or add the MCP server: claude mcp add driftline -- npx -y @aidriftline/driftline mcp, then call check_models or scan_project."},{"@type":"HowToStep","text":"Without a shell, fetch https://aidriftline.com/models.json or https://aidriftline.com/models/<model-id>/ and read the retires and replacement fields."}]}</script>
 </head>
 <body>
 <header class="nav scrolled">
@@ -42,7 +42,7 @@
 
     <h2>If you are an agent</h2>
     <p>Before you add, change or keep a model ID in code that calls OpenAI, Anthropic or Google, run this in the repository root:</p>
-    <pre class="cmd"><code>npx -y github:AI-Driftline/driftline . --json</code></pre>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline . --json</code></pre>
     <ul>
       <li>No install, no account, no API key. Without a Driftline license key it only reads files; the one network call is npx fetching the tool.</li>
       <li>Each finding has <code>id</code>, <code>file</code>, <code>line</code>, <code>status</code> (<code>retired</code>, <code>at-risk</code>, <code>deprecated</code>, <code>active</code>, <code>unknown</code>), <code>retires</code>, <code>replacement</code> and <code>routes</code>.</li>
@@ -62,7 +62,7 @@
     <p>Paste this into <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.cursor/rules</code> or <code>.github/copilot-instructions.md</code> so your agent checks model IDs on its own:</p>
 <pre class="cmd" id="snippet"><code>## AI model IDs
 Before adding, changing or keeping an OpenAI, Anthropic or Google model ID,
-run `npx -y github:AI-Driftline/driftline . --json` and check its status.
+run `npx -y @aidriftline/driftline . --json` and check its status.
 Never introduce a model whose status is "retired". If it is "at-risk" or
 "routes" is true, tell me and suggest the replacement before using it.
 Model pages: https://aidriftline.com/models/&lt;model-id&gt;/</code></pre>
@@ -71,11 +71,11 @@ Model pages: https://aidriftline.com/models/&lt;model-id&gt;/</code></pre>
     <h2>Add it as an MCP server</h2>
     <p>Driftline also runs as an <a href="https://modelcontextprotocol.io">MCP</a> server, so the agent can ask it directly instead of running a command. Free, no key, Node 20 or later.</p>
     <p>Claude Code:</p>
-    <pre class="cmd"><code>claude mcp add driftline -- npx -y github:AI-Driftline/driftline mcp</code></pre>
+    <pre class="cmd"><code>claude mcp add driftline -- npx -y @aidriftline/driftline mcp</code></pre>
     <p>Cursor, Windsurf, Claude Desktop and other clients, in <code>mcp.json</code> or <code>claude_desktop_config.json</code>:</p>
 <pre class="cmd"><code>{
   "mcpServers": {
-    "driftline": { "command": "npx", "args": ["-y", "github:AI-Driftline/driftline", "mcp"] }
+    "driftline": { "command": "npx", "args": ["-y", "@aidriftline/driftline", "mcp"] }
   }
 }</code></pre>
     <ul>

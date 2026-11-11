@@ -20,7 +20,7 @@ DESCRIPTION:Google lists 17 August 2026 as the earliest shutdown date. The
  rate-001\, imagen-4.0-generate-001\, imagen-4.0-ultra-generate-001\nReplac
  ement: gemini-nano-banana-2.1\nSource: https://ai.google.dev/gemini-api/do
  cs/deprecations\nDetails: https://aidriftline.com/models/imagen-4.0-fast-g
- enerate-001/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ enerate-001/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/imagen-4.0-fast-generate-001/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -35,8 +35,8 @@ DESCRIPTION:Google lists 31 August 2026 as the earliest shutdown date. The
  models can be switched off from that day on.\nModels: gemini-robotics-er-1
  .6-preview\nReplacement: gemini-robotics-er-2-preview\nSource: https://ai.
  google.dev/gemini-api/docs/deprecations\nDetails: https://aidriftline.com/
- models/gemini-robotics-er-1.6-preview/\nCheck your code: npx -y github:AI-
- Driftline/driftline .
+ models/gemini-robotics-er-1.6-preview/\nCheck your code: npx -y @aidriftli
+ ne/driftline .
 URL:https://aidriftline.com/models/gemini-robotics-er-1.6-preview/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -50,7 +50,7 @@ DESCRIPTION:OpenAI shuts these models down on 24 September 2026. Calls to t
  hem fail after that.\nModels: sora-2\, sora-2-2025-10-06\, sora-2-2025-12-
  08\, sora-2-pro\, sora-2-pro-2025-10-06\nSource: https://developers.openai
  .com/api/docs/deprecations\nDetails: https://aidriftline.com/models/sora-2
- /\nCheck your code: npx -y github:AI-Driftline/driftline .
+ /\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/sora-2/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -64,8 +64,7 @@ DESCRIPTION:OpenAI shuts these models down on 28 September 2026. Calls to t
  hem fail after that.\nModels: babbage-002\, davinci-002\, gpt-3.5-turbo-11
  06\, gpt-3.5-turbo-instruct\nReplacement: gpt-5.6-terra\nSource: https://d
  evelopers.openai.com/api/docs/deprecations\nDetails: https://aidriftline.c
- om/models/babbage-002/\nCheck your code: npx -y github:AI-Driftline/driftl
- ine .
+ om/models/babbage-002/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/babbage-002/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -78,7 +77,7 @@ SUMMARY:OpenAI retires gpt-5.4-cyber
 DESCRIPTION:OpenAI shuts these models down on 1 October 2026. Calls to them
   fail after that.\nModels: gpt-5.4-cyber\nSource: https://developers.opena
  i.com/api/docs/deprecations\nDetails: https://aidriftline.com/models/gpt-5
- .4-cyber/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ .4-cyber/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5.4-cyber/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -92,8 +91,8 @@ DESCRIPTION:Google lists 5 October 2026 as the earliest shutdown date. The
  models can be switched off from that day on.\nModels: antigravity-preview-
  05-2026\nReplacement: antigravity-preview-09-2026\nSource: https://ai.goog
  le.dev/gemini-api/docs/deprecations\nDetails: https://aidriftline.com/mode
- ls/antigravity-preview-05-2026/\nCheck your code: npx -y github:AI-Driftli
- ne/driftline .
+ ls/antigravity-preview-05-2026/\nCheck your code: npx -y @aidriftline/drif
+ tline .
 URL:https://aidriftline.com/models/antigravity-preview-05-2026/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -109,8 +108,8 @@ DESCRIPTION:Google lists 22 October 2026 as the earliest shutdown date. The
  review\, veo-3.1-fast-generate-preview\, veo-3.1-generate-preview\, veo-3.
  1-lite-generate-preview\nReplacement: gemini-omni-1.2-flash\nSource: https
  ://ai.google.dev/gemini-api/docs/deprecations\nDetails: https://aidriftlin
- e.com/models/gemini-omni-flash-preview/\nCheck your code: npx -y github:AI
- -Driftline/driftline .
+ e.com/models/gemini-omni-flash-preview/\nCheck your code: npx -y @aidriftl
+ ine/driftline .
 URL:https://aidriftline.com/models/gemini-omni-flash-preview/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -125,8 +124,8 @@ DESCRIPTION:Google lists 23 October 2026 as the earliest shutdown date. The
   models can be switched off from that day on.\nModels: deep-research-pro-p
  review-12-2025\nReplacement: deep-research-preview-04-2026\nSource: https:
  //ai.google.dev/gemini-api/docs/deprecations\nDetails: https://aidriftline
- .com/models/deep-research-pro-preview-12-2025/\nCheck your code: npx -y gi
- thub:AI-Driftline/driftline .
+ .com/models/deep-research-pro-preview-12-2025/\nCheck your code: npx -y @a
+ idriftline/driftline .
 URL:https://aidriftline.com/models/deep-research-pro-preview-12-2025/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -140,7 +139,7 @@ DESCRIPTION:OpenAI shuts these models down on 23 October 2026. Calls to the
  m fail after that.\nModels: gpt-3.5-turbo\, gpt-3.5-turbo-0125\, o4-mini\,
   o4-mini-2025-04-16\nReplacement: gpt-5.6-terra\nSource: https://developer
  s.openai.com/api/docs/deprecations\nDetails: https://aidriftline.com/model
- s/gpt-3.5-turbo/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ s/gpt-3.5-turbo/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-3.5-turbo/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -155,8 +154,8 @@ DESCRIPTION:OpenAI shuts these models down on 23 October 2026. Calls to the
  4-turbo\, gpt-4-turbo-2024-04-09\, gpt-4o-2024-05-13\, o1\, o1-2024-12-17\
  , o1-pro\, o1-pro-2025-03-19\, o3-mini\, o3-mini-2025-01-31\nReplacement: 
  gpt-5.6-sol\nSource: https://developers.openai.com/api/docs/deprecations\n
- Details: https://aidriftline.com/models/gpt-4/\nCheck your code: npx -y gi
- thub:AI-Driftline/driftline .
+ Details: https://aidriftline.com/models/gpt-4/\nCheck your code: npx -y @a
+ idriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -170,7 +169,7 @@ DESCRIPTION:OpenAI shuts these models down on 23 October 2026. Calls to the
  m fail after that.\nModels: gpt-4.1-nano\, gpt-4.1-nano-2025-04-14\nReplac
  ement: gpt-5.6-luna\nSource: https://developers.openai.com/api/docs/deprec
  ations\nDetails: https://aidriftline.com/models/gpt-4.1-nano/\nCheck your 
- code: npx -y github:AI-Driftline/driftline .
+ code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4.1-nano/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -183,8 +182,8 @@ SUMMARY:OpenAI retires gpt-image-1
 DESCRIPTION:OpenAI shuts these models down on 23 October 2026. Calls to the
  m fail after that.\nModels: gpt-image-1\nReplacement: gpt-image-2.5-sunbur
  st\nSource: https://developers.openai.com/api/docs/deprecations\nDetails: 
- https://aidriftline.com/models/gpt-image-1/\nCheck your code: npx -y githu
- b:AI-Driftline/driftline .
+ https://aidriftline.com/models/gpt-image-1/\nCheck your code: npx -y @aidr
+ iftline/driftline .
 URL:https://aidriftline.com/models/gpt-image-1/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -198,8 +197,8 @@ DESCRIPTION:From 6 November 2026\, Google answers requests for these models
   with gemini-embedding-2. Nothing errors\, but the answers come from a dif
  ferent model.\nModels: gemini-embedding-2-preview\nSource: https://ai.goog
  le.dev/gemini-api/docs/deprecations\nDetails: https://aidriftline.com/mode
- ls/gemini-embedding-2-preview/\nCheck your code: npx -y github:AI-Driftlin
- e/driftline .
+ ls/gemini-embedding-2-preview/\nCheck your code: npx -y @aidriftline/drift
+ line .
 URL:https://aidriftline.com/models/gemini-embedding-2-preview/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -215,7 +214,7 @@ DESCRIPTION:Google lists 17 November 2026 as the earliest shutdown date. Th
  ative-audio-preview-12-2025\, gemini-3.1-flash-live-preview\nReplacement: 
  gemini-3.8-live\nSource: https://ai.google.dev/gemini-api/docs/deprecation
  s\nDetails: https://aidriftline.com/models/gemini-2.5-flash-native-audio-p
- review-12-2025/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ review-12-2025/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12
  -2025/
 TRANSP:TRANSPARENT
@@ -232,7 +231,7 @@ DESCRIPTION:Google lists 17 November 2026 as the earliest shutdown date. Th
  review-tts\, gemini-2.5-pro-preview-tts\, gemini-3.1-flash-tts-preview\nRe
  placement: gemini-3.8-flash-tts\nSource: https://ai.google.dev/gemini-api/
  docs/deprecations\nDetails: https://aidriftline.com/models/gemini-2.5-flas
- h-preview-tts/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ h-preview-tts/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -246,7 +245,7 @@ DESCRIPTION:Anthropic shuts these models down on 30 November 2026. Calls to
   them fail after that.\nModels: claude-sonnet-4-5-20250929\nReplacement: c
  laude-sonnet-5-5\nSource: https://platform.claude.com/docs/en/about-claude
  /model-deprecations\nDetails: https://aidriftline.com/models/claude-sonnet
- -4-5-20250929/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ -4-5-20250929/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/claude-sonnet-4-5-20250929/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -261,7 +260,7 @@ DESCRIPTION:OpenAI shuts these models down on 1 December 2026. Calls to the
  image-1.5\, gpt-image-1.5-2025-12-16\nReplacement: gpt-image-2.6-sunburst\
  nSource: https://developers.openai.com/api/docs/deprecations\nDetails: htt
  ps://aidriftline.com/models/chatgpt-image-latest/\nCheck your code: npx -y
-  github:AI-Driftline/driftline .
+  @aidriftline/driftline .
 URL:https://aidriftline.com/models/chatgpt-image-latest/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -275,7 +274,7 @@ DESCRIPTION:From 1 December 2026\, Google answers requests for these models
   with gemini-3.5-flash-lite. Nothing errors\, but the answers come from a 
  different model.\nModels: gemini-2.5-flash\nSource: https://ai.google.dev/
  gemini-api/docs/deprecations\nDetails: https://aidriftline.com/models/gemi
- ni-2.5-flash/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ ni-2.5-flash/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-2.5-flash/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -289,7 +288,7 @@ DESCRIPTION:From 1 December 2026\, Google answers requests for these models
   with gemini-3.8-flash. Nothing errors\, but the answers come from a diffe
  rent model.\nModels: gemini-2.5-pro\nSource: https://ai.google.dev/gemini-
  api/docs/deprecations\nDetails: https://aidriftline.com/models/gemini-2.5-
- pro/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ pro/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-2.5-pro/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -303,8 +302,7 @@ DESCRIPTION:From 3 December 2026\, Google answers requests for these models
   with gemini-omni-1.2-flash. Nothing errors\, but the answers come from a 
  different model.\nModels: gemini-omni-1.1-flash\nSource: https://ai.google
  .dev/gemini-api/docs/deprecations\nDetails: https://aidriftline.com/models
- /gemini-omni-1.1-flash/\nCheck your code: npx -y github:AI-Driftline/drift
- line .
+ /gemini-omni-1.1-flash/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-omni-1.1-flash/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -319,7 +317,7 @@ DESCRIPTION:OpenAI shuts these models down on 11 December 2026. Calls to th
  pro-2025-10-06\, o3\, o3-2025-04-16\, o3-pro\, o3-pro-2025-06-10\nReplacem
  ent: gpt-5.6-sol\nSource: https://developers.openai.com/api/docs/deprecati
  ons\nDetails: https://aidriftline.com/models/gpt-5/\nCheck your code: npx 
- -y github:AI-Driftline/driftline .
+ -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -333,7 +331,7 @@ DESCRIPTION:OpenAI shuts these models down on 11 December 2026. Calls to th
  em fail after that.\nModels: gpt-5-mini\, gpt-5-mini-2025-08-07\nReplaceme
  nt: gpt-5.6-terra\nSource: https://developers.openai.com/api/docs/deprecat
  ions\nDetails: https://aidriftline.com/models/gpt-5-mini/\nCheck your code
- : npx -y github:AI-Driftline/driftline .
+ : npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5-mini/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -347,7 +345,7 @@ DESCRIPTION:OpenAI shuts these models down on 11 December 2026. Calls to th
  em fail after that.\nModels: gpt-5-nano\, gpt-5-nano-2025-08-07\nReplaceme
  nt: gpt-5.6-luna\nSource: https://developers.openai.com/api/docs/deprecati
  ons\nDetails: https://aidriftline.com/models/gpt-5-nano/\nCheck your code:
-  npx -y github:AI-Driftline/driftline .
+  npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5-nano/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -363,7 +361,7 @@ DESCRIPTION:OpenAI shuts these models down on 6 January 2027. Calls to them
  gpt-4o-mini-tts-2025-12-15\, tts-1\, tts-1-hd\nReplacement: gpt-realtime-2
  .1-mini\nSource: https://developers.openai.com/api/docs/deprecations\nDeta
  ils: https://aidriftline.com/models/gpt-4o-mini-tts/\nCheck your code: npx
-  -y github:AI-Driftline/driftline .
+  -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-mini-tts/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -379,7 +377,7 @@ DESCRIPTION:OpenAI shuts these models down on 14 January 2027. Calls to the
   gpt-4o-2024-08-06\, gpt-4o-2024-11-20\, gpt-4o-mini-2024-07-18\nReplaceme
  nt: gpt-6-luna\nSource: https://developers.openai.com/api/docs/deprecation
  s\nDetails: https://aidriftline.com/models/gpt-4.1-2025-04-14/\nCheck your
-  code: npx -y github:AI-Driftline/driftline .
+  code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4.1-2025-04-14/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -394,7 +392,7 @@ DESCRIPTION:OpenAI shuts these models down on 20 January 2027. Calls to the
   gpt-audio-2025-08-28\, gpt-audio-mini\, gpt-audio-mini-2025-12-15\nReplac
  ement: gpt-audio-1.5\nSource: https://developers.openai.com/api/docs/depre
  cations\nDetails: https://aidriftline.com/models/gpt-4o-audio/\nCheck your
-  code: npx -y github:AI-Driftline/driftline .
+  code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-audio/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -409,8 +407,8 @@ DESCRIPTION:OpenAI shuts these models down on 20 January 2027. Calls to the
  m fail after that.\nModels: gpt-4o-mini-realtime\, gpt-realtime-mini\, gpt
  -realtime-mini-2025-12-15\nReplacement: gpt-realtime-2.1-mini\nSource: htt
  ps://developers.openai.com/api/docs/deprecations\nDetails: https://aidrift
- line.com/models/gpt-4o-mini-realtime/\nCheck your code: npx -y github:AI-D
- riftline/driftline .
+ line.com/models/gpt-4o-mini-realtime/\nCheck your code: npx -y @aidriftlin
+ e/driftline .
 URL:https://aidriftline.com/models/gpt-4o-mini-realtime/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -425,8 +423,7 @@ DESCRIPTION:OpenAI shuts these models down on 20 January 2027. Calls to the
  m fail after that.\nModels: gpt-4o-mini-transcribe-2025-03-20\nReplacement
  : gpt-4o-mini-transcribe-2025-12-15\nSource: https://developers.openai.com
  /api/docs/deprecations\nDetails: https://aidriftline.com/models/gpt-4o-min
- i-transcribe-2025-03-20/\nCheck your code: npx -y github:AI-Driftline/drif
- tline .
+ i-transcribe-2025-03-20/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-mini-transcribe-2025-03-20/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -441,7 +438,7 @@ DESCRIPTION:OpenAI shuts these models down on 20 January 2027. Calls to the
  m fail after that.\nModels: gpt-4o-realtime\, gpt-realtime\, gpt-realtime-
  2025-08-28\nReplacement: gpt-realtime-2.1\nSource: https://developers.open
  ai.com/api/docs/deprecations\nDetails: https://aidriftline.com/models/gpt-
- 4o-realtime/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ 4o-realtime/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-realtime/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -454,8 +451,8 @@ SUMMARY:OpenAI retires gpt-5.5-cyber-preview
 DESCRIPTION:OpenAI shuts these models down on 1 February 2027. Calls to the
  m fail after that.\nModels: gpt-5.5-cyber-preview\nSource: https://develop
  ers.openai.com/api/docs/deprecations\nDetails: https://aidriftline.com/mod
- els/gpt-5.5-cyber-preview/\nCheck your code: npx -y github:AI-Driftline/dr
- iftline .
+ els/gpt-5.5-cyber-preview/\nCheck your code: npx -y @aidriftline/driftline
+  .
 URL:https://aidriftline.com/models/gpt-5.5-cyber-preview/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -469,7 +466,7 @@ DESCRIPTION:OpenAI shuts these models down on 10 February 2027. Calls to th
  em fail after that.\nModels: gpt-image-2\, gpt-image-2-2026-04-21\nReplace
  ment: gpt-image-2.6-sunburst\nSource: https://developers.openai.com/api/do
  cs/deprecations\nDetails: https://aidriftline.com/models/gpt-image-2/\nChe
- ck your code: npx -y github:AI-Driftline/driftline .
+ ck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-image-2/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -485,7 +482,7 @@ DESCRIPTION:OpenAI shuts these models down on 26 February 2027. Calls to th
  be-2025-12-15\, gpt-4o-transcribe\, gpt-4o-transcribe-diarize\, whisper-1\
  nReplacement: gpt-transcribe\nSource: https://developers.openai.com/api/do
  cs/deprecations\nDetails: https://aidriftline.com/models/gpt-4o-mini-trans
- cribe/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ cribe/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-mini-transcribe/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -499,8 +496,7 @@ DESCRIPTION:Google lists 15 March 2027 as the earliest shutdown date. The m
  odels can be switched off from that day on.\nModels: gemini-2.5-flash-imag
  e\nReplacement: gemini-3.1-flash-lite-image\nSource: https://ai.google.dev
  /gemini-api/docs/deprecations\nDetails: https://aidriftline.com/models/gem
- ini-2.5-flash-image/\nCheck your code: npx -y github:AI-Driftline/driftlin
- e .
+ ini-2.5-flash-image/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-2.5-flash-image/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -514,7 +510,7 @@ DESCRIPTION:OpenAI shuts these models down on 1 April 2027. Calls to them f
  ail after that.\nModels: gpt-5.1\, gpt-5.1-2025-11-13\, gpt-5.3-codex\nRep
  lacement: gpt-6-sol\nSource: https://developers.openai.com/api/docs/deprec
  ations\nDetails: https://aidriftline.com/models/gpt-5.1/\nCheck your code:
-  npx -y github:AI-Driftline/driftline .
+  npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5.1/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -528,7 +524,7 @@ DESCRIPTION:OpenAI shuts these models down on 1 April 2027. Calls to them f
  ail after that.\nModels: gpt-5.4-nano\, gpt-5.4-nano-2026-03-17\nReplaceme
  nt: gpt-6-luna\nSource: https://developers.openai.com/api/docs/deprecation
  s\nDetails: https://aidriftline.com/models/gpt-5.4-nano/\nCheck your code:
-  npx -y github:AI-Driftline/driftline .
+  npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-5.4-nano/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -542,7 +538,7 @@ DESCRIPTION:Google lists 7 May 2027 as the earliest shutdown date. The mode
  ls can be switched off from that day on.\nModels: gemini-3.1-flash-lite\nR
  eplacement: gemini-3.5-flash-lite\nSource: https://ai.google.dev/gemini-ap
  i/docs/deprecations\nDetails: https://aidriftline.com/models/gemini-3.1-fl
- ash-lite/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ ash-lite/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-3.1-flash-lite/
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -556,7 +552,7 @@ DESCRIPTION:Google lists 14 May 2028 as the earliest shutdown date. The mod
  els can be switched off from that day on.\nModels: gemini-embedding-001\nR
  eplacement: gemini-embedding-2\nSource: https://ai.google.dev/gemini-api/d
  ocs/deprecations\nDetails: https://aidriftline.com/models/gemini-embedding
- -001/\nCheck your code: npx -y github:AI-Driftline/driftline .
+ -001/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gemini-embedding-001/
 TRANSP:TRANSPARENT
 END:VEVENT
