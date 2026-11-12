@@ -5,7 +5,7 @@
 - Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks 252 model IDs (checked 2026-11-11), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- Tracks 253 model IDs (checked 2026-11-12), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
@@ -29,7 +29,7 @@
 - [GitHub Marketplace](https://github.com/marketplace/actions/driftline-ai-model-check)
 - [Pricing and FAQ](https://aidriftline.com/#pricing)
 
-## Upcoming retirements (as of 2026-11-11)
+## Upcoming retirements (as of 2026-11-12)
 
 - gemini-2.5-flash-native-audio-preview-12-2025 (Google, audio): earliest shutdown 2026-11-17, replacement gemini-3.8-live
 - gemini-2.5-flash-preview-tts (Google, audio): earliest shutdown 2026-11-17, replacement gemini-3.8-flash-tts
@@ -134,6 +134,7 @@
 - gpt-4 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-3.5-turbo-0125 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
 - gpt-3.5-turbo (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
+- ft-o4-mini-2025-04-16 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
 - deep-research-pro-preview-12-2025 (Google, agent): earliest shutdown 2026-10-23, replacement deep-research-preview-04-2026
 - veo-3.1-lite-generate-preview (Google, video): earliest shutdown 2026-10-22, replacement gemini-omni-1.2-flash
 - veo-3.1-generate-preview (Google, video): earliest shutdown 2026-10-22, replacement gemini-omni-1.2-flash

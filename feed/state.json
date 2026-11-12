@@ -251,7 +251,8 @@
     "gpt-realtime-mini-2025-12-15": "2027-01-20|exact|gpt-realtime-2.1-mini|",
     "gpt-image-1.5-2025-12-16": "2026-12-01|exact|gpt-image-2.6-sunburst|",
     "claude-mythos-5-2": "2027-11-09|not-before||",
-    "claude-fable-5-2": "2027-11-09|not-before||"
+    "claude-fable-5-2": "2027-11-09|not-before||",
+    "ft-o4-mini-2025-04-16": "2026-10-23|exact|gpt-5.6-terra|"
   },
   "posted": [
     "new:openai:2027-02-26|exact|gpt-live-transcribe|:changed"
