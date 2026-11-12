@@ -1,0 +1,26 @@
+# Posts one hand-written post to @aidriftline. Run it from the Actions tab and paste the text (\n for a new line).
+name: x-post
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: "Post text (max 280; \\n for a new line)"
+        required: true
+permissions:
+  contents: read
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Post to X
+        env:
+          POST_TEXT: ${{ inputs.text }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node tools/x-post.mjs
