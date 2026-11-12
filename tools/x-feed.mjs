@@ -87,6 +87,9 @@ const group = (list, key) => {
     map.get(k).ids.push(m.id);
     map.get(k).models.push(m);
   }
+  // Short names people type (gpt-5, o3) before dated snapshots (gpt-5-2025-08-07), so the post and link lead with them.
+  const dated = (id) => /-\d{4}-\d{2}-\d{2}$|-\d{8}$/.test(id);
+  for (const g of map.values()) g.ids.sort((a, b) => dated(a) - dated(b));
   return [...map.values()];
 };
 
