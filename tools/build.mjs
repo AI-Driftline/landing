@@ -144,6 +144,7 @@ ${body}
     </div>
   </div>
 </footer>
+<script src="/count.js" defer></script>
 </body>
 </html>
 `;
@@ -155,6 +156,19 @@ const CHECK_BLOCK = (id) => `
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
+
+// Email alert sign-up (the driftline-api Worker). count.js shows the result message.
+const API = "https://driftline-api.aidriftline.workers.dev";
+const ALERT_BLOCK = (m) => `
+    <h2 id="alert">Get an email before it ${m.routes ? "is re-routed" : "retires"}</h2>
+    <form class="alert-form" method="post" action="${API}/subscribe">
+      <input type="hidden" name="model" value="${esc(m.id)}">
+      <input type="email" name="email" required maxlength="200" placeholder="you@company.com" aria-label="Your email address">
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn small" type="submit">Email me</button>
+    </form>
+    <p class="alert-msg" role="status" hidden></p>
+    <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if ${WHO[m.provider] || m.provider} changes the date. Nothing else. One-click unsubscribe.</p>`;
 
 // ---------- one page per model ----------
 rmSync(join(ROOT, "models"), { recursive: true, force: true });
@@ -193,6 +207,7 @@ ${kind === "text" ? `
     <p>A replacement model answers the same prompt differently: tone, length, format, and whether JSON still parses. ${past(m) && !m.replacement ? "Pick the new model yourself and test your prompts on it before you ship." : past(m) && m.qualifier === "exact" && !m.routes
       ? `Driftline Pro runs your real prompts on ${esc(r || m.replacement)} in CI, so you see the new answers before you ship the switch.`
       : `Driftline Pro runs your real prompts on ${esc(m.id)} and ${esc(r || m.replacement || "the replacement")} side by side in CI and shows what changed.`} <a href="/#drift">See a drift test</a>.</p>` : ""}
+${past(m) ? "" : ALERT_BLOCK(m)}
 ${CHECK_BLOCK(m.id)}
 ${same.length ? `
     <h2>Same date at ${who}</h2>

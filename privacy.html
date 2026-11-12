@@ -25,12 +25,16 @@
   <div class="wrap">
     <span class="eyebrow">Legal</span>
     <h1>Privacy policy</h1>
-    <p class="updated">Last updated 10 October 2026</p>
+    <p class="updated">Last updated 12 November 2026</p>
     <h2>Short version</h2>
-    <p>This website has no cookies, no analytics and no tracking. The Driftline Action runs in your own pipeline and sends me nothing. When you buy Pro, I receive the order details Lemon Squeezy shares with me, and I use them only to run your subscription and answer your questions.</p>
+    <p>This website has no cookies and no tracking. It counts page views without identifying anyone. The Driftline Action runs in your own pipeline and sends me nothing. When you buy Pro, I receive the order details Lemon Squeezy shares with me, and I use them only to run your subscription and answer your questions.</p>
     
     <h2>This website</h2>
     <p>The site is a static page hosted on GitHub Pages. Fonts are served from this site, not from Google. GitHub may log visitor IP addresses for security and abuse prevention; see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>.</p>
+    <p>Each page view sends two things to a counter I run on Cloudflare Workers: the page's path and the site you came from (for example google.com). The counter adds 1 to a daily total for that page and source. It stores no IP address, no cookie, no browser details and nothing that tells one visitor from another.</p>
+
+    <h2>Email alerts</h2>
+    <p>If you ask for an email before a model retires, I store your email address, the model you chose and which alerts have been sent, in a Cloudflare D1 database. Emails are sent through <a href="https://resend.com/legal/privacy-policy" rel="noopener">Resend</a>. Nothing is sent until you confirm. You get at most one email 30 days before, one 7 days before and one on the day, plus a note if the date changes. Every email has a one-click unsubscribe, which deletes the entry. Unconfirmed sign-ups are never emailed again.</p>
     
     <h2>The Driftline Action</h2>
     <p>The Action runs inside your GitHub Actions job. Your code, prompts and API keys stay in your pipeline. Prompts go directly from your runner to OpenAI, Anthropic or Google. If you use Pro, the Action sends your license key, and nothing else, to Lemon Squeezy's license API to check that it is valid.</p>
@@ -53,5 +57,6 @@
     </div>
   </div>
 </footer>
+<script src="/count.js" defer></script>
 </body>
 </html>

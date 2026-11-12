@@ -45,6 +45,16 @@
     </tbody></table>
 
 
+    <h2 id="alert">Get an email before it retires</h2>
+    <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+      <input type="hidden" name="model" value="gpt-4o-audio">
+      <input type="email" name="email" required maxlength="200" placeholder="you@company.com" aria-label="Your email address">
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn small" type="submit">Email me</button>
+    </form>
+    <p class="alert-msg" role="status" hidden></p>
+    <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if OpenAI changes the date. Nothing else. One-click unsubscribe.</p>
+
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
@@ -73,5 +83,6 @@
     </div>
   </div>
 </footer>
+<script src="/count.js" defer></script>
 </body>
 </html>
