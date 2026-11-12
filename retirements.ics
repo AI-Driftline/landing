@@ -471,7 +471,7 @@ URL:https://aidriftline.com/models/gpt-image-2/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:openai-2027-02-26-exact-gpt-transcribe-@aidriftline.com
+UID:openai-2027-02-26-exact-gpt-live-transcribe-@aidriftline.com
 DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270226
 DTEND;VALUE=DATE:20270227
@@ -480,9 +480,9 @@ SUMMARY:OpenAI retires gpt-4o-mini-transcribe\, gpt-4o-mini-transcribe-2025
 DESCRIPTION:OpenAI shuts these models down on 26 February 2027. Calls to th
  em fail after that.\nModels: gpt-4o-mini-transcribe\, gpt-4o-mini-transcri
  be-2025-12-15\, gpt-4o-transcribe\, gpt-4o-transcribe-diarize\, whisper-1\
- nReplacement: gpt-transcribe\nSource: https://developers.openai.com/api/do
- cs/deprecations\nDetails: https://aidriftline.com/models/gpt-4o-mini-trans
- cribe/\nCheck your code: npx -y @aidriftline/driftline .
+ nReplacement: gpt-live-transcribe\nSource: https://developers.openai.com/a
+ pi/docs/deprecations\nDetails: https://aidriftline.com/models/gpt-4o-mini-
+ transcribe/\nCheck your code: npx -y @aidriftline/driftline .
 URL:https://aidriftline.com/models/gpt-4o-mini-transcribe/
 TRANSP:TRANSPARENT
 END:VEVENT

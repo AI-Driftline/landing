@@ -358,10 +358,10 @@ Check your code: npx -y @aidriftline/driftline .</description>
   <item>
     <title>OpenAI retires gpt-4o-mini-transcribe, gpt-4o-mini-transcribe-2025-12-15 and 3 more on 26 Feb 2027</title>
     <link>https://aidriftline.com/models/gpt-4o-mini-transcribe/</link>
-    <guid isPermaLink="false">driftline:openai|2027-02-26|exact|gpt-transcribe|</guid>
+    <guid isPermaLink="false">driftline:openai|2027-02-26|exact|gpt-live-transcribe|</guid>
     <description>OpenAI shuts these models down on 26 February 2027. Calls to them fail after that.
 Models: gpt-4o-mini-transcribe, gpt-4o-mini-transcribe-2025-12-15, gpt-4o-transcribe, gpt-4o-transcribe-diarize, whisper-1
-Replacement: gpt-transcribe
+Replacement: gpt-live-transcribe
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4o-mini-transcribe/
 Check your code: npx -y @aidriftline/driftline .</description>
