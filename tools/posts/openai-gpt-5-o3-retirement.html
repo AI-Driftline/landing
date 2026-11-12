@@ -1,0 +1,66 @@
+<!--{
+  "slug": "openai-gpt-5-o3-retirement",
+  "title": "OpenAI retires gpt-5 and o3 on 11 December 2026: what to change and how to test it",
+  "short": "OpenAI retires gpt-5 and o3 on 11 December",
+  "description": "On 11 December 2026 OpenAI removes gpt-5, gpt-5-mini, gpt-5-nano, gpt-5-pro, o3 and o3-pro from the API. The replacements, how to find every use in your code, and how to test your prompts before you switch.",
+  "date": "2026-11-12"
+}-->
+    <p class="answer">On 11 December 2026, OpenAI removes gpt-5, gpt-5-mini, gpt-5-nano, gpt-5-pro, o3 and o3-pro from the API, together with their dated snapshots. From that day, API calls to these models fail. OpenAI recommends gpt-5.6-sol, gpt-5.6-terra and gpt-5.6-luna as replacements. Changing the model name takes a minute. Checking that your prompts still give the answers your app expects takes longer, and it can only be done while the old model still answers.</p>
+
+    <h2>What retires, and what replaces it</h2>
+    <p>OpenAI announced the shutdown on 11 June 2026 on its <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener">deprecations page</a>. Both the short name and the dated snapshot stop working:</p>
+    <table>
+      <thead><tr><th>Model</th><th>Snapshot</th><th>Replacement</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/gpt-5/"><code>gpt-5</code></a></td><td><code>gpt-5-2025-08-07</code></td><td><code>gpt-5.6-sol</code></td></tr>
+        <tr><td><a href="/models/gpt-5-mini/"><code>gpt-5-mini</code></a></td><td><code>gpt-5-mini-2025-08-07</code></td><td><code>gpt-5.6-terra</code></td></tr>
+        <tr><td><a href="/models/gpt-5-nano/"><code>gpt-5-nano</code></a></td><td><code>gpt-5-nano-2025-08-07</code></td><td><code>gpt-5.6-luna</code></td></tr>
+        <tr><td><a href="/models/gpt-5-pro/"><code>gpt-5-pro</code></a></td><td><code>gpt-5-pro-2025-10-06</code></td><td><code>gpt-5.6-sol</code> with <code>reasoning.mode: pro</code></td></tr>
+        <tr><td><a href="/models/o3/"><code>o3</code></a></td><td><code>o3-2025-04-16</code></td><td><code>gpt-5.6-sol</code></td></tr>
+        <tr><td><a href="/models/o3-pro/"><code>o3-pro</code></a></td><td><code>o3-pro-2025-06-10</code></td><td><code>gpt-5.6-sol</code> with <code>reasoning.mode: pro</code></td></tr>
+      </tbody>
+    </table>
+    <p>Fine-tuned models built on any of these follow the same date, so an ID like <code>ft:gpt-5-mini-2025-08-07:your-org::abc123</code> stops working on 11 December too. Note that o3 and o3-pro do not get an o-series successor: both move to the GPT-5.6 family.</p>
+    <p>Two other OpenAI shutdowns land just before. On 30 November the Evals platform and the reusable prompts API (<code>v1/prompts</code>) shut down, and on 1 December the older GPT Image models go. If you store prompts as prompt objects in OpenAI's dashboard, you have two migrations in the same two weeks.</p>
+
+    <h2>Step 1: find every place your code uses them</h2>
+    <p>Run this in the root of your repository. It needs no install, account or API key, and lists every OpenAI, Anthropic and Google model ID it finds with its file, line and retirement date:</p>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
+    <p>A plain search works too, as long as you remember what it misses:</p>
+    <pre class="cmd"><code>grep -rnE '"(gpt-5(-mini|-nano|-pro)?|o3(-pro)?)(-20[0-9-]+)?"' .</code></pre>
+    <p>Places that are easy to overlook:</p>
+    <ul>
+      <li>Environment variables and deployment settings, such as <code>OPENAI_MODEL=gpt-5</code> in a <code>.env</code> file, a Helm chart or your hosting dashboard. These never show up in a code search.</li>
+      <li>Model names stored in a database, for example a per-customer or per-feature setting.</li>
+      <li>Defaults inside libraries and agent frameworks. If you never set a model, check which one your SDK or framework picks.</li>
+      <li>Evaluation scripts, notebooks and cron jobs that only run once a week.</li>
+      <li>Azure OpenAI deployments. Azure has its own retirement schedule, so check Azure's model retirement page for those.</li>
+    </ul>
+
+    <h2>Step 2: test your prompts before 11 December</h2>
+    <p>A new model gives different answers to the same prompt. Usually they are fine, sometimes better. The problems show up where your code depends on the shape of the answer:</p>
+    <ul>
+      <li>JSON that no longer matches your schema, or extra text around it</li>
+      <li>answers that are much longer or shorter, which matters for UI limits and cost</li>
+      <li>different tool or function calls for the same request</li>
+      <li>refusals on prompts that used to work</li>
+      <li>a different tone in customer-facing text</li>
+    </ul>
+    <p>The test is simple. Take 10 to 20 real prompts from your logs, including the odd ones, run each on the old model and on the replacement, and compare the answers side by side. Check that every answer your code parses still parses.</p>
+    <p>The timing matters. After 11 December the old model is gone, so you can no longer see what it would have answered. You can only compare while both models respond, which means before 11 December. With the Evals platform shutting down on 30 November, OpenAI points to <a href="https://www.promptfoo.dev/" rel="noopener">Promptfoo</a> as one way to run such comparisons yourself.</p>
+    <p><a href="/#drift">Driftline Pro</a> does this inside your GitHub Actions: it runs the prompts your app sends on the current model and on the replacement, and shows what changed in the pull request, with your own API key.</p>
+
+    <h2>Step 3: switch, then keep it from happening again</h2>
+    <p>Change the model name, deploy the change well before 11 December, and watch your error logs for the first days. If you use <code>gpt-5-pro</code> or <code>o3-pro</code>, remember to set <code>reasoning.mode: pro</code> on <code>gpt-5.6-sol</code>, otherwise you get the standard mode.</p>
+    <p>The GPT-5.6 models will retire too one day. The free <a href="/#install">Driftline GitHub Action</a> checks every pull request for model IDs that are retired or retire within 90 days, and points to the exact line. If you would rather get an email:</p>
+{{ALERT:gpt-5}}
+
+    <h2>Questions</h2>
+    <h3>Will calls to gpt-5 keep working after 11 December 2026?</h3>
+    <p>No. OpenAI removes the model from the API on that day, so requests to <code>gpt-5</code> and <code>gpt-5-2025-08-07</code> return an error. Unlike some Google models, these IDs are not quietly routed to a newer model.</p>
+    <h3>Are gpt-5.1 and other GPT-5.x models affected?</h3>
+    <p>Not on 11 December. <a href="/models/gpt-5.1/">gpt-5.1</a> and <a href="/models/gpt-5.3-codex/">gpt-5.3-codex</a> are scheduled to retire on 1 April 2027. Every date is on the <a href="/models/">model retirement list</a>.</p>
+    <h3>Does this affect ChatGPT?</h3>
+    <p>This notice covers the API. Which models ChatGPT offers is a separate decision by OpenAI.</p>
+    <h3>Is gpt-5.6-sol a drop-in replacement?</h3>
+    <p>OpenAI names it as the recommended replacement, so in most code the change is the model name (plus the reasoning mode for the pro models). Check OpenAI's model page for any parameter differences. The answers are what change, which is why the prompt test in step 2 is worth an hour of your time.</p>

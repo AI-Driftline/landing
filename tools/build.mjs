@@ -11,7 +11,7 @@
 //
 // Run after every registry change:  node tools/build.mjs [path/to/models.json]
 // Default registry path: ../product/registry/models.json (the product repo next to this one).
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -133,6 +133,7 @@ ${body}
     <nav aria-label="Footer">
       <a href="/models/">All retirement dates</a>
       <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
       <a href="https://x.com/aidriftline" rel="noopener">X</a>
       <a href="/feed.xml">RSS</a>
@@ -159,8 +160,8 @@ const CHECK_BLOCK = (id) => `
 
 // Email alert sign-up (the driftline-api Worker). count.js shows the result message.
 const API = "https://driftline-api.aidriftline.workers.dev";
-const ALERT_BLOCK = (m) => `
-    <h2 id="alert">Get an email before it ${m.routes ? "is re-routed" : "retires"}</h2>
+const ALERT_BLOCK = (m, named = false) => `
+    <h2 id="alert">Get an email before ${named ? esc(m.id) : "it"} ${m.routes ? "is re-routed" : "retires"}</h2>
     <form class="alert-form" method="post" action="${API}/subscribe">
       <input type="hidden" name="model" value="${esc(m.id)}">
       <input type="email" name="email" required maxlength="200" placeholder="you@company.com" aria-label="Your email address">
@@ -390,7 +391,42 @@ writeFileSync(join(ROOT, "retirements.ics"), [
   "END:VCALENDAR",
 ].map(fold).join("\r\n") + "\r\n");
 
-const pages = ["/", "/models/", "/agents/", ...[...models, ...aliases].map((m) => url(m.id)), "/terms.html", "/privacy.html", "/refunds.html"];
+// ---------- blog: tools/posts/<slug>.html = a JSON header comment + the article body ----------
+// {{ALERT:<model-id>}} in the body becomes the email alert form for that model.
+const posts = existsSync(join(ROOT, "tools", "posts")) ? readdirSync(join(ROOT, "tools", "posts")).filter((f) => f.endsWith(".html")).map((f) => {
+  const raw = readFileSync(join(ROOT, "tools", "posts", f), "utf8");
+  const meta = JSON.parse(raw.match(/^<!--([\s\S]*?)-->/)[1]);
+  const body = raw.replace(/^<!--[\s\S]*?-->\s*/, "").replace(/\{\{ALERT:([\w.-]+)\}\}/g, (_, id) => {
+    const m = byId.get(id);
+    if (!m) throw new Error(`blog ${f}: unknown model ${id}`);
+    return past(m) ? "" : ALERT_BLOCK(m, true);
+  });
+  return { ...meta, body };
+}).sort((a, b) => b.date.localeCompare(a.date)) : [];
+for (const post of posts) {
+  const path = `/blog/${post.slug}/`;
+  const dir = join(ROOT, "blog", post.slug);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page({
+    path, title: post.title, description: post.description,
+    body: `    <p class="crumbs"><a href="/blog/">Blog</a></p>
+    <h1 class="post-h1">${esc(post.title)}</h1>
+    <p class="updated">${long(post.date)} · Driftline</p>
+${post.body}`,
+    jsonld: [{ "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date, author: { "@type": "Organization", name: "Driftline", url: SITE }, publisher: { "@type": "Organization", name: "Driftline", url: SITE }, mainEntityOfPage: `${SITE}${path}` }],
+  }));
+}
+if (posts.length) writeFileSync(join(ROOT, "blog", "index.html"), page({
+  path: "/blog/", title: "Driftline blog · AI model retirements explained", description: "What changes when OpenAI, Anthropic and Google retire a model, and how to move your code and prompts to the replacement.",
+  body: `    <span class="eyebrow">Blog</span>
+    <h1>Model retirements, explained</h1>
+    <p class="answer">What changes when OpenAI, Anthropic and Google retire a model, and how to move your code and prompts to the replacement.</p>
+    <ul class="posts">
+${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.title)}</a><span class="dim"> · ${long(p.date)}</span><br><span>${esc(p.description)}</span></li>`).join("\n")}
+    </ul>`,
+}));
+
+const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
