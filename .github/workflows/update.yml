@@ -42,12 +42,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PROBLEMS: ${{ steps.check.outputs.problems }}
+          ROUTINE_FIRE_TOKEN: ${{ secrets.ROUTINE_FIRE_TOKEN }}
         run: |
           gh label create registry-check --color D93F0B --description "Registry differs from a provider page" --force >/dev/null 2>&1 || true
           n=$(gh issue list --label registry-check --state open --json number --jq '.[0].number // empty')
           if [ "$PROBLEMS" != "0" ]; then
             if [ -z "$n" ]; then
-              gh issue create --title "Registry differs from the provider pages" --label registry-check --body-file "$RUNNER_TEMP/registry-check.md"
+              url=$(gh issue create --title "Registry differs from the provider pages" --label registry-check --body-file "$RUNNER_TEMP/registry-check.md")
+              # Start the AI registry check now instead of at its next morning run (API trigger; needs the
+              # ROUTINE_FIRE_TOKEN secret from claude.ai/code/routines → task → Edit → Trigger + → API).
+              if [ -n "$ROUTINE_FIRE_TOKEN" ]; then
+                jq -n --arg t "The page check opened $url with these differences. Fix them as your instructions say: $(cat "$RUNNER_TEMP/registry-check.md")" '{text: $t}' \
+                  | curl -sS -m 30 -X POST "https://api.anthropic.com/v1/claude_code/routines/trig_019fF1zPXDCTGaxRVieWN5Wg/fire" \
+                      -H "Authorization: Bearer $ROUTINE_FIRE_TOKEN" -H "anthropic-beta: experimental-cc-routine-2026-04-01" -H "anthropic-version: 2023-06-01" -H "Content-Type: application/json" -d @- >/dev/null \
+                  && echo "Started the AI registry check." || echo "Could not start the AI registry check; it runs at 22:00 UTC anyway."
+              fi
             else
               # Only touch the issue when the list itself changed (line 1 is just the timestamp), so no repeat emails.
               if [ "$(gh issue view "$n" --json body --jq .body | tail -n +2 | tr -d '[:space:]')" != "$(tail -n +2 "$RUNNER_TEMP/registry-check.md" | tr -d '[:space:]')" ]; then
