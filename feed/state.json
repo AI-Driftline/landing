@@ -20,7 +20,7 @@
     "o3-2025-04-16": "2026-12-11|exact|gpt-6.1-sol|",
     "o3-pro-2025-06-10": "2026-12-11|exact|gpt-6.1-sol|",
     "gpt-5-mini-2025-08-07": "2026-12-11|exact|gpt-6.1-terra|",
-    "gpt-5-nano-2025-08-07": "2026-12-11|exact|gpt-5.6-luna|",
+    "gpt-5-nano-2025-08-07": "2026-12-11|exact|gpt-6-luna|",
     "gpt-3.5-turbo-0125": "2026-10-23|exact|gpt-5.6-terra|",
     "gpt-3.5-turbo": "2026-10-23|exact|gpt-5.6-terra|",
     "o4-mini": "2026-10-23|exact|gpt-5.6-terra|",
@@ -242,7 +242,7 @@
     "o3": "2026-12-11|exact|gpt-6.1-sol|",
     "o3-pro": "2026-12-11|exact|gpt-6.1-sol|",
     "gpt-5-mini": "2026-12-11|exact|gpt-6.1-terra|",
-    "gpt-5-nano": "2026-12-11|exact|gpt-5.6-luna|",
+    "gpt-5-nano": "2026-12-11|exact|gpt-6-luna|",
     "gpt-4o-mini-tts": "2027-01-06|exact|gpt-realtime-2.1-mini|",
     "gpt-4o-mini-transcribe-2025-12-15": "2027-02-26|exact|gpt-live-transcribe|",
     "gpt-realtime-2025-08-28": "2027-01-20|exact|gpt-realtime-2.1|",
@@ -263,6 +263,7 @@
     "new:openai:2027-02-26|exact|gpt-live-transcribe|:changed",
     "new:openai:repl:2026-12-11|exact|gpt-6.1-sol||",
     "new:openai:repl:2026-12-11|exact|gpt-6.1-sol||reasoning.mode: pro, in the Responses API",
-    "new:openai:repl:2026-12-11|exact|gpt-6.1-terra||"
+    "new:openai:repl:2026-12-11|exact|gpt-6.1-terra||",
+    "new:openai:repl:2026-12-11|exact|gpt-6-luna||"
   ]
 }
