@@ -9,7 +9,11 @@
  },
  "google-2026-12-01-gemini-2-5-pro-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"gemini-2.5-pro\",\"2026-12-01\",\"gemini-3.8-flash\",null,null],[\"gemini-2.5-flash\",\"2026-12-01\",\"gemini-3.5-flash-lite\",null,null]]"
+  "facts": "[[\"gemini-2.5-pro\",\"2026-12-01\",\"gemini-3.8-flash\",null,null],[\"gemini-2.5-flash\",\"2026-12-01\",\"gemini-3.5-flash-lite\",null,null]]",
+  "devto": {
+   "id": 5032142,
+   "drafted": "2026-11-13"
+  }
  },
  "openai-2026-12-01-gpt-image-1-mini-and-more-retirement": {
   "date": "2026-11-13",

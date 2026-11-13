@@ -6,7 +6,7 @@
   <atom:link href="https://aidriftline.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>When OpenAI, Anthropic and Google retire or re-route their models, from the official deprecation pages, checked daily.</description>
   <language>en</language>
-  <lastBuildDate>Fri, 13 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 14 Nov 2026 00:00:00 GMT</lastBuildDate>
   <ttl>360</ttl>
   <item>
     <title>OpenAI retires gpt-image-2, gpt-image-2-2026-04-21 on 10 Feb 2027</title>
@@ -238,28 +238,6 @@ Details: https://aidriftline.com/models/gemini-embedding-2-preview/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
-    <title>Google may shut down gemini-2.5-flash-native-audio-preview-12-2025, gemini-3.1-flash-live-preview from 17 Nov 2026</title>
-    <link>https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12-2025/</link>
-    <guid isPermaLink="false">driftline:google|2026-11-17|earliest|gemini-3.8-live|</guid>
-    <description>Google lists 17 November 2026 as the earliest shutdown date. The models can be switched off from that day on.
-Models: gemini-2.5-flash-native-audio-preview-12-2025, gemini-3.1-flash-live-preview
-Replacement: gemini-3.8-live
-Source: https://ai.google.dev/gemini-api/docs/deprecations
-Details: https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12-2025/
-Check your code: npx -y @aidriftline/driftline .</description>
-  </item>
-  <item>
-    <title>Google may shut down gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-flash-tts-preview from 17 Nov 2026</title>
-    <link>https://aidriftline.com/models/gemini-2.5-flash-preview-tts/</link>
-    <guid isPermaLink="false">driftline:google|2026-11-17|earliest|gemini-3.8-flash-tts|</guid>
-    <description>Google lists 17 November 2026 as the earliest shutdown date. The models can be switched off from that day on.
-Models: gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-flash-tts-preview
-Replacement: gemini-3.8-flash-tts
-Source: https://ai.google.dev/gemini-api/docs/deprecations
-Details: https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
-Check your code: npx -y @aidriftline/driftline .</description>
-  </item>
-  <item>
     <title>OpenAI retires chatgpt-image-latest, gpt-image-1-mini and 2 more on 1 Dec 2026</title>
     <link>https://aidriftline.com/models/chatgpt-image-latest/</link>
     <guid isPermaLink="false">driftline:openai|2026-12-01|exact|gpt-image-2.6-sunburst|</guid>
@@ -298,6 +276,17 @@ Check your code: npx -y @aidriftline/driftline .</description>
 Models: gemini-omni-1.1-flash
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-omni-1.1-flash/
+Check your code: npx -y @aidriftline/driftline .</description>
+  </item>
+  <item>
+    <title>Google may shut down gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-flash-tts-preview from 18 Dec 2026</title>
+    <link>https://aidriftline.com/models/gemini-2.5-flash-preview-tts/</link>
+    <guid isPermaLink="false">driftline:google|2026-12-18|earliest|gemini-3.8-flash-tts|</guid>
+    <description>Google lists 18 December 2026 as the earliest shutdown date. The models can be switched off from that day on.
+Models: gemini-2.5-flash-preview-tts, gemini-2.5-pro-preview-tts, gemini-3.1-flash-tts-preview
+Replacement: gemini-3.8-flash-tts
+Source: https://ai.google.dev/gemini-api/docs/deprecations
+Details: https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
@@ -375,6 +364,17 @@ Models: gemini-2.5-flash-image
 Replacement: gemini-3.1-flash-lite-image
 Source: https://ai.google.dev/gemini-api/docs/deprecations
 Details: https://aidriftline.com/models/gemini-2.5-flash-image/
+Check your code: npx -y @aidriftline/driftline .</description>
+  </item>
+  <item>
+    <title>Google may shut down gemini-2.5-flash-native-audio-preview-12-2025 from 31 Mar 2027</title>
+    <link>https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12-2025/</link>
+    <guid isPermaLink="false">driftline:google|2027-03-31|earliest|gemini-3.8-live|</guid>
+    <description>Google lists 31 March 2027 as the earliest shutdown date. The models can be switched off from that day on.
+Models: gemini-2.5-flash-native-audio-preview-12-2025
+Replacement: gemini-3.8-live
+Source: https://ai.google.dev/gemini-api/docs/deprecations
+Details: https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12-2025/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>

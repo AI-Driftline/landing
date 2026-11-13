@@ -10,7 +10,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:google-2026-08-17-earliest-gemini-nano-banana-2.1-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20260817
 DTEND;VALUE=DATE:20260818
 SUMMARY:Google may shut down imagen-4.0-fast-generate-001\, imagen-4.0-gene
@@ -27,7 +27,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-08-31-earliest-gemini-robotics-er-2-preview-@aidriftline.co
  m
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
 SUMMARY:Google may shut down gemini-robotics-er-1.6-preview
@@ -42,7 +42,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-09-24-exact-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20260924
 DTEND;VALUE=DATE:20260925
 SUMMARY:OpenAI retires sora-2\, sora-2-2025-10-06 and 3 more
@@ -56,7 +56,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-09-28-exact-gpt-5.6-terra-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20260928
 DTEND;VALUE=DATE:20260929
 SUMMARY:OpenAI retires babbage-002\, davinci-002 and 2 more
@@ -70,7 +70,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-10-01-exact-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:OpenAI retires gpt-5.4-cyber
@@ -83,7 +83,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-10-05-earliest-antigravity-preview-09-2026-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261005
 DTEND;VALUE=DATE:20261006
 SUMMARY:Google may shut down antigravity-preview-05-2026
@@ -98,7 +98,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-10-22-earliest-gemini-omni-1.2-flash-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
 SUMMARY:Google may shut down gemini-omni-flash-preview\, veo-3.1-fast-gener
@@ -116,7 +116,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-10-23-earliest-deep-research-preview-04-2026-@aidriftline.c
  om
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:Google may shut down deep-research-pro-preview-12-2025
@@ -131,7 +131,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-10-23-exact-gpt-5.6-terra-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:OpenAI retires ft-o4-mini-2025-04-16\, gpt-3.5-turbo and 4 more
@@ -146,7 +146,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-10-23-exact-gpt-5.6-sol-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:OpenAI retires gpt-4\, gpt-4-0613 and 13 more
@@ -163,7 +163,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-10-23-exact-gpt-5.6-luna-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:OpenAI retires gpt-4.1-nano\, gpt-4.1-nano-2025-04-14
@@ -177,7 +177,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-10-23-exact-gpt-image-2.5-sunburst-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:OpenAI retires gpt-image-1
@@ -191,7 +191,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-11-06-exact-gemini-embedding-2-routes@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261106
 DTEND;VALUE=DATE:20261107
 SUMMARY:Google routes gemini-embedding-2-preview to gemini-embedding-2
@@ -205,41 +205,8 @@ URL:https://aidriftline.com/models/gemini-embedding-2-preview/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:google-2026-11-17-earliest-gemini-3.8-live-@aidriftline.com
-DTSTAMP:20261113T000000Z
-DTSTART;VALUE=DATE:20261117
-DTEND;VALUE=DATE:20261118
-SUMMARY:Google may shut down gemini-2.5-flash-native-audio-preview-12-2025\
- , gemini-3.1-flash-live-preview
-DESCRIPTION:Google lists 17 November 2026 as the earliest shutdown date. Th
- e models can be switched off from that day on.\nModels: gemini-2.5-flash-n
- ative-audio-preview-12-2025\, gemini-3.1-flash-live-preview\nReplacement: 
- gemini-3.8-live\nSource: https://ai.google.dev/gemini-api/docs/deprecation
- s\nDetails: https://aidriftline.com/models/gemini-2.5-flash-native-audio-p
- review-12-2025/\nCheck your code: npx -y @aidriftline/driftline .
-URL:https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12
- -2025/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:google-2026-11-17-earliest-gemini-3.8-flash-tts-@aidriftline.com
-DTSTAMP:20261113T000000Z
-DTSTART;VALUE=DATE:20261117
-DTEND;VALUE=DATE:20261118
-SUMMARY:Google may shut down gemini-2.5-flash-preview-tts\, gemini-2.5-pro-
- preview-tts\, gemini-3.1-flash-tts-preview
-DESCRIPTION:Google lists 17 November 2026 as the earliest shutdown date. Th
- e models can be switched off from that day on.\nModels: gemini-2.5-flash-p
- review-tts\, gemini-2.5-pro-preview-tts\, gemini-3.1-flash-tts-preview\nRe
- placement: gemini-3.8-flash-tts\nSource: https://ai.google.dev/gemini-api/
- docs/deprecations\nDetails: https://aidriftline.com/models/gemini-2.5-flas
- h-preview-tts/\nCheck your code: npx -y @aidriftline/driftline .
-URL:https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:anthropic-2026-11-30-exact-claude-sonnet-5-5-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:Anthropic retires claude-sonnet-4-5-20250929
@@ -253,7 +220,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-12-01-exact-gpt-image-2.6-sunburst-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:OpenAI retires chatgpt-image-latest\, gpt-image-1-mini and 2 more
@@ -268,7 +235,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-12-01-exact-gemini-3.5-flash-lite-routes@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:Google routes gemini-2.5-flash to gemini-3.5-flash-lite
@@ -282,7 +249,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-12-01-exact-gemini-3.8-flash-routes@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:Google routes gemini-2.5-pro to gemini-3.8-flash
@@ -296,7 +263,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2026-12-03-exact-gemini-omni-1.2-flash-routes@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261203
 DTEND;VALUE=DATE:20261204
 SUMMARY:Google routes gemini-omni-1.1-flash to gemini-omni-1.2-flash
@@ -310,7 +277,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-12-11-exact-gpt-6.1-sol-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:OpenAI retires gpt-5\, gpt-5-2025-08-07 and 6 more
@@ -325,7 +292,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-12-11-exact-gpt-6.1-terra-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:OpenAI retires gpt-5-mini\, gpt-5-mini-2025-08-07
@@ -339,7 +306,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2026-12-11-exact-gpt-6-luna-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:OpenAI retires gpt-5-nano\, gpt-5-nano-2025-08-07
@@ -352,8 +319,24 @@ URL:https://aidriftline.com/models/gpt-5-nano/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:google-2026-12-18-earliest-gemini-3.8-flash-tts-@aidriftline.com
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:Google may shut down gemini-2.5-flash-preview-tts\, gemini-2.5-pro-
+ preview-tts\, gemini-3.1-flash-tts-preview
+DESCRIPTION:Google lists 18 December 2026 as the earliest shutdown date. Th
+ e models can be switched off from that day on.\nModels: gemini-2.5-flash-p
+ review-tts\, gemini-2.5-pro-preview-tts\, gemini-3.1-flash-tts-preview\nRe
+ placement: gemini-3.8-flash-tts\nSource: https://ai.google.dev/gemini-api/
+ docs/deprecations\nDetails: https://aidriftline.com/models/gemini-2.5-flas
+ h-preview-tts/\nCheck your code: npx -y @aidriftline/driftline .
+URL:https://aidriftline.com/models/gemini-2.5-flash-preview-tts/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:openai-2027-01-06-exact-gpt-realtime-2.1-mini-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
 SUMMARY:OpenAI retires gpt-4o-mini-tts\, gpt-4o-mini-tts-2025-03-20 and 3 m
@@ -369,7 +352,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-01-14-exact-gpt-6-luna-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270114
 DTEND;VALUE=DATE:20270115
 SUMMARY:OpenAI retires gpt-4.1-2025-04-14\, gpt-4.1-mini-2025-04-14 and 3 m
@@ -385,7 +368,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-01-20-exact-gpt-audio-1.5-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:OpenAI retires gpt-4o-audio\, gpt-4o-mini-audio and 4 more
@@ -400,7 +383,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-01-20-exact-gpt-realtime-2.1-mini-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:OpenAI retires gpt-4o-mini-realtime\, gpt-realtime-mini\, gpt-realt
@@ -417,7 +400,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-01-20-exact-gpt-4o-mini-transcribe-2025-12-15-@aidriftline.
  com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:OpenAI retires gpt-4o-mini-transcribe-2025-03-20
@@ -431,7 +414,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-01-20-exact-gpt-realtime-2.1-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:OpenAI retires gpt-4o-realtime\, gpt-realtime\, gpt-realtime-2025-0
@@ -446,7 +429,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-02-01-exact-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:OpenAI retires gpt-5.5-cyber-preview
@@ -460,7 +443,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-02-10-exact-gpt-image-2.6-sunburst-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270210
 DTEND;VALUE=DATE:20270211
 SUMMARY:OpenAI retires gpt-image-2\, gpt-image-2-2026-04-21
@@ -474,7 +457,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-02-26-exact-gpt-live-transcribe-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270226
 DTEND;VALUE=DATE:20270227
 SUMMARY:OpenAI retires gpt-4o-mini-transcribe\, gpt-4o-mini-transcribe-2025
@@ -490,7 +473,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2027-03-15-earliest-gemini-3.1-flash-lite-image-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270315
 DTEND;VALUE=DATE:20270316
 SUMMARY:Google may shut down gemini-2.5-flash-image
@@ -503,8 +486,24 @@ URL:https://aidriftline.com/models/gemini-2.5-flash-image/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:google-2027-03-31-earliest-gemini-3.8-live-@aidriftline.com
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:Google may shut down gemini-2.5-flash-native-audio-preview-12-2025
+DESCRIPTION:Google lists 31 March 2027 as the earliest shutdown date. The m
+ odels can be switched off from that day on.\nModels: gemini-2.5-flash-nati
+ ve-audio-preview-12-2025\nReplacement: gemini-3.8-live\nSource: https://ai
+ .google.dev/gemini-api/docs/deprecations\nDetails: https://aidriftline.com
+ /models/gemini-2.5-flash-native-audio-preview-12-2025/\nCheck your code: n
+ px -y @aidriftline/driftline .
+URL:https://aidriftline.com/models/gemini-2.5-flash-native-audio-preview-12
+ -2025/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:openai-2027-04-01-exact-gpt-6-sol-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270401
 DTEND;VALUE=DATE:20270402
 SUMMARY:OpenAI retires gpt-5.1\, gpt-5.1-2025-11-13\, gpt-5.3-codex
@@ -518,7 +517,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-2027-04-01-exact-gpt-6-luna-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270401
 DTEND;VALUE=DATE:20270402
 SUMMARY:OpenAI retires gpt-5.4-nano\, gpt-5.4-nano-2026-03-17
@@ -532,7 +531,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2027-05-07-earliest-gemini-3.5-flash-lite-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20270507
 DTEND;VALUE=DATE:20270508
 SUMMARY:Google may shut down gemini-3.1-flash-lite
@@ -546,7 +545,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:google-2028-05-14-earliest-gemini-embedding-2-@aidriftline.com
-DTSTAMP:20261113T000000Z
+DTSTAMP:20261114T000000Z
 DTSTART;VALUE=DATE:20280514
 DTEND;VALUE=DATE:20280515
 SUMMARY:Google may shut down gemini-embedding-001
