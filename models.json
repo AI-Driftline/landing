@@ -13,6 +13,7 @@
       "retires": "2027-02-10",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image",
       "announced": "2026-11-10"
     },
@@ -22,6 +23,7 @@
       "retires": "2027-02-10",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image",
       "announced": "2026-11-10"
     },
@@ -1270,6 +1272,7 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
+      "replacement_alt": "gpt-transcribe",
       "kind": "audio",
       "migration": {
         "change": "choose",
@@ -1284,6 +1287,7 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
+      "replacement_alt": "gpt-transcribe",
       "kind": "audio",
       "migration": {
         "change": "choose",
@@ -1298,6 +1302,7 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
+      "replacement_alt": "gpt-transcribe",
       "kind": "audio",
       "migration": {
         "change": "choose",
@@ -1312,6 +1317,7 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
+      "replacement_alt": "gpt-transcribe",
       "kind": "audio",
       "migration": {
         "change": "choose",
@@ -1326,6 +1332,7 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
+      "replacement_alt": "gpt-transcribe",
       "kind": "audio",
       "migration": {
         "change": "choose",
@@ -1576,6 +1583,7 @@
       "retires": "2026-10-23",
       "qualifier": "exact",
       "replacement": "gpt-image-2.5-sunburst",
+      "replacement_alt": "gpt-image-2.5-flare",
       "kind": "image"
     },
     {
@@ -1584,6 +1592,7 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image"
     },
     {
@@ -1592,6 +1601,7 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image"
     },
     {
@@ -1600,6 +1610,7 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image"
     },
     {
@@ -1608,6 +1619,7 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gpt-image-2.6-sunburst",
+      "replacement_alt": "gpt-image-2.6-flare",
       "kind": "image"
     },
     {

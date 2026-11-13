@@ -56,7 +56,7 @@ function newPost(g, kind) {
       `Date unchanged: ${nice(retires)}.\n\n${CHECK}\n${link(g.ids)}`, g.ids);
   }
   const head = kind === "date" ? "Date change" : "New";
-  const repl = replacement ? `\nReplacement: ${replacement}.` : "";
+  const repl = replacement ? `\nReplacement: ${replacement}${g.entry.replacement_alt ? ` or ${g.entry.replacement_alt}` : ""}.` : "";
   return fit((list, n) => {
     const them = n === 1 ? "it" : "them";
     const body = routes
@@ -73,7 +73,7 @@ function newPost(g, kind) {
 function reminder(g, when) {
   const { provider, retires } = g.entry;
   const who = WHO[provider] || provider;
-  const repls = [...new Set(g.models.map((m) => m.replacement).filter(Boolean))];
+  const repls = [...new Set(g.models.filter((m) => m.replacement).map((m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "")))];
   const routes = g.models.every((m) => m.routes);
   const repl = repls.length === 1 ? `\nReplacement: ${repls[0]}.` : "";
   return fit((list, n) => {
