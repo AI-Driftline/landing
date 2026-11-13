@@ -78,7 +78,7 @@ function answer(m) {
     s += past(m) ? `${who} retired ${m.id} on ${d}. API calls to it now fail.` : `${who} will retire ${m.id} on ${d}. After that date, API calls to it fail.`;
   }
   const r = finalReplacement(m);
-  if (m.replacement && !m.routes) s += ` The recommended replacement is ${m.replacement}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.`;
+  if (m.replacement && !m.routes) s += ` The recommended replacement is ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.`;
   else if (!m.replacement) s += ` ${who} names no direct replacement.`;
   return s;
 }
@@ -184,14 +184,14 @@ for (const m of [...models, ...aliases]) {
     : `${m.id} retirement date: ${short(m.retires)}${m.qualifier === "earliest" ? " (earliest)" : m.qualifier === "not-before" ? " (not before)" : ""} · Driftline`;
   const q1 = m.routes ? `What happens to ${m.id} on ${long(m.retires)}?` : `When is ${m.id} retired?`;
   const faq = [{ q: q1, a: text }];
-  if (m.replacement) faq.push({ q: `What replaces ${m.id}?`, a: `${who} recommends ${m.replacement}${r && r !== m.replacement ? `, which is itself retiring; the model to move to is ${r}` : ""}. Test your prompts on it before you switch: answers, formats and JSON output can change.` });
+  if (m.replacement) faq.push({ q: `What replaces ${m.id}?`, a: `${who} recommends ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? `, which is itself retiring; the model to move to is ${r}` : ""}. Test your prompts on it before you switch: answers, formats and JSON output can change.` });
   faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y @aidriftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
 
   const rows = [
     ["Provider", who],
     ["Status", `${status(m)} <span class="dim">(as of ${short(reg.checked)})</span>`],
     [dateKind(m), long(m.retires)],
-    ...(m.replacement ? [["Replacement", link(m.replacement) + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
+    ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
     ["Model type", KIND[kind] || kind],
     ...(m.announced ? [["Announced", long(m.announced)]] : []),

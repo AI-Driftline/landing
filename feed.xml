@@ -6,7 +6,7 @@
   <atom:link href="https://aidriftline.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>When OpenAI, Anthropic and Google retire or re-route their models, from the official deprecation pages, checked daily.</description>
   <language>en</language>
-  <lastBuildDate>Thu, 12 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 00:00:00 GMT</lastBuildDate>
   <ttl>360</ttl>
   <item>
     <title>OpenAI retires gpt-image-2, gpt-image-2-2026-04-21 on 10 Feb 2027</title>
@@ -82,11 +82,11 @@ Check your code: npx -y @aidriftline/driftline .</description>
   <item>
     <title>OpenAI retires gpt-5, gpt-5-2025-08-07 and 6 more on 11 Dec 2026</title>
     <link>https://aidriftline.com/models/gpt-5/</link>
-    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-5.6-sol|</guid>
+    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-6.1-sol|</guid>
     <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
     <description>OpenAI shuts these models down on 11 December 2026. Calls to them fail after that.
 Models: gpt-5, gpt-5-2025-08-07, gpt-5-pro, gpt-5-pro-2025-10-06, o3, o3-2025-04-16, o3-pro, o3-pro-2025-06-10
-Replacement: gpt-5.6-sol
+Replacement: gpt-6.1-sol
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5/
 Check your code: npx -y @aidriftline/driftline .</description>
@@ -94,11 +94,11 @@ Check your code: npx -y @aidriftline/driftline .</description>
   <item>
     <title>OpenAI retires gpt-5-mini, gpt-5-mini-2025-08-07 on 11 Dec 2026</title>
     <link>https://aidriftline.com/models/gpt-5-mini/</link>
-    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-5.6-terra|</guid>
+    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-6.1-terra|</guid>
     <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
     <description>OpenAI shuts these models down on 11 December 2026. Calls to them fail after that.
 Models: gpt-5-mini, gpt-5-mini-2025-08-07
-Replacement: gpt-5.6-terra
+Replacement: gpt-6.1-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5-mini/
 Check your code: npx -y @aidriftline/driftline .</description>
@@ -106,34 +106,34 @@ Check your code: npx -y @aidriftline/driftline .</description>
   <item>
     <title>OpenAI retires gpt-5-nano, gpt-5-nano-2025-08-07 on 11 Dec 2026</title>
     <link>https://aidriftline.com/models/gpt-5-nano/</link>
-    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-5.6-luna|</guid>
+    <guid isPermaLink="false">driftline:openai|2026-12-11|exact|gpt-6-luna|</guid>
     <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
     <description>OpenAI shuts these models down on 11 December 2026. Calls to them fail after that.
 Models: gpt-5-nano, gpt-5-nano-2025-08-07
-Replacement: gpt-5.6-luna
+Replacement: gpt-6-luna
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-5-nano/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
-    <title>OpenAI retires ft-o4-mini-2025-04-16, gpt-3.5-turbo and 3 more on 23 Oct 2026</title>
+    <title>OpenAI retires ft-o4-mini-2025-04-16, gpt-3.5-turbo and 4 more on 23 Oct 2026</title>
     <link>https://aidriftline.com/models/ft-o4-mini-2025-04-16/</link>
     <guid isPermaLink="false">driftline:openai|2026-10-23|exact|gpt-5.6-terra|</guid>
     <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
     <description>OpenAI shuts these models down on 23 October 2026. Calls to them fail after that.
-Models: ft-o4-mini-2025-04-16, gpt-3.5-turbo, gpt-3.5-turbo-0125, o4-mini, o4-mini-2025-04-16
+Models: ft-o4-mini-2025-04-16, gpt-3.5-turbo, gpt-3.5-turbo-0125, gpt-3.5-turbo-completions, o4-mini, o4-mini-2025-04-16
 Replacement: gpt-5.6-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/ft-o4-mini-2025-04-16/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
-    <title>OpenAI retires gpt-4, gpt-4-0613 and 10 more on 23 Oct 2026</title>
+    <title>OpenAI retires gpt-4, gpt-4-0613 and 13 more on 23 Oct 2026</title>
     <link>https://aidriftline.com/models/gpt-4/</link>
     <guid isPermaLink="false">driftline:openai|2026-10-23|exact|gpt-5.6-sol|</guid>
     <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
     <description>OpenAI shuts these models down on 23 October 2026. Calls to them fail after that.
-Models: gpt-4, gpt-4-0613, gpt-4-1106-preview, gpt-4-turbo, gpt-4-turbo-2024-04-09, gpt-4o-2024-05-13, o1, o1-2024-12-17, o1-pro, o1-pro-2025-03-19, o3-mini, o3-mini-2025-01-31
+Models: gpt-4, gpt-4-0613, gpt-4-0613-completions, gpt-4-1106-preview, gpt-4-completions, gpt-4-turbo, gpt-4-turbo-2024-04-09, gpt-4-turbo-completions, gpt-4o-2024-05-13, o1, o1-2024-12-17, o1-pro, o1-pro-2025-03-19, o3-mini, o3-mini-2025-01-31
 Replacement: gpt-5.6-sol
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/gpt-4/

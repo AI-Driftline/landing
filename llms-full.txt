@@ -5,7 +5,7 @@
 - Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks 253 model IDs (checked 2026-11-12), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- Tracks 258 model IDs (checked 2026-11-13), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
@@ -29,7 +29,7 @@
 - [GitHub Marketplace](https://github.com/marketplace/actions/driftline-ai-model-check)
 - [Pricing and FAQ](https://aidriftline.com/#pricing)
 
-## Upcoming retirements (as of 2026-11-12)
+## Upcoming retirements (as of 2026-11-13)
 
 - gemini-2.5-flash-native-audio-preview-12-2025 (Google, audio): earliest shutdown 2026-11-17, replacement gemini-3.8-live
 - gemini-2.5-flash-preview-tts (Google, audio): earliest shutdown 2026-11-17, replacement gemini-3.8-flash-tts
@@ -45,18 +45,18 @@
 - gpt-image-1.5 (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
 - gpt-image-1.5-2025-12-16 (OpenAI, image): shutdown 2026-12-01, replacement gpt-image-2.6-sunburst
 - gemini-omni-1.1-flash (Google, video): routing starts 2026-12-03, replacement gemini-omni-1.2-flash (requests routed to the replacement)
-- gpt-5 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- gpt-5-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- gpt-5-mini (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-terra
-- gpt-5-mini-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-terra
-- gpt-5-nano (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-luna
-- gpt-5-nano-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-luna
-- gpt-5-pro (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- gpt-5-pro-2025-10-06 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- o3 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- o3-2025-04-16 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- o3-pro (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
-- o3-pro-2025-06-10 (OpenAI): shutdown 2026-12-11, replacement gpt-5.6-sol
+- gpt-5 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- gpt-5-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- gpt-5-mini (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-terra
+- gpt-5-mini-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-terra
+- gpt-5-nano (OpenAI): shutdown 2026-12-11, replacement gpt-6-luna
+- gpt-5-nano-2025-08-07 (OpenAI): shutdown 2026-12-11, replacement gpt-6-luna
+- gpt-5-pro (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- gpt-5-pro-2025-10-06 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- o3 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- o3-2025-04-16 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- o3-pro (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
+- o3-pro-2025-06-10 (OpenAI): shutdown 2026-12-11, replacement gpt-6.1-sol
 - gpt-4o-mini-tts (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
 - gpt-4o-mini-tts-2025-03-20 (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
 - gpt-4o-mini-tts-2025-12-15 (OpenAI, audio): shutdown 2027-01-06, replacement gpt-realtime-2.1-mini
@@ -127,11 +127,15 @@
 - gpt-4o-2024-05-13 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4.1-nano-2025-04-14 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-luna
 - gpt-4.1-nano (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-luna
+- gpt-4-turbo-completions (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4-turbo-2024-04-09 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4-turbo (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
+- gpt-4-completions (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4-1106-preview (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
+- gpt-4-0613-completions (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4-0613 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
 - gpt-4 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-sol
+- gpt-3.5-turbo-completions (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
 - gpt-3.5-turbo-0125 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
 - gpt-3.5-turbo (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
 - ft-o4-mini-2025-04-16 (OpenAI): shutdown 2026-10-23, replacement gpt-5.6-terra
@@ -201,6 +205,7 @@
 - gemini-robotics-er-1.5-preview (Google): earliest shutdown 2026-04-30, replacement gemini-robotics-er-2-preview
 - claude-3-haiku-20240307 (Anthropic): shutdown 2026-04-20, replacement claude-haiku-4-5-20251001
 - gemini-2.5-flash-lite-preview-09-2025 (Google): earliest shutdown 2026-03-31, replacement gemini-3.1-flash-lite
+- gpt-4-turbo-preview-completions (OpenAI): shutdown 2026-03-26, replacement gpt-5
 - gpt-4-turbo-preview (OpenAI): shutdown 2026-03-26, replacement gpt-5
 - gpt-4-0314 (OpenAI): shutdown 2026-03-26, replacement gpt-5
 - gpt-4-0125-preview (OpenAI): shutdown 2026-03-26, replacement gpt-5
