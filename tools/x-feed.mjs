@@ -124,7 +124,9 @@ const state = firstRun ? { seen: {}, posted: [] } : JSON.parse(readFileSync(STAT
 const posts = [];
 
 const fixed = reg.models.filter((m) => m.qualifier === "exact");
-for (const g of group(fixed.filter((m) => m.retires === today), (m) => `day:${m.retires}:${m.provider}`))
+// Entries under review (the provider's page changed, registry not fixed yet) get no reminders until confirmed.
+const confirmed = (list) => list.filter((m) => !m.under_review);
+for (const g of group(confirmed(fixed).filter((m) => m.retires === today), (m) => `day:${m.retires}:${m.provider}`))
   if (!state.posted.includes(g.key)) posts.push({ key: g.key, text: reminder(g, "day") });
 
 const changed = reg.models.filter((m) => !firstRun && state.seen[m.id] !== sig(m) && m.retires >= plus(today, -1));
@@ -139,7 +141,7 @@ if (newGroups.length > MAX_NEW_GROUPS) {
   for (const g of newGroups) posts.push({ key: g.key, ids: g.ids, text: newPost(g, g.key.split(":")[2]) });
 }
 
-for (const g of group(fixed.filter((m) => m.retires === plus(today, 7)), (m) => `week:${m.retires}:${m.provider}`))
+for (const g of group(confirmed(fixed).filter((m) => m.retires === plus(today, 7)), (m) => `week:${m.retires}:${m.provider}`))
   if (!state.posted.includes(g.key)) posts.push({ key: g.key, text: reminder(g, "week") });
 
 // ---------- post ----------

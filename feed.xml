@@ -6,7 +6,7 @@
   <atom:link href="https://aidriftline.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>When OpenAI, Anthropic and Google retire or re-route their models, from the official deprecation pages, checked daily.</description>
   <language>en</language>
-  <lastBuildDate>Sat, 14 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 00:00:00 GMT</lastBuildDate>
   <ttl>360</ttl>
   <item>
     <title>OpenAI retires gpt-image-2, gpt-image-2-2026-04-21 on 10 Feb 2027</title>

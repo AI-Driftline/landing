@@ -19,6 +19,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://aidriftline.com";
 const regPath = resolve(process.argv[2] || join(ROOT, "..", "product", "registry", "models.json"));
 const reg = JSON.parse(readFileSync(regPath, "utf8"));
+// Entries the page check found out of step with the provider's page (feed/disputed.json): marked "under review".
+const DISPUTED = join(ROOT, "feed", "disputed.json");
+const disputed = existsSync(DISPUTED) ? JSON.parse(readFileSync(DISPUTED, "utf8")) : {};
+for (const m of reg.models) if (disputed[m.id]) m.under_review = disputed[m.id];
 // Migration rules live in the product repo next to the registry (same rules the Action and MCP use).
 const { migrationFor, MIGRATION_LABEL } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "migration.js")).href);
 const { buildRegistry } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "registry.js")).href);
@@ -201,7 +205,7 @@ for (const m of [...models, ...aliases]) {
   const rows = [
     ["Provider", who],
     ["Status", `${status(m)} <span class="dim">(as of ${short(reg.checked)})</span>`],
-    [dateKind(m), long(m.retires)],
+    [dateKind(m), long(m.retires) + (m.under_review ? ` <span class="dim">· under review: ${esc(WHO[m.provider] || m.provider)}'s page changed on ${short(m.under_review.since)}, Driftline is updating this. <a href="${esc(m.under_review.page)}" rel="noopener">Check the source</a></span>` : "")],
     ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_alt ? ` or ${link(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(mig && m.replacement ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && !(mig.change === "settings") ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)}'s guide</a>` : ""}</span>` : ""}`]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),

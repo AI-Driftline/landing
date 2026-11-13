@@ -76,6 +76,8 @@ export function batchArticles({ reg, byId, today, migrationFor, MIGRATION_LABEL,
       : `On ${date}, ${who} removes ${what(4)} from the API. The replacements, what else changes, how to find every use in your code, and how to test before you switch.`;
 
     const blocks = [];
+    const review = ms.filter((m) => m.under_review);
+    if (review.length) blocks.push({ p: `**Under review:** ${who}'s page changed for ${listOf(review.map((m) => `\`${m.id}\``))} on ${long(review[0].under_review.since)}, and Driftline is updating the details below. Until then, check [${who}'s deprecations page](${review[0].under_review.page}) before acting on them.` });
     blocks.push({ answer: true, p: routes
       ? `On ${date}, ${who} starts answering API requests for ${replsPlain.length > 1 && ms.length <= 4 ? ms.map((m) => `${m.id} with ${m.replacement}`).join(" and ") : `${listOf(names, 4)} with ${listOf(replsPlain)}`}. The calls keep going through, but the answers come from a different model.`
       : `On ${date}, ${who} removes ${what(4)} from the API${!onlyDated && ms.some((m) => SNAPSHOT.test(m.id)) ? (ms.filter((m) => SNAPSHOT.test(m.id)).length === 1 ? ", together with its dated version" : ", together with the dated versions listed below") : ""}. From that day, API calls to ${ms.length > 1 ? "these models" : "it"} fail. ${who}'s recommended replacement${replsPlain.length > 1 ? "s" : ""} (as of ${long(reg.checked)}): ${listOf(replsPlain, 4)}.` });

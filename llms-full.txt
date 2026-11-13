@@ -5,7 +5,7 @@
 - Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks 257 model IDs (checked 2026-11-14), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- Tracks 257 model IDs (checked 2026-11-13), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
@@ -29,7 +29,7 @@
 - [GitHub Marketplace](https://github.com/marketplace/actions/driftline-ai-model-check)
 - [Pricing and FAQ](https://aidriftline.com/#pricing)
 
-## Upcoming retirements (as of 2026-11-14)
+## Upcoming retirements (as of 2026-11-13)
 
 - claude-opus-4-5-20251101 (Anthropic): not before 2026-11-24
 - claude-sonnet-4-5-20250929 (Anthropic): shutdown 2026-11-30, replacement claude-sonnet-5-5

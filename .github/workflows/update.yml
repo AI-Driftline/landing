@@ -28,13 +28,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      # First compare with the provider pages: entries that no longer match go to feed/disputed.json, and the
+      # build marks them "under review" in the live list (Action, MCP, emails and posts then hold back).
+      - name: Check registry against provider pages
+        id: check
+        continue-on-error: true # a broken check must never stop the site from building
+        run: node product-src/tools/check-pages.mjs product-src/registry/models.json --state feed/page-ids.json --out "$RUNNER_TEMP/registry-check.md" --disputed feed/disputed.json | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Rebuild pages
         id: build
         run: node tools/build.mjs product-src/registry/models.json
-      - name: Check registry against provider pages
-        id: check
-        if: always() && steps.build.outcome == 'success'
-        run: node product-src/tools/check-pages.mjs product-src/registry/models.json --state feed/page-ids.json --out "$RUNNER_TEMP/registry-check.md" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Open, update or close the registry-check issue
         if: always() && steps.check.outcome == 'success'
         env:
@@ -51,6 +53,13 @@ jobs:
               if [ "$(gh issue view "$n" --json body --jq .body | tail -n +2 | tr -d '[:space:]')" != "$(tail -n +2 "$RUNNER_TEMP/registry-check.md" | tr -d '[:space:]')" ]; then
                 gh issue edit "$n" --body-file "$RUNNER_TEMP/registry-check.md"
                 gh issue comment "$n" --body "The list of differences changed; see the updated description."
+              fi
+              # Not fixed yet: one reminder per full day open (at most 3), so a difference can't sit unnoticed.
+              age=$(( $(date -u +%s) - $(date -u -d "$(gh issue view "$n" --json createdAt --jq .createdAt)" +%s) ))
+              sent=$(gh issue view "$n" --json comments --jq '[.comments[].body | select(startswith("Still open"))] | length')
+              due=$(( age / 86400 ))
+              if [ "$due" -gt "$sent" ] && [ "$sent" -lt 3 ]; then
+                gh issue comment "$n" --body "Still open after $due day(s): the registry still differs from the provider pages, so Driftline marks these models as under review. Fix registry/models.json in AI-Driftline/driftline, or ask Claude to."
               fi
             fi
           elif [ -n "$n" ]; then
