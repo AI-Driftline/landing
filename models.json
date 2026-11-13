@@ -38,7 +38,13 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gemini-3.8-flash",
-      "routes": true
+      "routes": true,
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8"
+      }
     },
     {
       "id": "gemini-2.5-flash",
@@ -46,7 +52,13 @@
       "retires": "2026-12-01",
       "qualifier": "exact",
       "replacement": "gemini-3.5-flash-lite",
-      "routes": true
+      "routes": true,
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-omni-1.1-flash",
@@ -64,7 +76,13 @@
       "qualifier": "exact",
       "replacement": "gemini-embedding-2",
       "kind": "embedding",
-      "routes": true
+      "routes": true,
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "gpt-4o-2024-08-06",
@@ -175,7 +193,13 @@
       "replacement_note": "reasoning.mode: pro, in the Responses API",
       "previous_replacement": "gpt-5.6-sol",
       "replacement_changed": "2026-11-13",
-      "announced": "2026-06-11"
+      "announced": "2026-06-11",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro, in the Responses API.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "gpt-5-pro",
@@ -186,7 +210,13 @@
       "replacement_note": "reasoning.mode: pro, in the Responses API",
       "previous_replacement": "gpt-5.6-sol",
       "replacement_changed": "2026-11-13",
-      "announced": "2026-06-11"
+      "announced": "2026-06-11",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro, in the Responses API.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "o3-2025-04-16",
@@ -217,7 +247,13 @@
       "replacement_note": "reasoning.mode: pro, in the Responses API",
       "previous_replacement": "gpt-5.6-sol",
       "replacement_changed": "2026-11-13",
-      "announced": "2026-06-11"
+      "announced": "2026-06-11",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro, in the Responses API.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "o3-pro",
@@ -228,7 +264,13 @@
       "replacement_note": "reasoning.mode: pro, in the Responses API",
       "previous_replacement": "gpt-5.6-sol",
       "replacement_changed": "2026-11-13",
-      "announced": "2026-06-11"
+      "announced": "2026-06-11",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro, in the Responses API.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "gpt-5-mini-2025-08-07",
@@ -373,7 +415,13 @@
       "qualifier": "exact",
       "replacement": "gpt-5.6-sol",
       "replacement_note": "reasoning.mode: pro",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "o1-pro-2025-03-19",
@@ -382,7 +430,13 @@
       "qualifier": "exact",
       "replacement": "gpt-5.6-sol",
       "replacement_note": "reasoning.mode: pro",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "settings",
+        "drop_in": false,
+        "note": "Also set reasoning.mode: pro.",
+        "guide": "https://developers.openai.com/api/docs/guides/reasoning"
+      }
     },
     {
       "id": "o3-mini",
@@ -510,7 +564,13 @@
       "retires": "2026-09-28",
       "qualifier": "exact",
       "replacement": "gpt-5.6-terra",
-      "announced": "2025-09-26"
+      "announced": "2025-09-26",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "babbage-002",
@@ -518,7 +578,13 @@
       "retires": "2026-09-28",
       "qualifier": "exact",
       "replacement": "gpt-5.6-terra",
-      "announced": "2025-09-26"
+      "announced": "2025-09-26",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "davinci-002",
@@ -526,7 +592,13 @@
       "retires": "2026-09-28",
       "qualifier": "exact",
       "replacement": "gpt-5.6-terra",
-      "announced": "2025-09-26"
+      "announced": "2025-09-26",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "gpt-3.5-turbo-1106",
@@ -598,7 +670,13 @@
       "retires": "2026-11-30",
       "qualifier": "exact",
       "replacement": "claude-sonnet-5-5",
-      "announced": "2026-09-30"
+      "announced": "2026-09-30",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-opus-4-1-20250805",
@@ -606,7 +684,13 @@
       "retires": "2026-08-05",
       "qualifier": "exact",
       "replacement": "claude-opus-4-8",
-      "announced": "2026-06-05"
+      "announced": "2026-06-05",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-opus-4-20250514",
@@ -614,7 +698,13 @@
       "retires": "2026-06-15",
       "qualifier": "exact",
       "replacement": "claude-opus-4-8",
-      "announced": "2026-04-14"
+      "announced": "2026-04-14",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-sonnet-4-20250514",
@@ -622,7 +712,13 @@
       "retires": "2026-06-15",
       "qualifier": "exact",
       "replacement": "claude-sonnet-5-5",
-      "announced": "2026-04-14"
+      "announced": "2026-04-14",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-3-7-sonnet-20250219",
@@ -630,7 +726,13 @@
       "retires": "2026-02-19",
       "qualifier": "exact",
       "replacement": "claude-sonnet-5-5",
-      "announced": "2025-10-28"
+      "announced": "2025-10-28",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-3-5-haiku-20241022",
@@ -730,70 +832,130 @@
       "provider": "google",
       "retires": "2026-06-01",
       "qualifier": "earliest",
-      "replacement": "gemini-3.6-flash"
+      "replacement": "gemini-3.6-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.0-flash-001",
       "provider": "google",
       "retires": "2026-06-01",
       "qualifier": "earliest",
-      "replacement": "gemini-3.6-flash"
+      "replacement": "gemini-3.6-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.0-flash-lite",
       "provider": "google",
       "retires": "2026-06-01",
       "qualifier": "earliest",
-      "replacement": "gemini-3.1-flash-lite"
+      "replacement": "gemini-3.1-flash-lite",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.0-flash-lite-001",
       "provider": "google",
       "retires": "2026-06-01",
       "qualifier": "earliest",
-      "replacement": "gemini-3.1-flash-lite"
+      "replacement": "gemini-3.1-flash-lite",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.5-pro-preview-03-25",
       "provider": "google",
       "retires": "2025-12-02",
       "qualifier": "earliest",
-      "replacement": "gemini-3.8-flash"
+      "replacement": "gemini-3.8-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8"
+      }
     },
     {
       "id": "gemini-2.5-pro-preview-05-06",
       "provider": "google",
       "retires": "2025-12-02",
       "qualifier": "earliest",
-      "replacement": "gemini-3.8-flash"
+      "replacement": "gemini-3.8-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8"
+      }
     },
     {
       "id": "gemini-2.5-pro-preview-06-05",
       "provider": "google",
       "retires": "2025-12-02",
       "qualifier": "earliest",
-      "replacement": "gemini-3.8-flash"
+      "replacement": "gemini-3.8-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8"
+      }
     },
     {
       "id": "gemini-2.5-flash-preview-05-20",
       "provider": "google",
       "retires": "2025-11-18",
       "qualifier": "earliest",
-      "replacement": "gemini-3.6-flash"
+      "replacement": "gemini-3.6-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.5-flash-preview-09-2025",
       "provider": "google",
       "retires": "2026-02-17",
       "qualifier": "earliest",
-      "replacement": "gemini-3.6-flash"
+      "replacement": "gemini-3.6-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.5-flash-lite-preview-09-2025",
       "provider": "google",
       "retires": "2026-03-31",
       "qualifier": "earliest",
-      "replacement": "gemini-3.1-flash-lite"
+      "replacement": "gemini-3.1-flash-lite",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-3-pro-preview",
@@ -822,7 +984,13 @@
       "retires": "2026-01-14",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "gpt-4-1106-preview",
@@ -1032,7 +1200,13 @@
       "retires": "2027-01-06",
       "qualifier": "exact",
       "replacement": "gpt-realtime-2.1-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "OpenAI calls this a change of API workflow: the replacement isn't a model for /v1/audio/speech and runs through the Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/text-to-speech"
+      }
     },
     {
       "id": "tts-1-hd",
@@ -1040,7 +1214,13 @@
       "retires": "2027-01-06",
       "qualifier": "exact",
       "replacement": "gpt-realtime-2.1-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "OpenAI calls this a change of API workflow: the replacement isn't a model for /v1/audio/speech and runs through the Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/text-to-speech"
+      }
     },
     {
       "id": "gpt-4o-mini-tts-2025-03-20",
@@ -1048,7 +1228,13 @@
       "retires": "2027-01-06",
       "qualifier": "exact",
       "replacement": "gpt-realtime-2.1-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "OpenAI calls this a change of API workflow: the replacement isn't a model for /v1/audio/speech and runs through the Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/text-to-speech"
+      }
     },
     {
       "id": "gpt-4o-mini-tts",
@@ -1056,7 +1242,13 @@
       "retires": "2027-01-06",
       "qualifier": "exact",
       "replacement": "gpt-realtime-2.1-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "OpenAI calls this a change of API workflow: the replacement isn't a model for /v1/audio/speech and runs through the Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/text-to-speech"
+      }
     },
     {
       "id": "gpt-4o-mini-tts-2025-12-15",
@@ -1064,7 +1256,13 @@
       "retires": "2027-01-06",
       "qualifier": "exact",
       "replacement": "gpt-realtime-2.1-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "OpenAI calls this a change of API workflow: the replacement isn't a model for /v1/audio/speech and runs through the Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/text-to-speech"
+      }
     },
     {
       "id": "whisper-1",
@@ -1072,7 +1270,13 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-4o-transcribe",
@@ -1080,7 +1284,13 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-4o-mini-transcribe",
@@ -1088,7 +1298,13 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-4o-mini-transcribe-2025-12-15",
@@ -1096,7 +1312,13 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-4o-transcribe-diarize",
@@ -1104,7 +1326,13 @@
       "retires": "2027-02-26",
       "qualifier": "exact",
       "replacement": "gpt-live-transcribe",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-realtime",
@@ -1208,7 +1436,13 @@
       "retires": "2027-01-20",
       "qualifier": "exact",
       "replacement": "gpt-4o-mini-transcribe-2025-12-15",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "choose",
+        "drop_in": false,
+        "note": "OpenAI names two replacements: gpt-transcribe for recorded files, gpt-live-transcribe for live audio. Word timestamps, subtitles and translation work differently, so check those if you use them.",
+        "guide": "https://developers.openai.com/api/docs/guides/transcription"
+      }
     },
     {
       "id": "gpt-audio-mini-2025-10-06",
@@ -1232,7 +1466,13 @@
       "retires": "2026-05-07",
       "qualifier": "exact",
       "replacement": "gpt-realtime-1.5",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The preview models ran on the Realtime beta (header OpenAI-Beta: realtime=v1), which OpenAI shut down; the replacement needs the current Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/realtime"
+      }
     },
     {
       "id": "gpt-4o-realtime-preview-2025-06-03",
@@ -1240,7 +1480,13 @@
       "retires": "2026-05-07",
       "qualifier": "exact",
       "replacement": "gpt-realtime-1.5",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The preview models ran on the Realtime beta (header OpenAI-Beta: realtime=v1), which OpenAI shut down; the replacement needs the current Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/realtime"
+      }
     },
     {
       "id": "gpt-4o-realtime-preview-2024-12-17",
@@ -1248,7 +1494,13 @@
       "retires": "2026-05-07",
       "qualifier": "exact",
       "replacement": "gpt-realtime-1.5",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The preview models ran on the Realtime beta (header OpenAI-Beta: realtime=v1), which OpenAI shut down; the replacement needs the current Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/realtime"
+      }
     },
     {
       "id": "gpt-4o-mini-realtime-preview",
@@ -1256,7 +1508,13 @@
       "retires": "2026-05-07",
       "qualifier": "exact",
       "replacement": "gpt-realtime-mini",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The preview models ran on the Realtime beta (header OpenAI-Beta: realtime=v1), which OpenAI shut down; the replacement needs the current Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/realtime"
+      }
     },
     {
       "id": "gpt-4o-audio-preview",
@@ -1280,7 +1538,13 @@
       "retires": "2025-10-10",
       "qualifier": "exact",
       "replacement": "gpt-realtime-1.5",
-      "kind": "audio"
+      "kind": "audio",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The preview models ran on the Realtime beta (header OpenAI-Beta: realtime=v1), which OpenAI shut down; the replacement needs the current Realtime API.",
+        "guide": "https://developers.openai.com/api/docs/guides/realtime"
+      }
     },
     {
       "id": "gpt-4o-audio-preview-2024-10-01",
@@ -1411,7 +1675,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-ada-doc-001",
@@ -1419,7 +1689,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-ada-query-001",
@@ -1427,7 +1703,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "code-search-ada-code-001",
@@ -1435,7 +1717,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "code-search-ada-text-001",
@@ -1443,7 +1731,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-similarity-babbage-001",
@@ -1451,7 +1745,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-babbage-doc-001",
@@ -1459,7 +1759,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-babbage-query-001",
@@ -1467,7 +1773,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "code-search-babbage-code-001",
@@ -1475,7 +1787,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "code-search-babbage-text-001",
@@ -1483,7 +1801,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-similarity-curie-001",
@@ -1491,7 +1815,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-curie-doc-001",
@@ -1499,7 +1829,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-curie-query-001",
@@ -1507,7 +1843,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-similarity-davinci-001",
@@ -1515,7 +1857,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-davinci-doc-001",
@@ -1523,7 +1871,13 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "text-search-davinci-query-001",
@@ -1531,49 +1885,91 @@
       "retires": "2024-01-04",
       "qualifier": "exact",
       "replacement": "text-embedding-3-small",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://developers.openai.com/api/docs/guides/embeddings"
+      }
     },
     {
       "id": "claude-3-5-sonnet-20240620",
       "provider": "anthropic",
       "retires": "2025-10-28",
       "qualifier": "exact",
-      "replacement": "claude-sonnet-5-5"
+      "replacement": "claude-sonnet-5-5",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-3-5-sonnet-20241022",
       "provider": "anthropic",
       "retires": "2025-10-28",
       "qualifier": "exact",
-      "replacement": "claude-sonnet-5-5"
+      "replacement": "claude-sonnet-5-5",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-3-opus-20240229",
       "provider": "anthropic",
       "retires": "2026-01-05",
       "qualifier": "exact",
-      "replacement": "claude-opus-4-8"
+      "replacement": "claude-opus-4-8",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-2.0",
       "provider": "anthropic",
       "retires": "2025-07-21",
       "qualifier": "exact",
-      "replacement": "claude-opus-4-8"
+      "replacement": "claude-opus-4-8",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-2.1",
       "provider": "anthropic",
       "retires": "2025-07-21",
       "qualifier": "exact",
-      "replacement": "claude-opus-4-8"
+      "replacement": "claude-opus-4-8",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-3-sonnet-20240229",
       "provider": "anthropic",
       "retires": "2025-07-21",
       "qualifier": "exact",
-      "replacement": "claude-sonnet-5-5"
+      "replacement": "claude-sonnet-5-5",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-1.0",
@@ -1665,21 +2061,39 @@
       "provider": "google",
       "retires": "2025-12-09",
       "qualifier": "earliest",
-      "replacement": "gemini-3.1-flash-lite"
+      "replacement": "gemini-3.1-flash-lite",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.0-flash-lite-preview-02-05",
       "provider": "google",
       "retires": "2025-12-09",
       "qualifier": "earliest",
-      "replacement": "gemini-3.1-flash-lite"
+      "replacement": "gemini-3.1-flash-lite",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6"
+      }
     },
     {
       "id": "gemini-2.5-computer-use-preview-10-2025",
       "provider": "google",
       "retires": "2026-07-28",
       "qualifier": "earliest",
-      "replacement": "gemini-3.8-flash"
+      "replacement": "gemini-3.8-flash",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Gemini 3 changes the request: remove temperature, top_p, top_k, candidate_count and prefilled model turns, replace thinking_budget with thinking_level, and check function calling.",
+        "guide": "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8"
+      }
     },
     {
       "id": "gemini-2.0-flash-live-001",
@@ -1743,7 +2157,13 @@
       "retires": "2028-05-14",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "embedding-2-preview",
@@ -1751,7 +2171,13 @@
       "retires": "2026-08-10",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "embedding-001",
@@ -1759,7 +2185,13 @@
       "retires": "2025-10-30",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "embedding-gecko-001",
@@ -1767,7 +2199,13 @@
       "retires": "2025-10-30",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "gemini-embedding-exp",
@@ -1775,7 +2213,13 @@
       "retires": "2025-10-30",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "gemini-embedding-exp-03-07",
@@ -1783,7 +2227,13 @@
       "retires": "2025-10-30",
       "qualifier": "earliest",
       "replacement": "gemini-embedding-2",
-      "kind": "embedding"
+      "kind": "embedding",
+      "migration": {
+        "change": "re-embed",
+        "drop_in": false,
+        "note": "Embeddings from different models can't be compared: re-embed your stored data with the new model, and query with that same model. The vector size may differ too.",
+        "guide": "https://ai.google.dev/gemini-api/docs/embeddings"
+      }
     },
     {
       "id": "gemini-2.5-flash-image",
@@ -1831,7 +2281,13 @@
       "retires": "2026-08-17",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "imagen-4.0-ultra-generate-001",
@@ -1839,7 +2295,13 @@
       "retires": "2026-08-17",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "imagen-4.0-fast-generate-001",
@@ -1847,7 +2309,13 @@
       "retires": "2026-08-17",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "imagen-3.0-generate-002",
@@ -1855,7 +2323,13 @@
       "retires": "2025-11-10",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "imagen-4.0-generate-preview-06-06",
@@ -1863,7 +2337,13 @@
       "retires": "2026-02-17",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "imagen-4.0-ultra-generate-preview-06-06",
@@ -1871,7 +2351,13 @@
       "retires": "2026-02-17",
       "qualifier": "earliest",
       "replacement": "gemini-nano-banana-2.1",
-      "kind": "image"
+      "kind": "image",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Use generate_content instead of generate_images; images come back as content parts, not an image response object.",
+        "guide": "https://ai.google.dev/gemini-api/docs/imagen"
+      }
     },
     {
       "id": "veo-3.0-generate-001",
@@ -1879,7 +2365,13 @@
       "retires": "2026-06-30",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-2.0-generate-001",
@@ -1887,7 +2379,13 @@
       "retires": "2026-06-30",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-3.0-fast-generate-001",
@@ -1895,7 +2393,13 @@
       "retires": "2026-06-30",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-3.1-lite-generate-preview",
@@ -1903,7 +2407,13 @@
       "retires": "2026-10-22",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-3.1-generate-preview",
@@ -1911,7 +2421,13 @@
       "retires": "2026-10-22",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-3.1-fast-generate-preview",
@@ -1919,7 +2435,13 @@
       "retires": "2026-10-22",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "gemini-omni-flash-preview",
@@ -1935,7 +2457,13 @@
       "retires": "2025-11-12",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "veo-3.0-fast-generate-preview",
@@ -1943,7 +2471,13 @@
       "retires": "2025-11-12",
       "qualifier": "earliest",
       "replacement": "gemini-omni-1.2-flash",
-      "kind": "video"
+      "kind": "video",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "Gemini Omni Flash uses the Interactions API (interactions.create), not Veo's video-generation call. Google also offers Veo itself on Gemini Enterprise Agent Platform.",
+        "guide": "https://ai.google.dev/gemini-api/docs/video"
+      }
     },
     {
       "id": "gemini-robotics-er-1.6-preview",
@@ -1981,7 +2515,13 @@
       "retires": "2026-10-23",
       "qualifier": "exact",
       "replacement": "gpt-5.6-terra",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "gpt-4-completions",
@@ -1989,7 +2529,13 @@
       "retires": "2026-10-23",
       "qualifier": "exact",
       "replacement": "gpt-5.6-sol",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "gpt-4-0613-completions",
@@ -1997,7 +2543,13 @@
       "retires": "2026-10-23",
       "qualifier": "exact",
       "replacement": "gpt-5.6-sol",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "gpt-4-turbo-completions",
@@ -2005,7 +2557,13 @@
       "retires": "2026-10-23",
       "qualifier": "exact",
       "replacement": "gpt-5.6-sol",
-      "announced": "2026-04-22"
+      "announced": "2026-04-22",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     },
     {
       "id": "gpt-4-turbo-preview-completions",
@@ -2013,7 +2571,13 @@
       "retires": "2026-03-26",
       "qualifier": "exact",
       "replacement": "gpt-5",
-      "announced": "2025-09-26"
+      "announced": "2025-09-26",
+      "migration": {
+        "change": "api",
+        "drop_in": false,
+        "note": "The old Completions endpoint (a plain prompt) doesn't serve the replacement: move the call to the Responses API or Chat Completions (messages).",
+        "guide": "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      }
     }
   ],
   "url": "https://aidriftline.com/models.json",

@@ -264,7 +264,9 @@ ${table(gone)}`,
 }));
 
 // ---------- data + files for crawlers and agents ----------
-writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
+// Each entry also says whether moving to its replacement is more than a rename (rules: product src/migration.js).
+const withMigration = reg.models.map((m) => { const mig = migrationFor(m); return mig && mig.change !== "rename" ? { ...m, migration: mig } : m; });
+writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMigration, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
 
 const LLMS = `# Driftline
 

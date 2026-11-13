@@ -60,7 +60,7 @@ function newPost(g, kind) {
   return fit((list, n) => {
     const them = n === 1 ? "it" : "them";
     const body = routes
-      ? `${head}: from ${nice(retires)}, ${who} answers ${list} requests with ${replacement}. No error, different model.`
+      ? `${head}: from ${nice(retires)}, ${who} answers ${list} requests with ${replacement}. ${g.entry.migration?.change === "params" ? `${who} lists request changes to make first.` : "No error, different model."}`
       : qualifier === "earliest"
       ? `${head}: ${who} lists ${nice(retires)} as the earliest shutdown for ${list}. ${n === 1 ? "It" : "They"} can be switched off from that day on.${repl}`
       : qualifier === "not-before"
@@ -78,7 +78,7 @@ function reminder(g, when) {
   const repl = repls.length === 1 ? `\nReplacement: ${repls[0]}.` : "";
   return fit((list, n) => {
     const body = when === "day"
-      ? (routes ? `From today, ${who} answers ${list} requests with a newer model. No error, different answers.${repl}`
+      ? (routes ? `From today, ${who} answers ${list} requests with a newer model. ${g.models.some((m) => m.migration?.change === "params") ? `${who} lists request changes to make for it.` : "No error, different answers."}${repl}`
         : `Today ${who} retires ${list}. Calls to ${n === 1 ? "it" : "them"} fail from now on.${repl}`)
       : (routes ? `In 7 days (${nice(retires)}), ${who} starts answering ${list} requests with a newer model.${repl}`
         : `In 7 days (${nice(retires)}), ${who} retires ${list}.${repl}`);
