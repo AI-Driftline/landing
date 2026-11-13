@@ -56,7 +56,16 @@ function newPost(g, kind) {
       `Date unchanged: ${nice(retires)}.\n\n${CHECK}\n${link(g.ids)}`, g.ids);
   }
   const head = kind === "date" ? "Date change" : "New";
-  const repl = replacement ? `\nReplacement: ${replacement}${g.entry.replacement_alt ? ` or ${g.entry.replacement_alt}` : ""}.` : "";
+  // Longest version first; if even one model name doesn't fit in 280 characters, drop the second replacement, then the line.
+  const repls = replacement ? [`\nReplacement: ${replacement}${g.entry.replacement_alt ? ` or ${g.entry.replacement_alt}` : ""}.`, `\nReplacement: ${replacement}.`, ""] : [""];
+  for (const repl of [...new Set(repls)]) {
+    const text = postText(g, kind, head, who, repl);
+    if (text) return text;
+  }
+  return null;
+}
+function postText(g, kind, head, who, repl) {
+  const { retires, qualifier, replacement, routes } = g.entry;
   return fit((list, n) => {
     const them = n === 1 ? "it" : "them";
     const body = routes
@@ -75,7 +84,16 @@ function reminder(g, when) {
   const who = WHO[provider] || provider;
   const repls = [...new Set(g.models.filter((m) => m.replacement).map((m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "")))];
   const routes = g.models.every((m) => m.routes);
-  const repl = repls.length === 1 ? `\nReplacement: ${repls[0]}.` : "";
+  // Same fallback as newPost: shorter replacement line, then none, rather than no post at all.
+  const options = repls.length === 1 ? [`\nReplacement: ${repls[0]}.`, `\nReplacement: ${repls[0].split(" or ")[0]}.`, ""] : [""];
+  for (const repl of [...new Set(options)]) {
+    const text = reminderText(g, when, who, routes, repl);
+    if (text) return text;
+  }
+  return null;
+}
+function reminderText(g, when, who, routes, repl) {
+  const { retires } = g.entry;
   return fit((list, n) => {
     const body = when === "day"
       ? (routes ? `From today, ${who} answers ${list} requests with a newer model. ${g.models.some((m) => m.migration?.change === "params") ? `${who} lists request changes to make for it.` : "No error, different answers."}${repl}`

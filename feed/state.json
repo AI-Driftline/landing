@@ -202,9 +202,9 @@
     "gemini-live-2.5-flash-preview": "2025-12-09|earliest|gemini-3.8-live|",
     "gemini-3.1-flash-live-preview": "2026-11-17|earliest|gemini-3.8-live|",
     "gemini-2.5-flash-native-audio-preview-12-2025": "2027-03-31|earliest|gemini-3.8-live|",
-    "gemini-3.1-flash-tts-preview": "2026-12-18|earliest|gemini-3.8-flash-tts|",
-    "gemini-2.5-flash-preview-tts": "2026-12-18|earliest|gemini-3.8-flash-tts|",
-    "gemini-2.5-pro-preview-tts": "2026-12-18|earliest|gemini-3.8-flash-tts|",
+    "gemini-3.1-flash-tts-preview": "2026-11-17|earliest|gemini-3.8-flash-tts|",
+    "gemini-2.5-flash-preview-tts": "2026-11-17|earliest|gemini-3.8-flash-tts|",
+    "gemini-2.5-pro-preview-tts": "2026-11-17|earliest|gemini-3.8-flash-tts|",
     "gemini-embedding-001": "2028-05-14|earliest|gemini-embedding-2|",
     "embedding-2-preview": "2026-08-10|earliest|gemini-embedding-2|",
     "embedding-001": "2025-10-30|earliest|gemini-embedding-2|",
@@ -265,7 +265,6 @@
     "new:openai:repl:2026-12-11|exact|gpt-6.1-sol||reasoning.mode: pro, in the Responses API",
     "new:openai:repl:2026-12-11|exact|gpt-6.1-terra||",
     "new:openai:repl:2026-12-11|exact|gpt-6-luna||",
-    "new:google:date:2027-03-31|earliest|gemini-3.8-live||",
-    "new:google:date:2026-12-18|earliest|gemini-3.8-flash-tts||"
+    "new:google:date:2027-03-31|earliest|gemini-3.8-live||"
   ]
 }
