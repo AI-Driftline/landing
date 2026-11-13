@@ -45,10 +45,17 @@ function fit(make, ids) {
 const link = (ids) => `${SITE}/models/${ids[0]}/`; // the first ID is the most recognizable one
 const CHECK = "Check your code: npx -y github:AI-Driftline/driftline .";
 
-function newPost(g, changed) {
+// kind: "new" (first time seen), "date" (date or qualifier changed) or "repl" (only the replacement changed).
+function newPost(g, kind) {
   const { provider, retires, qualifier, replacement, routes } = g.entry;
   const who = WHO[provider] || provider;
-  const head = changed ? "Date change" : "New";
+  if (kind === "repl") {
+    const was = (state.seen[g.ids[0]] || "").split("|")[2];
+    const note = g.entry.replacement_note ? ` (${g.entry.replacement_note})` : "";
+    return fit((list) => `Replacement change: ${who} now recommends ${replacement || "no direct replacement"}${note} for ${list}${was ? `, not ${was}` : ""}. ` +
+      `Date unchanged: ${nice(retires)}.\n\n${CHECK}\n${link(g.ids)}`, g.ids);
+  }
+  const head = kind === "date" ? "Date change" : "New";
   const repl = replacement ? `\nReplacement: ${replacement}.` : "";
   return fit((list, n) => {
     const them = n === 1 ? "it" : "them";
@@ -103,12 +110,15 @@ for (const g of group(fixed.filter((m) => m.retires === today), (m) => `day:${m.
   if (!state.posted.includes(g.key)) posts.push({ key: g.key, text: reminder(g, "day") });
 
 const changed = reg.models.filter((m) => !firstRun && state.seen[m.id] !== sig(m) && m.retires >= plus(today, -1));
-const newGroups = group(changed, (m) => `new:${m.provider}:${sig(m)}:${state.seen[m.id] ? "changed" : "new"}`);
+// What changed decides the post: a new entry, a new date, or only a new replacement.
+const kindOf = (m) => { const old = state.seen[m.id]; if (!old) return "new"; const [r, q] = old.split("|"); return r !== m.retires || q !== m.qualifier ? "date" : "repl"; };
+// The provider's note (e.g. reasoning.mode: pro) is part of the advice, so models with a note get their own post.
+const newGroups = group(changed, (m) => `new:${m.provider}:${kindOf(m)}:${sig(m)}|${m.replacement_note || ""}`);
 let warning = "";
 if (newGroups.length > MAX_NEW_GROUPS) {
   warning = `${newGroups.length} new or changed groups at once (limit ${MAX_NEW_GROUPS}); recorded without posting. Check the registry.`;
 } else {
-  for (const g of newGroups) posts.push({ key: g.key, ids: g.ids, text: newPost(g, g.key.endsWith(":changed")) });
+  for (const g of newGroups) posts.push({ key: g.key, ids: g.ids, text: newPost(g, g.key.split(":")[2]) });
 }
 
 for (const g of group(fixed.filter((m) => m.retires === plus(today, 7)), (m) => `week:${m.retires}:${m.provider}`))

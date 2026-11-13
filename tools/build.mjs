@@ -78,7 +78,7 @@ function answer(m) {
     s += past(m) ? `${who} retired ${m.id} on ${d}. API calls to it now fail.` : `${who} will retire ${m.id} on ${d}. After that date, API calls to it fail.`;
   }
   const r = finalReplacement(m);
-  if (m.replacement && !m.routes) s += ` The recommended replacement is ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.`;
+  if (m.replacement && !m.routes) s += ` The recommended replacement is ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.${m.previous_replacement ? ` ${who} changed this recommendation on ${long(m.replacement_changed)}; before, it was ${m.previous_replacement}.` : ""}`;
   else if (!m.replacement) s += ` ${who} names no direct replacement.`;
   return s;
 }
@@ -191,7 +191,7 @@ for (const m of [...models, ...aliases]) {
     ["Provider", who],
     ["Status", `${status(m)} <span class="dim">(as of ${short(reg.checked)})</span>`],
     [dateKind(m), long(m.retires)],
-    ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
+    ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
     ["Model type", KIND[kind] || kind],
     ...(m.announced ? [["Announced", long(m.announced)]] : []),
@@ -393,14 +393,32 @@ writeFileSync(join(ROOT, "retirements.ics"), [
 
 // ---------- blog: tools/posts/<slug>.html = a JSON header comment + the article body ----------
 // {{ALERT:<model-id>}} in the body becomes the email alert form for that model.
+// Replacements are never typed into an article: they come from the registry on every build, so a provider
+// changing its advice changes the article too.
+//   {{REPL:<id>}}        <code>replacement</code> (+ the provider's note, e.g. reasoning.mode: pro)
+//   {{REPLTEXT:<id>}}    the replacement as plain text, for headings and sentences
+//   {{ASOF}}             "as of 13 November 2026" (the registry's last check)
+//   {{CHANGES:<id>,...}} a sentence listing recommendations the provider changed, or nothing
 const posts = existsSync(join(ROOT, "tools", "posts")) ? readdirSync(join(ROOT, "tools", "posts")).filter((f) => f.endsWith(".html")).map((f) => {
   const raw = readFileSync(join(ROOT, "tools", "posts", f), "utf8");
   const meta = JSON.parse(raw.match(/^<!--([\s\S]*?)-->/)[1]);
+  const model = (id) => { const m = byId.get(id); if (!m) throw new Error(`blog ${f}: unknown model ${id}`); return m; };
   const body = raw.replace(/^<!--[\s\S]*?-->\s*/, "").replace(/\{\{ALERT:([\w.-]+)\}\}/g, (_, id) => {
-    const m = byId.get(id);
-    if (!m) throw new Error(`blog ${f}: unknown model ${id}`);
+    const m = model(id);
     return past(m) ? "" : ALERT_BLOCK(m, true);
-  });
+  }).replace(/\{\{REPL:([\w.-]+)\}\}/g, (_, id) => {
+    const m = model(id);
+    return m.replacement ? `<code>${esc(m.replacement)}</code>${m.replacement_note ? ` (<code>${esc(m.replacement_note)}</code>)` : ""}` : "no direct replacement";
+  }).replace(/\{\{REPLTEXT:([\w.-]+)\}\}/g, (_, id) => esc(model(id).replacement || "a newer model"))
+    .replace(/\{\{ASOF\}\}/g, `as of ${long(reg.checked)}`)
+    .replace(/\{\{CHANGES:([\w.,-]+)\}\}/g, (_, list) => {
+      const changed = list.split(",").map(model).filter((m) => m.previous_replacement);
+      if (!changed.length) return "";
+      const by = [...new Set(changed.map((m) => m.replacement_changed))].sort();
+      return `<p class="note"><b>Changed:</b> ${esc(WHO[changed[0].provider] || changed[0].provider)} changed these recommendations on ${by.map(long).join(" and ")}. Before, it recommended ` +
+        changed.map((m) => `<code>${esc(m.previous_replacement)}</code> for <code>${esc(m.id)}</code>`).join(", ") +
+        `. The table above shows the current advice; each model's page has the source.</p>`;
+    });
   return { ...meta, body };
 }).sort((a, b) => b.date.localeCompare(a.date)) : [];
 for (const post of posts) {
@@ -411,7 +429,7 @@ for (const post of posts) {
     path, title: post.title, description: post.description,
     body: `    <p class="crumbs"><a href="/blog/">Blog</a></p>
     <h1 class="post-h1">${esc(post.title)}</h1>
-    <p class="updated">${long(post.date)} · Driftline</p>
+    <p class="updated">${long(post.date)}${post.updated ? ` · updated ${long(post.updated)}` : ""} · Driftline</p>
 ${post.body}`,
     jsonld: [{ "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date, author: { "@type": "Organization", name: "Driftline", url: SITE }, publisher: { "@type": "Organization", name: "Driftline", url: SITE }, mainEntityOfPage: `${SITE}${path}` }],
   }));

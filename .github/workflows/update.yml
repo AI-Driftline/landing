@@ -1,5 +1,6 @@
 # Keeps aidriftline.com and @aidriftline in step with the product registry, four times a day:
-# rebuild the model pages from the registry on product main, commit if anything changed, post alerts to X.
+# rebuild the model pages from the registry on product main, commit if anything changed, post alerts to X,
+# and compare the registry with the three provider pages by script (opens an issue on any difference).
 name: update
 on:
   schedule:
@@ -11,6 +12,7 @@ concurrency: update
 permissions:
   contents: write
   pages: write
+  issues: write
 
 jobs:
   update:
@@ -28,6 +30,31 @@ jobs:
       - name: Rebuild pages
         id: build
         run: node tools/build.mjs product-src/registry/models.json
+      - name: Check registry against provider pages
+        id: check
+        if: always() && steps.build.outcome == 'success'
+        run: node product-src/tools/check-pages.mjs product-src/registry/models.json --state feed/page-ids.json --out "$RUNNER_TEMP/registry-check.md" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Open, update or close the registry-check issue
+        if: always() && steps.check.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROBLEMS: ${{ steps.check.outputs.problems }}
+        run: |
+          gh label create registry-check --color D93F0B --description "Registry differs from a provider page" --force >/dev/null 2>&1 || true
+          n=$(gh issue list --label registry-check --state open --json number --jq '.[0].number // empty')
+          if [ "$PROBLEMS" != "0" ]; then
+            if [ -z "$n" ]; then
+              gh issue create --title "Registry differs from the provider pages" --label registry-check --body-file "$RUNNER_TEMP/registry-check.md"
+            else
+              # Only touch the issue when the list itself changed (line 1 is just the timestamp), so no repeat emails.
+              if [ "$(gh issue view "$n" --json body --jq .body | tail -n +2 | tr -d '[:space:]')" != "$(tail -n +2 "$RUNNER_TEMP/registry-check.md" | tr -d '[:space:]')" ]; then
+                gh issue edit "$n" --body-file "$RUNNER_TEMP/registry-check.md"
+                gh issue comment "$n" --body "The list of differences changed; see the updated description."
+              fi
+            fi
+          elif [ -n "$n" ]; then
+            gh issue close "$n" --comment "The registry matches the provider pages again ($(date -u '+%F %H:%M') UTC)."
+          fi
       - name: Post to X
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
