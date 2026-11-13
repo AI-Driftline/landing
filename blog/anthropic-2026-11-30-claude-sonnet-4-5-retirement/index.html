@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anthropic retires claude-sonnet-4-5 on 30 November 2026: what to change</title>
+<meta name="description" content="On 30 November 2026, Anthropic removes claude-sonnet-4-5 from the API. The replacements, what else changes, how to find every use in your code, and how to test before you switch.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/">
+<meta property="og:title" content="Anthropic retires claude-sonnet-4-5 on 30 November 2026: what to change">
+<meta property="og:description" content="On 30 November 2026, Anthropic removes claude-sonnet-4-5 from the API. The replacements, what else changes, how to find every use in your code, and how to test before you switch.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Anthropic retires claude-sonnet-4-5 on 30 November 2026: what to change","description":"On 30 November 2026, Anthropic removes claude-sonnet-4-5 from the API. The replacements, what else changes, how to find every use in your code, and how to test before you switch.","datePublished":"2026-11-13","dateModified":"2026-11-13","author":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"publisher":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"mainEntityOfPage":"https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/"}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/blog/">Blog</a></p>
+    <h1 class="post-h1">Anthropic retires claude-sonnet-4-5 on 30 November 2026: what to change</h1>
+    <p class="updated">13 November 2026 · Driftline</p>
+    <p class="answer">On 30 November 2026, Anthropic removes claude-sonnet-4-5 from the API, together with its dated version. From that day, API calls to it fail. Anthropic's recommended replacement (as of 13 November 2026): claude-sonnet-5-5.</p>
+    <h2>What retires, and what replaces it</h2>
+    <p>Anthropic lists this model on its <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener">deprecations page</a>. The dates and replacements on this page come from Driftline's registry, which is checked against that page several times a day, so they stay current if Anthropic changes them.</p>
+    <p><code>claude-sonnet-4-5</code> is the short name for <code>claude-sonnet-4-5-20250929</code>, so both stop working.</p>
+    <table>
+      <thead><tr><th>Model</th><th>Replacement</th><th>Moving to it</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/claude-sonnet-4-5-20250929/"><code>claude-sonnet-4-5-20250929</code></a></td><td><code>claude-sonnet-5-5</code></td><td>Parameter changes</td></tr>
+      </tbody>
+    </table>
+    <h2>More than a new model name</h2>
+    <p>For this model, changing the name isn't the whole job:</p>
+    <ul>
+      <li>Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them. <a href="https://platform.claude.com/docs/en/api/migration-2026-10-21" rel="noopener">Anthropic's guide</a></li>
+    </ul>
+    <h2>Find every place your code uses them</h2>
+    <p>Run this in the root of your repository. No install, account or API key; it lists every OpenAI, Anthropic and Google model ID it finds, with file, line, retirement date and replacement:</p>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
+    <p>A plain search works too:</p>
+    <pre class="cmd"><code>grep -rnE '&quot;(claude-sonnet-4-5-20250929)&quot;' .</code></pre>
+    <p>It misses model names set outside the code: environment variables, deployment settings, values stored in a database, and defaults inside SDKs or agent frameworks you never configured.</p>
+    <h2>Test before 30 November 2026</h2>
+    <p>A new model answers the same prompt differently: format, length, tone, and whether JSON still parses. Take 10 to 20 real prompts from your logs, run each on the old model and the replacement, and compare. Do it while the old model still answers; after the date there is nothing left to compare against.</p>
+    <p><a href="/#drift">Driftline Pro</a> does this in your GitHub Actions: it runs the prompts your app sends on the current model and the replacement, and shows what changed in the pull request.</p>
+    <h2>Get a reminder</h2>
+
+    <h2 id="alert">Get an email before claude-sonnet-4-5-20250929 retires</h2>
+    <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+      <input type="hidden" name="model" value="claude-sonnet-4-5-20250929">
+      <input type="email" name="email" required maxlength="200" placeholder="you@company.com" aria-label="Your email address">
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn small" type="submit">Email me</button>
+    </form>
+    <p class="alert-msg" role="status" hidden></p>
+    <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if Anthropic changes the date. Nothing else. One-click unsubscribe.</p>
+    <p>The free <a href="/#install">Driftline GitHub Action</a> flags retired and soon-to-retire model IDs on every pull request, so the next retirement doesn't come as a surprise.</p>
+    <h2>Questions</h2>
+    <h3>Will calls to claude-sonnet-4-5 keep working after 30 November 2026?</h3>
+    <p>No. Anthropic removes the model from the API on that day, and requests to it return an error.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 # Keeps aidriftline.com and @aidriftline in step with the product registry, four times a day:
 # rebuild the model pages from the registry on product main, commit if anything changed, post alerts to X,
-# and compare the registry with the three provider pages by script (opens an issue on any difference).
+# compare the registry with the three provider pages by script (opens an issue on any difference),
+# publish articles written from the registry, and create one dev.to draft per run for Mirza to publish.
 name: update
 on:
   schedule:
@@ -62,6 +63,23 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: node tools/x-feed.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: dev.to draft
+        id: devto
+        if: always() && steps.build.outcome == 'success'
+        continue-on-error: true
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+        run: node tools/devto-draft.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Tell Mirza a dev.to draft is ready
+        if: always() && steps.devto.outputs.title
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ steps.devto.outputs.title }}
+          SITE_URL: ${{ steps.devto.outputs.site }}
+        run: |
+          gh label create devto-draft --color 3B49DF --description "A dev.to draft is waiting to be published" --force >/dev/null 2>&1 || true
+          printf 'A new draft is waiting on dev.to: https://dev.to/dashboard\n\nIt is the dev.to copy of %s (canonical link already set). Read it, change a line if you like, then click Publish. Close this issue when done.\n' "$SITE_URL" > "$RUNNER_TEMP/devto.md"
+          gh issue create --title "dev.to draft ready: $TITLE" --label devto-draft --body-file "$RUNNER_TEMP/devto.md"
       - name: Commit and publish
         if: always() && steps.build.outcome == 'success'
         env:

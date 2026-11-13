@@ -21,6 +21,8 @@ const regPath = resolve(process.argv[2] || join(ROOT, "..", "product", "registry
 const reg = JSON.parse(readFileSync(regPath, "utf8"));
 // Migration rules live in the product repo next to the registry (same rules the Action and MCP use).
 const { migrationFor, MIGRATION_LABEL } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "migration.js")).href);
+const { buildRegistry } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "registry.js")).href);
+const { batchArticles } = await import("./articles.mjs");
 const models = [...reg.models].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 const byId = new Map(models.map((m) => [m.id, m]));
 // Claude short names ("claude-sonnet-4-5") get a page too: people search for those, not the dated snapshot.
@@ -433,6 +435,22 @@ const posts = existsSync(join(ROOT, "tools", "posts")) ? readdirSync(join(ROOT, 
     });
   return { ...meta, body };
 }).sort((a, b) => b.date.localeCompare(a.date)) : [];
+// ---------- blog: articles written from the registry (tools/articles.mjs), one per retirement batch ----------
+// Published here automatically; feed/devto/<slug>.json is what tools/devto-draft.mjs turns into a dev.to draft.
+{
+  const ARTICLES = join(ROOT, "feed", "articles.json");
+  const state = existsSync(ARTICLES) ? JSON.parse(readFileSync(ARTICLES, "utf8")) : {};
+  const covered = new Set(posts.map((p) => p.covers).filter(Boolean));
+  const generated = batchArticles({ reg, byId: buildRegistry(reg).byId, today: TODAY, migrationFor, MIGRATION_LABEL, ALERT_BLOCK, site: SITE, covered, state });
+  mkdirSync(join(ROOT, "feed", "devto"), { recursive: true });
+  for (const g of generated) {
+    posts.push(g);
+    writeFileSync(join(ROOT, "feed", "devto", `${g.slug}.json`), JSON.stringify({ title: g.title, description: g.description, tags: g.tags, retires: g.retires,
+      canonical_url: `${SITE}/blog/${g.slug}/`, body_markdown: g.markdown }, null, 1) + "\n");
+  }
+  posts.sort((a, b) => b.date.localeCompare(a.date) || a.retires?.localeCompare?.(b.retires || "") || 0);
+  writeFileSync(ARTICLES, JSON.stringify(state, null, 1) + "\n");
+}
 for (const post of posts) {
   const path = `/blog/${post.slug}/`;
   const dir = join(ROOT, "blog", post.slug);
