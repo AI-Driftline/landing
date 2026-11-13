@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is claude-1.3 retired?","acceptedAnswer":{"@type":"Answer","text":"Anthropic retired claude-1.3 on 6 November 2024. API calls to it now fail. The recommended replacement is claude-haiku-4-5-20251001."}},{"@type":"Question","name":"What replaces claude-1.3?","acceptedAnswer":{"@type":"Answer","text":"Anthropic recommends claude-haiku-4-5-20251001. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"How do I find claude-1.3 in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y @aidriftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When is claude-1.3 retired?","acceptedAnswer":{"@type":"Answer","text":"Anthropic retired claude-1.3 on 6 November 2024. API calls to it now fail. The recommended replacement is claude-haiku-4-5-20251001."}},{"@type":"Question","name":"What replaces claude-1.3?","acceptedAnswer":{"@type":"Answer","text":"Anthropic recommends claude-haiku-4-5-20251001. Test your prompts on it before you switch: answers, formats and JSON output can change."}},{"@type":"Question","name":"Is claude-haiku-4-5-20251001 a drop-in replacement for claude-1.3?","acceptedAnswer":{"@type":"Answer","text":"In most code, yes: change the model name. Answers can still differ, so test your prompts on it before you switch."}},{"@type":"Question","name":"How do I find claude-1.3 in my code?","acceptedAnswer":{"@type":"Answer","text":"Run \"npx -y @aidriftline/driftline .\" in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Model retirement dates","item":"https://aidriftline.com/models/"},{"@type":"ListItem","position":2,"name":"claude-1.3","item":"https://aidriftline.com/models/claude-1.3/"}]}</script>
 </head>
 <body>
@@ -40,6 +40,7 @@
       <tr><th scope="row">Status</th><td>Retired <span class="dim">(as of 13 Nov 2026)</span></td></tr>
       <tr><th scope="row">Shutdown</th><td>6 November 2024</td></tr>
       <tr><th scope="row">Replacement</th><td><a href="/models/claude-haiku-4-5-20251001/"><code>claude-haiku-4-5-20251001</code></a></td></tr>
+      <tr><th scope="row">Moving to it</th><td>Rename</td></tr>
       <tr><th scope="row">Model type</th><td>Text</td></tr>
       <tr><th scope="row">Source</th><td><a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener">Anthropic deprecations page</a></td></tr>
     </tbody></table>

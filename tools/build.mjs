@@ -13,12 +13,14 @@
 // Default registry path: ../product/registry/models.json (the product repo next to this one).
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://aidriftline.com";
 const regPath = resolve(process.argv[2] || join(ROOT, "..", "product", "registry", "models.json"));
 const reg = JSON.parse(readFileSync(regPath, "utf8"));
+// Migration rules live in the product repo next to the registry (same rules the Action and MCP use).
+const { migrationFor, MIGRATION_LABEL } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "migration.js")).href);
 const models = [...reg.models].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 const byId = new Map(models.map((m) => [m.id, m]));
 // Claude short names ("claude-sonnet-4-5") get a page too: people search for those, not the dated snapshot.
@@ -67,7 +69,8 @@ function answer(m) {
   if (m.routes) {
     s += past(m)
       ? `Since ${d}, ${who} routes API requests for ${m.id} to ${m.replacement}. Calls to ${m.id} still succeed, but the answers come from a different model.`
-      : `On ${d}, ${who} starts routing API requests for ${m.id} to ${m.replacement}. Calls to ${m.id} will keep succeeding, but the answers will come from a different model.`;
+      : `On ${d}, ${who} starts routing API requests for ${m.id} to ${m.replacement}. Calls to ${m.id} will keep succeeding, but the answers will come from a different model.`
+    if (migrationFor(m)?.change === "params") s += ` ${who} lists request changes to make for ${m.replacement} before then: ${migrationFor(m).note.replace(/^Gemini 3 changes the request: /, "")}`;
   } else if (m.qualifier === "earliest") {
     s += past(m)
       ? `${who} listed ${d} as the earliest shutdown date for ${m.id}. That date has passed, so ${m.id} may stop working at any time.`
@@ -185,6 +188,10 @@ for (const m of [...models, ...aliases]) {
   const q1 = m.routes ? `What happens to ${m.id} on ${long(m.retires)}?` : `When is ${m.id} retired?`;
   const faq = [{ q: q1, a: text }];
   if (m.replacement) faq.push({ q: `What replaces ${m.id}?`, a: `${who} recommends ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? `, which is itself retiring; the model to move to is ${r}` : ""}. Test your prompts on it before you switch: answers, formats and JSON output can change.` });
+  const mig = m.routes && migrationFor(m)?.change !== "params" ? null : migrationFor(m);
+  if (mig && m.replacement) faq.push({ q: `Is ${m.replacement} a drop-in replacement for ${m.id}?`, a: mig.drop_in
+    ? `In most code, yes: change the model name.${mig.note ? " " + mig.note : ""} Answers can still differ, so test your prompts on it before you switch.`
+    : `Not quite. ${mig.note}${mig.guide ? ` ${who}'s guide: ${mig.guide}` : ""} Then test your prompts on it before you switch.` });
   faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y @aidriftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
 
   const rows = [
@@ -192,6 +199,7 @@ for (const m of [...models, ...aliases]) {
     ["Status", `${status(m)} <span class="dim">(as of ${short(reg.checked)})</span>`],
     [dateKind(m), long(m.retires)],
     ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
+    ...(mig && m.replacement ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && !(mig.change === "settings") ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)}'s guide</a>` : ""}</span>` : ""}`]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
     ["Model type", KIND[kind] || kind],
     ...(m.announced ? [["Announced", long(m.announced)]] : []),
