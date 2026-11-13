@@ -121,6 +121,9 @@ const group = (list, key) => {
 // ---------- what to post ----------
 const firstRun = !existsSync(STATE);
 const state = firstRun ? { seen: {}, posted: [] } : JSON.parse(readFileSync(STATE, "utf8"));
+// Every post that went out, newest first (read by the stats page digest).
+const XLOG = join(ROOT, "feed", "x-log.json");
+const xlog = existsSync(XLOG) ? JSON.parse(readFileSync(XLOG, "utf8")) : [];
 const posts = [];
 
 const fixed = reg.models.filter((m) => m.qualifier === "exact");
@@ -177,6 +180,7 @@ async function tweet(text) {
 }
 
 const save = () => {
+  writeFileSync(XLOG, JSON.stringify(xlog.slice(0, 300), null, 1) + "\n");
   mkdirSync(dirname(STATE), { recursive: true });
   state.posted = state.posted.slice(-300);
   writeFileSync(STATE, JSON.stringify(state, null, 2) + "\n");
@@ -199,6 +203,7 @@ for (const p of posts) {
   try {
     const id = live ? await tweet(p.text) : "dry-run";
     console.log(`\n--- ${live ? "posted " + id : "DRY RUN"} (${p.key}, ${xlen(p.text)} chars)\n${p.text}`);
+    if (live) xlog.unshift({ at: new Date().toISOString(), id, text: p.text.split("\n")[0] });
     state.posted.push(p.key);
     if (p.ids) for (const i of p.ids) state.seen[i] = sig(reg.models.find((m) => m.id === i));
     sent++;
