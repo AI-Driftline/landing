@@ -25,7 +25,11 @@
  },
  "openai-2027-01-06-tts-1-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"tts-1\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"tts-1-hd\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts-2025-03-20\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts-2025-12-15\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null]]"
+  "facts": "[[\"tts-1\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"tts-1-hd\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts-2025-03-20\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-tts-2025-12-15\",\"2027-01-06\",\"gpt-realtime-2.1-mini\",null,null]]",
+  "devto": {
+   "id": 5033327,
+   "drafted": "2026-11-14"
+  }
  },
  "openai-2027-01-14-gpt-4o-and-more-retirement": {
   "date": "2026-11-13",

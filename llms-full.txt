@@ -1,6 +1,6 @@
 # Driftline
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google and Amazon Bedrock model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
 - Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
@@ -14,6 +14,7 @@
 - [models.json](https://aidriftline.com/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: https://aidriftline.com/models/<model-id>/ (for example https://aidriftline.com/models/gemini-2.5-pro/)
 - [RSS feed](https://aidriftline.com/feed.xml) and [calendar](https://aidriftline.com/retirements.ics) of retirement dates
+- [Amazon Bedrock dates](https://aidriftline.com/models/bedrock/): 56 Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: `platforms.bedrock.models` (id, maker, retires = earliest region, regions[], extended).
 - Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
 - How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry `under_review` in models.json and say "under review" on their pages; alerts for them wait.
 

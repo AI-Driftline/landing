@@ -1,8 +1,32 @@
 [
- { "at": "2026-11-13T22:49:21Z", "id": "2121374887616926184", "text": "Date change: Google lists 18 Dec 2026 as the earliest shutdown for gemini-3.1-flash-tts-preview and 2 more." },
- { "at": "2026-11-13T22:15:19Z", "id": "2121366324836540854", "text": "Date change: Google lists 31 Mar 2027 as the earliest shutdown for gemini-2.5-flash-native-audio-preview-12-2025." },
- { "at": "2026-11-13T14:26:15Z", "id": "2121248280935792702", "text": "Replacement change: OpenAI now recommends gpt-6-luna for gpt-5-nano and gpt-5-nano-2025-08-07, not gpt-5.6-luna." },
- { "at": "2026-11-13T13:54:28Z", "id": "2121240282570064093", "text": "Replacement change: OpenAI now recommends gpt-6.1-terra for gpt-5-mini and gpt-5-mini-2025-08-07, not gpt-5.6-terra." },
- { "at": "2026-11-13T13:54:28Z", "id": "2121240281563443397", "text": "Replacement change: OpenAI now recommends gpt-6.1-sol (reasoning.mode: pro, in the Responses API) for gpt-5-pro, o3-pro and more, not gpt-5.6-sol." },
- { "at": "2026-11-13T13:54:28Z", "id": "2121240280401629221", "text": "Replacement change: OpenAI now recommends gpt-6.1-sol for gpt-5, o3, gpt-5-2025-08-07 and o3-2025-04-16, not gpt-5.6-sol." }
+ {
+  "at": "2026-11-13T22:49:21Z",
+  "id": "2121374887616926184",
+  "text": "Date change: Google lists 18 Dec 2026 as the earliest shutdown for gemini-3.1-flash-tts-preview and 2 more."
+ },
+ {
+  "at": "2026-11-13T22:15:19Z",
+  "id": "2121366324836540854",
+  "text": "Date change: Google lists 31 Mar 2027 as the earliest shutdown for gemini-2.5-flash-native-audio-preview-12-2025."
+ },
+ {
+  "at": "2026-11-13T14:26:15Z",
+  "id": "2121248280935792702",
+  "text": "Replacement change: OpenAI now recommends gpt-6-luna for gpt-5-nano and gpt-5-nano-2025-08-07, not gpt-5.6-luna."
+ },
+ {
+  "at": "2026-11-13T13:54:28Z",
+  "id": "2121240282570064093",
+  "text": "Replacement change: OpenAI now recommends gpt-6.1-terra for gpt-5-mini and gpt-5-mini-2025-08-07, not gpt-5.6-terra."
+ },
+ {
+  "at": "2026-11-13T13:54:28Z",
+  "id": "2121240281563443397",
+  "text": "Replacement change: OpenAI now recommends gpt-6.1-sol (reasoning.mode: pro, in the Responses API) for gpt-5-pro, o3-pro and more, not gpt-5.6-sol."
+ },
+ {
+  "at": "2026-11-13T13:54:28Z",
+  "id": "2121240280401629221",
+  "text": "Replacement change: OpenAI now recommends gpt-6.1-sol for gpt-5, o3, gpt-5-2025-08-07 and o3-2025-04-16, not gpt-5.6-sol."
+ }
 ]

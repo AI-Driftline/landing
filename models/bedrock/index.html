@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amazon Bedrock model retirement dates (EOL) · Driftline</title>
+<meta name="description" content="Retirement (end-of-life) dates for 56 Amazon Bedrock model IDs, per region, from AWS's own model lifecycle page. Bedrock's dates often differ from the model maker's.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/models/bedrock/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/models/bedrock/">
+<meta property="og:title" content="Amazon Bedrock model retirement dates (EOL) · Driftline">
+<meta property="og:description" content="Retirement (end-of-life) dates for 56 Amazon Bedrock model IDs, per region, from AWS's own model lifecycle page. Bedrock's dates often differ from the model maker's.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Amazon Bedrock model retirement dates","description":"Retirement (end-of-life) dates for 56 Amazon Bedrock model IDs, per region, from AWS's own model lifecycle page. Bedrock's dates often differ from the model maker's.","url":"https://aidriftline.com/models/bedrock/","dateModified":"2026-11-14","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Amazon Bedrock</p>
+    <span class="eyebrow">Amazon Bedrock</span>
+    <h1>Bedrock model retirement dates</h1>
+    <p class="updated">56 model IDs · read from AWS 14 November 2026, checked every 6 hours</p>
+    <p class="answer">Amazon Bedrock sets its own end-of-life dates, per model and per region, and they often differ from the model maker's. Claude Opus 4.1 left Anthropic's API on 5 August 2026 but runs on Bedrock until 8 January 2027. For Bedrock calls, only Bedrock's dates apply. Source: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html" rel="noopener">Amazon Bedrock model lifecycle</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> reads Bedrock model IDs, cross-region profiles (<code>us.anthropic.…</code>) and ARNs.</p>
+    <h2>Coming up (41)</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Retires</th><th scope="col">Regions</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/bedrock/ai21.jamba-1-5-large-v1-0/"><code>ai21.jamba-1-5-large-v1:0</code></a></td><td>AI21 Labs</td><td>26 Nov 2026</td><td>us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/ai21.jamba-1-5-mini-v1-0/"><code>ai21.jamba-1-5-mini-v1:0</code></a></td><td>AI21 Labs</td><td>26 Nov 2026</td><td>us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-3-haiku-20240307-v1-0/"><code>anthropic.claude-3-haiku-20240307-v1:0</code></a></td><td>Anthropic</td><td>27 Nov 2026 <span class="dim">earlier in some regions</span></td><td>5 dates</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-3-sonnet-20240229-v1-0/"><code>anthropic.claude-3-sonnet-20240229-v1:0</code></a></td><td>Anthropic</td><td>27 Nov 2026 <span class="dim">earlier in some regions</span></td><td>3 dates</td></tr>
+        <tr><td><a href="/models/bedrock/twelvelabs.marengo-embed-2-7-v1-0/"><code>twelvelabs.marengo-embed-2-7-v1:0</code></a> <span class="dim">embedding</span></td><td>TwelveLabs</td><td>30 Nov 2026</td><td>ap-northeast-2, eu-west-1, us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-opus-4-1-20250805-v1-0/"><code>anthropic.claude-opus-4-1-20250805-v1:0</code></a></td><td>Anthropic</td><td>8 Jan 2027</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/writer.palmyra-x4-v1-0/"><code>writer.palmyra-x4-v1:0</code></a></td><td>Writer</td><td>9 Mar 2027</td><td>us-east-1, us-east-2, us-west-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/writer.palmyra-x5-v1-0/"><code>writer.palmyra-x5-v1:0</code></a></td><td>Writer</td><td>21 Mar 2027</td><td>us-east-1, us-east-2, us-west-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/twelvelabs.marengo-embed-3-0-v1-0/"><code>twelvelabs.marengo-embed-3-0-v1:0</code></a> <span class="dim">embedding</span></td><td>TwelveLabs</td><td>22 Mar 2027</td><td>ap-northeast-2</td></tr>
+        <tr><td><a href="/models/bedrock/twelvelabs.pegasus-1-2-v1-0/"><code>twelvelabs.pegasus-1-2-v1:0</code></a> <span class="dim">video</span></td><td>TwelveLabs</td><td>22 Mar 2027</td><td>af-south-1, ap-east-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1 and 24 more</td></tr>
+        <tr><td><a href="/models/bedrock/deepseek.r1-v1-0/"><code>deepseek.r1-v1:0</code></a></td><td>DeepSeek</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/deepseek.v3-v1-0/"><code>deepseek.v3-v1:0</code></a></td><td>DeepSeek</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-north-1, eu-west-2 and 2 more</td></tr>
+        <tr><td><a href="/models/bedrock/deepseek.v3.1/"><code>deepseek.v3.1</code></a></td><td>DeepSeek</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-north-1, eu-west-2 and 2 more</td></tr>
+        <tr><td><a href="/models/bedrock/google.gemma-3-12b-it/"><code>google.gemma-3-12b-it</code></a></td><td>Google</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/google.gemma-3-27b-it/"><code>google.gemma-3-27b-it</code></a></td><td>Google</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/google.gemma-3-4b-it/"><code>google.gemma-3-4b-it</code></a></td><td>Google</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-1-70b-instruct-v1-0/"><code>meta.llama3-1-70b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-1-8b-instruct-v1-0/"><code>meta.llama3-1-8b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-3-70b-instruct-v1-0/"><code>meta.llama3-3-70b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-70b-instruct-v1-0/"><code>meta.llama3-70b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027 <span class="dim">first</span></td><td>2 dates</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-8b-instruct-v1-0/"><code>meta.llama3-8b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027 <span class="dim">first</span></td><td>2 dates</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama4-maverick-17b-instruct-v1-0/"><code>meta.llama4-maverick-17b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama4-scout-17b-instruct-v1-0/"><code>meta.llama4-scout-17b-instruct-v1:0</code></a></td><td>Meta</td><td>30 Mar 2027</td><td>us-east-1, us-east-2, us-west-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/minimax.minimax-m2/"><code>minimax.minimax-m2</code></a></td><td>MiniMax</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/minimax.minimax-m2.1/"><code>minimax.minimax-m2.1</code></a></td><td>MiniMax</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-central-1, eu-north-1 and 7 more</td></tr>
+        <tr><td><a href="/models/bedrock/mistral.devstral-2-123b/"><code>mistral.devstral-2-123b</code></a></td><td>Mistral AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-central-1, eu-north-1 and 7 more</td></tr>
+        <tr><td><a href="/models/bedrock/mistral.mistral-7b-instruct-v0-2/"><code>mistral.mistral-7b-instruct-v0:2</code></a></td><td>Mistral AI</td><td>30 Mar 2027</td><td>ap-south-1, ap-southeast-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3 and 3 more</td></tr>
+        <tr><td><a href="/models/bedrock/mistral.mixtral-8x7b-instruct-v0-1/"><code>mistral.mixtral-8x7b-instruct-v0:1</code></a></td><td>Mistral AI</td><td>30 Mar 2027</td><td>ap-south-1, ap-southeast-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3 and 3 more</td></tr>
+        <tr><td><a href="/models/bedrock/mistral.voxtral-mini-3b-2507/"><code>mistral.voxtral-mini-3b-2507</code></a> <span class="dim">audio</span></td><td>Mistral AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/mistral.voxtral-small-24b-2507/"><code>mistral.voxtral-small-24b-2507</code></a> <span class="dim">audio</span></td><td>Mistral AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/moonshot.kimi-k2-thinking/"><code>moonshot.kimi-k2-thinking</code></a></td><td>Moonshot AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, sa-east-1, us-east-1, us-east-2 and 1 more</td></tr>
+        <tr><td><a href="/models/bedrock/moonshotai.kimi-k2-thinking/"><code>moonshotai.kimi-k2-thinking</code></a></td><td>Moonshot AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, sa-east-1, us-east-1, us-east-2 and 1 more</td></tr>
+        <tr><td><a href="/models/bedrock/nvidia.nemotron-nano-12b-v2/"><code>nvidia.nemotron-nano-12b-v2</code></a></td><td>NVIDIA</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/nvidia.nemotron-nano-9b-v2/"><code>nvidia.nemotron-nano-9b-v2</code></a></td><td>NVIDIA</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, eu-south-1, eu-west-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/qwen.qwen3-coder-30b-a3b-instruct/"><code>qwen.qwen3-coder-30b-a3b-instruct</code></a></td><td>Qwen</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-central-1, eu-north-1 and 7 more</td></tr>
+        <tr><td><a href="/models/bedrock/qwen.qwen3-coder-30b-a3b-v1-0/"><code>qwen.qwen3-coder-30b-a3b-v1:0</code></a></td><td>Qwen</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-central-1, eu-north-1 and 7 more</td></tr>
+        <tr><td><a href="/models/bedrock/qwen.qwen3-coder-480b-a35b-instruct/"><code>qwen.qwen3-coder-480b-a35b-instruct</code></a></td><td>Qwen</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-north-1, eu-west-2 and 2 more</td></tr>
+        <tr><td><a href="/models/bedrock/qwen.qwen3-coder-480b-a35b-v1-0/"><code>qwen.qwen3-coder-480b-a35b-v1:0</code></a></td><td>Qwen</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-north-1, eu-west-2 and 2 more</td></tr>
+        <tr><td><a href="/models/bedrock/zai.glm-4.7/"><code>zai.glm-4.7</code></a></td><td>Z.AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-north-1, eu-west-2 and 4 more</td></tr>
+        <tr><td><a href="/models/bedrock/zai.glm-4.7-flash/"><code>zai.glm-4.7-flash</code></a></td><td>Z.AI</td><td>30 Mar 2027</td><td>ap-northeast-1, ap-south-1, ap-southeast-2, ap-southeast-3, eu-central-1, eu-north-1 and 7 more</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-sonnet-4-5-20250929-v1-0/"><code>anthropic.claude-sonnet-4-5-20250929-v1:0</code></a></td><td>Anthropic</td><td>8 Apr 2027 <span class="dim">first</span></td><td>2 dates</td></tr>
+      </tbody>
+    </table></div>
+    <h2>Already retired everywhere (15)</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Retires</th><th scope="col">Regions</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/bedrock/anthropic.claude-3-7-sonnet-20250219-v1-0/"><code>anthropic.claude-3-7-sonnet-20250219-v1:0</code></a></td><td>Anthropic</td><td>13 Nov 2026</td><td>ap-south-1, eu-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-3-5-sonnet-20241022-v2-0/"><code>anthropic.claude-3-5-sonnet-20241022-v2:0</code></a></td><td>Anthropic</td><td>13 Nov 2026</td><td>ap-northeast-2, ap-south-1, ap-southeast-1</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-3-5-sonnet-20240620-v1-0/"><code>anthropic.claude-3-5-sonnet-20240620-v1:0</code></a></td><td>Anthropic</td><td>13 Nov 2026</td><td>ap-northeast-2, ap-south-1, ap-southeast-1</td></tr>
+        <tr><td><a href="/models/bedrock/anthropic.claude-sonnet-4-20250514-v1-0/"><code>anthropic.claude-sonnet-4-20250514-v1:0</code></a></td><td>Anthropic</td><td>14 Oct 2026</td><td>ap-northeast-1, eu-central-1, eu-north-1, eu-south-1, eu-south-2, eu-west-1 and 17 more</td></tr>
+        <tr><td><a href="/models/bedrock/amazon.nova-reel-v1-1/"><code>amazon.nova-reel-v1:1</code></a> <span class="dim">video</span></td><td>Amazon</td><td>30 Sept 2026</td><td>us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/amazon.nova-reel-v1-0/"><code>amazon.nova-reel-v1:0</code></a> <span class="dim">video</span></td><td>Amazon</td><td>30 Sept 2026</td><td>ap-northeast-1, eu-west-1, us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/amazon.nova-canvas-v1-0/"><code>amazon.nova-canvas-v1:0</code></a> <span class="dim">image</span></td><td>Amazon</td><td>30 Sept 2026</td><td>ap-northeast-1, eu-west-1, us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/amazon.nova-sonic-v1-0/"><code>amazon.nova-sonic-v1:0</code></a> <span class="dim">audio</span></td><td>Amazon</td><td>14 Sept 2026</td><td>ap-northeast-1, eu-north-1, us-east-1</td></tr>
+        <tr><td><a href="/models/bedrock/cohere.command-r-v1-0/"><code>cohere.command-r-v1:0</code></a></td><td>Cohere</td><td>19 Aug 2026</td><td>us-east-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/cohere.command-r-plus-v1-0/"><code>cohere.command-r-plus-v1:0</code></a></td><td>Cohere</td><td>19 Aug 2026</td><td>us-east-1, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-2-90b-instruct-v1-0/"><code>meta.llama3-2-90b-instruct-v1:0</code></a></td><td>Meta</td><td>7 Jul 2026</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-2-3b-instruct-v1-0/"><code>meta.llama3-2-3b-instruct-v1:0</code></a></td><td>Meta</td><td>7 Jul 2026</td><td>eu-central-1, eu-west-1, eu-west-3, us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-2-1b-instruct-v1-0/"><code>meta.llama3-2-1b-instruct-v1:0</code></a></td><td>Meta</td><td>7 Jul 2026</td><td>eu-central-1, eu-west-1, eu-west-3, us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-2-11b-instruct-v1-0/"><code>meta.llama3-2-11b-instruct-v1:0</code></a></td><td>Meta</td><td>7 Jul 2026</td><td>us-east-1, us-east-2, us-west-2</td></tr>
+        <tr><td><a href="/models/bedrock/meta.llama3-1-405b-instruct-v1-0/"><code>meta.llama3-1-405b-instruct-v1:0</code></a></td><td>Meta</td><td>7 Jul 2026</td><td>us-east-2, us-west-2</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>
