@@ -59,10 +59,22 @@ const vxLink = (id) => (vxById.has(id) ? `<a href="${vxUrl(id)}"><code>${esc(id)
 const vxTwinOf = (v) => v.maker === "google" ? reg.models.find((m) => m.id === v.id && m.provider === "google")
   : v.maker === "anthropic" ? reg.models.filter((m) => m.provider === "anthropic" && m.id.replace(/-\d{8}$/, "") === v.id.replace(/-v\d+$/, "")).sort((a, b) => b.id.localeCompare(a.id))[0] : null;
 const vxOf = (m) => vertex.find((v) => vxTwinOf(v)?.id === (m.aliasOf || m.id));
+// Microsoft Azure's own dates, per model version (registry platforms.azure): pages under /models/azure/.
+const AZ = reg.platforms?.azure;
+const azure = [...(AZ?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
+const azById = new Map(azure.map((a) => [a.id, a]));
+const azSlug = (id) => id.replace(/[:@\s/]/g, "-");
+const azUrl = (id) => `/models/azure/${azSlug(id)}/`;
+const azLink = (id) => (azById.has(id) ? `<a href="${azUrl(id)}"><code>${esc(id)}</code></a>` : `<code>${esc(id)}</code>`);
+// Azure lists a planned end date for every model; GA/Preview ones are current, the rest are on their way out.
+const azCurrent = (v) => /^(ga|preview|generally available)$/i.test(v?.lifecycle || "");
+// OpenAI's entry for an Azure model version: gpt-4o 2024-05-13 ↔ gpt-4o-2024-05-13, o3 ↔ o3.
+const azTwin = (a, v) => byId.get(`${a.id}-${v?.version}`) || byId.get(a.id);
+const azOf = (m) => { for (const a of azure) for (const v of a.versions) if (`${a.id}-${v.version}` === m.id || (a.id === m.id && a.versions.length === 1)) return { a, v }; return null; };
 const BR = reg.platforms?.bedrock;
 const bedrock = [...(BR?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 
-const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock", vertex: "Vertex AI" };
+const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock", vertex: "Vertex AI", azure: "Azure" };
 // "X or Y" when the provider names two replacements.
 const replName = (m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "");
 const KIND = { text: "Text", audio: "Audio", image: "Image", video: "Video", embedding: "Embedding", moderation: "Moderation", agent: "Agent" };
@@ -179,7 +191,7 @@ ${body}
 
 const CHECK_BLOCK = (id) => `
     <h2>Check your code for it</h2>
-    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model ID it finds, with its retirement date and replacement:</p>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
@@ -224,6 +236,7 @@ for (const m of [...models, ...aliases]) {
     ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_alt ? ` or ${link(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(mig && m.replacement ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && !(mig.change === "settings") ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)}'s guide</a>` : ""}</span>` : ""}`]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
+    ...(azOf(m) && azOf(m).v.retires !== m.retires ? [["On Azure", `${azLink(azOf(m).a.id)}${azOf(m).v.version ? ` <span class="dim">version ${esc(azOf(m).v.version)}</span>` : ""} · ${azOf(m).v.retires <= TODAY ? "retired" : "retires"} ${short(azOf(m).v.retires)} <span class="dim">(Azure sets its own date)</span>`]] : []),
     ...(vxOf(m) && vxOf(m).retires !== m.retires ? [["On Vertex AI", `${vxLink(vxOf(m).id)} · ${vxOf(m).retires <= TODAY ? "retired" : "retires"} ${short(vxOf(m).retires)} <span class="dim">(Vertex sets its own date)</span>`]] : []),
     ["Model type", KIND[kind] || kind],
     ...(m.announced ? [["Announced", long(m.announced)]] : []),
@@ -278,7 +291,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
     <p>To check your own code against this list: <code>npx -y @aidriftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
     <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
-    <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.${vertex.length ? ` On Google Vertex AI? Vertex uses the Gemini API's model names with its own dates: <a href="/models/vertex/">${vertex.length} Vertex retirement dates</a>.` : ""}</p>
+    <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.${vertex.length ? ` On Google Vertex AI? Vertex uses the Gemini API's model names with its own dates: <a href="/models/vertex/">${vertex.length} Vertex retirement dates</a>.` : ""}${azure.length ? ` On Azure? Azure sets its own date for every model version: <a href="/models/azure/">${azure.length} Azure retirement dates</a>.` : ""}</p>
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
     <h2>Already past (${gone.length})</h2>
@@ -468,6 +481,100 @@ ${vxTable(vxGone)}`,
   }));
 }
 
+// ---------- Microsoft Azure: its own date per model version (registry platforms.azure) ----------
+const AZ_MAKER = { openai: "OpenAI", anthropic: "Anthropic", meta: "Meta", microsoft: "Microsoft", mistral: "Mistral AI", moonshot: "Moonshot AI", xai: "xAI", deepseek: "DeepSeek", cohere: "Cohere", bfl: "Black Forest Labs", stability: "Stability AI", nixtla: "Nixtla", ntt: "NTT Data", fireworks: "Fireworks" };
+const azStatus = (v) => v.retires <= TODAY ? "Retired" : azCurrent(v) ? `${v.lifecycle}, end planned` : v.lifecycle || "Retiring";
+function azAnswer(a) {
+  const vs = a.versions, first = vs[0];
+  const one = (v) => `${v.version && v.version !== "—" ? `version ${v.version} ` : ""}${v.retires <= TODAY ? "retired" : "retires"} on ${long(v.retires)}`;
+  let s = vs.length > 1 ? `On Azure, ${a.id} retires version by version: ${vs.map(one).join("; ")}.` : `On Azure, ${a.id} ${one(first).replace(/^version \S+ /, "")}${first.version && first.version !== "—" ? ` (version ${first.version})` : ""}.`;
+  if (vs.every((v) => azCurrent(v)) && first.retires > TODAY) s += " It is a current model: Azure plans an end date for every model ahead of time.";
+  if (a.replacement) s += ` Azure recommends ${a.replacement}.`;
+  const twin = azTwin(a, first);
+  if (twin && a.maker === "openai") s += ` On OpenAI's own API the date is different: ${twin.retires <= TODAY ? "retired" : "retires"} ${long(twin.retires)}.`;
+  return s;
+}
+rmSync(join(ROOT, "models", "azure"), { recursive: true, force: true });
+for (const a of azure) {
+  const text = azAnswer(a);
+  const twin = a.maker === "openai" ? azTwin(a, a.versions[0]) : null;
+  const rows = [
+    ["Platform", `Microsoft Azure <span class="dim">(Azure OpenAI / Foundry Models)</span>`],
+    ["Model", `<code>${esc(a.id)}</code> <span class="dim">by ${esc(AZ_MAKER[a.maker] || a.maker)}</span>`],
+    ["Status", `${azStatus(a.versions[0])} <span class="dim">(as of ${short(AZ.checked || reg.checked)})</span>`],
+    [a.versions.length > 1 ? "First retirement" : "Retirement", long(a.retires)],
+    ...(a.replacement ? [["Replacement", `${link(a.replacement)} <span class="dim">(named by Azure)</span>`]] : []),
+    ...(twin ? [["On OpenAI's API", `${link(twin.id)} · ${twin.retires <= TODAY ? "retired" : "retires"} ${short(twin.retires)}`]] : []),
+    ["Model type", KIND[a.kind] || a.kind],
+    ["Source", `<a href="${esc(AZ.source)}" rel="noopener">Microsoft: model retirement schedule</a>`],
+  ];
+  const versions = `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Version</th><th scope="col">Lifecycle</th><th scope="col">Retires</th><th scope="col">Replacement</th></tr></thead>
+      <tbody>
+${a.versions.map((v) => `        <tr><td><code>${esc(v.version || "—")}</code></td><td>${esc(v.lifecycle || "—")}</td><td>${short(v.retires)}</td><td>${v.replacement ? `<code>${esc(v.replacement)}</code>${v.replacement_version ? ` <span class="dim">${esc(v.replacement_version)}</span>` : ""}` : '<span class="dim">—</span>'}</td></tr>`).join("\n")}
+      </tbody>
+    </table></div>`;
+  const faq = [{ q: `When does Azure retire ${a.id}?`, a: text }];
+  if (twin) faq.push({ q: `Is the Azure date the same as OpenAI's?`, a: `No. Azure sets its own date for each model version: ${short(a.retires)} on Azure${a.versions.length > 1 ? " (earliest version)" : ""}, ${short(twin.retires)} on OpenAI's API. For calls through Azure, only Azure's date applies.` });
+  const body = `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / <a href="/models/azure/">Azure</a></p>
+    <h1 class="model-h1"><code>${esc(a.id)}</code> <span class="dim" style="font-size:.5em">on Azure</span></h1>
+    <p class="answer">${esc(text)}</p>
+    <table class="kv"><tbody>
+${rows.map(([k, val]) => `      <tr><th scope="row">${k}</th><td>${val}</td></tr>`).join("\n")}
+    </tbody></table>
+    <h2>Dates by version</h2>
+    <p>Azure retires each model version on its own date. Check which version your deployment uses (deployment details in the Azure portal, or <code>version</code> in your Bicep or Terraform).</p>
+${versions}
+    <h2>How Driftline tells Azure from OpenAI's API</h2>
+    <p>Azure uses OpenAI's model names. Driftline uses Azure's dates in files that show they call Azure: <code>AzureOpenAI</code>, <code>azure_endpoint</code>, <code>openai.azure.com</code>, <code>AZURE_OPENAI_…</code>, <code>azure/</code> model names, and Bicep or Terraform deployments, where it also reads the model version (never <code>api_version</code>). Elsewhere it uses OpenAI's dates and notes when Azure's differ.</p>
+${a.versions.every((v) => v.retires <= TODAY) ? "" : ALERT_BLOCK({ ...a, id: `azure:${a.id}`, provider: "azure" })}
+${CHECK_BLOCK(a.id)}
+    <p class="updated" style="margin-top:48px">Read from Microsoft's official schedule on ${long(AZ.checked || reg.checked)}, checked every 6 hours. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>`;
+  const dir = join(ROOT, "models", "azure", azSlug(a.id));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page({ path: azUrl(a.id), title: `${a.id} on Azure: ${a.retires <= TODAY ? "retired" : "retires"} ${short(a.retires)}${a.versions.length > 1 ? " (first version)" : ""} · Driftline`, description: text, body, jsonld: [
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ q, a: ans }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: ans } })) },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Model retirement dates", item: `${SITE}/models/` },
+      { "@type": "ListItem", position: 2, name: "Azure", item: `${SITE}/models/azure/` },
+      { "@type": "ListItem", position: 3, name: a.id, item: `${SITE}${azUrl(a.id)}` },
+    ] },
+  ] }));
+}
+if (azure.length) {
+  const next = (a) => a.versions.map((v) => v.retires).filter((d) => d > TODAY).sort()[0];
+  const azTable = (list, mode) => `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">${mode === "gone" ? "Retired" : "Next date"}</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
+      <tbody>
+${list.map((a) => { const t = a.maker === "openai" ? azTwin(a, a.versions[0]) : null; return `        <tr><td>${azLink(a.id)}${a.kind && a.kind !== "text" ? ` <span class="dim">${a.kind}</span>` : ""}</td><td>${esc(AZ_MAKER[a.maker] || a.maker)}</td><td>${short(mode === "gone" ? a.versions[a.versions.length - 1].retires : next(a))}</td><td>${a.versions.length}</td><td>${t ? `${link(t.id)} <span class="dim">${short(t.retires)}</span>` : '<span class="dim">—</span>'}</td></tr>`; }).join("\n")}
+      </tbody>
+    </table></div>`;
+  const live = azure.filter((a) => next(a)).sort((x, y) => next(x).localeCompare(next(y)) || x.id.localeCompare(y.id));
+  const retiring = live.filter((a) => a.versions.some((v) => v.retires > TODAY && !azCurrent(v)) || next(a) <= new Date(Date.parse(TODAY) + 90 * 86400000).toISOString().slice(0, 10));
+  const current = live.filter((a) => !retiring.includes(a));
+  const gone = azure.filter((a) => !next(a)).reverse();
+  const azDesc = `Retirement dates for ${azure.length} Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.`;
+  writeFileSync(join(ROOT, "models", "azure", "index.html"), page({
+    path: "/models/azure/", title: "Azure OpenAI model retirement dates · Driftline", description: azDesc,
+    body: `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Azure</p>
+    <span class="eyebrow">Microsoft Azure</span>
+    <h1>Azure model retirement dates</h1>
+    <p class="updated">${azure.length} models · read from Microsoft ${long(AZ.checked || reg.checked)}, checked every 6 hours</p>
+    <p class="answer">Azure (Azure OpenAI and Foundry Models) uses OpenAI's model names but sets its own retirement date for every model version, and it differs in both directions: o3 retires on Azure on 19 November 2026, three weeks before OpenAI's 11 December, while gpt-5 lasts on Azure until 9 February 2027. For calls through Azure, only Azure's dates apply. Source: <a href="${esc(AZ.source)}" rel="noopener">Microsoft model retirement schedule</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Azure's dates in files that call Azure, and reads the model version from Bicep and Terraform deployments.</p>
+    <h2>Retiring (${retiring.length})</h2>
+    <p class="dim">Deprecated or legacy versions, and any model within 90 days of its date.</p>
+${azTable(retiring)}
+    <h2>Current models with a planned end (${current.length})</h2>
+    <p class="dim">Azure plans an end date for every model ahead of time. These are current (GA or preview).</p>
+${azTable(current)}
+    <h2>Already retired (${gone.length})</h2>
+${azTable(gone, "gone")}`,
+    jsonld: [{ "@context": "https://schema.org", "@type": "Dataset", name: "Azure OpenAI model retirement dates", description: azDesc, url: `${SITE}/models/azure/`, dateModified: AZ.checked || reg.checked,
+      creator: { "@type": "Organization", name: "Driftline", url: SITE }, distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
+  }));
+}
+
 // ---------- data + files for crawlers and agents ----------
 // Each entry also says whether moving to its replacement is more than a rename (rules: product src/migration.js).
 const withMigration = reg.models.map((m) => { const mig = migrationFor(m); return mig && mig.change !== "rename" ? { ...m, migration: mig } : m; });
@@ -475,7 +582,7 @@ writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMi
 
 const LLMS = `# Driftline
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Amazon Bedrock, Vertex AI and Azure model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
 - Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
@@ -489,7 +596,8 @@ const LLMS = `# Driftline
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
 - [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
-${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
+${azure.length ? `- [Azure dates](${SITE}/models/azure/): ${azure.length} Azure OpenAI and Foundry models with Azure's own retirement date per model version, read from Microsoft's schedule every 6 hours. They differ from OpenAI's in both directions (o3: Azure 19 Nov 2026, OpenAI 11 Dec 2026). Azure plans an end date for current models too (lifecycle GA/Preview). In models.json: \`platforms.azure.models\` (id, maker, retires = earliest version, versions[] with version, lifecycle, retires, replacement).
+` : ""}${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
 ` : ""}${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
 ` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
 - How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait.
@@ -679,7 +787,7 @@ ${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.titl
     </ul>`,
 }));
 
-const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
+const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
