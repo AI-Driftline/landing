@@ -57,6 +57,10 @@
  },
  "openai-2027-04-01-gpt-5-3-codex-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"gpt-5.3-codex\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.1\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.1-2025-11-13\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.4-nano\",\"2027-04-01\",\"gpt-6-luna\",null,null],[\"gpt-5.4-nano-2026-03-17\",\"2027-04-01\",\"gpt-6-luna\",null,null]]"
+  "facts": "[[\"gpt-5.3-codex\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.1\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.1-2025-11-13\",\"2027-04-01\",\"gpt-6-sol\",null,null],[\"gpt-5.4-nano\",\"2027-04-01\",\"gpt-6-luna\",null,null],[\"gpt-5.4-nano-2026-03-17\",\"2027-04-01\",\"gpt-6-luna\",null,null]]",
+  "devto": {
+   "id": 5034034,
+   "drafted": "2026-11-14"
+  }
  }
 }
