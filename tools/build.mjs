@@ -47,10 +47,22 @@ const aliases = [];
 }
 const TODAY = new Date().toISOString().slice(0, 10);
 // Amazon Bedrock's own dates (registry platforms.bedrock): pages under /models/bedrock/, see the Bedrock section below.
+// Google Vertex AI's own dates (registry platforms.vertex): pages under /models/vertex/. Same model names as the
+// Gemini API (and Claude's), different dates; each page links to the other.
+const VX = reg.platforms?.vertex;
+const vertex = [...(VX?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
+const vxById = new Map(vertex.map((v) => [v.id, v]));
+const vxSlug = (id) => id.replace(/[:@]/g, "-");
+const vxUrl = (id) => `/models/vertex/${vxSlug(id)}/`;
+const vxLink = (id) => (vxById.has(id) ? `<a href="${vxUrl(id)}"><code>${esc(id)}</code></a>` : `<code>${esc(id)}</code>`);
+// The Gemini API / Anthropic entry for a Vertex model, and back: gemini-2.5-pro ↔ gemini-2.5-pro, claude-3-haiku ↔ claude-3-haiku-20240307.
+const vxTwinOf = (v) => v.maker === "google" ? reg.models.find((m) => m.id === v.id && m.provider === "google")
+  : v.maker === "anthropic" ? reg.models.filter((m) => m.provider === "anthropic" && m.id.replace(/-\d{8}$/, "") === v.id.replace(/-v\d+$/, "")).sort((a, b) => b.id.localeCompare(a.id))[0] : null;
+const vxOf = (m) => vertex.find((v) => vxTwinOf(v)?.id === (m.aliasOf || m.id));
 const BR = reg.platforms?.bedrock;
 const bedrock = [...(BR?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 
-const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock" };
+const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock", vertex: "Vertex AI" };
 // "X or Y" when the provider names two replacements.
 const replName = (m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "");
 const KIND = { text: "Text", audio: "Audio", image: "Image", video: "Video", embedding: "Embedding", moderation: "Moderation", agent: "Agent" };
@@ -167,7 +179,7 @@ ${body}
 
 const CHECK_BLOCK = (id) => `
     <h2>Check your code for it</h2>
-    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google and Amazon Bedrock model ID it finds, with its retirement date and replacement:</p>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
@@ -212,6 +224,7 @@ for (const m of [...models, ...aliases]) {
     ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_alt ? ` or ${link(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(mig && m.replacement ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && !(mig.change === "settings") ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)}'s guide</a>` : ""}</span>` : ""}`]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
+    ...(vxOf(m) && vxOf(m).retires !== m.retires ? [["On Vertex AI", `${vxLink(vxOf(m).id)} · ${vxOf(m).retires <= TODAY ? "retired" : "retires"} ${short(vxOf(m).retires)} <span class="dim">(Vertex sets its own date)</span>`]] : []),
     ["Model type", KIND[kind] || kind],
     ...(m.announced ? [["Announced", long(m.announced)]] : []),
     ["Source", `<a href="${esc(reg.sources[m.provider])}" rel="noopener">${who} deprecations page</a>`],
@@ -265,7 +278,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
     <p>To check your own code against this list: <code>npx -y @aidriftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
     <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
-    <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.</p>
+    <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.${vertex.length ? ` On Google Vertex AI? Vertex uses the Gemini API's model names with its own dates: <a href="/models/vertex/">${vertex.length} Vertex retirement dates</a>.` : ""}</p>
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
     <h2>Already past (${gone.length})</h2>
@@ -373,6 +386,88 @@ ${brTable(brGone, false)}`,
   }));
 }
 
+// ---------- Google Vertex AI: its own dates (registry platforms.vertex) ----------
+const VX_MAKER = { google: "Google", anthropic: "Anthropic", ai21: "AI21 Labs", deepseek: "DeepSeek", zai: "Z.AI", openai: "OpenAI", moonshot: "Moonshot AI", meta: "Meta", minimax: "MiniMax", qwen: "Qwen", mistral: "Mistral AI", other: "Open model" };
+const vxSource = (v) => VX.sources?.[v.page] || VX.source;
+function vxAnswer(v) {
+  const d = long(v.retires);
+  let s = v.retires <= TODAY ? `Google Vertex AI retired ${v.id} on ${d}. Calls to it on Vertex now fail.` : `Google Vertex AI will retire ${v.id} on ${d}. After that, calls to it on Vertex fail.`;
+  if (v.replacement) s += ` Vertex recommends ${v.replacement}${v.replacement_alt ? ` or ${v.replacement_alt}` : ""}.`;
+  const twin = vxTwinOf(v);
+  if (twin) s += ` On ${v.maker === "google" ? "the Gemini API" : "Anthropic's own API"} the date is different: ${twin.routes ? (twin.retires <= TODAY ? "routed to a newer model since" : "routed to a newer model from") : twin.retires <= TODAY ? "retired" : "retires"} ${long(twin.retires)}.`;
+  if (!v.replacement && v.maker === "anthropic" && twin?.replacement) s += ` Vertex names no replacement; Anthropic's is ${replName(twin)}.`;
+  return s;
+}
+rmSync(join(ROOT, "models", "vertex"), { recursive: true, force: true });
+for (const v of vertex) {
+  const twin = vxTwinOf(v);
+  const text = vxAnswer(v);
+  const rows = [
+    ["Platform", `Google Vertex AI <span class="dim">(Gemini Enterprise Agent Platform)</span>`],
+    ["Model", `<code>${esc(v.id)}</code> <span class="dim">by ${esc(v.name ? `${VX_MAKER[v.maker] || v.maker} · ${v.name}` : VX_MAKER[v.maker] || v.maker)}</span>`],
+    ["Status", `${v.retires <= TODAY ? "Retired" : "Retiring"} <span class="dim">(as of ${short(VX.checked || reg.checked)})</span>`],
+    ["Shutdown", long(v.retires)],
+    ...(v.replacement ? [["Replacement", vxLink(v.replacement) + (v.replacement_alt ? ` or ${vxLink(v.replacement_alt)}` : "") + ' <span class="dim">(named by Vertex)</span>']] : []),
+    ...(twin ? [[v.maker === "google" ? "On the Gemini API" : "On Anthropic's API", `${link(twin.id)} · ${twin.routes ? "routed" : twin.retires <= TODAY ? "retired" : "retires"} ${short(twin.retires)}`]] : []),
+    ...(!v.replacement && v.maker === "anthropic" && twin?.replacement ? [["Anthropic's replacement", link(twin.replacement)]] : []),
+    ["Model type", KIND[v.kind] || v.kind],
+    ...(v.released ? [["Released", long(v.released)]] : []),
+    ["Source", `<a href="${esc(vxSource(v))}" rel="noopener">Google Cloud: ${v.page === "partner" ? "partner model deprecations" : v.page === "open" ? "open model deprecations" : "model versions and lifecycle"}</a>`],
+  ];
+  const same = vertex.filter((o) => o.id !== v.id && o.retires === v.retires).slice(0, 12);
+  const faq = [{ q: `When does Vertex AI retire ${v.id}?`, a: text }];
+  if (twin) faq.push({ q: `Is the Vertex AI date the same as ${v.maker === "google" ? "the Gemini API's" : "Anthropic's"}?`, a: `No. Vertex sets its own dates: ${short(v.retires)} on Vertex, ${short(twin.retires)} on ${v.maker === "google" ? "the Gemini API" : "Anthropic's API"}. For calls through Vertex AI, only Vertex's date applies.` });
+  const body = `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / <a href="/models/vertex/">Vertex AI</a></p>
+    <h1 class="model-h1"><code>${esc(v.id)}</code> <span class="dim" style="font-size:.5em">on Vertex AI</span></h1>
+    <p class="answer">${esc(text)}</p>
+    <table class="kv"><tbody>
+${rows.map(([k, val]) => `      <tr><th scope="row">${k}</th><td>${val}</td></tr>`).join("\n")}
+    </tbody></table>
+    <h2>How Driftline tells Vertex from the Gemini API</h2>
+    <p>Vertex uses the same model names as the Gemini API${v.maker === "anthropic" ? " and Anthropic" : ""}. Driftline uses Vertex's dates in files that show they run on Vertex: <code>vertexai=True</code>, <code>vertexai</code> or <code>google.cloud.aiplatform</code> imports, <code>@google-cloud/vertexai</code>, <code>AnthropicVertex</code>, <code>vertex_ai/</code> model names, Claude's <code>@date</code> spelling and <code>-maas</code> IDs. Elsewhere it uses the Gemini API's dates and notes when Vertex's differ.</p>
+${v.retires <= TODAY ? "" : ALERT_BLOCK({ ...v, id: `vertex:${v.id}`, provider: "vertex" })}
+${CHECK_BLOCK(v.id)}
+${same.length ? `
+    <h2>Same date on Vertex AI</h2>
+    <p class="ids">${same.map((o) => vxLink(o.id)).join(" ")}</p>` : ""}
+    <p class="updated" style="margin-top:48px">Read from Google Cloud's official pages on ${long(VX.checked || reg.checked)}, checked every 6 hours. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>`;
+  const dir = join(ROOT, "models", "vertex", vxSlug(v.id));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page({ path: vxUrl(v.id), title: `${v.id} on Vertex AI: ${v.retires <= TODAY ? "retired" : "retires"} ${short(v.retires)} · Driftline`, description: text, body, jsonld: [
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Model retirement dates", item: `${SITE}/models/` },
+      { "@type": "ListItem", position: 2, name: "Vertex AI", item: `${SITE}/models/vertex/` },
+      { "@type": "ListItem", position: 3, name: v.id, item: `${SITE}${vxUrl(v.id)}` },
+    ] },
+  ] }));
+}
+if (vertex.length) {
+  const vxTable = (list) => `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Date on Vertex</th><th scope="col">Gemini API / Anthropic</th></tr></thead>
+      <tbody>
+${list.map((v) => { const t = vxTwinOf(v); return `        <tr><td>${vxLink(v.id)}${v.kind && v.kind !== "text" ? ` <span class="dim">${v.kind}</span>` : ""}</td><td>${esc(VX_MAKER[v.maker] || v.maker)}</td><td>${short(v.retires)}</td><td>${t ? `${link(t.id)} <span class="dim">${short(t.retires)}</span>` : '<span class="dim">—</span>'}</td></tr>`; }).join("\n")}
+      </tbody>
+    </table></div>`;
+  const vxUp = vertex.filter((v) => v.retires > TODAY), vxGone = vertex.filter((v) => v.retires <= TODAY).reverse();
+  const vxDesc = `Retirement dates for ${vertex.length} Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.`;
+  writeFileSync(join(ROOT, "models", "vertex", "index.html"), page({
+    path: "/models/vertex/", title: "Vertex AI model retirement dates · Driftline", description: vxDesc,
+    body: `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Vertex AI</p>
+    <span class="eyebrow">Google Vertex AI</span>
+    <h1>Vertex AI model retirement dates</h1>
+    <p class="updated">${vertex.length} model IDs · read from Google Cloud ${long(VX.checked || reg.checked)}, checked every 6 hours</p>
+    <p class="answer">Google Vertex AI (now part of Gemini Enterprise Agent Platform) uses the Gemini API's model names but sets its own retirement dates, and they often differ: gemini-2.5-pro was retired on Vertex on 20 October 2026 while the Gemini API keeps answering it until 1 December, when it routes to a newer model. For calls through Vertex, only Vertex's dates apply. Sources: <a href="${esc(VX.sources?.gemini || VX.source)}" rel="noopener">model versions</a>, <a href="${esc(VX.sources?.partner || VX.source)}" rel="noopener">partner models</a>, <a href="${esc(VX.sources?.open || VX.source)}" rel="noopener">open models</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Vertex's dates in files that run on Vertex.</p>
+    <h2>Coming up (${vxUp.length})</h2>
+${vxTable(vxUp)}
+    <h2>Already retired (${vxGone.length})</h2>
+${vxTable(vxGone)}`,
+    jsonld: [{ "@context": "https://schema.org", "@type": "Dataset", name: "Google Vertex AI model retirement dates", description: vxDesc, url: `${SITE}/models/vertex/`, dateModified: VX.checked || reg.checked,
+      creator: { "@type": "Organization", name: "Driftline", url: SITE }, distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
+  }));
+}
+
 // ---------- data + files for crawlers and agents ----------
 // Each entry also says whether moving to its replacement is more than a rename (rules: product src/migration.js).
 const withMigration = reg.models.map((m) => { const mig = migrationFor(m); return mig && mig.change !== "rename" ? { ...m, migration: mig } : m; });
@@ -380,7 +475,7 @@ writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMi
 
 const LLMS = `# Driftline
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google and Amazon Bedrock model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
 - Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
@@ -394,7 +489,8 @@ const LLMS = `# Driftline
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
 - [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
-${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
+${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
+` : ""}${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
 ` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
 - How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait.
 
@@ -583,7 +679,7 @@ ${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.titl
     </ul>`,
 }));
 
-const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
+const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
