@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vertex AI model retirement dates · Driftline</title>
+<meta name="description" content="Retirement dates for 64 Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/models/vertex/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/models/vertex/">
+<meta property="og:title" content="Vertex AI model retirement dates · Driftline">
+<meta property="og:description" content="Retirement dates for 64 Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Google Vertex AI model retirement dates","description":"Retirement dates for 64 Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.","url":"https://aidriftline.com/models/vertex/","dateModified":"2026-11-14","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Vertex AI</p>
+    <span class="eyebrow">Google Vertex AI</span>
+    <h1>Vertex AI model retirement dates</h1>
+    <p class="updated">64 model IDs · read from Google Cloud 14 November 2026, checked every 6 hours</p>
+    <p class="answer">Google Vertex AI (now part of Gemini Enterprise Agent Platform) uses the Gemini API's model names but sets its own retirement dates, and they often differ: gemini-2.5-pro was retired on Vertex on 20 October 2026 while the Gemini API keeps answering it until 1 December, when it routes to a newer model. For calls through Vertex, only Vertex's dates apply. Sources: <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions" rel="noopener">model versions</a>, <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/partner-models" rel="noopener">partner models</a>, <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/open-models" rel="noopener">open models</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Vertex's dates in files that run on Vertex.</p>
+    <h2>Coming up (9)</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Date on Vertex</th><th scope="col">Gemini API / Anthropic</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/vertex/gemini-3.6-flash/"><code>gemini-3.6-flash</code></a></td><td>Google</td><td>19 Nov 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-sonnet-4-5/"><code>claude-sonnet-4-5</code></a></td><td>Anthropic</td><td>30 Nov 2026</td><td><a href="/models/claude-sonnet-4-5-20250929/"><code>claude-sonnet-4-5-20250929</code></a> <span class="dim">30 Nov 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-live-2.5-flash-native-audio/"><code>gemini-live-2.5-flash-native-audio</code></a> <span class="dim">audio</span></td><td>Google</td><td>13 Dec 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-3.7-flash/"><code>gemini-3.7-flash</code></a></td><td>Google</td><td>28 Jan 2027</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.5-flash-image/"><code>gemini-2.5-flash-image</code></a> <span class="dim">image</span></td><td>Google</td><td>15 Mar 2027</td><td><a href="/models/gemini-2.5-flash-image/"><code>gemini-2.5-flash-image</code></a> <span class="dim">15 Mar 2027</span></td></tr>
+        <tr><td><a href="/models/vertex/multimodalembedding-001/"><code>multimodalembedding@001</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/text-embedding-004/"><code>text-embedding-004</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><a href="/models/text-embedding-004/"><code>text-embedding-004</code></a> <span class="dim">14 Jan 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/text-embedding-005/"><code>text-embedding-005</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/text-multilingual-embedding-002/"><code>text-multilingual-embedding-002</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><span class="dim">—</span></td></tr>
+      </tbody>
+    </table></div>
+    <h2>Already retired (55)</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Date on Vertex</th><th scope="col">Gemini API / Anthropic</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/vertex/qwen3-next-80b-a3b-thinking-maas/"><code>qwen3-next-80b-a3b-thinking-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/qwen3-next-80b-a3b-instruct-maas/"><code>qwen3-next-80b-a3b-instruct-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/qwen3-coder-480b-a35b-instruct-maas/"><code>qwen3-coder-480b-a35b-instruct-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/qwen3-235b-a22b-instruct-2507-maas/"><code>qwen3-235b-a22b-instruct-2507-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/multilingual-e5-small-maas/"><code>multilingual-e5-small-maas</code></a> <span class="dim">embedding</span></td><td>Open model</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/multilingual-e5-large-instruct-maas/"><code>multilingual-e5-large-instruct-maas</code></a> <span class="dim">embedding</span></td><td>Open model</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/minimax-m2-maas/"><code>minimax-m2-maas</code></a></td><td>MiniMax</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/llama-3.3-70b-instruct-maas/"><code>llama-3.3-70b-instruct-maas</code></a></td><td>Meta</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/kimi-k2-thinking-maas/"><code>kimi-k2-thinking-maas</code></a></td><td>Moonshot AI</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gpt-oss-20b-maas/"><code>gpt-oss-20b-maas</code></a></td><td>OpenAI</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/glm-5-maas/"><code>glm-5-maas</code></a></td><td>Z.AI</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/glm-4.7-maas/"><code>glm-4.7-maas</code></a></td><td>Z.AI</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/deepseek-v3.2-maas/"><code>deepseek-v3.2-maas</code></a></td><td>DeepSeek</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/deepseek-v3.1-maas/"><code>deepseek-v3.1-maas</code></a></td><td>DeepSeek</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/deepseek-r1-0528-maas/"><code>deepseek-r1-0528-maas</code></a></td><td>DeepSeek</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/deepseek-ocr-maas/"><code>deepseek-ocr-maas</code></a></td><td>DeepSeek</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.5-pro/"><code>gemini-2.5-pro</code></a></td><td>Google</td><td>20 Oct 2026</td><td><a href="/models/gemini-2.5-pro/"><code>gemini-2.5-pro</code></a> <span class="dim">1 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.5-flash-lite/"><code>gemini-2.5-flash-lite</code></a></td><td>Google</td><td>20 Oct 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.5-flash/"><code>gemini-2.5-flash</code></a></td><td>Google</td><td>20 Oct 2026</td><td><a href="/models/gemini-2.5-flash/"><code>gemini-2.5-flash</code></a> <span class="dim">1 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-haiku/"><code>claude-3-haiku</code></a></td><td>Anthropic</td><td>23 Aug 2026</td><td><a href="/models/claude-3-haiku-20240307/"><code>claude-3-haiku-20240307</code></a> <span class="dim">20 Apr 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-5-haiku/"><code>claude-3-5-haiku</code></a></td><td>Anthropic</td><td>5 Jul 2026</td><td><a href="/models/claude-3-5-haiku-20241022/"><code>claude-3-5-haiku-20241022</code></a> <span class="dim">19 Feb 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/veo-3.0-generate-001/"><code>veo-3.0-generate-001</code></a> <span class="dim">video</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/veo-3.0-generate-001/"><code>veo-3.0-generate-001</code></a> <span class="dim">30 Jun 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/veo-3.0-fast-generate-001/"><code>veo-3.0-fast-generate-001</code></a> <span class="dim">video</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/veo-3.0-fast-generate-001/"><code>veo-3.0-fast-generate-001</code></a> <span class="dim">30 Jun 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/veo-2.0-generate-001/"><code>veo-2.0-generate-001</code></a> <span class="dim">video</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/veo-2.0-generate-001/"><code>veo-2.0-generate-001</code></a> <span class="dim">30 Jun 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/imagen-4.0-ultra-generate-001/"><code>imagen-4.0-ultra-generate-001</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/imagen-4.0-ultra-generate-001/"><code>imagen-4.0-ultra-generate-001</code></a> <span class="dim">17 Aug 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/imagen-4.0-generate-001/"><code>imagen-4.0-generate-001</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/imagen-4.0-generate-001/"><code>imagen-4.0-generate-001</code></a> <span class="dim">17 Aug 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/imagen-3.0-generate-002/"><code>imagen-3.0-generate-002</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><a href="/models/imagen-3.0-generate-002/"><code>imagen-3.0-generate-002</code></a> <span class="dim">10 Nov 2025</span></td></tr>
+        <tr><td><a href="/models/vertex/imagen-3.0-generate-001/"><code>imagen-3.0-generate-001</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/imagegeneration-006/"><code>imagegeneration@006</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/imagegeneration-005/"><code>imagegeneration@005</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/imagegeneration-004/"><code>imagegeneration@004</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/imagegeneration-003/"><code>imagegeneration@003</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/imagegeneration-002/"><code>imagegeneration@002</code></a> <span class="dim">image</span></td><td>Google</td><td>30 Jun 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.0-flash-lite/"><code>gemini-2.0-flash-lite</code></a></td><td>Google</td><td>1 Jun 2026</td><td><a href="/models/gemini-2.0-flash-lite/"><code>gemini-2.0-flash-lite</code></a> <span class="dim">1 Jun 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-2.0-flash/"><code>gemini-2.0-flash</code></a></td><td>Google</td><td>1 Jun 2026</td><td><a href="/models/gemini-2.0-flash/"><code>gemini-2.0-flash</code></a> <span class="dim">1 Jun 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-7-sonnet/"><code>claude-3-7-sonnet</code></a></td><td>Anthropic</td><td>11 May 2026</td><td><a href="/models/claude-3-7-sonnet-20250219/"><code>claude-3-7-sonnet-20250219</code></a> <span class="dim">19 Feb 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/jamba-1.5-mini/"><code>jamba-1.5-mini</code></a></td><td>AI21 Labs</td><td>27 Feb 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/jamba-1.5-large/"><code>jamba-1.5-large</code></a></td><td>AI21 Labs</td><td>27 Feb 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-5-sonnet-v2/"><code>claude-3-5-sonnet-v2</code></a></td><td>Anthropic</td><td>19 Feb 2026</td><td><a href="/models/claude-3-5-sonnet-20241022/"><code>claude-3-5-sonnet-20241022</code></a> <span class="dim">28 Oct 2025</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-5-sonnet/"><code>claude-3-5-sonnet</code></a></td><td>Anthropic</td><td>19 Feb 2026</td><td><a href="/models/claude-3-5-sonnet-20241022/"><code>claude-3-5-sonnet-20241022</code></a> <span class="dim">28 Oct 2025</span></td></tr>
+        <tr><td><a href="/models/vertex/imagetext/"><code>imagetext</code></a></td><td>Google</td><td>24 Sept 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.5-pro-002/"><code>gemini-1.5-pro-002</code></a></td><td>Google</td><td>24 Sept 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.5-flash-002/"><code>gemini-1.5-flash-002</code></a></td><td>Google</td><td>24 Sept 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/claude-3-opus/"><code>claude-3-opus</code></a></td><td>Anthropic</td><td>1 Aug 2025</td><td><a href="/models/claude-3-opus-20240229/"><code>claude-3-opus-20240229</code></a> <span class="dim">5 Jan 2026</span></td></tr>
+        <tr><td><a href="/models/vertex/textembedding-gecko-multilingual-001/"><code>textembedding-gecko-multilingual@001</code></a> <span class="dim">embedding</span></td><td>Google</td><td>24 May 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.5-pro-001/"><code>gemini-1.5-pro-001</code></a></td><td>Google</td><td>24 May 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.5-flash-001/"><code>gemini-1.5-flash-001</code></a></td><td>Google</td><td>24 May 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/textembedding-gecko-002/"><code>textembedding-gecko@002</code></a> <span class="dim">embedding</span></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/textembedding-gecko-001/"><code>textembedding-gecko@001</code></a> <span class="dim">embedding</span></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/text-bison/"><code>text-bison</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.0-pro-vision-001/"><code>gemini-1.0-pro-vision-001</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.0-pro-002/"><code>gemini-1.0-pro-002</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-1.0-pro-001/"><code>gemini-1.0-pro-001</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/code-gecko/"><code>code-gecko</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/chat-bison/"><code>chat-bison</code></a></td><td>Google</td><td>21 Apr 2025</td><td><span class="dim">—</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>

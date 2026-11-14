@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gemini-2.5-flash-lite on Vertex AI: retired 20 Oct 2026 · Driftline</title>
+<meta name="description" content="Google Vertex AI retired gemini-2.5-flash-lite on 20 October 2026. Calls to it on Vertex now fail. Vertex recommends gemini-3.8-flash or gemini-3.5-flash-lite.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/models/vertex/gemini-2.5-flash-lite/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/models/vertex/gemini-2.5-flash-lite/">
+<meta property="og:title" content="gemini-2.5-flash-lite on Vertex AI: retired 20 Oct 2026 · Driftline">
+<meta property="og:description" content="Google Vertex AI retired gemini-2.5-flash-lite on 20 October 2026. Calls to it on Vertex now fail. Vertex recommends gemini-3.8-flash or gemini-3.5-flash-lite.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When does Vertex AI retire gemini-2.5-flash-lite?","acceptedAnswer":{"@type":"Answer","text":"Google Vertex AI retired gemini-2.5-flash-lite on 20 October 2026. Calls to it on Vertex now fail. Vertex recommends gemini-3.8-flash or gemini-3.5-flash-lite."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Model retirement dates","item":"https://aidriftline.com/models/"},{"@type":"ListItem","position":2,"name":"Vertex AI","item":"https://aidriftline.com/models/vertex/"},{"@type":"ListItem","position":3,"name":"gemini-2.5-flash-lite","item":"https://aidriftline.com/models/vertex/gemini-2.5-flash-lite/"}]}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/models/">Model retirement dates</a> / <a href="/models/vertex/">Vertex AI</a></p>
+    <h1 class="model-h1"><code>gemini-2.5-flash-lite</code> <span class="dim" style="font-size:.5em">on Vertex AI</span></h1>
+    <p class="answer">Google Vertex AI retired gemini-2.5-flash-lite on 20 October 2026. Calls to it on Vertex now fail. Vertex recommends gemini-3.8-flash or gemini-3.5-flash-lite.</p>
+    <table class="kv"><tbody>
+      <tr><th scope="row">Platform</th><td>Google Vertex AI <span class="dim">(Gemini Enterprise Agent Platform)</span></td></tr>
+      <tr><th scope="row">Model</th><td><code>gemini-2.5-flash-lite</code> <span class="dim">by Google</span></td></tr>
+      <tr><th scope="row">Status</th><td>Retired <span class="dim">(as of 14 Nov 2026)</span></td></tr>
+      <tr><th scope="row">Shutdown</th><td>20 October 2026</td></tr>
+      <tr><th scope="row">Replacement</th><td><code>gemini-3.8-flash</code> or <code>gemini-3.5-flash-lite</code> <span class="dim">(named by Vertex)</span></td></tr>
+      <tr><th scope="row">Model type</th><td>Text</td></tr>
+      <tr><th scope="row">Released</th><td>22 July 2025</td></tr>
+      <tr><th scope="row">Source</th><td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions" rel="noopener">Google Cloud: model versions and lifecycle</a></td></tr>
+    </tbody></table>
+    <h2>How Driftline tells Vertex from the Gemini API</h2>
+    <p>Vertex uses the same model names as the Gemini API. Driftline uses Vertex's dates in files that show they run on Vertex: <code>vertexai=True</code>, <code>vertexai</code> or <code>google.cloud.aiplatform</code> imports, <code>@google-cloud/vertexai</code>, <code>AnthropicVertex</code>, <code>vertex_ai/</code> model names, Claude's <code>@date</code> spelling and <code>-maas</code> IDs. Elsewhere it uses the Gemini API's dates and notes when Vertex's differ.</p>
+
+
+    <h2>Check your code for it</h2>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model ID it finds, with its retirement date and replacement:</p>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
+    <p>Or look for this ID only: <code>grep -rn "gemini-2.5-flash-lite" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
+    <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>
+
+    <h2>Same date on Vertex AI</h2>
+    <p class="ids"><a href="/models/vertex/gemini-2.5-flash/"><code>gemini-2.5-flash</code></a> <a href="/models/vertex/gemini-2.5-pro/"><code>gemini-2.5-pro</code></a></p>
+    <p class="updated" style="margin-top:48px">Read from Google Cloud's official pages on 14 November 2026, checked every 6 hours. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>

@@ -339,6 +339,71 @@
   <url><loc>https://aidriftline.com/models/bedrock/zai.glm-4.7/</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://aidriftline.com/models/bedrock/zai.glm-4.7-flash/</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://aidriftline.com/models/bedrock/anthropic.claude-sonnet-4-5-20250929-v1-0/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/chat-bison/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/code-gecko/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.0-pro-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.0-pro-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.0-pro-vision-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/text-bison/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/textembedding-gecko-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/textembedding-gecko-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.5-flash-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.5-pro-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/textembedding-gecko-multilingual-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-opus/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.5-flash-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-1.5-pro-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagetext/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-5-sonnet/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-5-sonnet-v2/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/jamba-1.5-large/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/jamba-1.5-mini/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-7-sonnet/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.0-flash/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.0-flash-lite/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagegeneration-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagegeneration-003/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagegeneration-004/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagegeneration-005/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagegeneration-006/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagen-3.0-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagen-3.0-generate-002/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagen-4.0-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/imagen-4.0-ultra-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/veo-2.0-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/veo-3.0-fast-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/veo-3.0-generate-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-5-haiku/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-3-haiku/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.5-flash/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.5-flash-lite/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.5-pro/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/deepseek-ocr-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/deepseek-r1-0528-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/deepseek-v3.1-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/deepseek-v3.2-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/glm-4.7-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/glm-5-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gpt-oss-20b-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/kimi-k2-thinking-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/llama-3.3-70b-instruct-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/minimax-m2-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/multilingual-e5-large-instruct-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/multilingual-e5-small-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/qwen3-235b-a22b-instruct-2507-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/qwen3-coder-480b-a35b-instruct-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/qwen3-next-80b-a3b-instruct-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/qwen3-next-80b-a3b-thinking-maas/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-3.6-flash/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/claude-sonnet-4-5/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-live-2.5-flash-native-audio/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-3.7-flash/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/gemini-2.5-flash-image/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/multimodalembedding-001/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/text-embedding-004/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/text-embedding-005/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://aidriftline.com/models/vertex/text-multilingual-embedding-002/</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://aidriftline.com/terms.html</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/privacy.html</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/refunds.html</loc><lastmod>2026-10-11</lastmod></url>

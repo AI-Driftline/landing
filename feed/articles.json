@@ -33,7 +33,11 @@
  },
  "openai-2027-01-14-gpt-4o-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"gpt-4o-2024-08-06\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4o-2024-11-20\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4o-mini-2024-07-18\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4.1-2025-04-14\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4.1-mini-2025-04-14\",\"2027-01-14\",\"gpt-6-luna\",null,null]]"
+  "facts": "[[\"gpt-4o-2024-08-06\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4o-2024-11-20\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4o-mini-2024-07-18\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4.1-2025-04-14\",\"2027-01-14\",\"gpt-6-luna\",null,null],[\"gpt-4.1-mini-2025-04-14\",\"2027-01-14\",\"gpt-6-luna\",null,null]]",
+  "devto": {
+   "id": 5033485,
+   "drafted": "2026-11-14"
+  }
  },
  "openai-2027-01-20-gpt-realtime-and-more-retirement": {
   "date": "2026-11-13",

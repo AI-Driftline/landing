@@ -41,6 +41,7 @@
       <tr><th scope="row">Earliest shutdown</th><td>17 August 2026</td></tr>
       <tr><th scope="row">Replacement</th><td><code>gemini-nano-banana-2.1</code></td></tr>
       <tr><th scope="row">Moving to it</th><td>API change <span class="dim">· Use generate_content instead of generate_images; images come back as content parts, not an image response object. <a href="https://ai.google.dev/gemini-api/docs/imagen" rel="noopener">Google's guide</a></span></td></tr>
+      <tr><th scope="row">On Vertex AI</th><td><a href="/models/vertex/imagen-4.0-ultra-generate-001/"><code>imagen-4.0-ultra-generate-001</code></a> · retired 30 Jun 2026 <span class="dim">(Vertex sets its own date)</span></td></tr>
       <tr><th scope="row">Model type</th><td>Image</td></tr>
       <tr><th scope="row">Source</th><td><a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener">Google deprecations page</a></td></tr>
     </tbody></table>
@@ -48,7 +49,7 @@
 
 
     <h2>Check your code for it</h2>
-    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google and Amazon Bedrock model ID it finds, with its retirement date and replacement:</p>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock and Vertex AI model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "imagen-4.0-ultra-generate-001" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>
