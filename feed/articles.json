@@ -49,7 +49,11 @@
  },
  "openai-2027-02-26-whisper-1-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"whisper-1\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-transcribe\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-mini-transcribe\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-mini-transcribe-2025-12-15\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-transcribe-diarize\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null]]"
+  "facts": "[[\"whisper-1\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-transcribe\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-mini-transcribe\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-mini-transcribe-2025-12-15\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null],[\"gpt-4o-transcribe-diarize\",\"2027-02-26\",\"gpt-live-transcribe\",\"gpt-transcribe\",null]]",
+  "devto": {
+   "id": 5033849,
+   "drafted": "2026-11-14"
+  }
  },
  "openai-2027-04-01-gpt-5-3-codex-and-more-retirement": {
   "date": "2026-11-13",
