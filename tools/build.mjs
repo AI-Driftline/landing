@@ -59,6 +59,11 @@ const vxLink = (id) => (vxById.has(id) ? `<a href="${vxUrl(id)}"><code>${esc(id)
 const vxTwinOf = (v) => v.maker === "google" ? reg.models.find((m) => m.id === v.id && m.provider === "google")
   : v.maker === "anthropic" ? reg.models.filter((m) => m.provider === "anthropic" && m.id.replace(/-\d{8}$/, "") === v.id.replace(/-v\d+$/, "")).sort((a, b) => b.id.localeCompare(a.id))[0] : null;
 const vxOf = (m) => vertex.find((v) => vxTwinOf(v)?.id === (m.aliasOf || m.id));
+// More providers' own dates (registry platforms.<p> with direct: true): Groq, Mistral, xAI, Cohere, DeepSeek.
+// Pages under /models/<provider>/<id>/; "/" and ":" in IDs become "-" in the address.
+const DIRECT = Object.entries(reg.platforms || {}).filter(([, p]) => p.direct).map(([key, p]) => [key, p, [...(p.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id))]);
+const dSlug = (id) => id.replace(/[/:@\s]/g, "-");
+const dUrl = (key, id) => `/models/${key}/${dSlug(id)}/`;
 // Microsoft Azure's own dates, per model version (registry platforms.azure): pages under /models/azure/.
 const AZ = reg.platforms?.azure;
 const azure = [...(AZ?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
@@ -74,7 +79,7 @@ const azOf = (m) => { for (const a of azure) for (const v of a.versions) if (`${
 const BR = reg.platforms?.bedrock;
 const bedrock = [...(BR?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 
-const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock", vertex: "Vertex AI", azure: "Azure" };
+const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock", vertex: "Vertex AI", azure: "Azure", groq: "Groq", mistral: "Mistral AI", xai: "xAI", cohere: "Cohere", deepseek: "DeepSeek" };
 // "X or Y" when the provider names two replacements.
 const replName = (m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "");
 const KIND = { text: "Text", audio: "Audio", image: "Image", video: "Video", embedding: "Embedding", moderation: "Moderation", agent: "Agent" };
@@ -191,7 +196,7 @@ ${body}
 
 const CHECK_BLOCK = (id) => `
     <h2>Check your code for it</h2>
-    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Amazon Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
@@ -292,6 +297,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <p>To check your own code against this list: <code>npx -y @aidriftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
     <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
     <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.${vertex.length ? ` On Google Vertex AI? Vertex uses the Gemini API's model names with its own dates: <a href="/models/vertex/">${vertex.length} Vertex retirement dates</a>.` : ""}${azure.length ? ` On Azure? Azure sets its own date for every model version: <a href="/models/azure/">${azure.length} Azure retirement dates</a>.` : ""}</p>
+${DIRECT.length ? `    <p>More providers: ${DIRECT.map(([key, p, list]) => `<a href="/models/${key}/">${esc(p.name)} (${list.length})</a>`).join(" · ")}.</p>` : ""}
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
     <h2>Already past (${gone.length})</h2>
@@ -481,6 +487,89 @@ ${vxTable(vxGone)}`,
   }));
 }
 
+// ---------- More providers: Groq, Mistral, xAI, Cohere, DeepSeek (registry platforms.<p>, direct) ----------
+const D_MAKER = { meta: "Meta", qwen: "Qwen", openai: "OpenAI", moonshot: "Moonshot AI", google: "Google", deepseek: "DeepSeek", mistral: "Mistral AI", playai: "PlayAI", groq: "Groq", zai: "Z.AI", xai: "xAI", cohere: "Cohere", other: "" };
+// Words that tie a file to the provider; IDs that could mean something else need them (see the product's PROVIDER_SIGNS).
+const D_SIGNS = { groq: "<code>groq</code> imports, <code>GROQ_API_KEY</code> or <code>api.groq.com</code>", cohere: "<code>cohere</code> imports or <code>CO_API_KEY</code>", mistral: "<code>mistralai</code> or <code>MISTRAL_API_KEY</code>", xai: "<code>api.x.ai</code> or <code>XAI_API_KEY</code>", deepseek: "<code>deepseek</code>" };
+const dAmbiguous = (key, m) => m.id.includes("/") || (!/\d/.test(m.id) && !m.id.startsWith(`${m.maker}-`) && !m.id.startsWith(`${key}-`));
+for (const [key, P, list] of DIRECT) {
+  const name = P.name, host = key === "groq";
+  const dLink = (id) => (list.some((m) => m.id === id) ? `<a href="${dUrl(key, id)}"><code>${esc(id)}</code></a>` : `<code>${esc(id)}</code>`);
+  const answer = (m) => {
+    const d = long(m.retires), gone = m.retires <= TODAY;
+    let s = m.routes
+      ? (gone ? `${name} retired ${m.id} on ${d}. Calls to it still work: ${name} answers them with ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}, so the model behind it changed.` : `On ${d}, ${name} retires ${m.id} and starts answering its calls with ${m.replacement}${m.replacement_note ? ` (${m.replacement_note})` : ""}.`)
+      : gone ? `${name} retired ${m.id} on ${d}. Calls to it now fail.` : `${name} will retire ${m.id} on ${d}. After that, calls to it fail.`;
+    if (!m.routes && m.replacement) s += ` ${name} recommends ${m.replacement}${m.replacement_alt ? ` or ${m.replacement_alt}` : ""}${m.replacement_note ? ` (${m.replacement_note})` : ""}.`;
+    else if (!m.replacement && m.replacement_note) s += ` ${m.replacement_note}.`;
+    if (m.note) s += ` ${m.note.replace(/^DeepSeek: /, "")}`;
+    if (host && m.maker !== "groq") s += ` This is Groq's date for its API; the model's maker and other hosts set their own.`;
+    return s;
+  };
+  rmSync(join(ROOT, "models", key), { recursive: true, force: true });
+  for (const m of list) {
+    const text = answer(m);
+    const rows = [
+      ["Provider", host ? `Groq <span class="dim">(hosts other makers' models)</span>` : esc(name)],
+      ["Model", `<code>${esc(m.id)}</code>${m.name && m.name !== m.id ? ` <span class="dim">${esc(m.name)}</span>` : ""}${host && D_MAKER[m.maker] ? ` <span class="dim">by ${esc(D_MAKER[m.maker])}</span>` : ""}`],
+      ["Status", `${m.routes ? (m.retires <= TODAY ? "Redirected to a newer model" : "Will be redirected") : m.retires <= TODAY ? "Retired" : "Retiring"} <span class="dim">(as of ${short(P.checked || reg.checked)})</span>`],
+      [m.routes ? "Redirect starts" : "Shutdown", long(m.retires)],
+      ...(m.replacement ? [[m.routes ? "Now answered by" : "Replacement", dLink(m.replacement) + (m.replacement_alt ? ` or ${dLink(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "")]] : m.replacement_note ? [["Suggested instead", esc(m.replacement_note)]] : []),
+      ["Model type", KIND[m.kind] || m.kind],
+      ["Source", `<a href="${esc(P.source)}" rel="noopener">${esc(name)}: ${key === "deepseek" ? "news and updates" : "deprecations"}</a>${P.maintained === "ai" ? ' <span class="dim">(no deprecation page; read from announcements)</span>' : ""}`],
+    ];
+    const faq = [{ q: `When does ${name} retire ${m.id}?`, a: text }];
+    const same = list.filter((o) => o.id !== m.id && o.retires === m.retires).slice(0, 12);
+    const body = `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / <a href="/models/${key}/">${esc(name)}</a></p>
+    <h1 class="model-h1"><code>${esc(m.id)}</code>${host ? ' <span class="dim" style="font-size:.5em">on Groq</span>' : ""}</h1>
+    <p class="answer">${esc(text)}</p>
+    <table class="kv"><tbody>
+${rows.map(([k, v]) => `      <tr><th scope="row">${k}</th><td>${v}</td></tr>`).join("\n")}
+    </tbody></table>
+${dAmbiguous(key, m) ? `    <h2>How Driftline finds it</h2>
+    <p><code>${esc(m.id)}</code> could also mean something else${m.id.includes("/") ? " (other services use the same name for their own copy of the model)" : " (it is an ordinary word in code)"}, so Driftline counts it only in files that show they call ${esc(name)}: ${D_SIGNS[key] || esc(name)}${key === "groq" ? ", or a <code>groq/</code> prefix" : ""}.</p>` : ""}
+${m.retires <= TODAY ? "" : ALERT_BLOCK({ ...m, id: `${key}:${m.id}`, provider: key })}
+${CHECK_BLOCK(m.id)}
+${same.length ? `
+    <h2>Same date at ${esc(name)}</h2>
+    <p class="ids">${same.map((o) => dLink(o.id)).join(" ")}</p>` : ""}
+    <p class="updated" style="margin-top:48px">Read from ${esc(name)}'s official ${key === "deepseek" ? "announcements" : "page"} on ${long(P.checked || reg.checked)}${P.maintained === "ai" ? ", checked daily" : ", checked every 6 hours"}. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>`;
+    const dir = join(ROOT, "models", key, dSlug(m.id));
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, "index.html"), page({ path: dUrl(key, m.id), title: `${m.id}${host ? " on Groq" : ""}: ${m.routes ? "redirected" : m.retires <= TODAY ? "retired" : "retires"} ${short(m.retires)} · Driftline`, description: text, body, jsonld: [
+      { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Model retirement dates", item: `${SITE}/models/` },
+        { "@type": "ListItem", position: 2, name, item: `${SITE}/models/${key}/` },
+        { "@type": "ListItem", position: 3, name: m.id, item: `${SITE}${dUrl(key, m.id)}` },
+      ] },
+    ] }));
+  }
+  const tbl = (rows) => `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th>${host ? '<th scope="col">Maker</th>' : ""}<th scope="col">Date</th><th scope="col">${list.some((m) => m.routes) ? "Replacement / redirect" : "Replacement"}</th></tr></thead>
+      <tbody>
+${rows.map((m) => `        <tr><td>${dLink(m.id)}${m.kind && m.kind !== "text" ? ` <span class="dim">${m.kind}</span>` : ""}</td>${host ? `<td>${esc(D_MAKER[m.maker] || "")}</td>` : ""}<td>${short(m.retires)}${m.routes ? ' <span class="dim">redirect</span>' : ""}</td><td>${m.replacement ? `<code>${esc(m.replacement)}</code>${m.replacement_alt ? ` or <code>${esc(m.replacement_alt)}</code>` : ""}` : m.replacement_note ? `<span class="dim">${esc(m.replacement_note)}</span>` : '<span class="dim">—</span>'}</td></tr>`).join("\n")}
+      </tbody>
+    </table></div>`;
+  const up = list.filter((m) => m.retires > TODAY), gone = list.filter((m) => m.retires <= TODAY).reverse();
+  const desc = `Retirement dates for ${list.length} ${name} model IDs, with replacements, from ${name}'s own ${key === "deepseek" ? "announcements" : "deprecation page"}.${list.some((m) => m.routes) ? ` Some retired names are redirected to a newer model instead of failing.` : ""}`;
+  writeFileSync(join(ROOT, "models", key, "index.html"), page({
+    path: `/models/${key}/`, title: `${name} model deprecations and retirement dates · Driftline`, description: desc,
+    body: `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / ${esc(name)}</p>
+    <span class="eyebrow">${esc(name)}</span>
+    <h1>${esc(name)} model retirement dates</h1>
+    <p class="updated">${list.length} model IDs · read from ${esc(name)} ${long(P.checked || reg.checked)}, ${P.maintained === "ai" ? "checked daily" : "checked every 6 hours"}</p>
+    <p class="answer">${esc(desc)}${host ? " Groq sets these dates for its own API; the model makers and other hosts set theirs." : ""} Source: <a href="${esc(P.source)}" rel="noopener">${esc(name)}</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code></p>
+    <h2>Coming up (${up.length})</h2>
+${up.length ? tbl(up) : '    <p class="dim">Nothing announced right now.</p>'}
+    <h2>Already retired (${gone.length})</h2>
+${tbl(gone)}`,
+    jsonld: [{ "@context": "https://schema.org", "@type": "Dataset", name: `${name} model retirement dates`, description: desc, url: `${SITE}/models/${key}/`, dateModified: P.checked || reg.checked,
+      creator: { "@type": "Organization", name: "Driftline", url: SITE }, distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
+  }));
+}
+
 // ---------- Microsoft Azure: its own date per model version (registry platforms.azure) ----------
 const AZ_MAKER = { openai: "OpenAI", anthropic: "Anthropic", meta: "Meta", microsoft: "Microsoft", mistral: "Mistral AI", moonshot: "Moonshot AI", xai: "xAI", deepseek: "DeepSeek", cohere: "Cohere", bfl: "Black Forest Labs", stability: "Stability AI", nixtla: "Nixtla", ntt: "NTT Data", fireworks: "Fireworks" };
 const azStatus = (v) => v.retires <= TODAY ? "Retired" : azCurrent(v) ? `${v.lifecycle}, end planned` : v.lifecycle || "Retiring";
@@ -582,7 +671,7 @@ writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMi
 
 const LLMS = `# Driftline
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Amazon Bedrock, Vertex AI and Azure model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq model IDs (and Amazon Bedrock, Vertex AI and Azure's own dates) in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
 - Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
@@ -596,7 +685,7 @@ const LLMS = `# Driftline
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
 - [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
-${azure.length ? `- [Azure dates](${SITE}/models/azure/): ${azure.length} Azure OpenAI and Foundry models with Azure's own retirement date per model version, read from Microsoft's schedule every 6 hours. They differ from OpenAI's in both directions (o3: Azure 19 Nov 2026, OpenAI 11 Dec 2026). Azure plans an end date for current models too (lifecycle GA/Preview). In models.json: \`platforms.azure.models\` (id, maker, retires = earliest version, versions[] with version, lifecycle, retires, replacement).
+${DIRECT.map(([key, p, list]) => `- [${p.name} dates](${SITE}/models/${key}/): ${list.length} model IDs from ${p.name}'s own ${key === "deepseek" ? "announcements (no deprecation page; checked daily)" : "deprecation page (checked every 6 hours)"}${list.some((m) => m.routes) ? "; retired names are redirected to a newer model (routes)" : ""}. In models.json: \`platforms.${key}.models\`.\n`).join("")}${azure.length ? `- [Azure dates](${SITE}/models/azure/): ${azure.length} Azure OpenAI and Foundry models with Azure's own retirement date per model version, read from Microsoft's schedule every 6 hours. They differ from OpenAI's in both directions (o3: Azure 19 Nov 2026, OpenAI 11 Dec 2026). Azure plans an end date for current models too (lifecycle GA/Preview). In models.json: \`platforms.azure.models\` (id, maker, retires = earliest version, versions[] with version, lifecycle, retires, replacement).
 ` : ""}${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
 ` : ""}${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
 ` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
@@ -787,7 +876,7 @@ ${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.titl
     </ul>`,
 }));
 
-const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
+const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), ...DIRECT.flatMap(([key, , list]) => [`/models/${key}/`, ...list.map((m) => dUrl(key, m.id))]), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
