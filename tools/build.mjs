@@ -46,8 +46,11 @@ const aliases = [];
   for (const a of aliases) byId.set(a.id, a);
 }
 const TODAY = new Date().toISOString().slice(0, 10);
+// Amazon Bedrock's own dates (registry platforms.bedrock): pages under /models/bedrock/, see the Bedrock section below.
+const BR = reg.platforms?.bedrock;
+const bedrock = [...(BR?.models || [])].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 
-const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google" };
+const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google", bedrock: "Amazon Bedrock" };
 // "X or Y" when the provider names two replacements.
 const replName = (m) => m.replacement + (m.replacement_alt ? ` or ${m.replacement_alt}` : "");
 const KIND = { text: "Text", audio: "Audio", image: "Image", video: "Video", embedding: "Embedding", moderation: "Moderation", agent: "Agent" };
@@ -164,7 +167,7 @@ ${body}
 
 const CHECK_BLOCK = (id) => `
     <h2>Check your code for it</h2>
-    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic and Google model ID it finds, with its retirement date and replacement:</p>
+    <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google and Amazon Bedrock model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
     <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
@@ -200,7 +203,7 @@ for (const m of [...models, ...aliases]) {
   if (mig && m.replacement) faq.push({ q: `Is ${m.replacement} a drop-in replacement for ${m.id}?`, a: mig.drop_in
     ? `In most code, yes: change the model name.${mig.note ? " " + mig.note : ""} Answers can still differ, so test your prompts on it before you switch.`
     : `Not quite. ${mig.note}${mig.guide ? ` ${who}'s guide: ${mig.guide}` : ""} Then test your prompts on it before you switch.` });
-  faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y @aidriftline/driftline ." in your repository. It finds OpenAI, Anthropic and Google model IDs, including aliases and Bedrock/Vertex names, and lists each one's retirement date and replacement.` });
+  faq.push({ q: `How do I find ${m.id} in my code?`, a: `Run "npx -y @aidriftline/driftline ." in your repository. It finds OpenAI, Anthropic, Google and Amazon Bedrock model IDs, including aliases and Vertex names, and lists each one's retirement date and replacement.` });
 
   const rows = [
     ["Provider", who],
@@ -262,6 +265,7 @@ writeFileSync(join(ROOT, "models", "index.html"), page({
     <p class="answer">Every OpenAI, Anthropic and Google model ID that has a published retirement date, with the recommended replacement. Dates come from the providers' official pages (<a href="${reg.sources.openai}" rel="noopener">OpenAI</a>, <a href="${reg.sources.anthropic}" rel="noopener">Anthropic</a>, <a href="${reg.sources.google}" rel="noopener">Google</a>). Google publishes earliest dates only, and routes some old IDs to newer models instead of switching them off. Anthropic's dates are "not sooner than".</p>
     <p>To check your own code against this list: <code>npx -y @aidriftline/driftline .</code> · Machine-readable: <a href="/models.json">/models.json</a></p>
     <p>Get new dates as they are announced: <a href="/feed.xml">RSS feed</a> · <a href="webcal://aidriftline.com/retirements.ics">add to your calendar</a> (<a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Faidriftline.com%2Fretirements.ics" rel="noopener">Google Calendar</a>, or subscribe to <code>${SITE}/retirements.ics</code>) · <a href="https://x.com/aidriftline" rel="noopener">@aidriftline on X</a></p>
+    <p>On Amazon Bedrock? Bedrock sets its own dates, per model and region: <a href="/models/bedrock/">${bedrock.length} Bedrock retirement dates</a>.</p>
     <h2>Coming up (${upcoming.length})</h2>
 ${table(upcoming)}
     <h2>Already past (${gone.length})</h2>
@@ -271,6 +275,104 @@ ${table(gone)}`,
     distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
 }));
 
+// ---------- Amazon Bedrock: its own dates, per model and region (registry platforms.bedrock) ----------
+// Bedrock IDs contain ":" (…-v1:0); the page address uses "-" instead.
+const MAKER = { ai21: "AI21 Labs", amazon: "Amazon", anthropic: "Anthropic", cohere: "Cohere", deepseek: "DeepSeek", google: "Google", meta: "Meta", minimax: "MiniMax", mistral: "Mistral AI", moonshot: "Moonshot AI", nvidia: "NVIDIA", openai: "OpenAI", qwen: "Qwen", twelvelabs: "TwelveLabs", writer: "Writer", zai: "Z.AI", stability: "Stability AI", luma: "Luma AI" };
+const brUrl = (id) => `/models/bedrock/${id.replace(/:/g, "-")}/`;
+const brLink = (id) => `<a href="${brUrl(id)}"><code>${esc(id)}</code></a>`;
+const regionList = (g) => g.regions.length > 6 ? `${g.regions.slice(0, 6).join(", ")} and ${g.regions.length - 6} more` : g.regions.join(", ");
+// Anthropic's own entry for a Claude model on Bedrock (anthropic.claude-…-v1:0 → claude-…), to show both dates.
+const anthropicBase = (pm) => pm.maker === "anthropic" ? byId.get(pm.id.replace(/^anthropic\./, "").replace(/-v\d+(?::\d+)?$/, "")) : null;
+function brAnswer(pm) {
+  const name = `${pm.name || pm.id} (${pm.id})`;
+  const d = long(pm.retires);
+  let s = pm.retires <= TODAY
+    ? `Amazon Bedrock retired ${name} on ${d}${pm.regions.length > 1 ? " in its first regions" : ""}. Calls to it there now fail.`
+    : `Amazon Bedrock will retire ${name} on ${d}${pm.regions.length > 1 ? " in its first regions" : ""}. After that, calls to it fail.`;
+  if (pm.regions.length > 1) { const last = pm.regions[pm.regions.length - 1]; s += ` Other regions follow, the last on ${long(last.retires)}.`; }
+  if (pm.extended && pm.retires > TODAY) s += pm.extended <= TODAY ? ` It has been in extended access since ${long(pm.extended)}, when the model maker may charge more.` : ` Extended access, when the model maker may charge more, starts ${long(pm.extended)}.`;
+  const base = anthropicBase(pm);
+  if (base) s += ` On Anthropic's own API the date is different (${long(base.retires)}). Bedrock names no replacement; Anthropic's is ${replName(base)}, which has its own Bedrock model ID.`;
+  else s += " Bedrock names no replacement.";
+  return s;
+}
+rmSync(join(ROOT, "models", "bedrock"), { recursive: true, force: true });
+for (const pm of bedrock) {
+  const maker = MAKER[pm.maker] || pm.maker;
+  const base = anthropicBase(pm);
+  const text = brAnswer(pm);
+  const regionsTable = `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Regions</th><th scope="col">Legacy since</th><th scope="col">Extended access</th><th scope="col">Retires (EOL)</th></tr></thead>
+      <tbody>
+${pm.regions.map((g) => `        <tr><td>${esc(regionList(g))}</td><td>${g.legacy ? short(g.legacy) : "—"}</td><td>${g.extended ? short(g.extended) : "—"}</td><td>${short(g.retires)}</td></tr>`).join("\n")}
+      </tbody>
+    </table></div>`;
+  const rows = [
+    ["Platform", "Amazon Bedrock"],
+    ["Model", `${esc(pm.name || pm.id)} <span class="dim">by ${esc(maker)}</span>`],
+    ["Status", `${pm.retires <= TODAY ? "Retired" + (pm.regions.length > 1 ? " in some regions" : "") : "Legacy, retiring"} <span class="dim">(as of ${short(BR.checked || reg.checked)})</span>`],
+    [pm.regions.length > 1 ? "First shutdown" : "Shutdown", long(pm.retires)],
+    ...(base ? [["On Anthropic's API", `${link(base.id)} · ${short(base.retires)}`], ["Anthropic's replacement", link(base.replacement) + ' <span class="dim">(use its Bedrock model ID)</span>']] : []),
+    ["Model type", KIND[pm.kind] || pm.kind],
+    ["Source", `<a href="${esc(BR.source)}" rel="noopener">Amazon Bedrock model lifecycle page</a>`],
+  ];
+  const same = bedrock.filter((o) => o.id !== pm.id && o.retires === pm.retires).slice(0, 12);
+  const faq = [{ q: `When does Amazon Bedrock retire ${pm.id}?`, a: text }];
+  if (base) faq.push({ q: `Is the Bedrock date the same as Anthropic's?`, a: `No. Bedrock sets its own dates: ${short(pm.retires)} on Bedrock, ${short(base.retires)} on Anthropic's API. For Bedrock calls, only Bedrock's date applies.` });
+  const body = `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / <a href="/models/bedrock/">Amazon Bedrock</a></p>
+    <h1 class="model-h1"><code>${esc(pm.id)}</code></h1>
+    <p class="answer">${esc(text)}</p>
+    <table class="kv"><tbody>
+${rows.map(([k, v]) => `      <tr><th scope="row">${k}</th><td>${v}</td></tr>`).join("\n")}
+    </tbody></table>
+    <h2>Dates by region</h2>
+    <p>Bedrock retires a model region by region. During the legacy period new customers can't start using it and existing ones may lose access after 15 days without calls.</p>
+${regionsTable}
+${pm.retires <= TODAY && pm.regions.every((g) => g.retires <= TODAY) ? "" : ALERT_BLOCK({ ...pm, provider: "bedrock" })}
+${CHECK_BLOCK(pm.id)}
+${same.length ? `
+    <h2>Same date on Bedrock</h2>
+    <p class="ids">${same.map((o) => brLink(o.id)).join(" ")}</p>` : ""}
+    <p class="updated" style="margin-top:48px">Read from Amazon Bedrock's official page on ${long(BR.checked || reg.checked)}, checked every 6 hours. Something wrong? <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></p>`;
+  const dir = join(ROOT, "models", "bedrock", pm.id.replace(/:/g, "-"));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page({ path: brUrl(pm.id), title: `${pm.id} on Amazon Bedrock: retires ${short(pm.retires)} · Driftline`, description: text, body, jsonld: [
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Model retirement dates", item: `${SITE}/models/` },
+      { "@type": "ListItem", position: 2, name: "Amazon Bedrock", item: `${SITE}/models/bedrock/` },
+      { "@type": "ListItem", position: 3, name: pm.id, item: `${SITE}${brUrl(pm.id)}` },
+    ] },
+  ] }));
+}
+if (bedrock.length) {
+  // Coming up: each model's next date that hasn't passed yet; "already retired" lists the last date.
+  const nextDate = (pm) => pm.regions.map((g) => g.retires).filter((d) => d > TODAY).sort()[0];
+  const brTable = (list, upcoming) => `    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Retires</th><th scope="col">Regions</th></tr></thead>
+      <tbody>
+${list.map((pm) => `        <tr><td>${brLink(pm.id)}${pm.kind && pm.kind !== "text" ? ` <span class="dim">${pm.kind}</span>` : ""}</td><td>${esc(MAKER[pm.maker] || pm.maker)}</td><td>${upcoming ? short(nextDate(pm)) + (pm.retires <= TODAY ? ` <span class="dim">earlier in some regions</span>` : pm.regions.length > 1 ? ` <span class="dim">first</span>` : "") : short(pm.regions[pm.regions.length - 1].retires)}</td><td>${pm.regions.length > 1 ? `${pm.regions.length} dates` : esc(regionList(pm.regions[0]))}</td></tr>`).join("\n")}
+      </tbody>
+    </table></div>`;
+  const brUp = bedrock.filter((pm) => pm.regions.some((g) => g.retires > TODAY)).sort((a, b) => nextDate(a).localeCompare(nextDate(b)) || a.id.localeCompare(b.id)), brGone = bedrock.filter((pm) => pm.regions.every((g) => g.retires <= TODAY)).reverse();
+  const brDesc = `Retirement (end-of-life) dates for ${bedrock.length} Amazon Bedrock model IDs, per region, from AWS's own model lifecycle page. Bedrock's dates often differ from the model maker's.`;
+  writeFileSync(join(ROOT, "models", "bedrock", "index.html"), page({
+    path: "/models/bedrock/", title: "Amazon Bedrock model retirement dates (EOL) · Driftline", description: brDesc,
+    body: `    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Amazon Bedrock</p>
+    <span class="eyebrow">Amazon Bedrock</span>
+    <h1>Bedrock model retirement dates</h1>
+    <p class="updated">${bedrock.length} model IDs · read from AWS ${long(BR.checked || reg.checked)}, checked every 6 hours</p>
+    <p class="answer">Amazon Bedrock sets its own end-of-life dates, per model and per region, and they often differ from the model maker's. Claude Opus 4.1 left Anthropic's API on 5 August 2026 but runs on Bedrock until 8 January 2027. For Bedrock calls, only Bedrock's dates apply. Source: <a href="${esc(BR.source)}" rel="noopener">Amazon Bedrock model lifecycle</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> reads Bedrock model IDs, cross-region profiles (<code>us.anthropic.…</code>) and ARNs.</p>
+    <h2>Coming up (${brUp.length})</h2>
+${brTable(brUp, true)}
+    <h2>Already retired everywhere (${brGone.length})</h2>
+${brTable(brGone, false)}`,
+    jsonld: [{ "@context": "https://schema.org", "@type": "Dataset", name: "Amazon Bedrock model retirement dates", description: brDesc, url: `${SITE}/models/bedrock/`, dateModified: BR.checked || reg.checked,
+      creator: { "@type": "Organization", name: "Driftline", url: SITE }, distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: `${SITE}/models.json` }] }],
+  }));
+}
+
 // ---------- data + files for crawlers and agents ----------
 // Each entry also says whether moving to its replacement is more than a rename (rules: product src/migration.js).
 const withMigration = reg.models.map((m) => { const mig = migrationFor(m); return mig && mig.change !== "rename" ? { ...m, migration: mig } : m; });
@@ -278,7 +380,7 @@ writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMi
 
 const LLMS = `# Driftline
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic and Google model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google and Amazon Bedrock model IDs in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
 - Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
@@ -292,7 +394,8 @@ const LLMS = `# Driftline
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
 - [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
-- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
+${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
+` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
 - How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait.
 
 ## For AI coding agents
@@ -480,7 +583,7 @@ ${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.titl
     </ul>`,
 }));
 
-const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), "/terms.html", "/privacy.html", "/refunds.html"];
+const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
