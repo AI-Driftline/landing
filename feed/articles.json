@@ -41,7 +41,11 @@
  },
  "openai-2027-01-20-gpt-realtime-and-more-retirement": {
   "date": "2026-11-13",
-  "facts": "[[\"gpt-realtime\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-realtime-2025-08-28\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-4o-realtime\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-2025-08-28\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-4o-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-mini\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-mini-2025-12-15\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-4o-mini-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-realtime-mini\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-realtime-mini-2025-12-15\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-realtime\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-transcribe-2025-03-20\",\"2027-01-20\",\"gpt-live-transcribe\",\"gpt-transcribe\",null]]"
+  "facts": "[[\"gpt-realtime\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-realtime-2025-08-28\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-4o-realtime\",\"2027-01-20\",\"gpt-realtime-2.1\",null,null],[\"gpt-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-2025-08-28\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-4o-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-mini\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-audio-mini-2025-12-15\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-4o-mini-audio\",\"2027-01-20\",\"gpt-audio-1.5\",null,null],[\"gpt-realtime-mini\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-realtime-mini-2025-12-15\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-realtime\",\"2027-01-20\",\"gpt-realtime-2.1-mini\",null,null],[\"gpt-4o-mini-transcribe-2025-03-20\",\"2027-01-20\",\"gpt-live-transcribe\",\"gpt-transcribe\",null]]",
+  "devto": {
+   "id": 5033657,
+   "drafted": "2026-11-14"
+  }
  },
  "openai-2027-02-26-whisper-1-and-more-retirement": {
   "date": "2026-11-13",

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Azure OpenAI model retirement dates · Driftline</title>
+<meta name="description" content="Retirement dates for 149 Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/models/azure/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/models/azure/">
+<meta property="og:title" content="Azure OpenAI model retirement dates · Driftline">
+<meta property="og:description" content="Retirement dates for 149 Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Azure OpenAI model retirement dates","description":"Retirement dates for 149 Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.","url":"https://aidriftline.com/models/azure/","dateModified":"2026-11-14","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/models/">Model retirement dates</a> / Azure</p>
+    <span class="eyebrow">Microsoft Azure</span>
+    <h1>Azure model retirement dates</h1>
+    <p class="updated">149 models · read from Microsoft 14 November 2026, checked every 6 hours</p>
+    <p class="answer">Azure (Azure OpenAI and Foundry Models) uses OpenAI's model names but sets its own retirement date for every model version, and it differs in both directions: o3 retires on Azure on 19 November 2026, three weeks before OpenAI's 11 December, while gpt-5 lasts on Azure until 9 February 2027. For calls through Azure, only Azure's dates apply. Source: <a href="https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule" rel="noopener">Microsoft model retirement schedule</a>.</p>
+    <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Azure's dates in files that call Azure, and reads the model version from Bicep and Terraform deployments.</p>
+    <h2>Retiring (46)</h2>
+    <p class="dim">Deprecated or legacy versions, and any model within 90 days of its date.</p>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Next date</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/azure/codex-mini/"><code>codex-mini</code></a></td><td>OpenAI</td><td>15 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-chat-latest/"><code>gpt-chat-latest</code></a></td><td>OpenAI</td><td>17 Nov 2026</td><td>5</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/llama-4-maverick-17b-128e-instruct-fp8/"><code>llama-4-maverick-17b-128e-instruct-fp8</code></a></td><td>Meta</td><td>19 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/o1/"><code>o1</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o1-2024-12-17/"><code>o1-2024-12-17</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o1-pro/"><code>o1-pro</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o1-pro-2025-03-19/"><code>o1-pro-2025-03-19</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o3/"><code>o3</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-2025-04-16/"><code>o3-2025-04-16</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o3-deep-research/"><code>o3-deep-research</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-deep-research-2025-06-26/"><code>o3-deep-research-2025-06-26</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o3-mini/"><code>o3-mini</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-mini-2025-01-31/"><code>o3-mini-2025-01-31</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o3-pro/"><code>o3-pro</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-pro-2025-06-10/"><code>o3-pro-2025-06-10</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/o4-mini/"><code>o4-mini</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o4-mini-2025-04-16/"><code>o4-mini-2025-04-16</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/claude-sonnet-4-5/"><code>claude-sonnet-4-5</code></a></td><td>Anthropic</td><td>30 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v4-flash-0731/"><code>deepseek-v4-flash-0731</code></a></td><td>DeepSeek</td><td>3 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/ministral-3b/"><code>ministral-3b</code></a></td><td>Mistral AI</td><td>9 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mistral-medium-2505/"><code>mistral-medium-2505</code></a></td><td>Mistral AI</td><td>9 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-parse-v5/"><code>cohere-parse-v5</code></a></td><td>Cohere</td><td>15 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/tts/"><code>tts</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/tts-hd/"><code>tts-hd</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/whisper/"><code>whisper</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-image-1.5/"><code>gpt-image-1.5</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>16 Dec 2026</td><td>1</td><td><a href="/models/gpt-image-1.5-2025-12-16/"><code>gpt-image-1.5-2025-12-16</code></a> <span class="dim">1 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/flux-1.1-pro/"><code>flux-1.1-pro</code></a> <span class="dim">image</span></td><td>Black Forest Labs</td><td>5 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/flux.1-kontext-pro/"><code>flux.1-kontext-pro</code></a> <span class="dim">image</span></td><td>Black Forest Labs</td><td>5 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o/"><code>gpt-4o</code></a></td><td>OpenAI</td><td>14 Jan 2027</td><td>3</td><td><a href="/models/gpt-4o-2024-05-13/"><code>gpt-4o-2024-05-13</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-5-5-fast/"><code>claude-opus-5-5-fast</code></a></td><td>Anthropic</td><td>15 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/phi-4/"><code>phi-4</code></a></td><td>Microsoft</td><td>17 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/phi-4-mini-instruct/"><code>phi-4-mini-instruct</code></a></td><td>Microsoft</td><td>17 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/phi-4-mini-reasoning/"><code>phi-4-mini-reasoning</code></a></td><td>Microsoft</td><td>17 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/phi-4-multimodal-instruct/"><code>phi-4-multimodal-instruct</code></a></td><td>Microsoft</td><td>17 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/phi-4-reasoning/"><code>phi-4-reasoning</code></a></td><td>Microsoft</td><td>17 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/flux.2-flex/"><code>flux.2-flex</code></a> <span class="dim">image</span></td><td>Black Forest Labs</td><td>20 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/flux.2-pro/"><code>flux.2-pro</code></a> <span class="dim">image</span></td><td>Black Forest Labs</td><td>20 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime-2/"><code>gpt-realtime-2</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>20 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/kimi-k2.5/"><code>kimi-k2.5</code></a></td><td>Moonshot AI</td><td>26 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/model-router/"><code>model-router</code></a></td><td>Microsoft</td><td>27 Jan 2027</td><td>3</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4/"><code>grok-4</code></a></td><td>xAI</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-code-fast-1/"><code>grok-code-fast-1</code></a></td><td>xAI</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/llama-3.3-70b-instruct/"><code>llama-3.3-70b-instruct</code></a></td><td>Meta</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/llama-4-scout-17b-16e-instruct/"><code>llama-4-scout-17b-16e-instruct</code></a></td><td>Meta</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-6/"><code>claude-opus-4-6</code></a></td><td>Anthropic</td><td>2 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5/"><code>gpt-5</code></a></td><td>OpenAI</td><td>9 Feb 2027</td><td>1</td><td><a href="/models/gpt-5-2025-08-07/"><code>gpt-5-2025-08-07</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5-nano/"><code>gpt-5-nano</code></a></td><td>OpenAI</td><td>9 Feb 2027</td><td>1</td><td><a href="/models/gpt-5-nano-2025-08-07/"><code>gpt-5-nano-2025-08-07</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/claude-sonnet-4-6/"><code>claude-sonnet-4-6</code></a></td><td>Anthropic</td><td>10 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mistral-small-2503/"><code>mistral-small-2503</code></a></td><td>Mistral AI</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4.1/"><code>gpt-4.1</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-2025-04-14/"><code>gpt-4.1-2025-04-14</code></a> <span class="dim">14 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4.1-mini/"><code>gpt-4.1-mini</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-mini-2025-04-14/"><code>gpt-4.1-mini-2025-04-14</code></a> <span class="dim">14 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4.1-nano/"><code>gpt-4.1-nano</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-nano-2025-04-14/"><code>gpt-4.1-nano-2025-04-14</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o-mini/"><code>gpt-4o-mini</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4o-mini-2024-07-18/"><code>gpt-4o-mini-2024-07-18</code></a> <span class="dim">14 Jan 2027</span></td></tr>
+      </tbody>
+    </table></div>
+    <h2>Current models with a planned end (66)</h2>
+    <p class="dim">Azure plans an end date for every model ahead of time. These are current (GA or preview).</p>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Next date</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/azure/codestral-2501/"><code>codestral-2501</code></a></td><td>Mistral AI</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-command-a/"><code>cohere-command-a</code></a></td><td>Cohere</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-embed-v3-english/"><code>cohere-embed-v3-english</code></a> <span class="dim">embedding</span></td><td>Cohere</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-embed-v3-multilingual/"><code>cohere-embed-v3-multilingual</code></a> <span class="dim">embedding</span></td><td>Cohere</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mistral-document-ai-2512/"><code>mistral-document-ai-2512</code></a></td><td>Mistral AI</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-haiku-4-5/"><code>claude-haiku-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-5/"><code>claude-opus-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-audio/"><code>gpt-audio</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>2 Mar 2027</td><td>1</td><td><a href="/models/gpt-audio-2025-08-28/"><code>gpt-audio-2025-08-28</code></a> <span class="dim">20 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime/"><code>gpt-realtime</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>2 Mar 2027</td><td>1</td><td><a href="/models/gpt-realtime-2025-08-28/"><code>gpt-realtime-2025-08-28</code></a> <span class="dim">20 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5-codex/"><code>gpt-5-codex</code></a></td><td>OpenAI</td><td>17 Mar 2027</td><td>1</td><td><a href="/models/gpt-5-codex/"><code>gpt-5-codex</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/claude-mythos-preview/"><code>claude-mythos-preview</code></a></td><td>Anthropic</td><td>2 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-7/"><code>claude-opus-4-7</code></a></td><td>Anthropic</td><td>6 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-audio-mini/"><code>gpt-audio-mini</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>6 Apr 2027</td><td>2</td><td><a href="/models/gpt-audio-mini-2025-10-06/"><code>gpt-audio-mini-2025-10-06</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime-mini/"><code>gpt-realtime-mini</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>6 Apr 2027</td><td>2</td><td><a href="/models/gpt-realtime-mini-2025-10-06/"><code>gpt-realtime-mini-2025-10-06</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-20-non-reasoning/"><code>grok-4-20-non-reasoning</code></a></td><td>xAI</td><td>6 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-20-reasoning/"><code>grok-4-20-reasoning</code></a></td><td>xAI</td><td>6 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5-pro/"><code>gpt-5-pro</code></a></td><td>OpenAI</td><td>7 Apr 2027</td><td>1</td><td><a href="/models/gpt-5-pro-2025-10-06/"><code>gpt-5-pro-2025-10-06</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-image-1-mini/"><code>gpt-image-1-mini</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>7 Apr 2027</td><td>1</td><td><a href="/models/gpt-image-1-mini/"><code>gpt-image-1-mini</code></a> <span class="dim">1 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o-transcribe-diarize/"><code>gpt-4o-transcribe-diarize</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Apr 2027</td><td>1</td><td><a href="/models/gpt-4o-transcribe-diarize/"><code>gpt-4o-transcribe-diarize</code></a> <span class="dim">26 Feb 2027</span></td></tr>
+        <tr><td><a href="/models/azure/kimi-k2.6/"><code>kimi-k2.6</code></a></td><td>Moonshot AI</td><td>16 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/kimi-k2.7-code/"><code>kimi-k2.7-code</code></a></td><td>Moonshot AI</td><td>16 Apr 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.1-codex/"><code>gpt-5.1-codex</code></a></td><td>OpenAI</td><td>15 May 2027</td><td>1</td><td><a href="/models/gpt-5.1-codex/"><code>gpt-5.1-codex</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.1-codex-mini/"><code>gpt-5.1-codex-mini</code></a></td><td>OpenAI</td><td>15 May 2027</td><td>1</td><td><a href="/models/gpt-5.1-codex-mini/"><code>gpt-5.1-codex-mini</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.1-codex-max/"><code>gpt-5.1-codex-max</code></a></td><td>OpenAI</td><td>18 May 2027</td><td>1</td><td><a href="/models/gpt-5.1-codex-max/"><code>gpt-5.1-codex-max</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-1-fast-non-reasoning/"><code>grok-4-1-fast-non-reasoning</code></a></td><td>xAI</td><td>19 May 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-1-fast-reasoning/"><code>grok-4-1-fast-reasoning</code></a></td><td>xAI</td><td>19 May 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/embed-v-4-0/"><code>embed-v-4-0</code></a> <span class="dim">embedding</span></td><td>Cohere</td><td>1 Jun 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.2/"><code>gpt-5.2</code></a></td><td>OpenAI</td><td>8 Jun 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o-mini-transcribe/"><code>gpt-4o-mini-transcribe</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Jun 2027</td><td>2</td><td><a href="/models/gpt-4o-mini-transcribe-2025-03-20/"><code>gpt-4o-mini-transcribe-2025-03-20</code></a> <span class="dim">20 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o-mini-tts/"><code>gpt-4o-mini-tts</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Jun 2027</td><td>2</td><td><a href="/models/gpt-4o-mini-tts-2025-03-20/"><code>gpt-4o-mini-tts-2025-03-20</code></a> <span class="dim">6 Jan 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime-2.1/"><code>gpt-realtime-2.1</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>25 Jun 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime-2.1-mini/"><code>gpt-realtime-2.1-mini</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>25 Jun 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-sonnet-5/"><code>claude-sonnet-5</code></a></td><td>Anthropic</td><td>30 Jun 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-5/"><code>claude-opus-5</code></a></td><td>Anthropic</td><td>8 Jul 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5-mini/"><code>gpt-5-mini</code></a></td><td>OpenAI</td><td>13 Jul 2027</td><td>1</td><td><a href="/models/gpt-5-mini-2025-08-07/"><code>gpt-5-mini-2025-08-07</code></a> <span class="dim">11 Dec 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.1/"><code>gpt-5.1</code></a></td><td>OpenAI</td><td>13 Jul 2027</td><td>1</td><td><a href="/models/gpt-5.1-2025-11-13/"><code>gpt-5.1-2025-11-13</code></a> <span class="dim">1 Apr 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.2-codex/"><code>gpt-5.2-codex</code></a></td><td>OpenAI</td><td>13 Jul 2027</td><td>1</td><td><a href="/models/gpt-5.2-codex/"><code>gpt-5.2-codex</code></a> <span class="dim">23 Jul 2026</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.3-codex/"><code>gpt-5.3-codex</code></a></td><td>OpenAI</td><td>24 Aug 2027</td><td>1</td><td><a href="/models/gpt-5.3-codex/"><code>gpt-5.3-codex</code></a> <span class="dim">1 Apr 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-audio-1.5/"><code>gpt-audio-1.5</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>24 Aug 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-realtime-1.5/"><code>gpt-realtime-1.5</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>24 Aug 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-mythos-5-1/"><code>claude-mythos-5-1</code></a></td><td>Anthropic</td><td>1 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-8/"><code>claude-opus-4-8</code></a></td><td>Anthropic</td><td>1 Sept 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.4/"><code>gpt-5.4</code></a></td><td>OpenAI</td><td>2 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.4-pro/"><code>gpt-5.4-pro</code></a></td><td>OpenAI</td><td>7 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-image-2.5-flare/"><code>gpt-image-2.5-flare</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>9 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-image-2.5-sunburst/"><code>gpt-image-2.5-sunburst</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>9 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-rerank-v4.0-fast/"><code>cohere-rerank-v4.0-fast</code></a></td><td>Cohere</td><td>13 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-rerank-v4.0-pro/"><code>cohere-rerank-v4.0-pro</code></a></td><td>Cohere</td><td>13 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-oss-120b/"><code>gpt-oss-120b</code></a></td><td>OpenAI</td><td>15 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.4-mini/"><code>gpt-5.4-mini</code></a></td><td>OpenAI</td><td>21 Sept 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.4-nano/"><code>gpt-5.4-nano</code></a></td><td>OpenAI</td><td>21 Sept 2027</td><td>1</td><td><a href="/models/gpt-5.4-nano-2026-03-17/"><code>gpt-5.4-nano-2026-03-17</code></a> <span class="dim">1 Apr 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-image-2/"><code>gpt-image-2</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>21 Oct 2027</td><td>1</td><td><a href="/models/gpt-image-2-2026-04-21/"><code>gpt-image-2-2026-04-21</code></a> <span class="dim">10 Feb 2027</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.5/"><code>gpt-5.5</code></a></td><td>OpenAI</td><td>26 Oct 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v3.2/"><code>deepseek-v3.2</code></a></td><td>DeepSeek</td><td>1 Nov 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v3.2-speciale/"><code>deepseek-v3.2-speciale</code></a></td><td>DeepSeek</td><td>1 Nov 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/kimi-k3.1-pro/"><code>kimi-k3.1-pro</code></a></td><td>Moonshot AI</td><td>4 Nov 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-fable-5/"><code>claude-fable-5</code></a></td><td>Anthropic</td><td>5 Dec 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-fable-5-1/"><code>claude-fable-5-1</code></a></td><td>Anthropic</td><td>5 Dec 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.6-luna/"><code>gpt-5.6-luna</code></a></td><td>OpenAI</td><td>11 Jan 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.6-sol/"><code>gpt-5.6-sol</code></a></td><td>OpenAI</td><td>11 Jan 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.6-terra/"><code>gpt-5.6-terra</code></a></td><td>OpenAI</td><td>11 Jan 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/text-embedding-3-large/"><code>text-embedding-3-large</code></a> <span class="dim">embedding</span></td><td>OpenAI</td><td>9 Feb 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/text-embedding-3-small/"><code>text-embedding-3-small</code></a> <span class="dim">embedding</span></td><td>OpenAI</td><td>9 Feb 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/text-embedding-ada-002/"><code>text-embedding-ada-002</code></a> <span class="dim">embedding</span></td><td>OpenAI</td><td>9 Feb 2028</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v4-flash/"><code>deepseek-v4-flash</code></a></td><td>DeepSeek</td><td>20 Feb 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v4-pro/"><code>deepseek-v4-pro</code></a></td><td>DeepSeek</td><td>20 Feb 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
+      </tbody>
+    </table></div>
+    <h2>Already retired (37)</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Retired</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/models/azure/gpt-image-1/"><code>gpt-image-1</code></a> <span class="dim">image</span></td><td>OpenAI</td><td>23 Oct 2026</td><td>1</td><td><a href="/models/gpt-image-1/"><code>gpt-image-1</code></a> <span class="dim">23 Oct 2026</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-command-a-plus-05-2026/"><code>cohere-command-a-plus-05-2026</code></a></td><td>Cohere</td><td>16 Oct 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-4o-transcribe/"><code>gpt-4o-transcribe</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>15 Oct 2026</td><td>1</td><td><a href="/models/gpt-4o-transcribe/"><code>gpt-4o-transcribe</code></a> <span class="dim">26 Feb 2027</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2.5-pro/"><code>mai-image-2.5-pro</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>1 Oct 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2.5-flash/"><code>mai-image-2.5-flash</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>1 Oct 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2.5/"><code>mai-image-2.5</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>1 Oct 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-transcribe-1/"><code>mai-transcribe-1</code></a> <span class="dim">audio</span></td><td>Microsoft</td><td>15 Sept 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/tsuzumi-7b/"><code>tsuzumi-7b</code></a></td><td>NTT Data</td><td>31 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/timegen-1/"><code>timegen-1</code></a></td><td>Nixtla</td><td>31 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2e/"><code>mai-image-2e</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>15 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2/"><code>mai-image-2</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>15 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-r1/"><code>deepseek-r1</code></a></td><td>DeepSeek</td><td>13 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-1/"><code>claude-opus-4-1</code></a></td><td>Anthropic</td><td>5 Aug 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/stable-image-ultra/"><code>stable-image-ultra</code></a> <span class="dim">image</span></td><td>Stability AI</td><td>31 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/stable-image-core/"><code>stable-image-core</code></a> <span class="dim">image</span></td><td>Stability AI</td><td>31 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/stable-diffusion-3.5-large/"><code>stable-diffusion-3.5-large</code></a> <span class="dim">image</span></td><td>Stability AI</td><td>31 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mistral-document-ai-2505/"><code>mistral-document-ai-2505</code></a></td><td>Mistral AI</td><td>20 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/sora-2/"><code>sora-2</code></a> <span class="dim">video</span></td><td>OpenAI</td><td>15 Oct 2026</td><td>2</td><td><a href="/models/sora-2-2025-10-06/"><code>sora-2-2025-10-06</code></a> <span class="dim">24 Sept 2026</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v3.1/"><code>deepseek-v3.1</code></a></td><td>DeepSeek</td><td>13 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-v3-0324/"><code>deepseek-v3-0324</code></a></td><td>DeepSeek</td><td>13 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/deepseek-r1-0528/"><code>deepseek-r1-0528</code></a></td><td>DeepSeek</td><td>13 Jul 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.3-chat/"><code>gpt-5.3-chat</code></a></td><td>OpenAI</td><td>29 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.1-chat/"><code>gpt-5.1-chat</code></a></td><td>OpenAI</td><td>29 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/meta-llama-3.1-8b-instruct/"><code>meta-llama-3.1-8b-instruct</code></a></td><td>Meta</td><td>13 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/meta-llama-3.1-8b/"><code>meta-llama-3.1-8b</code></a></td><td>Meta</td><td>13 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/meta-llama-3.1-405b-instruct/"><code>meta-llama-3.1-405b-instruct</code></a></td><td>Meta</td><td>13 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/llama-3.2-90b-vision-instruct/"><code>llama-3.2-90b-vision-instruct</code></a></td><td>Meta</td><td>13 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/llama-3.2-11b-vision-instruct/"><code>llama-3.2-11b-vision-instruct</code></a></td><td>Meta</td><td>13 Jun 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-rerank-v3.5/"><code>cohere-rerank-v3.5</code></a></td><td>Cohere</td><td>14 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5.2-chat/"><code>gpt-5.2-chat</code></a></td><td>OpenAI</td><td>29 Jun 2026</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/gpt-5-chat/"><code>gpt-5-chat</code></a></td><td>OpenAI</td><td>29 Jun 2026</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-command-r-plus-08-2024/"><code>cohere-command-r-plus-08-2024</code></a></td><td>Cohere</td><td>12 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/cohere-command-r-08-2024/"><code>cohere-command-r-08-2024</code></a></td><td>Cohere</td><td>12 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-fast-reasoning/"><code>grok-4-fast-reasoning</code></a></td><td>xAI</td><td>1 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4-fast-non-reasoning/"><code>grok-4-fast-non-reasoning</code></a></td><td>xAI</td><td>1 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-3-mini/"><code>grok-3-mini</code></a></td><td>xAI</td><td>1 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-3/"><code>grok-3</code></a></td><td>xAI</td><td>1 May 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>
