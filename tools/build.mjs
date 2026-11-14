@@ -292,6 +292,8 @@ const LLMS = `# Driftline
 - [models.json](${SITE}/models.json): the same data as JSON (fields: id, provider, retires, qualifier exact|earliest|not-before, replacement, kind, routes)
 - Per model: ${SITE}/models/<model-id>/ (for example ${SITE}/models/gemini-2.5-pro/)
 - [RSS feed](${SITE}/feed.xml) and [calendar](${SITE}/retirements.ics) of retirement dates
+- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
+- How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait.
 
 ## For AI coding agents
 
