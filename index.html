@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Driftline · Know before your AI model disappears</title>
-<meta name="description" content="A GitHub Action that finds OpenAI, Anthropic and Google model IDs in your code, warns before they are retired, and tests your prompts on the replacement model.">
+<meta name="description" content="A GitHub Action that finds AI model IDs in your code (OpenAI, Anthropic, Google, Mistral, xAI, Groq and more, plus Bedrock, Vertex AI and Azure), warns before they are retired, and opens one pull request with the fix and your prompts tested on the replacement model.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://aidriftline.com/">
 <meta property="og:type" content="website">
@@ -84,7 +84,7 @@
 <div class="ln"><b>10</b><span>  <span class="k">return</span> <span class="f">JSON</span>.<span class="f">parse</span>(res.choices[<span class="s">0</span>].message.content);</span></div>
 <div class="ln"><b>11</b><span>}</span></div>
       </div>
-      <div class="status"><span class="live">driftline scan</span><span id="reg-status"><span data-reg="count">257</span> model IDs tracked · checked <span data-reg="checked">14 Nov 2026</span></span></div>
+      <div class="status"><span class="live">driftline scan</span><span id="reg-status"><span data-reg="total">627</span> model IDs tracked · checked <span data-reg="checked">14 Nov 2026</span></span></div>
     </div>
   </div>
 </section>
@@ -117,7 +117,7 @@
         <span class="n">02 · Check</span>
         <svg class="glyph" viewBox="0 0 46 46" aria-hidden="true"><rect x="1" y="1" width="44" height="44" rx="10" fill="none" stroke="rgba(250,250,250,.16)"/><rect x="11" y="13" width="24" height="22" rx="3" fill="none" stroke="#FAFAFA" stroke-width="2"/><path d="M11 19h24M17 10v6M29 10v6" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round"/><rect x="25" y="24" width="6" height="6" rx="1.5" fill="#C6F432"/></svg>
         <h3>Knows the dates</h3>
-        <p>Each ID is matched against the official OpenAI, Anthropic and Google retirement pages. You get a warning on the exact file and line.</p>
+        <p>Each ID is matched against the official retirement pages of OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq, with Bedrock, Vertex AI and Azure's own dates. You get a warning on the exact file and line.</p>
       </div>
       <div class="step reveal d2">
         <span class="n">03 · Test · Pro</span>
@@ -135,6 +135,7 @@
           <li><span><b>Annotations</b> on the file and line of every retired or retiring model.</span></li>
           <li><span><b>A report</b> in the job summary, plus one GitHub issue that updates itself.</span></li>
           <li><span><b>Fail the build</b> on retired models, on soon-to-retire models, or never.</span></li>
+          <li><span><b>A pull request</b> with the fix, kept up to date (<a href="#pr" style="color:var(--lime)">see below</a>).</span></li>
         </ul>
       </div>
       <div class="yaml reveal d1">
@@ -202,6 +203,56 @@
   </div>
 </section>
 
+<!-- FIX PULL REQUEST -->
+<section class="sec" id="pr">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow reveal">Fix pull request · Free + Pro</span>
+        <h2 class="reveal d1">One pull request.<br><span class="dim">Ready to review.</span></h2>
+      </div>
+      <p class="lede reveal d2">Add <code>fix-pr: true</code> and Driftline opens one draft pull request with every safe rename, and keeps it up to date until you merge. Lines that need more than a new name get a checklist with the provider's guide. With Pro, your prompts run on the replacement and the verdict sits right in the pull request.</p>
+    </div>
+
+    <div class="pr-card reveal" role="img" aria-label="Example Driftline pull request: two model IDs renamed, one Claude call left for you with the change it needs, and a drift test verdict saying don't merge yet because one prompt broke.">
+      <div class="pr-top">
+        <span class="pr-draft">Draft</span>
+        <b>Driftline: update retiring AI model IDs</b>
+        <small>driftline/model-updates → main</small>
+      </div>
+      <div class="pr-body">
+        <div class="pr-block">
+          <h4>Renamed (2)</h4>
+          <div class="pr-diff">
+            <div class="f">src/summarize.py</div>
+            <div class="del">- MODEL = "gpt-4o-mini-2024-07-18"</div>
+            <div class="add">+ MODEL = "gpt-6-luna"</div>
+            <div class="f">src/invoices.ts</div>
+            <div class="del">-   model: "gpt-4o-mini-2024-07-18",</div>
+            <div class="add">+   model: "gpt-6-luna",</div>
+          </div>
+        </div>
+        <div class="pr-block">
+          <h4>Left for you (1)</h4>
+          <p class="pr-model"><code>claude-sonnet-4-5-20250929</code> → <code>claude-sonnet-5-5</code> · retires 30 Nov 2026</p>
+          <p><b>Parameter changes.</b> Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them. <a href="https://platform.claude.com/docs/en/api/migration-2026-10-21" rel="noopener" target="_blank">Provider's guide</a></p>
+          <p class="pr-check"><span class="box" aria-hidden="true"></span><code>src/agent.ts:7</code></p>
+        </div>
+        <div class="pr-block pro">
+          <h4>Your prompts on the replacement <span class="pr-pro">Pro</span></h4>
+          <p class="pr-verdict">🔴 <b>Don't merge yet:</b> 1 prompt broke on the replacement.</p>
+          <div class="pr-rows">
+            <span>sentiment</span><span>1.00</span><span class="ok">✓ Same</span>
+            <span>ticket-summary</span><span>0.76</span><span class="warn">● Changed</span>
+            <span>invoice-json</span><span>0.00</span><span class="bad">✕ Broken · not JSON</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="src reveal">Taken from a real run of the Action on a test repository (prompt answers simulated). The pull request is closed by Driftline once nothing is left to rename. Set-up and permissions: <a href="https://github.com/AI-Driftline/driftline#fix-the-easy-ones" rel="noopener" target="_blank" style="color:var(--lime)">README</a>.</p>
+  </div>
+</section>
+
 <!-- TIMELINE -->
 <section class="sec" id="timeline">
   <div class="wrap">
@@ -217,7 +268,7 @@
       <div class="tl-months" id="tl-months"></div>
       <div class="tl-rows" id="tl-rows"></div>
     </div>
-    <p class="src reveal">Checked against <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener" target="_blank">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener" target="_blank">Anthropic</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener" target="_blank">Google</a> on <span id="reg-checked"><span data-reg="checked">14 Nov 2026</span></span>. Google publishes only earliest shutdown dates, so Driftline reports those as "may stop working". <a href="/models/" style="color:var(--lime)">See all <span data-reg="count">257</span> dates →</a></p>
+    <p class="src reveal">Checked against <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener" target="_blank">OpenAI</a>, <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener" target="_blank">Anthropic</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" rel="noopener" target="_blank">Google</a> on <span id="reg-checked"><span data-reg="checked">14 Nov 2026</span></span>. Google publishes only earliest shutdown dates, so Driftline reports those as "may stop working". Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure are checked too: <a href="/status/" style="color:var(--lime)">when each source was last checked</a>. <a href="/models/" style="color:var(--lime)">See all dates →</a></p>
   </div>
 </section>
 
@@ -230,7 +281,7 @@
       <p class="lede reveal d2" style="margin-top:26px">Driftline is code that runs inside your own GitHub Actions job. Prompts go straight from your runner to your AI provider. There is no Driftline server in between.</p>
       <div class="facts reveal d3">
         <div><b>0</b><span>servers between you and your AI provider</span></div>
-        <div><b data-reg="count">257</b><span>model IDs tracked across three providers</span></div>
+        <div><b data-reg="total">627</b><span>model IDs tracked across 8 providers and 3 clouds</span></div>
         <div><b>0</b><span>dependencies. Plain Node, easy to audit</span></div>
       </div>
     </div>
@@ -253,7 +304,7 @@
         <h2 class="reveal d1">Cheaper than<br><span class="dim">one outage.</span></h2>
       </div>
       <div class="reveal d2">
-        <p class="lede">The scan is free forever. Pro adds drift tests. API calls in drift tests run on your own provider keys: two calls per prompt per run.</p>
+        <p class="lede">The scan and the fix pull request are free forever. Pro tests your prompts on the replacement and puts the verdict in that pull request. API calls in drift tests run on your own provider keys: two calls per prompt per run.</p>
         <div class="billing" role="group" aria-label="Billing period">
           <span class="pill" id="pill"></span>
           <button type="button" data-period="monthly" aria-pressed="true">Monthly</button>
@@ -268,10 +319,11 @@
         <div class="price">$0</div>
         <div class="per">forever, any number of repositories</div>
         <ul>
-          <li><span><b>Scan</b> for OpenAI, Anthropic and Google model IDs</span></li>
+          <li><span><b>Scan</b> for model IDs from 8 providers and 3 clouds</span></li>
           <li><span>Retirement warnings on the exact file and line</span></li>
-          <li><span>Job summary report and a self-updating issue</span></li>
-          <li><span>Fail the build on retired models</span></li>
+          <li><span><b>Fix pull request</b> with the safe renames, and a checklist for the rest</span></li>
+          <li><span>Job summary report, a self-updating issue, SARIF for code scanning</span></li>
+          <li><span>Alerts by email, Slack, Discord or webhook</span></li>
         </ul>
         <a class="btn ghost" href="#install">Add the free Action</a>
         <p class="small-print">No account. No key.</p>
@@ -284,9 +336,9 @@
         <ul>
           <li><span>Everything in Free</span></li>
           <li><span><b>Drift tests</b>: your prompts on the current and the replacement model</span></li>
-          <li><span>Similarity score per prompt</span></li>
-          <li><span>Hard fail when a JSON answer stops parsing</span></li>
-          <li><span>Full before and after answers in the report</span></li>
+          <li><span><b>A verdict in the fix pull request</b>: safe to merge, read first, or don't merge yet</span></li>
+          <li><span>Similarity score per prompt, hard fail when JSON stops parsing</span></li>
+          <li><span>Full before and after answers in the job summary</span></li>
           <li><span>Use on up to 3 GitHub accounts or organizations</span></li>
         </ul>
         <a class="btn" id="buy" href="mailto:hello@aidriftline.com?subject=Driftline%20Pro">Get Pro <span class="arrow" aria-hidden="true">→</span></a>
@@ -314,7 +366,7 @@
       </details>
       <details>
         <summary>Which models does it cover?</summary>
-        <p><span data-reg="count">257</span> OpenAI, Anthropic and Google model IDs (including audio, image, video and embedding models, Vertex and OpenRouter spellings and Claude short names), plus every Amazon Bedrock model with an announced end-of-life date, using Bedrock's own dates per region: Claude, Llama, Mistral, DeepSeek, Cohere and more (<a href="/models/bedrock/" style="color:var(--lime)">Bedrock list</a>), Google Vertex AI's own dates for code that runs on Vertex (<a href="/models/vertex/" style="color:var(--lime)">Vertex list</a>), Azure's own date per model version for code that calls Azure (<a href="/models/azure/" style="color:var(--lime)">Azure list</a>), and the deprecations of Mistral, xAI, Cohere, DeepSeek and Groq (<a href="/models/" style="color:var(--lime)">all lists</a>). All of them are scanned and reported. Drift tests run on text models only. The full list, with one page per model, is at <a href="/models/" style="color:var(--lime)">aidriftline.com/models</a>.</p>
+        <p><span data-reg="total">627</span> model IDs in all. <span data-reg="count">257</span> OpenAI, Anthropic and Google model IDs (including audio, image, video and embedding models, Vertex and OpenRouter spellings and Claude short names), plus every Amazon Bedrock model with an announced end-of-life date, using Bedrock's own dates per region: Claude, Llama, Mistral, DeepSeek, Cohere and more (<a href="/models/bedrock/" style="color:var(--lime)">Bedrock list</a>), Google Vertex AI's own dates for code that runs on Vertex (<a href="/models/vertex/" style="color:var(--lime)">Vertex list</a>), Azure's own date per model version for code that calls Azure (<a href="/models/azure/" style="color:var(--lime)">Azure list</a>), and the deprecations of Mistral, xAI, Cohere, DeepSeek and Groq (<a href="/models/" style="color:var(--lime)">all lists</a>). All of them are scanned and reported. Drift tests run on text models only. The full list, with one page per model, is at <a href="/models/" style="color:var(--lime)">aidriftline.com/models</a>.</p>
       </details>
       <details>
         <summary>What does a drift test cost me in API usage?</summary>
@@ -327,6 +379,10 @@
       <details>
         <summary>What happens if I cancel Pro?</summary>
         <p>Drift tests stop at the end of your paid period. The free scan keeps running. You can cancel any time from the Lemon Squeezy receipt email, and you can ask for a full refund within 14 days of your first payment.</p>
+      </details>
+      <details>
+        <summary>Can Driftline change the code for me?</summary>
+        <p>Yes, where a new model name is the whole change. Run <code>npx @aidriftline/driftline fix</code> locally, or set <code>fix-pr: true</code> in the Action to get one draft pull request that stays up to date. Driftline never touches calls that need more than a rename (new parameters, a different API, a choice between two replacements, Bedrock and Azure IDs): those are listed in the pull request as a checklist, with what to change and a link to the provider's guide.</p>
       </details>
       <details>
         <summary>Can my AI coding agent use it?</summary>

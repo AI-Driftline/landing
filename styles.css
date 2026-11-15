@@ -453,3 +453,34 @@ footer .legal { width: 100%; display: flex; flex-wrap: wrap; justify-content: sp
 .doc details.hook { margin-top: 14px; }
 .doc details.hook summary { cursor: pointer; color: var(--mute-2); font-size: 14px; }
 .doc details.hook[open] summary { color: var(--paper); }
+
+/* ---------- fix pull request example ---------- */
+.pr-card { border: 1px solid var(--line-2); border-radius: 14px; overflow: hidden; background: rgba(250,250,250,.02); max-width: 880px; }
+.pr-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+.pr-top b { font-size: 17px; }
+.pr-top small { color: var(--mute); font-family: var(--mono); font-size: 12.5px; }
+.pr-draft { font-size: 12px; padding: 3px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); color: var(--mute); }
+.pr-body { display: grid; grid-template-columns: minmax(0, 1fr); }
+.pr-block { padding: 20px 22px; border-bottom: 1px solid var(--line); min-width: 0; }
+.pr-block:last-child { border-bottom: 0; }
+.pr-block h4 { margin: 0 0 12px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--mute); font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.pr-block p { margin: 6px 0; color: var(--paper); font-size: 15px; line-height: 1.55; }
+.pr-block a { color: var(--lime); }
+.pr-diff { font-family: var(--mono); font-size: 13px; line-height: 1.7; overflow-x: auto; }
+.pr-diff div { white-space: pre; padding: 0 10px; }
+.pr-diff .f { color: var(--mute); padding-top: 6px; }
+.pr-diff .f:first-child { padding-top: 0; }
+.pr-diff .del { background: rgba(255, 92, 92, .10); color: #FF9C9C; }
+.pr-diff .add { background: rgba(198, 244, 50, .10); color: var(--lime); }
+.pr-model code, .pr-check code { font-size: 13px; }
+.pr-model, .pr-top b { overflow-wrap: anywhere; }
+.pr-card { min-width: 0; }
+.pr-check { display: flex; align-items: center; gap: 10px; }
+.pr-check .box { width: 15px; height: 15px; border-radius: 4px; box-shadow: inset 0 0 0 1.5px var(--line-2); flex: none; }
+.pr-pro { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--lime); color: var(--ink); letter-spacing: .02em; }
+.pr-verdict { font-size: 16px; }
+.pr-rows { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px 18px; margin-top: 12px; font-family: var(--mono); font-size: 13px; align-items: center; }
+.pr-rows span:nth-child(3n+2) { color: var(--mute); text-align: right; }
+.pr-rows span { min-width: 0; overflow-wrap: anywhere; }
+.pr-rows .ok { color: var(--lime); } .pr-rows .warn { color: #F5C451; } .pr-rows .bad { color: #FF9C9C; }
+@media (max-width: 560px) { .pr-top, .pr-block { padding: 16px; } .pr-rows { font-size: 12px; gap: 6px 10px; } }

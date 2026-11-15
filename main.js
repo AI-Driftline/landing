@@ -96,7 +96,7 @@ const isText = (m) => (m.kind || "text") === "text";
 // Recognizable names first: the hero model, then aliases like "gpt-4", then dated snapshots like "gpt-4-0613".
 const dated = (id) => /-(\d{4}-\d{2}-\d{2}|\d{8}|\d{4})(-preview)?$/.test(id);
 
-function derive({ checked, count, models }) {
+function derive({ checked, count, total, models }) {
   const byDate = (a, b) => a.retires.localeCompare(b.retires);
   const heroDate = models.filter((m) => m.provider === "openai" && isText(m) && daysUntil(m.retires) > -HERO_DAYS_AFTER)
     .sort(byDate)[0]?.retires;
@@ -118,7 +118,7 @@ function derive({ checked, count, models }) {
   };
 
   return {
-    checked, count,
+    checked, count, total,
     hero: hero && { id: hero.id, replacement: hero.replacement, retires: hero.retires },
     groups: group(models.filter(isText)),
     // One audio/image/video model per date, for the ticker only.
@@ -129,6 +129,7 @@ function derive({ checked, count, models }) {
 const fromRegistry = (r) => derive({
   checked: r.checked,
   count: r.models.length,
+  total: r.models.length + Object.values(r.platforms || {}).reduce((n, p) => n + (p.models || []).length, 0),
   models: r.models.filter((m) => m.qualifier === "exact" && m.replacement),
 });
 
@@ -139,10 +140,11 @@ addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
 // ---------- render retirement data ----------
-function render({ checked, count, hero, groups, extras }) {
-  $("#reg-status").textContent = `${count} model IDs tracked · checked ${fmt(checked)}`;
+function render({ checked, count, total, hero, groups, extras }) {
+  $("#reg-status").textContent = `${total || count} model IDs tracked · checked ${fmt(checked)}`;
   $("#reg-checked").textContent = fmt(checked);
   document.querySelectorAll('[data-reg="count"]').forEach((el) => { el.textContent = count; });
+  if (total) document.querySelectorAll('[data-reg="total"]').forEach((el) => { el.textContent = total; });
 
   // hero countdown + annotation
   if (hero) {

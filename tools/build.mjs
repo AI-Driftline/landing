@@ -49,6 +49,7 @@ const aliases = [];
 }
 const TODAY = new Date().toISOString().slice(0, 10);
 // Migration notes for cloud-platform and other-provider entries: the same rules the Action and MCP apply to them.
+const totalIds = reg.models.length + Object.values(reg.platforms || {}).reduce((n, p) => n + (p.models || []).length, 0); // makers + every platform/provider entry
 const platformEntries = new Map(buildRegistry(JSON.parse(JSON.stringify(reg))).platformModels.map((e) => [`${e.platform}:${e.id}`, e]));
 const platMig = (platform, id) => { const e = platformEntries.get(`${platform}:${id}`); const mig = e && migrationFor(e); return mig && !(e.routes && mig.change !== "params") ? mig : null; };
 const migRow = (mig, who) => mig ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && mig.change !== "settings" ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)} guide</a>` : ""}</span>` : ""}`]] : [];
@@ -206,7 +207,8 @@ const CHECK_BLOCK = (id) => `
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>
     <pre class="cmd"><code>npx -y @aidriftline/driftline .</code></pre>
     <p>Or look for this ID only: <code>grep -rn "${esc(id)}" .</code> (misses aliases, Bedrock and Vertex names, and IDs split across lines).</p>
-    <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>`;
+    <p>To be warned automatically before the next retirement, add the <a href="/#install">free Driftline GitHub Action</a>. It annotates the exact line in pull requests and can fail the build on retired models.</p>
+    <p>Where a new name is the whole change, Driftline can make it for you: <code>npx -y @aidriftline/driftline fix --dry-run</code> shows the edits, and the Action's <code>fix-pr: true</code> opens one pull request with them, plus a checklist for the lines that need more. <a href="/#pr">See an example pull request</a>.</p>`;
 
 // Email alert sign-up (the driftline-api Worker). count.js shows the result message.
 const API = "https://driftline-api.aidriftline.workers.dev";
@@ -274,7 +276,7 @@ ${kind === "text" ? `
     <h2>Before you switch</h2>
     <p>A replacement model answers the same prompt differently: tone, length, format, and whether JSON still parses. ${past(m) && !m.replacement ? "Pick the new model yourself and test your prompts on it before you ship." : past(m) && m.qualifier === "exact" && !m.routes
       ? `Driftline Pro runs your real prompts on ${esc(r || m.replacement)} in CI, so you see the new answers before you ship the switch.`
-      : `Driftline Pro runs your real prompts on ${esc(m.id)} and ${esc(r || m.replacement || "the replacement")} side by side in CI and shows what changed.`} <a href="/#drift">See a drift test</a>.</p>` : ""}
+      : `Driftline Pro runs your real prompts on ${esc(m.id)} and ${esc(r || m.replacement || "the replacement")} side by side in CI and shows what changed.`} <a href="/#drift">See a drift test</a>, or <a href="/#pr">the verdict in a fix pull request</a>.</p>` : ""}
 ${past(m) ? "" : ALERT_BLOCK(m)}
 ${CHECK_BLOCK(m.id)}
 ${same.length ? `
@@ -697,7 +699,7 @@ const LLMS = `# Driftline
 - Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks ${models.length} model IDs (checked ${reg.checked}), including Bedrock, Vertex and OpenRouter spellings and Claude short names.
+- Tracks ${totalIds} model IDs (checked ${reg.checked}): ${models.length} from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: ${SITE}/status/
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
@@ -1002,6 +1004,7 @@ for (const f of ["index.html", "agents/index.html"]) {
   if (!existsSync(p)) continue;
   const s = readFileSync(p, "utf8")
     .replace(/(<(span|b) data-reg="count">)[^<]*(<\/\2>)/g, `$1${models.length}$3`)
+    .replace(/(<(span|b) data-reg="total">)[^<]*(<\/\2>)/g, `$1${totalIds}$3`)
     .replace(/(<span data-reg="checked">)[^<]*(<\/span>)/g, `$1${short(reg.checked)}$2`);
   writeFileSync(p, f === "index.html" ? withFaqLd(s) : s);
 }
