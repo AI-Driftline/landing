@@ -41,6 +41,7 @@
       <tr><th scope="row">Status</th><td>Deprecated <span class="dim">(as of 14 Nov 2026)</span></td></tr>
       <tr><th scope="row">Retirement</th><td>19 November 2026</td></tr>
       <tr><th scope="row">Replacement</th><td><code>gpt-5.6-sol</code> <span class="dim">(named by Azure)</span></td></tr>
+      <tr><th scope="row">Moving to it</th><td>Rename</td></tr>
       <tr><th scope="row">On OpenAI's API</th><td><a href="/models/o1-pro-2025-03-19/"><code>o1-pro-2025-03-19</code></a> · retired 23 Oct 2026</td></tr>
       <tr><th scope="row">Model type</th><td>Text</td></tr>
       <tr><th scope="row">Source</th><td><a href="https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule" rel="noopener">Microsoft: model retirement schedule</a></td></tr>
@@ -65,6 +66,16 @@
     </form>
     <p class="alert-msg" role="status" hidden></p>
     <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if Azure changes the date. Nothing else. One-click unsubscribe.</p>
+    <details class="hook">
+      <summary>Or post the alerts to Slack, Discord or a webhook</summary>
+      <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+        <input type="hidden" name="model" value="azure:o1-pro">
+        <input type="url" name="webhook" required maxlength="500" placeholder="https://hooks.slack.com/services/…" aria-label="Webhook URL">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn small" type="submit">Post them there</button>
+      </form>
+      <p class="note">Slack: add an <a href="https://api.slack.com/messaging/webhooks" rel="noopener">incoming webhook</a> to your channel and paste its URL. Discord: channel settings → Integrations → Webhooks. Any other https URL gets the alert as JSON. A test message is posted right away; every message has a link to stop them.</p>
+    </details>
 
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>

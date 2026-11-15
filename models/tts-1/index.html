@@ -55,6 +55,16 @@
     </form>
     <p class="alert-msg" role="status" hidden></p>
     <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if OpenAI changes the date. Nothing else. One-click unsubscribe.</p>
+    <details class="hook">
+      <summary>Or post the alerts to Slack, Discord or a webhook</summary>
+      <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+        <input type="hidden" name="model" value="tts-1">
+        <input type="url" name="webhook" required maxlength="500" placeholder="https://hooks.slack.com/services/…" aria-label="Webhook URL">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn small" type="submit">Post them there</button>
+      </form>
+      <p class="note">Slack: add an <a href="https://api.slack.com/messaging/webhooks" rel="noopener">incoming webhook</a> to your channel and paste its URL. Discord: channel settings → Integrations → Webhooks. Any other https URL gets the alert as JSON. A test message is posted right away; every message has a link to stop them.</p>
+    </details>
 
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>

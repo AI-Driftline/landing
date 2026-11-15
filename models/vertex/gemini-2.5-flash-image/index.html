@@ -41,6 +41,7 @@
       <tr><th scope="row">Status</th><td>Retiring <span class="dim">(as of 14 Nov 2026)</span></td></tr>
       <tr><th scope="row">Shutdown</th><td>15 March 2027</td></tr>
       <tr><th scope="row">Replacement</th><td><code>gemini-3.1-flash-lite-image</code> <span class="dim">(named by Vertex)</span></td></tr>
+      <tr><th scope="row">Moving to it</th><td>Rename</td></tr>
       <tr><th scope="row">On the Gemini API</th><td><a href="/models/gemini-2.5-flash-image/"><code>gemini-2.5-flash-image</code></a> · retires 15 Mar 2027</td></tr>
       <tr><th scope="row">Model type</th><td>Image</td></tr>
       <tr><th scope="row">Released</th><td>2 October 2025</td></tr>
@@ -58,6 +59,16 @@
     </form>
     <p class="alert-msg" role="status" hidden></p>
     <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if Vertex AI changes the date. Nothing else. One-click unsubscribe.</p>
+    <details class="hook">
+      <summary>Or post the alerts to Slack, Discord or a webhook</summary>
+      <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+        <input type="hidden" name="model" value="vertex:gemini-2.5-flash-image">
+        <input type="url" name="webhook" required maxlength="500" placeholder="https://hooks.slack.com/services/…" aria-label="Webhook URL">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn small" type="submit">Post them there</button>
+      </form>
+      <p class="note">Slack: add an <a href="https://api.slack.com/messaging/webhooks" rel="noopener">incoming webhook</a> to your channel and paste its URL. Discord: channel settings → Integrations → Webhooks. Any other https URL gets the alert as JSON. A test message is posted right away; every message has a link to stop them.</p>
+    </details>
 
     <h2>Check your code for it</h2>
     <p>Run this in your repository. No install and no API key; it lists every OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, Bedrock, Vertex AI and Azure model ID it finds, with its retirement date and replacement:</p>

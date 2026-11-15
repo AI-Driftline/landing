@@ -65,6 +65,16 @@
     </form>
     <p class="alert-msg" role="status" hidden></p>
     <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if OpenAI changes the date. Nothing else. One-click unsubscribe.</p>
+    <details class="hook">
+      <summary>Or post the alerts to Slack, Discord or a webhook</summary>
+      <form class="alert-form" method="post" action="https://driftline-api.aidriftline.workers.dev/subscribe">
+        <input type="hidden" name="model" value="gpt-image-1-mini">
+        <input type="url" name="webhook" required maxlength="500" placeholder="https://hooks.slack.com/services/…" aria-label="Webhook URL">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn small" type="submit">Post them there</button>
+      </form>
+      <p class="note">Slack: add an <a href="https://api.slack.com/messaging/webhooks" rel="noopener">incoming webhook</a> to your channel and paste its URL. Discord: channel settings → Integrations → Webhooks. Any other https URL gets the alert as JSON. A test message is posted right away; every message has a link to stop them.</p>
+    </details>
     <p>The free <a href="/#install">Driftline GitHub Action</a> flags retired and soon-to-retire model IDs on every pull request, so the next retirement doesn't come as a surprise.</p>
     <h2>Questions</h2>
     <h3>Will calls to gpt-image-1-mini keep working after 1 December 2026?</h3>
