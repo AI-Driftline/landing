@@ -35,6 +35,7 @@
 
     <h2>Email alerts</h2>
     <p>If you ask for an email before a model retires, I store your email address, the model you chose and which alerts have been sent, in a Cloudflare D1 database. Emails are sent through <a href="https://resend.com/legal/privacy-policy" rel="noopener">Resend</a>. Nothing is sent until you confirm. You get at most one email 30 days before, one 7 days before and one on the day, plus a note if the date changes. Every email has a one-click unsubscribe, which deletes the entry. Unconfirmed sign-ups are never emailed again.</p>
+    <p>If you choose Slack, Discord or another webhook instead, I store the webhook URL in place of an email address, the same way. It is used only to post these alerts, is never shown anywhere, and is deleted when you click "Stop these alerts" or when Slack or Discord reports the webhook as removed.</p>
     
     <h2>The Driftline Action</h2>
     <p>The Action runs inside your GitHub Actions job. Your code, prompts and API keys stay in your pipeline. Prompts go directly from your runner to OpenAI, Anthropic or Google. If you use Pro, the Action sends your license key, and nothing else, to Lemon Squeezy's license API to check that it is valid.</p>

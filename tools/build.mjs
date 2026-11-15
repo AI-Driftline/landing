@@ -48,6 +48,10 @@ const aliases = [];
   for (const a of aliases) byId.set(a.id, a);
 }
 const TODAY = new Date().toISOString().slice(0, 10);
+// Migration notes for cloud-platform and other-provider entries: the same rules the Action and MCP apply to them.
+const platformEntries = new Map(buildRegistry(JSON.parse(JSON.stringify(reg))).platformModels.map((e) => [`${e.platform}:${e.id}`, e]));
+const platMig = (platform, id) => { const e = platformEntries.get(`${platform}:${id}`); const mig = e && migrationFor(e); return mig && !(e.routes && mig.change !== "params") ? mig : null; };
+const migRow = (mig, who) => mig ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && mig.change !== "settings" ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)} guide</a>` : ""}</span>` : ""}`]] : [];
 // Amazon Bedrock's own dates (registry platforms.bedrock): pages under /models/bedrock/, see the Bedrock section below.
 // Google Vertex AI's own dates (registry platforms.vertex): pages under /models/vertex/. Same model names as the
 // Gemini API (and Claude's), different dates; each page links to the other.
@@ -215,7 +219,17 @@ const ALERT_BLOCK = (m, named = false) => `
       <button class="btn small" type="submit">Email me</button>
     </form>
     <p class="alert-msg" role="status" hidden></p>
-    <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if ${WHO[m.provider] || m.provider} changes the date. Nothing else. One-click unsubscribe.</p>`;
+    <p class="note">One email 30 days before, one 7 days before and one on the day, plus a note if ${WHO[m.provider] || m.provider} changes the date. Nothing else. One-click unsubscribe.</p>
+    <details class="hook">
+      <summary>Or post the alerts to Slack, Discord or a webhook</summary>
+      <form class="alert-form" method="post" action="${API}/subscribe">
+        <input type="hidden" name="model" value="${esc(m.id)}">
+        <input type="url" name="webhook" required maxlength="500" placeholder="https://hooks.slack.com/services/…" aria-label="Webhook URL">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn small" type="submit">Post them there</button>
+      </form>
+      <p class="note">Slack: add an <a href="https://api.slack.com/messaging/webhooks" rel="noopener">incoming webhook</a> to your channel and paste its URL. Discord: channel settings → Integrations → Webhooks. Any other https URL gets the alert as JSON. A test message is posted right away; every message has a link to stop them.</p>
+    </details>`;
 
 // ---------- one page per model ----------
 rmSync(join(ROOT, "models"), { recursive: true, force: true });
@@ -430,6 +444,7 @@ for (const v of vertex) {
     ["Status", `${v.retires <= TODAY ? "Retired" : "Retiring"} <span class="dim">(as of ${short(VX.checked || reg.checked)})</span>`],
     ["Shutdown", long(v.retires)],
     ...(v.replacement ? [["Replacement", vxLink(v.replacement) + (v.replacement_alt ? ` or ${vxLink(v.replacement_alt)}` : "") + ' <span class="dim">(named by Vertex)</span>']] : []),
+    ...migRow(v.replacement && platMig("vertex", v.id), "Google's"),
     ...(twin ? [[v.maker === "google" ? "On the Gemini API" : "On Anthropic's API", `${link(twin.id)} · ${twin.routes ? "routed" : twin.retires <= TODAY ? "retired" : "retires"} ${short(twin.retires)}`]] : []),
     ...(!v.replacement && v.maker === "anthropic" && twin?.replacement ? [["Anthropic's replacement", link(twin.replacement)]] : []),
     ["Model type", KIND[v.kind] || v.kind],
@@ -518,6 +533,7 @@ for (const [key, P, list] of DIRECT) {
       ["Status", `${m.routes ? (m.retires <= TODAY ? "Redirected to a newer model" : "Will be redirected") : m.retires <= TODAY ? "Retired" : "Retiring"} <span class="dim">(as of ${short(P.checked || reg.checked)})</span>`],
       [m.routes ? "Redirect starts" : "Shutdown", long(m.retires)],
       ...(m.replacement ? [[m.routes ? "Now answered by" : "Replacement", dLink(m.replacement) + (m.replacement_alt ? ` or ${dLink(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "")]] : m.replacement_note ? [["Suggested instead", esc(m.replacement_note)]] : []),
+      ...migRow(m.replacement && platMig(key, m.id), `${name}'s`),
       ["Model type", KIND[m.kind] || m.kind],
       ["Source", `<a href="${esc(P.source)}" rel="noopener">${esc(name)}: ${key === "deepseek" ? "news and updates" : "deprecations"}</a>${P.maintained === "ai" ? ' <span class="dim">(no deprecation page; read from announcements)</span>' : ""}`],
     ];
@@ -596,6 +612,7 @@ for (const a of azure) {
     ["Status", `${azStatus(a.versions[0])} <span class="dim">(as of ${short(AZ.checked || reg.checked)})</span>`],
     [a.versions.length > 1 ? "First retirement" : "Retirement", long(a.retires)],
     ...(a.replacement ? [["Replacement", `${link(a.replacement)} <span class="dim">(named by Azure)</span>`]] : []),
+    ...migRow(a.replacement && platMig("azure", a.id), "The"),
     ...(twin ? [["On OpenAI's API", `${link(twin.id)} · ${twin.retires <= TODAY ? "retired" : "retires"} ${short(twin.retires)}`]] : []),
     ["Model type", KIND[a.kind] || a.kind],
     ["Source", `<a href="${esc(AZ.source)}" rel="noopener">Microsoft: model retirement schedule</a>`],
@@ -670,7 +687,8 @@ ${azTable(gone, "gone")}`,
 // ---------- data + files for crawlers and agents ----------
 // Each entry also says whether moving to its replacement is more than a rename (rules: product src/migration.js).
 const withMigration = reg.models.map((m) => { const mig = migrationFor(m); return mig && mig.change !== "rename" ? { ...m, migration: mig } : m; });
-writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, models: withMigration, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
+const platformsWithMigration = Object.fromEntries(Object.entries(reg.platforms || {}).map(([k, p]) => [k, { ...p, models: (p.models || []).map((pm) => { const mig = pm.replacement && platMig(k, pm.id); return mig && mig.change !== "rename" && mig.change !== "platform" ? { ...pm, migration: mig } : pm; }) }]));
+writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, platforms: platformsWithMigration, models: withMigration, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
 
 const LLMS = `# Driftline
 
@@ -691,7 +709,7 @@ const LLMS = `# Driftline
 ${DIRECT.map(([key, p, list]) => `- [${p.name} dates](${SITE}/models/${key}/): ${list.length} model IDs from ${p.name}'s own ${key === "deepseek" ? "announcements (no deprecation page; checked daily)" : "deprecation page (checked every 6 hours)"}${list.some((m) => m.routes) ? "; retired names are redirected to a newer model (routes)" : ""}. In models.json: \`platforms.${key}.models\`.\n`).join("")}${azure.length ? `- [Azure dates](${SITE}/models/azure/): ${azure.length} Azure OpenAI and Foundry models with Azure's own retirement date per model version, read from Microsoft's schedule every 6 hours. They differ from OpenAI's in both directions (o3: Azure 19 Nov 2026, OpenAI 11 Dec 2026). Azure plans an end date for current models too (lifecycle GA/Preview). In models.json: \`platforms.azure.models\` (id, maker, retires = earliest version, versions[] with version, lifecycle, retires, replacement).
 ` : ""}${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
 ` : ""}${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
-` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
+` : ""}- Free alerts: sign up on any model page for an email, or a Slack, Discord or webhook message, 30 days and 7 days before, on the day, and when a date or replacement changes
 - How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait. Live freshness of every source: [data status](${SITE}/status/) ([status.json](${SITE}/status.json)).
 
 ## For AI coding agents

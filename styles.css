@@ -435,8 +435,8 @@ footer .legal { width: 100%; display: flex; flex-wrap: wrap; justify-content: sp
 .doc table a, .doc .ids a { text-decoration: none; }
 .doc ul + p { margin-top: 14px; }
 .alert-form { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.alert-form input[type=email] { flex: 1 1 220px; min-width: 0; height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--ink-3); color: var(--paper); font: inherit; font-size: 15px; }
-.alert-form input[type=email]:focus { outline: none; border-color: var(--lime); }
+.alert-form input[type=email], .alert-form input[type=url] { flex: 1 1 220px; min-width: 0; height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--ink-3); color: var(--paper); font: inherit; font-size: 15px; }
+.alert-form input[type=email]:focus, .alert-form input[type=url]:focus { outline: none; border-color: var(--lime); }
 .alert-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .doc .alert-msg { margin-top: 12px; color: var(--lime); }
 .doc h1.post-h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.12; letter-spacing: -0.02em; }
@@ -450,3 +450,6 @@ footer .legal { width: 100%; display: flex; flex-wrap: wrap; justify-content: sp
 .st-warn { color: var(--amber); }
 .st-bad { color: var(--red); }
 .nowrap { white-space: nowrap; }
+.doc details.hook { margin-top: 14px; }
+.doc details.hook summary { cursor: pointer; color: var(--mute-2); font-size: 14px; }
+.doc details.hook[open] summary { color: var(--paper); }
