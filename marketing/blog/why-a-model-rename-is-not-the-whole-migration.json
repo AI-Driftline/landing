@@ -1,0 +1,26 @@
+{
+ "order": 2,
+ "title": "When a new model name isn't enough: 6 changes to check before you switch",
+ "short": "When a new model name isn't enough",
+ "description": "Most AI model retirements are a rename. Some aren't: removed sampling parameters, a different API, re-embedding, voices, image input or fill-in-the-middle. What to check, with examples from OpenAI, Anthropic, Google, Groq and Mistral.",
+ "tags": ["ai", "llm", "openai", "programming"],
+ "blocks": [
+  { "p": "When a provider retires a model, it names a replacement, and most of the time changing the model ID is the whole code change. Sometimes it isn't. The replacement may reject a parameter you send, live behind a different API call, or lack something the old model could do. These are the six kinds of change Driftline looks for, with real examples from the providers' own migration notes.", "answer": true },
+  { "h2": "1. Parameters the new model rejects" },
+  { "p": "Anthropic: Claude 4.7 and later accept only the default `temperature`, `top_p` and `top_k`. If your code sets them, remove them. Google: moving to Gemini 3 means removing `temperature`, `top_p`, `top_k`, `candidate_count` and prefilled model turns, replacing `thinking_budget` with `thinking_level`, and checking function calling." },
+  { "h2": "2. A different API or method" },
+  { "p": "OpenAI's old Completions endpoint (a plain prompt) doesn't serve the replacements of `davinci-002`, `babbage-002` or `gpt-3.5-turbo-instruct`: the call moves to the Responses API or Chat Completions. Google's older image models used `generate_images` or the `predict` call on Vertex AI; Gemini image models use `generateContent`, and images come back as content parts." },
+  { "h2": "3. Stored data that has to be redone" },
+  { "p": "Embeddings from different models can't be compared. Moving to a new embedding model means re-embedding your stored data and querying with that same model, and the vector size may differ too." },
+  { "h2": "4. Features the replacement doesn't have" },
+  { "p": "On Groq, Llama 4 Scout and Maverick are replaced by gpt-oss, which reads text only, so calls that send images need a different model. On Azure, Codestral's replacement is Mistral Large, and fill-in-the-middle (the code-completion mode editors use) works only on Codestral models." },
+  { "h2": "5. Inputs with different names" },
+  { "p": "Groq's PlayAI text-to-speech models keep the same speech endpoint, but the voice names are different: pick one of the new model's voices, or the call fails." },
+  { "h2": "6. Two replacements to choose from" },
+  { "p": "Sometimes the provider names two models and the right one depends on how you use it. OpenAI's transcription models are an example: one replacement for recorded files and another for live audio, with word timestamps, subtitles and translation working differently." },
+  { "h2": "Find out which kind you have" },
+  { "p": "Driftline's model pages show this under \"Moving to it\", and the scan lists it per finding. The `fix` command renames only where a rename is the whole change and lists everything else with the reason:" },
+  { "code": "npx -y @aidriftline/driftline fix --dry-run" },
+  { "p": "Even a plain rename can change your app's answers. Before you switch, run the prompts your app really sends on both models: [Driftline Pro does that in CI](/#drift) and puts the verdict in the [fix pull request](/#pr)." }
+ ]
+}

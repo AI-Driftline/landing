@@ -1,0 +1,50 @@
+[
+ {
+  "id": "fix-pr-launch",
+  "text": "Driftline can now open the fix for you.\n\nAdd fix-pr: true to the GitHub Action and you get one draft pull request that renames retiring model IDs, kept up to date until you merge. Lines a rename can't fix get a checklist with the provider's guide.\naidriftline.com/#pr"
+ },
+ {
+  "id": "retiring-90-days",
+  "text": "{retiring90} AI model IDs retire in the next 90 days across OpenAI, Anthropic, Google, Mistral, xAI, Groq, Cohere, DeepSeek, Bedrock, Vertex AI and Azure.\n\nFind the ones in your code, no install and no key:\nnpx -y @aidriftline/driftline ."
+ },
+ {
+  "id": "pro-verdict",
+  "text": "A rename keeps the API call working. The answers can still change.\n\nDriftline Pro runs your real prompts on the old and the new model and puts a verdict in the fix pull request: safe to merge, read first, or don't merge yet.\naidriftline.com/#drift"
+ },
+ {
+  "id": "webhook-alerts",
+  "text": "Retirement alerts for any AI model now go to Slack, Discord or any webhook, as well as email.\n\nOpen the model's page, paste the webhook link, and you get a post 30 days before, 7 days before and on the day.\naidriftline.com/models/"
+ },
+ {
+  "id": "next-retirement-1",
+  "text": "Next fixed retirement: {next_id} on {next_date}, {next_days} days from now.\n\nCheck whether it's in your code:\nnpx -y @aidriftline/driftline .\n\nAlerts by email, Slack or webhook: aidriftline.com/models/{next_id}/"
+ },
+ {
+  "id": "status-page",
+  "text": "Where do Driftline's retirement dates come from? From the providers' own pages, checked every 6 hours.\n\nEvery source and when it was last read, in public: aidriftline.com/status/"
+ },
+ {
+  "id": "mcp-agents",
+  "text": "Coding agents write model IDs from their training data, and many of those are already retired.\n\nDriftline's MCP server lets Claude Code, Cursor or Copilot check an ID before writing it:\nclaude mcp add driftline -- npx -y @aidriftline/driftline mcp"
+ },
+ {
+  "id": "fix-cli",
+  "text": "Swap retiring model IDs in one command:\nnpx @aidriftline/driftline fix --dry-run\n\nIt changes only lines where the new name is the whole change. The rest is listed with the reason: new parameters, a different API, or two possible replacements."
+ },
+ {
+  "id": "platform-dates",
+  "text": "The same Claude or Gemini model can retire on different dates at Anthropic, Bedrock, Vertex AI and Azure.\n\nDriftline reads how your code calls the model and uses that platform's own date, per region on Bedrock.\naidriftline.com/models/bedrock/"
+ },
+ {
+  "id": "sarif",
+  "text": "Driftline findings can sit in GitHub code scanning next to your other alerts.\n\nSet sarif-file in the Action and upload the file with github/codeql-action/upload-sarif. Free on public repositories.\ngithub.com/AI-Driftline/driftline"
+ },
+ {
+  "id": "how-many-prompts",
+  "text": "How many prompts should you test before switching models? 5 to 20: the ones your app really sends.\n\nDriftline Pro makes two API calls per prompt on your own key, scores the difference, and fails hard when a JSON answer stops parsing.\naidriftline.com/#drift"
+ },
+ {
+  "id": "free-scan",
+  "text": "Driftline's scan is free, with no account and no key: GitHub Action, CLI and MCP server.\n\n{total} model IDs from 8 providers and 3 clouds, each with the replacement its provider recommends.\ngithub.com/AI-Driftline/driftline"
+ }
+]
