@@ -20,8 +20,8 @@ const out = (k, v) => process.env.GITHUB_OUTPUT && appendFileSync(process.env.GI
 
 const todo = (existsSync(DIR) ? readdirSync(DIR) : []).filter((f) => f.endsWith(".json"))
   .map((f) => ({ slug: f.slice(0, -5), ...JSON.parse(readFileSync(join(DIR, f), "utf8")) }))
-  .filter((a) => state[a.slug] && !state[a.slug].devto && a.retires >= today) // still ahead, not drafted yet
-  .sort((a, b) => a.retires.localeCompare(b.retires));
+  .filter((a) => state[a.slug] && !state[a.slug].devto && (!a.retires || a.retires >= today)) // still ahead (or a marketing article), not drafted yet
+  .sort((a, b) => (a.retires || "9999").localeCompare(b.retires || "9999"));
 
 if (!todo.length) { console.log("No new articles to draft on dev.to."); process.exit(0); }
 const a = todo[0];

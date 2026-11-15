@@ -39,6 +39,9 @@ jobs:
       - name: Check every source for the status page
         continue-on-error: true
         run: node product-src/tools/status.mjs product-src/registry/models.json --pages "$RUNNER_TEMP/pages-summary.json" --out feed/status.json
+      - name: Marketing article (1st and 3rd Tuesday)
+        continue-on-error: true
+        run: node tools/marketing.mjs blog | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Rebuild pages
         id: build
         run: node tools/build.mjs product-src/registry/models.json
@@ -86,6 +89,35 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: node tools/x-feed.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Marketing post on X (Mon, Wed, Fri)
+        if: always() && steps.build.outcome == 'success'
+        continue-on-error: true
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node tools/marketing.mjs x | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Marketing queue check
+        id: queue
+        if: always() && steps.build.outcome == 'success'
+        continue-on-error: true
+        run: node tools/marketing.mjs status | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Open or close the "marketing queue running low" issue
+        if: always() && steps.queue.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LOW: ${{ steps.queue.outputs.low }}
+          X_LEFT: ${{ steps.queue.outputs.x_left }}
+          BLOG_LEFT: ${{ steps.queue.outputs.blog_left }}
+        run: |
+          gh label create marketing --color C6F432 --description "Marketing post queue" --force >/dev/null 2>&1 || true
+          n=$(gh issue list --label marketing --state open --json number -q '.[0].number')
+          if [ -z "$LOW" ]; then [ -n "$n" ] && gh issue close "$n" --comment "Queue filled again: $X_LEFT X post(s), $BLOG_LEFT article(s)."; exit 0; fi
+          if [ -n "$n" ]; then echo "Low-queue issue already open."; exit 0; fi
+          printf 'The marketing queue has %s X post(s) and %s article(s) left. The monthly routine drafts more as a pull request; merge it to approve them, or add items to marketing/ by hand (see marketing/README.md). Close this issue once the queue is filled.\n' "$X_LEFT" "$BLOG_LEFT" > "$RUNNER_TEMP/queue.md"
+          gh issue create --title "Marketing queue running low" --label marketing --body-file "$RUNNER_TEMP/queue.md"
       - name: dev.to draft
         id: devto
         if: always() && steps.build.outcome == 'success'

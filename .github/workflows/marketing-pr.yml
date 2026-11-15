@@ -1,0 +1,27 @@
+# The monthly marketing routine pushes new queue items to a branch named marketing/<month>. This opens the pull
+# request for Mirza: merging it approves the posts. Nothing goes out from the branch itself.
+name: marketing-pr
+on:
+  push:
+    branches: ["marketing/**"]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check the queue
+        run: node tools/marketing.mjs check
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          if [ -n "$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number')" ]; then echo "Pull request already open."; exit 0; fi
+          git diff --stat origin/main...HEAD -- marketing/ > "$RUNNER_TEMP/stat.txt"
+          { echo "New marketing posts for the queue, drafted by the monthly routine. **Merging approves them**: they then go out on their own (X on Mon/Wed/Fri, articles on the 1st and 3rd Tuesday). Edit or delete any item in this pull request first."; echo; echo '```'; cat "$RUNNER_TEMP/stat.txt"; echo '```'; } > "$RUNNER_TEMP/body.md"
+          gh pr create --base main --head "$BRANCH" --title "Marketing posts: $BRANCH" --body-file "$RUNNER_TEMP/body.md"

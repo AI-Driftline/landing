@@ -18,7 +18,7 @@ const escHtml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").re
 const inlineHtml = (s) => escHtml(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
   .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => `<a href="${u}"${u.startsWith("http") ? ' rel="noopener"' : ""}>${t}</a>`);
 
-function render(blocks, kind, site) {
+export function render(blocks, kind, site) {
   const md = kind === "md";
   const abs = (s) => md ? s.replace(/\]\((\/[^)]*)\)/g, `](${site}$1)`) : s; // dev.to needs full links
   return blocks.map((b) => {

@@ -28,7 +28,7 @@ for (const m of reg.models) if (disputed[m.id]) m.under_review = disputed[m.id];
 // Migration rules live in the product repo next to the registry (same rules the Action and MCP use).
 const { migrationFor, MIGRATION_LABEL } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "migration.js")).href);
 const { buildRegistry } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "registry.js")).href);
-const { batchArticles } = await import("./articles.mjs");
+const { batchArticles, render: renderBlocks } = await import("./articles.mjs");
 const models = [...reg.models].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 const byId = new Map(models.map((m) => [m.id, m]));
 // Claude short names ("claude-sonnet-4-5") get a page too: people search for those, not the dated snapshot.
@@ -874,6 +874,18 @@ const posts = existsSync(join(ROOT, "tools", "posts")) ? readdirSync(join(ROOT, 
       canonical_url: `${SITE}/blog/${g.slug}/`, body_markdown: g.markdown }, null, 1) + "\n");
   }
   posts.sort((a, b) => b.date.localeCompare(a.date) || a.retires?.localeCompare?.(b.retires || "") || 0);
+  // Marketing articles: published by tools/marketing.mjs (feed/marketing.json says when), written in marketing/blog/.
+  const published = (existsSync(join(ROOT, "feed", "marketing.json")) ? JSON.parse(readFileSync(join(ROOT, "feed", "marketing.json"), "utf8")).blog : null) || {};
+  for (const [slug, date] of Object.entries(published)) {
+    const f = join(ROOT, "marketing", "blog", `${slug}.json`);
+    if (!existsSync(f)) continue;
+    const a = JSON.parse(readFileSync(f, "utf8"));
+    posts.push({ slug, title: a.title, short: a.short, description: a.description, date, body: renderBlocks(a.blocks, "html", SITE) });
+    state[slug] ??= { date, marketing: true };
+    writeFileSync(join(ROOT, "feed", "devto", `${slug}.json`), JSON.stringify({ title: a.title, description: a.description, tags: a.tags || [],
+      canonical_url: `${SITE}/blog/${slug}/`, body_markdown: renderBlocks(a.blocks, "md", SITE) }, null, 1) + "\n");
+  }
+  posts.sort((a, b) => b.date.localeCompare(a.date));
   writeFileSync(ARTICLES, JSON.stringify(state, null, 1) + "\n");
 }
 for (const post of posts) {
