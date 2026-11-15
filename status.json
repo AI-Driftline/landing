@@ -1,0 +1,144 @@
+{
+ "built": "2026-11-15T03:14:48.992Z",
+ "summary": "All 11 sources match the registry",
+ "sources": [
+  {
+   "id": "openai",
+   "name": "OpenAI",
+   "page": "https://developers.openai.com/api/docs/deprecations",
+   "models": 163,
+   "last_read": "2026-11-15T03:14:45.389Z",
+   "result": "ok"
+  },
+  {
+   "id": "anthropic",
+   "name": "Anthropic",
+   "page": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+   "models": 37,
+   "last_read": "2026-11-15T03:14:45.389Z",
+   "result": "ok"
+  },
+  {
+   "id": "google",
+   "name": "Google",
+   "page": "https://ai.google.dev/gemini-api/docs/deprecations",
+   "models": 57,
+   "last_read": "2026-11-15T03:14:45.389Z",
+   "result": "ok"
+  },
+  {
+   "id": "bedrock",
+   "name": "Amazon Bedrock",
+   "page": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
+   "models": 56,
+   "last_read": "2026-11-15T03:14:45.848Z",
+   "result": "ok"
+  },
+  {
+   "id": "vertex",
+   "name": "Vertex AI",
+   "page": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+   "models": 64,
+   "last_read": "2026-11-15T03:14:47.154Z",
+   "result": "ok"
+  },
+  {
+   "id": "azure",
+   "name": "Azure",
+   "page": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
+   "models": 149,
+   "last_read": "2026-11-15T03:14:47.450Z",
+   "result": "ok"
+  },
+  {
+   "id": "groq",
+   "name": "Groq",
+   "page": "https://console.groq.com/docs/deprecations",
+   "models": 30,
+   "last_read": "2026-11-15T03:14:48.565Z",
+   "result": "ok"
+  },
+  {
+   "id": "mistral",
+   "name": "Mistral AI",
+   "page": "https://docs.mistral.ai/models",
+   "models": 47,
+   "last_read": "2026-11-15T03:14:48.565Z",
+   "result": "ok"
+  },
+  {
+   "id": "xai",
+   "name": "xAI",
+   "page": "https://docs.x.ai/developers/models",
+   "models": 9,
+   "last_read": "2026-11-15T03:14:48.565Z",
+   "result": "ok"
+  },
+  {
+   "id": "cohere",
+   "name": "Cohere",
+   "page": "https://docs.cohere.com/docs/deprecations",
+   "models": 11,
+   "last_read": "2026-11-15T03:14:48.565Z",
+   "result": "ok"
+  },
+  {
+   "id": "deepseek",
+   "name": "DeepSeek",
+   "page": "https://api-docs.deepseek.com/updates",
+   "models": 4,
+   "last_read": "2026-11-15T03:14:45.389Z",
+   "result": "ok"
+  }
+ ],
+ "ai_check": {
+  "last_run": "2026-11-14T22:11:55Z",
+  "late": false
+ },
+ "under_review": [],
+ "recent_changes": [
+  {
+   "date": "2026-11-14T07:08:41+09:00",
+   "by": "Maintainer",
+   "summary": "Google moved TTS previews to 2026-12-18 and native-audio preview to 2027-03-31",
+   "details": []
+  },
+  {
+   "date": "2026-11-13T20:00:44+09:00",
+   "by": "Maintainer",
+   "summary": "gpt-5/o3 replacements, completions IDs, replacement notes",
+   "details": []
+  },
+  {
+   "date": "2026-11-12T22:12:37Z",
+   "by": "AI check",
+   "summary": "added ft-o4-mini-2025-04-16 (OpenAI, 2026-10-23)",
+   "details": []
+  },
+  {
+   "date": "2026-11-11T22:04:42Z",
+   "by": "AI check",
+   "summary": "whisper/transcribe replacements -> gpt-live-transcribe (5 entries)",
+   "details": []
+  },
+  {
+   "date": "2026-11-11T16:39:28+09:00",
+   "by": "Maintainer",
+   "summary": "gpt-5/o3 aliases and 9 snapshots, gpt-image 2.6 replacement, claude-fable/mythos-5-2",
+   "details": []
+  },
+  {
+   "date": "2026-11-11T10:54:40+09:00",
+   "by": "Maintainer",
+   "summary": "Gemini 2.5 routing, gpt-image-2, gpt-5.5-cyber-preview; routed labels; CLI --json",
+   "details": []
+  },
+  {
+   "date": "2026-10-21T09:00:26+09:00",
+   "by": "Maintainer",
+   "summary": "5 GPT-4o/4.1 snapshots retiring 2027-01-14",
+   "details": []
+  }
+ ],
+ "url": "https://aidriftline.com/status/"
+}
