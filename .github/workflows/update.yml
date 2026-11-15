@@ -25,6 +25,7 @@ jobs:
           repository: AI-Driftline/driftline
           ref: main
           path: product-src
+          fetch-depth: 0 # full registry history for the status page's "recent changes" and last AI check
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -33,7 +34,11 @@ jobs:
       - name: Check registry against provider pages
         id: check
         continue-on-error: true # a broken check must never stop the site from building
-        run: node product-src/tools/check-pages.mjs product-src/registry/models.json --state feed/page-ids.json --out "$RUNNER_TEMP/registry-check.md" --disputed feed/disputed.json | tee -a "$GITHUB_STEP_SUMMARY"
+        run: node product-src/tools/check-pages.mjs product-src/registry/models.json --state feed/page-ids.json --out "$RUNNER_TEMP/registry-check.md" --disputed feed/disputed.json --summary "$RUNNER_TEMP/pages-summary.json" | tee -a "$GITHUB_STEP_SUMMARY"
+      # Read-only check of every platform page too, for aidriftline.com/status/ (when each source was last read).
+      - name: Check every source for the status page
+        continue-on-error: true
+        run: node product-src/tools/status.mjs product-src/registry/models.json --pages "$RUNNER_TEMP/pages-summary.json" --out feed/status.json
       - name: Rebuild pages
         id: build
         run: node tools/build.mjs product-src/registry/models.json

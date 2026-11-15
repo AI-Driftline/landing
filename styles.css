@@ -443,3 +443,10 @@ footer .legal { width: 100%; display: flex; flex-wrap: wrap; justify-content: sp
 .doc h3 { font-size: 18px; margin: 28px 0 8px; color: var(--paper); }
 .doc ul.posts { list-style: none; margin: 24px 0 0; gap: 22px; }
 .doc ul.posts a { font-size: 20px; font-weight: 600; }
+
+/* status page */
+.st { font-weight: 600; }
+.st-ok { color: var(--lime); }
+.st-warn { color: var(--amber); }
+.st-bad { color: var(--red); }
+.nowrap { white-space: nowrap; }

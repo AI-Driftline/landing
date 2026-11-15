@@ -6,6 +6,7 @@
 //   llms.txt, llms-full.txt      plain-text summary for AI assistants (llmstxt.org)
 //   feed.xml                     RSS: one item per announced retirement (models sharing date + replacement grouped)
 //   retirements.ics              the same as a calendar to subscribe to (all-day events)
+//   status/index.html, status.json  when each source was last read, recent changes, entries under review
 //   sitemap.xml, robots.txt
 // It also refreshes the model count and "checked" date written into index.html and agents/index.html.
 //
@@ -14,6 +15,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { execFileSync } from "node:child_process";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://aidriftline.com";
@@ -175,6 +177,7 @@ ${body}
     <a class="logo" href="/" aria-label="Driftline home">${LOGO}driftline</a>
     <nav aria-label="Footer">
       <a href="/models/">All retirement dates</a>
+      <a href="/status/">Data status</a>
       <a href="/agents/">For AI agents</a>
       <a href="/blog/">Blog</a>
       <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
@@ -689,7 +692,7 @@ ${DIRECT.map(([key, p, list]) => `- [${p.name} dates](${SITE}/models/${key}/): $
 ` : ""}${vertex.length ? `- [Google Vertex AI dates](${SITE}/models/vertex/): ${vertex.length} Vertex model IDs (Gemini, Imagen, Veo, embeddings, Claude, open models ending in -maas) with Vertex's own retirement dates, read from Google Cloud's pages every 6 hours. Vertex uses the Gemini API's model names but its dates often differ (gemini-2.5-pro: retired on Vertex 20 Oct 2026, routed on the Gemini API 1 Dec 2026). In models.json: \`platforms.vertex.models\`.
 ` : ""}${bedrock.length ? `- [Amazon Bedrock dates](${SITE}/models/bedrock/): ${bedrock.length} Bedrock model IDs (Claude, Llama, Mistral, DeepSeek, Cohere and more) with Bedrock's own end-of-life dates per region, read from AWS's page every 6 hours. They often differ from the model maker's dates; for Bedrock calls only Bedrock's apply. In models.json: \`platforms.bedrock.models\` (id, maker, retires = earliest region, regions[], extended).
 ` : ""}- Free email alerts: sign up on any model page for emails 30 days and 7 days before, on the day, and when a date or replacement changes
-- How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait.
+- How it stays current: a script compares every entry with the official deprecation pages every 6 hours, and an AI check following written rules updates the registry daily or right away when the script finds a difference. Until then, affected models carry \`under_review\` in models.json and say "under review" on their pages; alerts for them wait. Live freshness of every source: [data status](${SITE}/status/) ([status.json](${SITE}/status.json)).
 
 ## For AI coding agents
 
@@ -876,7 +879,93 @@ ${posts.map((p) => `      <li><a href="/blog/${p.slug}/">${esc(p.short || p.titl
     </ul>`,
 }));
 
-const pages = ["/", "/models/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), ...DIRECT.flatMap(([key, , list]) => [`/models/${key}/`, ...list.map((m) => dUrl(key, m.id))]), "/terms.html", "/privacy.html", "/refunds.html"];
+// ---------- /status/: when each source was last read, what changed, what is under review ----------
+// Inputs: feed/status.json (written every 6 hours by product tools/status.mjs in the update workflow) and the
+// product repo's git history of registry/models.json (the workflow checks it out with full history).
+const STATUS_IN = join(ROOT, "feed", "status.json");
+const st = existsSync(STATUS_IN) ? JSON.parse(readFileSync(STATUS_IN, "utf8")) : { sources: {} };
+const productDir = join(dirname(regPath), "..");
+const history = (() => {
+  try {
+    const out = execFileSync("git", ["-C", productDir, "log", "--since=45 days ago", "--format=%aI%x1f%an%x1f%s%x1f%b%x1e", "--", "registry/models.json"], { encoding: "utf8" });
+    return out.split("\x1e").map((c) => c.trim()).filter(Boolean).map((c) => { const [date, author, subject, body] = c.split("\x1f"); return { date, author, subject, body: body || "" }; });
+  } catch { return []; }
+})();
+const NOW = Date.now();
+const hoursAgo = (iso) => (NOW - Date.parse(iso)) / 36e5;
+const utc = (iso) => new Date(iso).toISOString().slice(0, 16).replace("T", " ") + " UTC";
+const SRC_ORDER = ["openai", "anthropic", "google", "bedrock", "vertex", "azure", "groq", "mistral", "xai", "cohere", "deepseek"];
+const srcPage = (k) => reg.sources[k] || reg.platforms?.[k]?.source;
+const srcCount = (k) => reg.sources[k] ? reg.models.filter((m) => m.provider === k).length : (reg.platforms?.[k]?.models || []).length;
+const srcList = (k) => reg.sources[k] ? "/models/" : `/models/${k}/`;
+const srcHow = (k) => reg.sources[k] ? "Page compared every 6 h; AI check fixes differences"
+  : reg.platforms?.[k]?.maintained === "ai" ? "News page read every 6 h; AI check keeps the list (no deprecation page)"
+  : "Script reads the page and updates the registry every 6 h";
+const LATE_H = 13; // two missed 6-hour runs
+const srcRows = SRC_ORDER.filter((k) => srcPage(k)).map((k) => {
+  const v = st.sources[k];
+  const late = !v || hoursAgo(v.at) > LATE_H;
+  const res = !v ? { cls: "bad", text: "Not checked yet" }
+    : v.result === "ok" ? { cls: "ok", text: "Matches" }
+    : v.result === "new" ? { cls: "ok", text: `Matches; ${v.new} new ID${v.new > 1 ? "s" : ""} on the page to look at` }
+    : v.result === "differs" ? { cls: "warn", text: `${v.differences} difference${v.differences > 1 ? "s" : ""}, held as under review` }
+    : { cls: "bad", text: "Couldn't read the page" };
+  return { key: k, name: WHO[k], page: srcPage(k), count: srcCount(k), how: srcHow(k), at: v?.at, late, ...res };
+});
+const needLook = srcRows.filter((r) => r.cls !== "ok" || r.late);
+const isAi = (c) => c.author === "Claude";
+const lastAi = history.find((c) => isAi(c) && /^Registry re-checked/.test(c.subject));
+const aiLate = !lastAi || hoursAgo(lastAi.date) > 30;
+const changes = history.filter((c) => /^Registry\b/.test(c.subject) && !/: no changes$/.test(c.subject)).slice(0, 15).map((c) => {
+  const lines = c.body.split("\n").map((l) => l.trim()).filter((l) => /^(new|changed|gone from page): /.test(l));
+  const who = c.author === "github-actions[bot]" ? "Page script" : isAi(c) ? "AI check" : "Maintainer";
+  return { date: c.date, by: who, summary: c.subject.replace(/^Registry (re-checked )?\d{4}-\d{2}-\d{2}:\s*/, "").replace(/^Registry re-checked:\s*/, ""), details: lines };
+});
+const review = Object.entries(disputed).map(([id, d]) => ({ id, ...d })).sort((a, b) => a.since.localeCompare(b.since));
+const soon = models.filter((m) => m.retires > TODAY && m.retires <= addDays(TODAY, 30));
+const stOverall = needLook.length ? `${needLook.length} of ${srcRows.length} sources need a look` : `All ${srcRows.length} sources match the registry`;
+const stDesc = `Live status of Driftline's AI model retirement data: when each of the ${srcRows.length} official sources (OpenAI, Anthropic, Google, Bedrock, Vertex AI, Azure and more) was last read, recent date changes, and entries under review.`;
+const cell = (r) => `<span class="st st-${r.late ? "bad" : r.cls}">${esc(r.text)}${r.late && r.at ? " (late)" : ""}</span>`;
+mkdirSync(join(ROOT, "status"), { recursive: true });
+writeFileSync(join(ROOT, "status", "index.html"), page({
+  path: "/status/",
+  title: "Data status: when every source was last checked · Driftline",
+  description: stDesc,
+  body: `    <span class="eyebrow">Status</span>
+    <h1>Data status</h1>
+    <p class="updated">Page built ${utc(new Date(NOW).toISOString())} · rebuilt every 6 hours</p>
+    <p class="answer"><span class="st st-${needLook.length ? "warn" : "ok"}">${esc(stOverall)}.</span> Driftline's dates come from ${srcRows.length} official pages. Scripts read every page every 6 hours and compare it with the registry; an AI check that follows <a href="https://github.com/AI-Driftline/driftline/blob/main/docs/registry-rules.md" rel="noopener">written rules</a> reviews the registry once a day, and right away when a script finds a difference. While an entry differs from its page it is marked under review, and alerts for it wait.</p>
+    <h2>Sources</h2>
+    <div class="table-scroll"><table class="list">
+      <thead><tr><th scope="col">Source</th><th scope="col">Last read</th><th scope="col">Result</th><th scope="col">Models</th></tr></thead>
+      <tbody>
+${srcRows.map((r) => `        <tr><td><a href="${esc(r.page)}" rel="noopener">${esc(r.name)}</a><br><span class="dim">${esc(r.how)}</span></td><td class="nowrap">${r.at ? `<time datetime="${r.at}" title="${utc(r.at)}">${utc(r.at).slice(5, 16)}</time>` : "never"}</td><td>${cell(r)}</td><td><a href="${srcList(r.key)}">${r.count}</a></td></tr>`).join("\n")}
+      </tbody>
+    </table></div>
+    <h2>Daily AI check</h2>
+    <p>${lastAi ? `Last run <time datetime="${new Date(lastAi.date).toISOString()}">${utc(lastAi.date)}</time>: ${esc(lastAi.subject.replace(/^Registry re-checked \d{4}-\d{2}-\d{2}:\s*/, ""))}.` : "No run in the last 45 days."}${aiLate ? ` <span class="st st-bad">Late: it runs every day at 22:00 UTC.</span>` : ""} It reads the OpenAI, Anthropic, Google and DeepSeek pages and commits what it finds, with the reason, to the <a href="https://github.com/AI-Driftline/driftline/commits/main/registry/models.json" rel="noopener">public registry history</a>.</p>
+    <h2>Under review (${review.length})</h2>
+${review.length ? `    <ul>
+${review.map((d) => `      <li>${link(d.id)} (${esc(WHO[d.provider] || d.provider)}): the ${esc(d.what || "entry")} no longer matches <a href="${esc(d.page)}" rel="noopener">the page</a>, since ${short(d.since)}.</li>`).join("\n")}
+    </ul>` : `    <p>Nothing. Every entry matches its official page.</p>`}
+    <h2>Recent changes</h2>
+${changes.length ? `    <ul>
+${changes.map((c) => `      <li><b>${short(c.date.slice(0, 10))}</b> · ${esc(c.by)}: ${esc(c.summary)}${c.details.length ? `<br><span class="dim">${c.details.slice(0, 5).map(esc).join("<br>")}${c.details.length > 5 ? `<br>and ${c.details.length - 5} more` : ""}</span>` : ""}</li>`).join("\n")}
+    </ul>` : `    <p>No date or replacement changes in the last 45 days.</p>`}
+    <h2>Retiring in the next 30 days (${soon.length})</h2>
+${soon.length ? table(soon) : `    <p>None.</p>`}
+    <script>for (const t of document.querySelectorAll("time[datetime]")) { const h = (Date.now() - Date.parse(t.dateTime)) / 36e5; if (h >= 0) t.textContent = h < 1 ? Math.max(1, Math.round(h * 60)) + " min ago" : h < 48 ? Math.round(h) + " h ago" : Math.round(h / 24) + " days ago"; }</script>
+    <p>Machine-readable: <a href="/status.json">/status.json</a> · the data itself: <a href="/models.json">/models.json</a> · <a href="/feed.xml">RSS</a></p>`,
+  jsonld: [{ "@context": "https://schema.org", "@type": "WebPage", name: "Driftline data status", description: stDesc, url: `${SITE}/status/`, dateModified: new Date(NOW).toISOString() }],
+}));
+writeFileSync(join(ROOT, "status.json"), JSON.stringify({
+  built: new Date(NOW).toISOString(), summary: stOverall,
+  sources: srcRows.map((r) => ({ id: r.key, name: r.name, page: r.page, models: r.count, last_read: r.at || null, result: r.late ? "late" : r.cls === "ok" ? "ok" : r.text })),
+  ai_check: { last_run: lastAi?.date || null, late: aiLate },
+  under_review: review, recent_changes: changes, url: `${SITE}/status/`,
+}, null, 1) + "\n");
+
+const pages = ["/", "/models/", "/status/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), ...DIRECT.flatMap(([key, , list]) => [`/models/${key}/`, ...list.map((m) => dUrl(key, m.id))]), "/terms.html", "/privacy.html", "/refunds.html"];
 writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
