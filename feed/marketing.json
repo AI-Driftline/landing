@@ -1,0 +1,11 @@
+{
+ "x": [
+  {
+   "id": "fix-pr-launch",
+   "at": "2026-11-16T22:28:02.882Z",
+   "tweet": "2122456690813481425",
+   "text": "Driftline can now open the fix for you.\n\nAdd fix-pr: true to the GitHub Action and you get one draft pull request that renames retiring model IDs, kept up to date until you merge. Lines a rename can't fix get a checklist with the provider's guide.\naidriftline.com/#pr"
+  }
+ ],
+ "blog": {}
+}
