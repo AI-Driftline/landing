@@ -284,6 +284,8 @@ section { position: relative; }
 }
 .legend { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: 14px; color: #55584F; }
 .legend .tag { margin-right: 8px; }
+.legend > span { display: inline-flex; align-items: baseline; max-width: 100%; }
+.legend .tag { flex: none; }
 .note { margin-top: 16px; font-size: 13px; color: #8A8D84; }
 
 /* ---------- timeline ---------- */
