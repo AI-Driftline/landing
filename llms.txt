@@ -5,7 +5,7 @@
 - Free scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). Add `--json` for machine-readable output. Exit code 1 = a retired model is used in code.
 - GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
 - Pro: drift tests on your prompts. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
-- Tracks 627 model IDs (checked 2026-11-14): 257 from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: https://aidriftline.com/status/
+- Tracks 627 model IDs (checked 2026-11-15): 257 from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: https://aidriftline.com/status/
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Retirement data
