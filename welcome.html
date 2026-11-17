@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You're in · Driftline Pro</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/welcome.html">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+.doc pre { margin: 14px 0 0; padding: 14px 16px; background: #141414; border: 1px solid rgba(250,250,250,.09); border-radius: 10px; overflow-x: auto; font: 13px/1.6 var(--mono); color: #FAFAFA; }
+.doc pre .c { color: #8A8D84; }
+.doc pre + p { margin-top: 14px; }
+.doc p code, .doc li code { font: 0.92em var(--mono); color: #FAFAFA; background: #141414; padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+.doc h2 .n { color: var(--lime); font-family: var(--mono); font-size: 0.8em; margin-right: 10px; }
+</style>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Driftline home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>
+      driftline
+    </a>
+    <a class="btn small ghost" href="index.html">← Back to home</a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <span class="eyebrow">Driftline Pro</span>
+    <h1>You're in.</h1>
+    <p>Thanks for buying Driftline Pro. Three steps, and your next workflow run tests your prompts on the replacement models.</p>
+
+    <h2><span class="n">1</span>Find your license key</h2>
+    <p>Polar has emailed you a receipt. Your license key is in it, and in the Polar customer portal linked from that email. It starts with <code>DRIFTLINE-</code>.</p>
+
+    <h2><span class="n">2</span>Activate it for your GitHub account</h2>
+    <p>From inside any repository of the GitHub account or organization where you want drift tests, run:</p>
+<pre>npx @aidriftline/driftline activate DRIFTLINE-…</pre>
+    <p>It prints a license code. Save that code as a repository or organization secret named <code>DRIFTLINE_LICENSE_KEY</code>. One key works on up to 3 GitHub accounts or organizations: run <code>activate</code> once in each. You can free a slot in the Polar customer portal.</p>
+
+    <h2><span class="n">3</span>Turn on drift tests</h2>
+    <p>In <code>.github/workflows/driftline.yml</code>, give the Driftline step your license code and the API keys of the providers you use:</p>
+<pre>- uses: AI-Driftline/driftline@v0
+  with:
+    license-key: ${{ secrets.DRIFTLINE_LICENSE_KEY }}
+  env:                       <span class="c"># only the providers you use</span>
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}</pre>
+    <p>Then list the 5 to 20 prompts your app really sends in <code>.driftline/prompts.yml</code> (<a href="https://github.com/AI-Driftline/driftline/blob/main/examples/prompts.yml" rel="noopener">example</a>). For the prompts that matter most, add <a href="https://github.com/AI-Driftline/driftline#checks" rel="noopener">checks</a> such as <code>must_include</code> or <code>same_fields</code>, so a change in meaning is caught and not only a change in wording.</p>
+
+    <h2>What happens next</h2>
+    <p>Run the workflow (Actions → Driftline → Run workflow) or open a pull request. The job summary shows both answers for every prompt. With <code>fix-pr: true</code>, the verdict also goes into Driftline's fix pull request. Your keys stay in your pipeline: prompts go from your runner straight to your provider.</p>
+
+    <h2>Need help?</h2>
+    <p>Email <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a> and I'll help you set it up. If Pro isn't right for you, you get a full refund within 14 days (<a href="refunds.html">refund policy</a>). Full setup notes are in the <a href="https://github.com/AI-Driftline/driftline#readme" rel="noopener">README</a>.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="legal" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© 2026 Driftline · <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a></span>
+      <span><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>
