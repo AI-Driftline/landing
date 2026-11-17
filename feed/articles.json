@@ -62,5 +62,13 @@
    "id": 5034034,
    "drafted": "2026-11-14"
   }
+ },
+ "fix-retiring-ai-models-in-one-pull-request": {
+  "date": "2026-11-17",
+  "marketing": true,
+  "devto": {
+   "id": 5060035,
+   "drafted": "2026-11-17"
+  }
  }
 }

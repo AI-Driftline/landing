@@ -1,5 +1,5 @@
 {
- "built": "2026-11-17T10:00:40.399Z",
+ "built": "2026-11-17T21:16:50.877Z",
  "summary": "All 11 sources match the registry",
  "sources": [
   {
@@ -7,7 +7,7 @@
    "name": "OpenAI",
    "page": "https://developers.openai.com/api/docs/deprecations",
    "models": 163,
-   "last_read": "2026-11-17T10:00:35.749Z",
+   "last_read": "2026-11-17T21:16:46.778Z",
    "result": "ok"
   },
   {
@@ -15,7 +15,7 @@
    "name": "Anthropic",
    "page": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
    "models": 37,
-   "last_read": "2026-11-17T10:00:35.749Z",
+   "last_read": "2026-11-17T21:16:46.778Z",
    "result": "ok"
   },
   {
@@ -23,7 +23,7 @@
    "name": "Google",
    "page": "https://ai.google.dev/gemini-api/docs/deprecations",
    "models": 57,
-   "last_read": "2026-11-17T10:00:35.749Z",
+   "last_read": "2026-11-17T21:16:46.778Z",
    "result": "ok"
   },
   {
@@ -31,7 +31,7 @@
    "name": "Amazon Bedrock",
    "page": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
    "models": 56,
-   "last_read": "2026-11-17T10:00:36.226Z",
+   "last_read": "2026-11-17T21:16:47.308Z",
    "result": "ok"
   },
   {
@@ -39,15 +39,15 @@
    "name": "Vertex AI",
    "page": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
    "models": 64,
-   "last_read": "2026-11-17T10:00:38.937Z",
+   "last_read": "2026-11-17T21:16:48.914Z",
    "result": "ok"
   },
   {
    "id": "azure",
    "name": "Azure",
    "page": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
-   "models": 149,
-   "last_read": "2026-11-17T10:00:39.143Z",
+   "models": 148,
+   "last_read": "2026-11-17T21:16:49.151Z",
    "result": "ok"
   },
   {
@@ -55,7 +55,7 @@
    "name": "Groq",
    "page": "https://console.groq.com/docs/deprecations",
    "models": 30,
-   "last_read": "2026-11-17T10:00:39.852Z",
+   "last_read": "2026-11-17T21:16:50.135Z",
    "result": "ok"
   },
   {
@@ -63,7 +63,7 @@
    "name": "Mistral AI",
    "page": "https://docs.mistral.ai/models",
    "models": 47,
-   "last_read": "2026-11-17T10:00:39.852Z",
+   "last_read": "2026-11-17T21:16:50.135Z",
    "result": "ok"
   },
   {
@@ -71,7 +71,7 @@
    "name": "xAI",
    "page": "https://docs.x.ai/developers/models",
    "models": 9,
-   "last_read": "2026-11-17T10:00:39.852Z",
+   "last_read": "2026-11-17T21:16:50.135Z",
    "result": "ok"
   },
   {
@@ -79,7 +79,7 @@
    "name": "Cohere",
    "page": "https://docs.cohere.com/docs/deprecations",
    "models": 11,
-   "last_read": "2026-11-17T10:00:39.852Z",
+   "last_read": "2026-11-17T21:16:50.135Z",
    "result": "ok"
   },
   {
@@ -87,7 +87,7 @@
    "name": "DeepSeek",
    "page": "https://api-docs.deepseek.com/updates",
    "models": 4,
-   "last_read": "2026-11-17T10:00:35.749Z",
+   "last_read": "2026-11-17T21:16:46.778Z",
    "result": "ok"
   }
  ],
@@ -97,6 +97,14 @@
  },
  "under_review": [],
  "recent_changes": [
+  {
+   "date": "2026-11-17T21:10:56Z",
+   "by": "Page script",
+   "summary": "Azure: 1 change",
+   "details": [
+    "gone from page: kimi-k3.1-pro"
+   ]
+  },
   {
    "date": "2026-11-17T18:56:14+09:00",
    "by": "Maintainer",

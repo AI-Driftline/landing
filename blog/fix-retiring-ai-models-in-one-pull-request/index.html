@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fix retiring AI model IDs with one pull request</title>
+<meta name="description" content="The Driftline GitHub Action can open one draft pull request that renames retiring OpenAI, Anthropic, Google and other model IDs, lists what a rename can't fix, and (with Pro) shows how your prompts answer on the replacement.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/">
+<meta property="og:title" content="Fix retiring AI model IDs with one pull request">
+<meta property="og:description" content="The Driftline GitHub Action can open one draft pull request that renames retiring OpenAI, Anthropic, Google and other model IDs, lists what a rename can't fix, and (with Pro) shows how your prompts answer on the replacement.">
+<meta property="og:image" content="https://aidriftline.com/assets/driftline-social-preview-v3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aidriftline">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Fix retiring AI model IDs with one pull request","description":"The Driftline GitHub Action can open one draft pull request that renames retiring OpenAI, Anthropic, Google and other model IDs, lists what a rename can't fix, and (with Pro) shows how your prompts answer on the replacement.","datePublished":"2026-11-17","dateModified":"2026-11-17","author":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"publisher":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"mainEntityOfPage":"https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/"}</script>
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <a class="btn small" href="/#install">Add the free Action <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p class="crumbs"><a href="/blog/">Blog</a></p>
+    <h1 class="post-h1">Fix retiring AI model IDs with one pull request</h1>
+    <p class="updated">17 November 2026 · Driftline</p>
+    <p class="answer">Driftline's GitHub Action can now make the change for you. Add <code>fix-pr: true</code> and it opens one draft pull request that swaps retiring model IDs for their replacements. Lines where a new name isn't enough get a checklist with what to change and a link to the provider's guide. With Driftline Pro, the same pull request shows how your real prompts answer on the new model.</p>
+    <h2>What the pull request contains</h2>
+    <ul>
+      <li><b>The renames.</b> Every line where the provider's replacement is a plain rename, keeping what's around the ID (<code>openai/gpt-4o-mini-2024-07-18</code> becomes <code>openai/gpt-6-luna</code>).</li>
+      <li><b>A checklist for the rest.</b> Calls that need new parameters, a different API, a choice between two replacements, or a Bedrock or Azure ID are left alone. Each one is listed with the reason and the provider's migration guide, and you can tick them off as you go.</li>
+      <li><b>Your prompts on the replacement (Pro).</b> Each prompt in <code>.driftline/prompts.yml</code> runs on the current and the replacement model. The pull request gets a verdict: safe to merge as far as your prompts show, read before you merge, or don't merge yet.</li>
+    </ul>
+    <p>There is one pull request, on the branch <code>driftline/model-updates</code>. Later runs rebuild it from your default branch and update it, and Driftline closes it once nothing is left to rename. It never touches documentation files or your prompt file.</p>
+    <h2>Set it up</h2>
+    <p>Add a scheduled workflow, for example every Monday:</p>
+    <pre class="cmd"><code># .github/workflows/driftline.yml
+on:
+  schedule: [{ cron: &quot;0 6 * * 1&quot; }]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  driftline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: AI-Driftline/driftline@v0
+        with:
+          fix-pr: true
+          fail-on: never</code></pre>
+    <p>Then turn on <b>Settings → Actions → General → Allow GitHub Actions to create and approve pull requests</b> in the repository. In an organization, turn it on in the organization's settings first, or the option is greyed out. If it is off, Driftline still pushes the branch and tells you which setting to change.</p>
+    <p>Pull requests opened with the default workflow token don't start your other workflows, which is GitHub's rule. If your tests should run on Driftline's pull request, pass a personal access token as <code>github-token</code>.</p>
+    <h2>Try it locally first</h2>
+    <p>The same renames are available from the command line, with nothing to install:</p>
+    <pre class="cmd"><code>npx -y @aidriftline/driftline fix --dry-run   # show what would change
+npx -y @aidriftline/driftline fix             # change it</code></pre>
+    <h2>Why a rename isn't the whole job</h2>
+    <p>A new model name keeps the API call working, but the new model can answer differently: a summary gets shorter, a label changes, or a JSON answer stops parsing. That's what the Pro drift test is for. It runs the 5 to 20 prompts your app really sends on both models, two API calls per prompt on your own key, and puts the result in the pull request. The answers themselves stay in the job summary, since anyone who can read the pull request would see them.</p>
+    <p>The scan, the <code>fix</code> command and the fix pull request are free. <a href="/#pr">See an example pull request</a>, or <a href="/#install">add the Action</a>.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Driftline home"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(-2 2)"><rect x="12" y="12" width="19" height="19" rx="3" fill="#FAFAFA"/><rect class="blip" x="39" y="6" width="19" height="19" rx="3" fill="#C6F432"/><rect x="12" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/><rect x="33" y="33" width="19" height="19" rx="3" fill="#FAFAFA"/></g></svg>driftline</a>
+    <nav aria-label="Footer">
+      <a href="/models/">All retirement dates</a>
+      <a href="/status/">Data status</a>
+      <a href="/agents/">For AI agents</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://github.com/AI-Driftline/driftline" rel="noopener">GitHub</a>
+      <a href="https://x.com/aidriftline" rel="noopener">X</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="mailto:hello@aidriftline.com">hello@aidriftline.com</a>
+    </nav>
+    <div class="legal">
+      <span>© 2026 Driftline. Driftline is not affiliated with OpenAI, Anthropic or Google.</span>
+      <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refunds.html">Refunds</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/count.js" defer></script>
+</body>
+</html>

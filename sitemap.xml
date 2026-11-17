@@ -5,6 +5,7 @@
   <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/agents/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/blog/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/blog/google-2026-12-01-gemini-2-5-pro-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://aidriftline.com/blog/openai-2026-12-01-gpt-image-1-mini-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
@@ -544,7 +545,6 @@
   <url><loc>https://aidriftline.com/models/azure/gpt-5.5/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/deepseek-v3.2/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/deepseek-v3.2-speciale/</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://aidriftline.com/models/azure/kimi-k3.1-pro/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/claude-fable-5/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/claude-fable-5-1/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/gpt-5.6-luna/</loc><lastmod>2026-11-16</lastmod></url>
