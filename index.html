@@ -199,7 +199,7 @@
       <span><span class="tag changed">● Changed</span>0.60 to 0.90, or a "not" came or went: worth a look</span>
       <span><span class="tag broken">✕ Broken</span>below 0.60, JSON stopped parsing, or a check failed</span>
     </div>
-    <p class="note reveal">Example answers written for this page. The scores are what Driftline's scoring code returns for them. Text is compared by word and word-pair overlap; JSON field by field. Overlap reads wording, not meaning, so add checks to the prompts that matter: <code>must_include</code>, <code>must_not_include</code> and <code>same_fields</code> (<a href="https://github.com/AI-Driftline/driftline#checks">how</a>).</p>
+    <p class="note reveal">Example answers written for this page. The scores are what Driftline's scoring code returns for them. Text is compared by word and word-pair overlap; JSON field by field. Overlap reads wording, not meaning, so add checks to the prompts that matter: <code>must_include</code>, <code>must_not_include</code> and <code>same_fields</code> (<a href="https://github.com/AI-Driftline/driftline#checks">how</a>). Real answers from live API calls: <a href="#real-run">see a real run</a>.</p>
   </div>
 </section>
 
@@ -249,7 +249,38 @@
         </div>
       </div>
     </div>
-    <p class="src reveal">Taken from a real run of the Action on a test repository (prompt answers simulated). The pull request is closed by Driftline once nothing is left to rename. Set-up and permissions: <a href="https://github.com/AI-Driftline/driftline#fix-the-easy-ones" rel="noopener" target="_blank" style="color:var(--lime)">README</a>.</p>
+    <p class="src reveal">Example pull request: the layout is Driftline's, the prompt results are made up to show all three outcomes. A real one follows. The pull request is closed by Driftline once nothing is left to rename. Set-up and permissions: <a href="https://github.com/AI-Driftline/driftline#fix-the-easy-ones" rel="noopener" target="_blank" style="color:var(--lime)">README</a>.</p>
+
+    <div class="pr-card real reveal" id="real-run">
+      <div class="pr-top">
+        <span class="pr-draft">Real run · 17 Nov 2026</span>
+        <b>Live OpenAI and Gemini calls, nothing simulated</b>
+        <small>AI-Driftline/driftline-demo</small>
+      </div>
+      <div class="pr-body">
+        <div class="pr-block">
+          <p>A small public demo app, run with a Pro key and real API keys. Google already refuses <code>gemini-2.5-flash</code> for new API keys (HTTP 404, "no longer available to new users"), so Driftline tested the replacement on its own and ran the checks on its answer.</p>
+          <p class="pr-verdict">🟡 <b>Read before you merge:</b> 1 prompt got a noticeably different answer. 3 prompts ran on the replacement only.</p>
+          <div class="pr-rows">
+            <span>ticket-summary · gemini</span><span>—</span><span class="info">● New model only · checks passed</span>
+            <span>sentiment · gemini</span><span>—</span><span class="info">● New model only · checks passed</span>
+            <span>invoice-json · gemini</span><span>—</span><span class="info">● New model only · valid JSON</span>
+            <span>ticket-summary · openai</span><span>0.75</span><span class="warn">● Changed</span>
+            <span>sentiment · openai</span><span>1.00</span><span class="ok">✓ Same</span>
+            <span>invoice-json · openai</span><span>1.00</span><span class="ok">✓ Same</span>
+          </div>
+        </div>
+        <div class="pr-block">
+          <h4>ticket-summary · gpt-4o-mini-2024-07-18 → gpt-6-luna</h4>
+          <div class="pr-diff">
+            <div class="del">- The office printer has been jamming on every second page since Monday and urgently requires repair today.</div>
+            <div class="add">+ The office printer has been jamming on every second page since Monday, and the team needs it fixed today.</div>
+          </div>
+          <p>Same meaning, different wording: "Changed" means worth a look, not wrong. The <code>must_include: [printer]</code> check passed.</p>
+          <p><a href="https://github.com/AI-Driftline/driftline-demo/pull/1" rel="noopener" target="_blank">Open the pull request →</a> · <a href="https://github.com/AI-Driftline/driftline-demo/actions" rel="noopener" target="_blank">Workflow runs, with both answers for every prompt →</a></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

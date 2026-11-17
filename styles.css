@@ -485,4 +485,11 @@ footer .legal { width: 100%; display: flex; flex-wrap: wrap; justify-content: sp
 .pr-rows span:nth-child(3n+2) { color: var(--mute); text-align: right; }
 .pr-rows span { min-width: 0; overflow-wrap: anywhere; }
 .pr-rows .ok { color: var(--lime); } .pr-rows .warn { color: #F5C451; } .pr-rows .bad { color: #FF9C9C; }
+.pr-rows .info { color: #8DB8FF; }
+.pr-card.real { margin-top: 40px; }
+.pr-card.real .pr-diff div { white-space: pre-wrap; }
+@media (max-width: 560px) {
+  .pr-card.real .pr-rows { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; }
+  .pr-card.real .pr-rows span:nth-child(3n) { grid-column: 1 / -1; margin-bottom: 8px; }
+}
 @media (max-width: 560px) { .pr-top, .pr-block { padding: 16px; } .pr-rows { font-size: 12px; gap: 6px 10px; } }
