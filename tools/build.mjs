@@ -130,6 +130,7 @@ function answer(m) {
   const r = finalReplacement(m);
   if (m.replacement && !m.routes) s += ` The recommended replacement is ${replName(m)}${m.replacement_note ? ` (${m.replacement_note})` : ""}${r && r !== m.replacement ? ` (which is itself retiring; move to ${r})` : ""}.${m.previous_replacement ? ` ${who} changed this recommendation on ${long(m.replacement_changed)}; before, it was ${m.previous_replacement}.` : ""}`;
   else if (!m.replacement) s += ` ${who} names no direct replacement.`;
+  if (m.note) s += ` ${m.note}`; // a provider fact beyond date and replacement (docs/registry-rules.md: note)
   return s;
 }
 
@@ -259,6 +260,7 @@ for (const m of [...models, ...aliases]) {
     [dateKind(m), long(m.retires) + (m.under_review ? ` <span class="dim">· under review: ${esc(WHO[m.provider] || m.provider)}'s page changed on ${short(m.under_review.since)}, Driftline is updating this. <a href="${esc(m.under_review.page)}" rel="noopener">Check the source</a></span>` : "")],
     ...(m.replacement ? [["Replacement", link(m.replacement) + (m.replacement_alt ? ` or ${link(m.replacement_alt)}` : "") + (m.replacement_note ? ` <span class="dim">(${esc(m.replacement_note)})</span>` : "") + (m.previous_replacement ? ` <span class="dim">· changed ${short(m.replacement_changed)}, was ${esc(m.previous_replacement)}</span>` : "") + (r && r !== m.replacement ? ` → move to ${link(r)}` : "")]] : []),
     ...(mig && m.replacement ? [["Moving to it", `${mig.drop_in ? "Rename" : esc(MIGRATION_LABEL[mig.change])}${mig.note && !(mig.change === "settings") ? ` <span class="dim">· ${esc(mig.note)}${mig.guide ? ` <a href="${esc(mig.guide)}" rel="noopener">${esc(who)}'s guide</a>` : ""}</span>` : ""}`]] : []),
+    ...(m.note ? [["Good to know", esc(m.note)]] : []),
     ...(m.aliasOf ? [["Short name for", link(m.aliasOf)]] : []),
     ...(azOf(m) && azOf(m).v.retires !== m.retires ? [["On Azure", `${azLink(azOf(m).a.id)}${azOf(m).v.version ? ` <span class="dim">version ${esc(azOf(m).v.version)}</span>` : ""} · ${azOf(m).v.retires <= TODAY ? "retired" : "retires"} ${short(azOf(m).v.retires)} <span class="dim">(Azure sets its own date)</span>`]] : []),
     ...(vxOf(m) && vxOf(m).retires !== m.retires ? [["On Vertex AI", `${vxLink(vxOf(m).id)} · ${vxOf(m).retires <= TODAY ? "retired" : "retires"} ${short(vxOf(m).retires)} <span class="dim">(Vertex sets its own date)</span>`]] : []),
