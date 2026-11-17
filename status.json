@@ -1,5 +1,5 @@
 {
- "built": "2026-11-17T08:24:52.802Z",
+ "built": "2026-11-17T10:00:40.399Z",
  "summary": "All 11 sources match the registry",
  "sources": [
   {
@@ -7,7 +7,7 @@
    "name": "OpenAI",
    "page": "https://developers.openai.com/api/docs/deprecations",
    "models": 163,
-   "last_read": "2026-11-17T08:24:49.495Z",
+   "last_read": "2026-11-17T10:00:35.749Z",
    "result": "ok"
   },
   {
@@ -15,7 +15,7 @@
    "name": "Anthropic",
    "page": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
    "models": 37,
-   "last_read": "2026-11-17T08:24:49.495Z",
+   "last_read": "2026-11-17T10:00:35.749Z",
    "result": "ok"
   },
   {
@@ -23,7 +23,7 @@
    "name": "Google",
    "page": "https://ai.google.dev/gemini-api/docs/deprecations",
    "models": 57,
-   "last_read": "2026-11-17T08:24:49.495Z",
+   "last_read": "2026-11-17T10:00:35.749Z",
    "result": "ok"
   },
   {
@@ -31,7 +31,7 @@
    "name": "Amazon Bedrock",
    "page": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
    "models": 56,
-   "last_read": "2026-11-17T08:24:50.033Z",
+   "last_read": "2026-11-17T10:00:36.226Z",
    "result": "ok"
   },
   {
@@ -39,7 +39,7 @@
    "name": "Vertex AI",
    "page": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
    "models": 64,
-   "last_read": "2026-11-17T08:24:51.175Z",
+   "last_read": "2026-11-17T10:00:38.937Z",
    "result": "ok"
   },
   {
@@ -47,7 +47,7 @@
    "name": "Azure",
    "page": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
    "models": 149,
-   "last_read": "2026-11-17T08:24:51.378Z",
+   "last_read": "2026-11-17T10:00:39.143Z",
    "result": "ok"
   },
   {
@@ -55,7 +55,7 @@
    "name": "Groq",
    "page": "https://console.groq.com/docs/deprecations",
    "models": 30,
-   "last_read": "2026-11-17T08:24:52.046Z",
+   "last_read": "2026-11-17T10:00:39.852Z",
    "result": "ok"
   },
   {
@@ -63,7 +63,7 @@
    "name": "Mistral AI",
    "page": "https://docs.mistral.ai/models",
    "models": 47,
-   "last_read": "2026-11-17T08:24:52.046Z",
+   "last_read": "2026-11-17T10:00:39.852Z",
    "result": "ok"
   },
   {
@@ -71,7 +71,7 @@
    "name": "xAI",
    "page": "https://docs.x.ai/developers/models",
    "models": 9,
-   "last_read": "2026-11-17T08:24:52.046Z",
+   "last_read": "2026-11-17T10:00:39.852Z",
    "result": "ok"
   },
   {
@@ -79,7 +79,7 @@
    "name": "Cohere",
    "page": "https://docs.cohere.com/docs/deprecations",
    "models": 11,
-   "last_read": "2026-11-17T08:24:52.046Z",
+   "last_read": "2026-11-17T10:00:39.852Z",
    "result": "ok"
   },
   {
@@ -87,7 +87,7 @@
    "name": "DeepSeek",
    "page": "https://api-docs.deepseek.com/updates",
    "models": 4,
-   "last_read": "2026-11-17T08:24:49.495Z",
+   "last_read": "2026-11-17T10:00:35.749Z",
    "result": "ok"
   }
  ],
@@ -97,6 +97,12 @@
  },
  "under_review": [],
  "recent_changes": [
+  {
+   "date": "2026-11-17T18:56:14+09:00",
+   "by": "Maintainer",
+   "summary": "Registry: notes on Gemini 2.5 Pro and Flash (access already limited)",
+   "details": []
+  },
   {
    "date": "2026-11-14T07:08:41+09:00",
    "by": "Maintainer",
