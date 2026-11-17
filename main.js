@@ -1,9 +1,9 @@
 // Driftline landing. No dependencies.
 
-// Lemon Squeezy checkout links (live mode). If one is empty, "Get Pro" opens an email instead.
+// Polar checkout links (live). If one is empty, "Get Pro" opens an email instead.
 const CHECKOUT = {
-  monthly: "https://aidriftline.lemonsqueezy.com/checkout/buy/bf8d4d8c-de7c-4250-a484-502684504d23?enabled=2237388",
-  yearly: "https://aidriftline.lemonsqueezy.com/checkout/buy/55745667-82c5-423d-baf4-5248c0f629bb?enabled=2237389",
+  monthly: "https://buy.polar.sh/polar_cl_pg5USKPuczqn1VL2V3oJpdlS3j1XUgcDlZ5IJ31Ou70",
+  yearly: "https://buy.polar.sh/polar_cl_mQmWQ37KWBbUunfW5ArBxUpgh7bgtfDpGf8Yk1WhUAP",
 };
 
 const DAY = 86400000;
