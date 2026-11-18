@@ -41,7 +41,7 @@
     <h2><span class="n">2</span>Activate it for your GitHub account</h2>
     <p>From inside any repository of the GitHub account or organization where you want drift tests, run:</p>
 <pre>npx @aidriftline/driftline activate DRIFTLINE-…</pre>
-    <p>It prints a license code. Save that code as a repository or organization secret named <code>DRIFTLINE_LICENSE_KEY</code>. One key works on up to 3 GitHub accounts or organizations: run <code>activate</code> once in each. You can free a slot in the Polar customer portal.</p>
+    <p>It prints a license code (your key, a colon, then an id). Save that code, not the plain key, as a repository or organization secret named <code>DRIFTLINE_LICENSE_KEY</code>. One key works on up to 3 GitHub accounts or organizations: run <code>activate</code> once in each. You can free a slot in the Polar customer portal.</p>
 
     <h2><span class="n">3</span>Turn on drift tests</h2>
     <p>In <code>.github/workflows/driftline.yml</code>, give the Driftline step your license code and the API keys of the providers you use:</p>
