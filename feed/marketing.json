@@ -5,6 +5,12 @@
    "at": "2026-11-16T22:28:02.882Z",
    "tweet": "2122456690813481425",
    "text": "Driftline can now open the fix for you.\n\nAdd fix-pr: true to the GitHub Action and you get one draft pull request that renames retiring model IDs, kept up to date until you merge. Lines a rename can't fix get a checklist with the provider's guide.\naidriftline.com/#pr"
+  },
+  {
+   "id": "blog:fix-retiring-ai-models-in-one-pull-request",
+   "at": "2026-11-18T20:52:14.607Z",
+   "tweet": "2123157356326658330",
+   "text": "New on the blog: Fix retiring AI model IDs with one pull request\naidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/"
   }
  ],
  "blog": {
