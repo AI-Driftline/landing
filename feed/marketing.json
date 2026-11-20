@@ -11,6 +11,12 @@
    "at": "2026-11-18T20:52:14.607Z",
    "tweet": "2123157356326658330",
    "text": "New on the blog: Fix retiring AI model IDs with one pull request\naidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/"
+  },
+  {
+   "id": "retiring-90-days",
+   "at": "2026-11-20T20:40:25.725Z",
+   "tweet": "2123879159109660876",
+   "text": "89 AI model IDs retire in the next 90 days across OpenAI, Anthropic, Google, Mistral, xAI, Groq, Cohere, DeepSeek, Bedrock, Vertex AI and Azure.\n\nFind the ones in your code, no install and no key:\nnpx -y @aidriftline/driftline ."
   }
  ],
  "blog": {
