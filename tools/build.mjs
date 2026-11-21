@@ -1034,6 +1034,34 @@ function heroHtml(html) {
     .replace(/(<div class="editor" role="img" aria-label=")[^"]*(")/, `$1Code editor showing a Driftline warning on line 6: ${esc(h.id)} ${d > 0 ? "retires" : "was retired"} on ${short(h.retires)}, replacement ${esc(h.replacement)}.$2`);
 }
 
+// ---------- main.js backup copy ----------
+// main.js draws SNAPSHOT first on every visit, then swaps in the live registry from GitHub
+// (and keeps SNAPSHOT if GitHub can't be reached), so it must match the registry too.
+// Same filter as fromRegistry() in main.js; models gone over 62 days are left out
+// (the timeline starts on the 1st of last month, the hero keeps a model 14 days).
+{
+  const p = join(ROOT, "main.js");
+  const cut = new Date(Date.parse(TODAY + "T00:00:00Z") - 62 * 86400000).toISOString().slice(0, 10);
+  const keep = reg.models.filter((m) => m.qualifier === "exact" && m.replacement && m.retires >= cut)
+    .sort((a, b) => a.retires.localeCompare(b.retires));
+  const row = (m) => `    { ${[["id", m.id], ["provider", m.provider], ["retires", m.retires], ["replacement", m.replacement], ...(m.kind && m.kind !== "text" ? [["kind", m.kind]] : [])]
+    .map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(", ")}${m.routes ? ", routes: true" : ""} },`;
+  const block = `// Models with a fixed date and a replacement, from registry/models.json (checked ${reg.checked}); written by tools/build.mjs.
+const SNAPSHOT = {
+  checked: ${JSON.stringify(reg.checked)},
+  count: ${reg.models.length},
+  total: ${totalIds},
+  models: [
+${keep.map(row).join("\n")}
+  ],
+};
+`;
+  const js = readFileSync(p, "utf8");
+  const next = js.replace(/\/\/ Models with a fixed date[^\n]*\nconst SNAPSHOT = \{[\s\S]*?\n\};\n/, block);
+  if (next === js && !js.includes(block)) throw new Error("main.js: SNAPSHOT block not found");
+  writeFileSync(p, next);
+}
+
 // ---------- refresh the numbers written into static pages ----------
 for (const f of ["index.html", "agents/index.html"]) {
   const p = join(ROOT, f);
