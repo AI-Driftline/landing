@@ -1012,11 +1012,35 @@ Allow: /
 Sitemap: ${SITE}/sitemap.xml
 `);
 
+// ---------- hero countdown, written into index.html for readers that don't run JS ----------
+// Same pick as derive() in main.js: next OpenAI text retirement (kept for 14 days after the date),
+// preferring HERO_PREFER inside that date group, else the first in registry order.
+function heroHtml(html) {
+  const PREFER = "gpt-4o-2024-05-13", DAYS_AFTER = 14;
+  const days = (iso) => Math.ceil((Date.parse(iso + "T00:00:00Z") - Date.parse(TODAY + "T00:00:00Z")) / 86400000);
+  const pool = reg.models.filter((m) => m.qualifier === "exact" && m.replacement && m.provider === "openai" && (m.kind || "text") === "text" && days(m.retires) > -DAYS_AFTER);
+  const date = [...pool].sort((a, b) => a.retires.localeCompare(b.retires))[0]?.retires;
+  const group = pool.filter((m) => m.retires === date);
+  const h = group.find((m) => m.id === PREFER) || group[0];
+  if (!h) return html;
+  const d = days(h.retires);
+  const code = (id) => `<code>${esc(id)}</code>`;
+  const rel = d === 0 ? "today" : `${-d} days ago`;
+  return html
+    .replace(/(<b id="cd-num">)[^<]*(<\/b>)/, `$1${d > 0 ? (d === 1 ? "1 day" : `${d} days`) : "Retired"}$2`)
+    .replace(/(<small id="cd-label">)[^<]*(<\/small>)/, `$1${d > 0 ? `until ${esc(h.id)} retires` : `${esc(h.id)} · ${rel}`}$2`)
+    .replace(/(<span id="annot-text">)[\s\S]*?(<\/span>)/, `$1${d > 0 ? `${code(h.id)} retires soon (${h.retires})` : `${code(h.id)} is retired (${h.retires})`}. Replacement: ${code(h.replacement)}.$2`)
+    .replace(/(<span class="s model">)[^<]*(<\/span>)/, `$1"${esc(h.id)}"$2`)
+    .replace(/(<div class="editor" role="img" aria-label=")[^"]*(")/, `$1Code editor showing a Driftline warning on line 6: ${esc(h.id)} ${d > 0 ? "retires" : "was retired"} on ${short(h.retires)}, replacement ${esc(h.replacement)}.$2`);
+}
+
 // ---------- refresh the numbers written into static pages ----------
 for (const f of ["index.html", "agents/index.html"]) {
   const p = join(ROOT, f);
   if (!existsSync(p)) continue;
-  const s = readFileSync(p, "utf8")
+  let s = readFileSync(p, "utf8");
+  if (f === "index.html") s = heroHtml(s);
+  s = s
     .replace(/(<(span|b) data-reg="count">)[^<]*(<\/\2>)/g, `$1${models.length}$3`)
     .replace(/(<(span|b) data-reg="total">)[^<]*(<\/\2>)/g, `$1${totalIds}$3`)
     .replace(/(<span data-reg="checked">)[^<]*(<\/span>)/g, `$1${short(reg.checked)}$2`);
