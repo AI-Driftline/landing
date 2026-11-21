@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-19",
+  "checked": "2026-11-20",
   "note": "Hand-maintained from the official deprecation pages. Re-check before each release. Entries with a 'kind' other than text are scanned and reported but never drift-tested. gpt-4-1106-preview is listed on OpenAI's page under both 2026-03-26 and 2026-10-23; the later date is used so builds are not failed on a conflicting record. Entries with routes: true keep answering after the date, but the provider sends the requests to the replacement model (Google calls this automatic routing); the 'retires' date is the day routing starts. gemini-3.5-flash and gemini-3.7-flash already route to newer models with no date given, so they are left out. gemini-3.1-flash-live-preview was removed on 2026-11-14: Google now lists it with no shutdown date.",
   "sources": {
     "openai": "https://developers.openai.com/api/docs/deprecations",
@@ -4016,7 +4016,7 @@
         "partner": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/partner-models",
         "open": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/open-models"
       },
-      "checked": "2026-11-15",
+      "checked": "2026-11-21",
       "models": [
         {
           "id": "chat-bison",
@@ -4283,9 +4283,9 @@
           "id": "gemini-3.6-flash",
           "maker": "google",
           "kind": "text",
-          "retires": "2026-11-19",
+          "retires": "2027-01-28",
           "released": "2026-07-21",
-          "replacement": "gemini-3.8-flash",
+          "replacement": "gemini-4-hydrogen",
           "page": "gemini"
         },
         {
@@ -4294,7 +4294,7 @@
           "kind": "text",
           "retires": "2027-01-28",
           "released": "2026-08-13",
-          "replacement": "gemini-3.8-flash",
+          "replacement": "gemini-4-hydrogen",
           "page": "gemini"
         },
         {
@@ -4703,7 +4703,7 @@
     "azure": {
       "name": "Azure",
       "source": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
-      "checked": "2026-11-17",
+      "checked": "2026-11-20",
       "models": [
         {
           "id": "claude-fable-5",
@@ -4714,10 +4714,10 @@
             {
               "version": "1",
               "lifecycle": "Preview",
-              "retires": "2027-12-05"
+              "retires": "2027-12-07"
             }
           ],
-          "retires": "2027-12-05"
+          "retires": "2027-12-07"
         },
         {
           "id": "claude-fable-5-1",
@@ -4728,10 +4728,10 @@
             {
               "version": "1",
               "lifecycle": "Preview",
-              "retires": "2027-12-05"
+              "retires": "2027-12-07"
             }
           ],
-          "retires": "2027-12-05"
+          "retires": "2027-12-07"
         },
         {
           "id": "claude-haiku-4-5",
@@ -4770,10 +4770,10 @@
             {
               "version": "1",
               "lifecycle": "Preview",
-              "retires": "2027-09-01"
+              "retires": "2027-12-07"
             }
           ],
-          "retires": "2027-09-01"
+          "retires": "2027-12-07"
         },
         {
           "id": "claude-mythos-preview",
@@ -4804,6 +4804,7 @@
           ],
           "retires": "2026-08-05",
           "replacement": "claude-opus-5",
+          "off_page": "2026-11-20",
           "migration": {
             "change": "params",
             "drop_in": false,
@@ -4999,10 +5000,10 @@
             {
               "version": "2025-05-16",
               "lifecycle": "Deprecated",
-              "retires": "2026-11-15"
+              "retires": "2026-11-17"
             }
           ],
-          "retires": "2026-11-15"
+          "retires": "2026-11-17"
         },
         {
           "id": "cohere-command-a",
@@ -5044,7 +5045,8 @@
               "retires": "2026-05-12"
             }
           ],
-          "retires": "2026-05-12"
+          "retires": "2026-05-12",
+          "off_page": "2026-11-20"
         },
         {
           "id": "cohere-command-r-plus-08-2024",
@@ -5058,7 +5060,8 @@
               "retires": "2026-05-12"
             }
           ],
-          "retires": "2026-05-12"
+          "retires": "2026-05-12",
+          "off_page": "2026-11-20"
         },
         {
           "id": "cohere-embed-v3-english",
@@ -5089,6 +5092,34 @@
           "retires": "2027-02-15"
         },
         {
+          "id": "cohere-embed-v5-fast",
+          "name": "Cohere-Embed-V5-Fast",
+          "maker": "cohere",
+          "kind": "embedding",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-01-23"
+            }
+          ],
+          "retires": "2027-01-23"
+        },
+        {
+          "id": "cohere-embed-v5-pro",
+          "name": "Cohere-Embed-V5-Pro",
+          "maker": "cohere",
+          "kind": "embedding",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-01-23"
+            }
+          ],
+          "retires": "2027-01-23"
+        },
+        {
           "id": "cohere-parse-v5",
           "name": "Cohere-parse-v5",
           "maker": "cohere",
@@ -5114,7 +5145,8 @@
               "retires": "2026-05-14"
             }
           ],
-          "retires": "2026-05-14"
+          "retires": "2026-05-14",
+          "off_page": "2026-11-20"
         },
         {
           "id": "cohere-rerank-v4.0-fast",
@@ -5125,11 +5157,11 @@
             {
               "version": "1",
               "lifecycle": "GA",
-              "retires": "2027-09-13",
+              "retires": "2027-09-14",
               "replacement": "cohere-rerank-v5-fast"
             }
           ],
-          "retires": "2027-09-13",
+          "retires": "2027-09-14",
           "replacement": "cohere-rerank-v5-fast"
         },
         {
@@ -5141,12 +5173,40 @@
             {
               "version": "1",
               "lifecycle": "GA",
-              "retires": "2027-09-13",
+              "retires": "2027-09-14",
               "replacement": "cohere-rerank-v5-pro"
             }
           ],
-          "retires": "2027-09-13",
+          "retires": "2027-09-14",
           "replacement": "cohere-rerank-v5-pro"
+        },
+        {
+          "id": "cohere-rerank-v5-fast",
+          "name": "Cohere-rerank-v5-fast",
+          "maker": "cohere",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-02-12"
+            }
+          ],
+          "retires": "2027-02-12"
+        },
+        {
+          "id": "cohere-rerank-v5-pro",
+          "name": "Cohere-rerank-v5-pro",
+          "maker": "cohere",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-02-12"
+            }
+          ],
+          "retires": "2027-02-12"
         },
         {
           "id": "deepseek-r1",
@@ -5162,7 +5222,8 @@
             }
           ],
           "retires": "2026-08-13",
-          "replacement": "deepseek-v4-pro"
+          "replacement": "deepseek-v4-pro",
+          "off_page": "2026-11-20"
         },
         {
           "id": "deepseek-r1-0528",
@@ -5178,7 +5239,8 @@
             }
           ],
           "retires": "2026-07-13",
-          "replacement": "deepseek-v4-pro"
+          "replacement": "deepseek-v4-pro",
+          "off_page": "2026-11-20"
         },
         {
           "id": "deepseek-v3-0324",
@@ -5194,7 +5256,8 @@
             }
           ],
           "retires": "2026-07-13",
-          "replacement": "deepseek-v4-flash"
+          "replacement": "deepseek-v4-flash",
+          "off_page": "2026-11-20"
         },
         {
           "id": "deepseek-v3.1",
@@ -5210,7 +5273,8 @@
             }
           ],
           "retires": "2026-07-13",
-          "replacement": "deepseek-v4-flash"
+          "replacement": "deepseek-v4-flash",
+          "off_page": "2026-11-20"
         },
         {
           "id": "deepseek-v3.2",
@@ -5221,11 +5285,11 @@
             {
               "version": "1",
               "lifecycle": "GA",
-              "retires": "2027-11-01",
+              "retires": "2027-11-02",
               "replacement": "deepseek-v4.1-flash"
             }
           ],
-          "retires": "2027-11-01",
+          "retires": "2027-11-02",
           "replacement": "deepseek-v4.1-flash"
         },
         {
@@ -5253,11 +5317,11 @@
             {
               "version": "2026-04-23",
               "lifecycle": "GA",
-              "retires": "2028-02-20",
+              "retires": "2028-02-22",
               "replacement": "deepseek-v4-flash-0731"
             }
           ],
-          "retires": "2028-02-20",
+          "retires": "2028-02-22",
           "replacement": "deepseek-v4-flash-0731"
         },
         {
@@ -5283,10 +5347,52 @@
             {
               "version": "2026-04-23",
               "lifecycle": "GA",
-              "retires": "2028-02-20"
+              "retires": "2028-02-22"
             }
           ],
-          "retires": "2028-02-20"
+          "retires": "2028-02-22"
+        },
+        {
+          "id": "deepseek-v4-pro-0813",
+          "name": "DeepSeek-V4-Pro-0813",
+          "maker": "deepseek",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-08-13",
+              "lifecycle": "Preview",
+              "retires": "2026-12-15"
+            }
+          ],
+          "retires": "2026-12-15"
+        },
+        {
+          "id": "deepseek-v4.1-flash",
+          "name": "DeepSeek-V4.1-Flash",
+          "maker": "deepseek",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-10",
+              "lifecycle": "Preview",
+              "retires": "2026-12-15"
+            }
+          ],
+          "retires": "2026-12-15"
+        },
+        {
+          "id": "deepseek-v4.1-flash-1017",
+          "name": "DeepSeek-V4.1-Flash-1017",
+          "maker": "deepseek",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-10-17",
+              "lifecycle": "Preview",
+              "retires": "2027-03-06"
+            }
+          ],
+          "retires": "2027-03-06"
         },
         {
           "id": "embed-v-4-0",
@@ -5452,7 +5558,7 @@
             {
               "version": "2025-03-20",
               "lifecycle": "GA",
-              "retires": "2026-10-15"
+              "retires": "2027-01-20"
             },
             {
               "version": "2025-12-15",
@@ -5460,7 +5566,7 @@
               "retires": "2027-06-15"
             }
           ],
-          "retires": "2026-10-15"
+          "retires": "2027-01-20"
         },
         {
           "id": "gpt-4o-mini-tts",
@@ -5471,7 +5577,7 @@
             {
               "version": "2025-03-20",
               "lifecycle": "Preview",
-              "retires": "2026-10-15"
+              "retires": "2027-01-20"
             },
             {
               "version": "2025-12-15",
@@ -5479,7 +5585,7 @@
               "retires": "2027-06-15"
             }
           ],
-          "retires": "2026-10-15"
+          "retires": "2027-01-20"
         },
         {
           "id": "gpt-4o-transcribe",
@@ -5490,10 +5596,10 @@
             {
               "version": "2025-03-20",
               "lifecycle": "GA",
-              "retires": "2026-10-15"
+              "retires": "2027-02-26"
             }
           ],
-          "retires": "2026-10-15"
+          "retires": "2027-02-26"
         },
         {
           "id": "gpt-4o-transcribe-diarize",
@@ -5543,7 +5649,8 @@
             }
           ],
           "retires": "2026-05-13",
-          "replacement": "gpt-chat-latest"
+          "replacement": "gpt-chat-latest",
+          "off_page": "2026-11-20"
         },
         {
           "id": "gpt-5-codex",
@@ -5629,7 +5736,8 @@
             }
           ],
           "retires": "2026-06-29",
-          "replacement": "gpt-chat-latest"
+          "replacement": "gpt-chat-latest",
+          "off_page": "2026-11-20"
         },
         {
           "id": "gpt-5.1-codex",
@@ -5707,7 +5815,8 @@
             }
           ],
           "retires": "2026-05-13",
-          "replacement": "gpt-chat-latest"
+          "replacement": "gpt-chat-latest",
+          "off_page": "2026-11-20"
         },
         {
           "id": "gpt-5.2-codex",
@@ -5737,7 +5846,8 @@
             }
           ],
           "retires": "2026-06-29",
-          "replacement": "gpt-chat-latest"
+          "replacement": "gpt-chat-latest",
+          "off_page": "2026-11-20"
         },
         {
           "id": "gpt-5.3-codex",
@@ -5866,6 +5976,76 @@
           "retires": "2028-01-11"
         },
         {
+          "id": "gpt-6-astra",
+          "name": "gpt-6-astra",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-03",
+              "lifecycle": "GA",
+              "retires": "2028-01-11"
+            }
+          ],
+          "retires": "2028-01-11"
+        },
+        {
+          "id": "gpt-6-luna",
+          "name": "gpt-6-luna",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-22",
+              "lifecycle": "GA",
+              "retires": "2028-03-11"
+            }
+          ],
+          "retires": "2028-03-11"
+        },
+        {
+          "id": "gpt-6-sol",
+          "name": "gpt-6-sol",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-22",
+              "lifecycle": "GA",
+              "retires": "2028-03-11"
+            }
+          ],
+          "retires": "2028-03-11"
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "name": "gpt-6.1-sol",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-29",
+              "lifecycle": "GA",
+              "retires": "2028-03-11"
+            }
+          ],
+          "retires": "2028-03-11"
+        },
+        {
+          "id": "gpt-6.1-terra",
+          "name": "gpt-6.1-terra",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-10-26",
+              "lifecycle": "GA",
+              "retires": "2027-10-26"
+            }
+          ],
+          "retires": "2027-10-26"
+        },
+        {
           "id": "gpt-audio",
           "name": "gpt-audio",
           "maker": "openai",
@@ -5941,7 +6121,7 @@
             {
               "version": "2026-10-07",
               "lifecycle": "Preview",
-              "retires": "2027-05-18"
+              "retires": "2027-02-02"
             }
           ],
           "retires": "2026-11-17"
@@ -5955,10 +6135,10 @@
             {
               "version": "2025-04-15",
               "lifecycle": "Preview",
-              "retires": "2026-10-23"
+              "retires": "2026-10-28"
             }
           ],
-          "retires": "2026-10-23"
+          "retires": "2026-10-28"
         },
         {
           "id": "gpt-image-1-mini",
@@ -5983,10 +6163,10 @@
             {
               "version": "2025-12-16",
               "lifecycle": "GA",
-              "retires": "2026-12-16"
+              "retires": "2027-06-16"
             }
           ],
-          "retires": "2026-12-16"
+          "retires": "2027-06-16"
         },
         {
           "id": "gpt-image-2",
@@ -6029,6 +6209,34 @@
             }
           ],
           "retires": "2027-09-09"
+        },
+        {
+          "id": "gpt-live-1",
+          "name": "gpt-live-1",
+          "maker": "openai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-09-10",
+              "lifecycle": "GA",
+              "retires": "2027-09-10"
+            }
+          ],
+          "retires": "2027-09-10"
+        },
+        {
+          "id": "gpt-live-transcribe",
+          "name": "gpt-live-transcribe",
+          "maker": "openai",
+          "kind": "audio",
+          "versions": [
+            {
+              "version": "2026-07-28",
+              "lifecycle": "GA",
+              "retires": "2028-02-01"
+            }
+          ],
+          "retires": "2028-02-01"
         },
         {
           "id": "gpt-oss-120b",
@@ -6097,10 +6305,10 @@
             {
               "version": "2026-07-07",
               "lifecycle": "GA",
-              "retires": "2027-06-25"
+              "retires": "2027-07-31"
             }
           ],
-          "retires": "2027-06-25"
+          "retires": "2027-07-31"
         },
         {
           "id": "gpt-realtime-2.1-mini",
@@ -6111,10 +6319,10 @@
             {
               "version": "2026-07-07",
               "lifecycle": "GA",
-              "retires": "2027-06-25"
+              "retires": "2027-07-31"
             }
           ],
-          "retires": "2027-06-25"
+          "retires": "2027-07-31"
         },
         {
           "id": "gpt-realtime-mini",
@@ -6136,6 +6344,48 @@
           "retires": "2027-04-06"
         },
         {
+          "id": "gpt-realtime-translate",
+          "name": "gpt-realtime-translate",
+          "maker": "openai",
+          "kind": "audio",
+          "versions": [
+            {
+              "version": "2026-05-06",
+              "lifecycle": "GA",
+              "retires": "2027-11-09"
+            }
+          ],
+          "retires": "2027-11-09"
+        },
+        {
+          "id": "gpt-realtime-whisper",
+          "name": "gpt-realtime-whisper",
+          "maker": "openai",
+          "kind": "audio",
+          "versions": [
+            {
+              "version": "2026-05-06",
+              "lifecycle": "GA",
+              "retires": "2027-11-09"
+            }
+          ],
+          "retires": "2027-11-09"
+        },
+        {
+          "id": "gpt-transcribe",
+          "name": "gpt-transcribe",
+          "maker": "openai",
+          "kind": "audio",
+          "versions": [
+            {
+              "version": "2026-07-28",
+              "lifecycle": "GA",
+              "retires": "2028-02-01"
+            }
+          ],
+          "retires": "2028-02-01"
+        },
+        {
           "id": "grok-3",
           "name": "grok-3",
           "maker": "xai",
@@ -6149,7 +6399,8 @@
             }
           ],
           "retires": "2026-05-01",
-          "replacement": "grok-4"
+          "replacement": "grok-4",
+          "off_page": "2026-11-20"
         },
         {
           "id": "grok-3-mini",
@@ -6165,7 +6416,8 @@
             }
           ],
           "retires": "2026-05-01",
-          "replacement": "grok-4-1-fast-reasoning"
+          "replacement": "grok-4-1-fast-reasoning",
+          "off_page": "2026-11-20"
         },
         {
           "id": "grok-4",
@@ -6251,7 +6503,8 @@
             }
           ],
           "retires": "2026-05-01",
-          "replacement": "grok-4-1-fast-non-reasoning"
+          "replacement": "grok-4-1-fast-non-reasoning",
+          "off_page": "2026-11-20"
         },
         {
           "id": "grok-4-fast-reasoning",
@@ -6267,7 +6520,50 @@
             }
           ],
           "retires": "2026-05-01",
-          "replacement": "grok-4-1-fast-reasoning"
+          "replacement": "grok-4-1-fast-reasoning",
+          "off_page": "2026-11-20"
+        },
+        {
+          "id": "grok-4.3",
+          "name": "grok-4.3",
+          "maker": "xai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-05-12"
+            }
+          ],
+          "retires": "2027-05-12"
+        },
+        {
+          "id": "grok-4.6",
+          "name": "grok-4.6",
+          "maker": "xai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-08-24"
+            }
+          ],
+          "retires": "2027-08-24"
+        },
+        {
+          "id": "grok-4.7",
+          "name": "grok-4.7",
+          "maker": "xai",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "GA",
+              "retires": "2027-10-05"
+            }
+          ],
+          "retires": "2027-10-05"
         },
         {
           "id": "grok-code-fast-1",
@@ -6337,7 +6633,8 @@
               "retires": "2026-06-13"
             }
           ],
-          "retires": "2026-06-13"
+          "retires": "2026-06-13",
+          "off_page": "2026-11-20"
         },
         {
           "id": "llama-3.2-90b-vision-instruct",
@@ -6351,7 +6648,8 @@
               "retires": "2026-06-13"
             }
           ],
-          "retires": "2026-06-13"
+          "retires": "2026-06-13",
+          "off_page": "2026-11-20"
         },
         {
           "id": "llama-3.3-70b-instruct",
@@ -6409,7 +6707,8 @@
             }
           ],
           "retires": "2026-08-15",
-          "replacement": "mai-image-2.5"
+          "replacement": "mai-image-2.5",
+          "off_page": "2026-11-20"
         },
         {
           "id": "mai-image-2.5",
@@ -6420,10 +6719,10 @@
             {
               "version": "2026-06-02",
               "lifecycle": "Preview",
-              "retires": "2026-10-01"
+              "retires": "2026-11-24"
             }
           ],
-          "retires": "2026-10-01"
+          "retires": "2026-11-24"
         },
         {
           "id": "mai-image-2.5-flash",
@@ -6434,10 +6733,10 @@
             {
               "version": "2026-06-02",
               "lifecycle": "Preview",
-              "retires": "2026-10-01"
+              "retires": "2026-11-24"
             }
           ],
-          "retires": "2026-10-01"
+          "retires": "2026-11-24"
         },
         {
           "id": "mai-image-2.5-pro",
@@ -6448,10 +6747,38 @@
             {
               "version": "2026-06-19",
               "lifecycle": "Preview",
-              "retires": "2026-10-01"
+              "retires": "2026-11-24"
             }
           ],
-          "retires": "2026-10-01"
+          "retires": "2026-11-24"
+        },
+        {
+          "id": "mai-image-2.6",
+          "name": "MAI-Image-2.6",
+          "maker": "microsoft",
+          "kind": "image",
+          "versions": [
+            {
+              "version": "2026-07-31",
+              "lifecycle": "GA",
+              "retires": "2027-05-01"
+            }
+          ],
+          "retires": "2027-05-01"
+        },
+        {
+          "id": "mai-image-2.6-flash",
+          "name": "MAI-Image-2.6-Flash",
+          "maker": "microsoft",
+          "kind": "image",
+          "versions": [
+            {
+              "version": "2026-07-31",
+              "lifecycle": "GA",
+              "retires": "2027-05-01"
+            }
+          ],
+          "retires": "2027-05-01"
         },
         {
           "id": "mai-image-2e",
@@ -6462,12 +6789,26 @@
             {
               "version": "2026-04-09",
               "lifecycle": "Retired",
-              "retires": "2026-08-15",
+              "retires": "2026-08-28",
               "replacement": "mai-image-2.5-flash"
             }
           ],
-          "retires": "2026-08-15",
+          "retires": "2026-08-28",
           "replacement": "mai-image-2.5-flash"
+        },
+        {
+          "id": "mai-thinking-1",
+          "name": "MAI-Thinking-1",
+          "maker": "microsoft",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-06-01",
+              "lifecycle": "Preview",
+              "retires": "2027-03-02"
+            }
+          ],
+          "retires": "2027-03-02"
         },
         {
           "id": "mai-transcribe-1",
@@ -6486,6 +6827,20 @@
           "replacement": "mai-transcribe-1.5"
         },
         {
+          "id": "mai-transcribe-2-streaming",
+          "name": "MAI-Transcribe-2-Streaming",
+          "maker": "microsoft",
+          "kind": "audio",
+          "versions": [
+            {
+              "version": "2026-08-06",
+              "lifecycle": "Preview",
+              "retires": "2026-12-04"
+            }
+          ],
+          "retires": "2026-12-04"
+        },
+        {
           "id": "meta-llama-3.1-405b-instruct",
           "name": "Meta-Llama-3.1-405B-Instruct",
           "maker": "meta",
@@ -6497,7 +6852,8 @@
               "retires": "2026-06-13"
             }
           ],
-          "retires": "2026-06-13"
+          "retires": "2026-06-13",
+          "off_page": "2026-11-20"
         },
         {
           "id": "meta-llama-3.1-8b",
@@ -6511,7 +6867,8 @@
               "retires": "2026-06-13"
             }
           ],
-          "retires": "2026-06-13"
+          "retires": "2026-06-13",
+          "off_page": "2026-11-20"
         },
         {
           "id": "meta-llama-3.1-8b-instruct",
@@ -6525,7 +6882,22 @@
               "retires": "2026-06-13"
             }
           ],
-          "retires": "2026-06-13"
+          "retires": "2026-06-13",
+          "off_page": "2026-11-20"
+        },
+        {
+          "id": "microsoft-decision-1",
+          "name": "Microsoft-Decision-1",
+          "maker": "microsoft",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-02-04"
+            }
+          ],
+          "retires": "2027-02-04"
         },
         {
           "id": "ministral-3b",
@@ -6555,7 +6927,8 @@
               "retires": "2026-07-20"
             }
           ],
-          "retires": "2026-07-20"
+          "retires": "2026-07-20",
+          "off_page": "2026-11-20"
         },
         {
           "id": "mistral-document-ai-2512",
@@ -6588,6 +6961,34 @@
           ],
           "retires": "2026-12-09",
           "replacement": "mistral-medium-3-5"
+        },
+        {
+          "id": "mistral-medium-3-5",
+          "name": "mistral-medium-3-5",
+          "maker": "mistral",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "Preview",
+              "retires": "2027-10-01"
+            }
+          ],
+          "retires": "2027-10-01"
+        },
+        {
+          "id": "mistral-ocr-4-0",
+          "name": "mistral-ocr-4-0",
+          "maker": "mistral",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "1",
+              "lifecycle": "GA",
+              "retires": "2027-10-01"
+            }
+          ],
+          "retires": "2027-10-01"
         },
         {
           "id": "mistral-small-2503",
@@ -6840,19 +7241,19 @@
           "versions": [
             {
               "version": "2025-10-06",
-              "lifecycle": "Preview",
+              "lifecycle": "Retired",
               "retires": "2026-07-15",
               "replacement": "sora-2",
               "replacement_version": "2025-12-08"
             },
             {
               "version": "2025-12-08",
-              "lifecycle": "Preview",
+              "lifecycle": "Retired",
               "retires": "2026-10-15"
             }
           ],
           "retires": "2026-07-15",
-          "replacement": "sora-2"
+          "off_page": "2026-11-20"
         },
         {
           "id": "stable-diffusion-3.5-large",
@@ -6866,7 +7267,8 @@
               "retires": "2026-07-31"
             }
           ],
-          "retires": "2026-07-31"
+          "retires": "2026-07-31",
+          "off_page": "2026-11-20"
         },
         {
           "id": "stable-image-core",
@@ -6880,7 +7282,8 @@
               "retires": "2026-07-31"
             }
           ],
-          "retires": "2026-07-31"
+          "retires": "2026-07-31",
+          "off_page": "2026-11-20"
         },
         {
           "id": "stable-image-ultra",
@@ -6894,7 +7297,8 @@
               "retires": "2026-07-31"
             }
           ],
-          "retires": "2026-07-31"
+          "retires": "2026-07-31",
+          "off_page": "2026-11-20"
         },
         {
           "id": "text-embedding-3-large",
@@ -7022,7 +7426,7 @@
       "direct": true,
       "maintained": "ai",
       "source": "https://api-docs.deepseek.com/updates",
-      "checked": "2026-11-19",
+      "checked": "2026-11-20",
       "models": [
         {
           "id": "deepseek-chat",

@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Google Vertex AI model retirement dates","description":"Retirement dates for 64 Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.","url":"https://aidriftline.com/models/vertex/","dateModified":"2026-11-15","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Google Vertex AI model retirement dates","description":"Retirement dates for 64 Google Vertex AI model IDs (Gemini, Imagen, Veo, embeddings, Claude and open models), from Google Cloud's own pages. Vertex uses the Gemini API's model names with its own dates.","url":"https://aidriftline.com/models/vertex/","dateModified":"2026-11-21","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
 </head>
 <body>
 <header class="nav scrolled">
@@ -34,15 +34,16 @@
     <p class="crumbs"><a href="/models/">Model retirement dates</a> / Vertex AI</p>
     <span class="eyebrow">Google Vertex AI</span>
     <h1>Vertex AI model retirement dates</h1>
-    <p class="updated">64 model IDs · read from Google Cloud 15 November 2026, checked every 6 hours</p>
+    <p class="updated">64 model IDs · read from Google Cloud 21 November 2026, checked every 6 hours</p>
     <p class="answer">Google Vertex AI (now part of Gemini Enterprise Agent Platform) uses the Gemini API's model names but sets its own retirement dates, and they often differ: gemini-2.5-pro was retired on Vertex on 20 October 2026 while the Gemini API keeps answering it until 1 December, when it routes to a newer model. For calls through Vertex, only Vertex's dates apply. Sources: <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions" rel="noopener">model versions</a>, <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/partner-models" rel="noopener">partner models</a>, <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/deprecations/open-models" rel="noopener">open models</a>.</p>
     <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Vertex's dates in files that run on Vertex.</p>
-    <h2>Coming up (8)</h2>
+    <h2>Coming up (9)</h2>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Date on Vertex</th><th scope="col">Gemini API / Anthropic</th></tr></thead>
       <tbody>
         <tr><td><a href="/models/vertex/claude-sonnet-4-5/"><code>claude-sonnet-4-5</code></a></td><td>Anthropic</td><td>30 Nov 2026</td><td><a href="/models/claude-sonnet-4-5-20250929/"><code>claude-sonnet-4-5-20250929</code></a> <span class="dim">30 Nov 2026</span></td></tr>
         <tr><td><a href="/models/vertex/gemini-live-2.5-flash-native-audio/"><code>gemini-live-2.5-flash-native-audio</code></a> <span class="dim">audio</span></td><td>Google</td><td>13 Dec 2026</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/vertex/gemini-3.6-flash/"><code>gemini-3.6-flash</code></a></td><td>Google</td><td>28 Jan 2027</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/vertex/gemini-3.7-flash/"><code>gemini-3.7-flash</code></a></td><td>Google</td><td>28 Jan 2027</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/vertex/gemini-2.5-flash-image/"><code>gemini-2.5-flash-image</code></a> <span class="dim">image</span></td><td>Google</td><td>15 Mar 2027</td><td><a href="/models/gemini-2.5-flash-image/"><code>gemini-2.5-flash-image</code></a> <span class="dim">15 Mar 2027</span></td></tr>
         <tr><td><a href="/models/vertex/multimodalembedding-001/"><code>multimodalembedding@001</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><span class="dim">—</span></td></tr>
@@ -51,11 +52,10 @@
         <tr><td><a href="/models/vertex/text-multilingual-embedding-002/"><code>text-multilingual-embedding-002</code></a> <span class="dim">embedding</span></td><td>Google</td><td>1 Apr 2027</td><td><span class="dim">—</span></td></tr>
       </tbody>
     </table></div>
-    <h2>Already retired (56)</h2>
+    <h2>Already retired (55)</h2>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model ID</th><th scope="col">Maker</th><th scope="col">Date on Vertex</th><th scope="col">Gemini API / Anthropic</th></tr></thead>
       <tbody>
-        <tr><td><a href="/models/vertex/gemini-3.6-flash/"><code>gemini-3.6-flash</code></a></td><td>Google</td><td>19 Nov 2026</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/vertex/qwen3-next-80b-a3b-thinking-maas/"><code>qwen3-next-80b-a3b-thinking-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/vertex/qwen3-next-80b-a3b-instruct-maas/"><code>qwen3-next-80b-a3b-instruct-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/vertex/qwen3-coder-480b-a35b-instruct-maas/"><code>qwen3-coder-480b-a35b-instruct-maas</code></a></td><td>Qwen</td><td>21 Oct 2026</td><td><span class="dim">—</span></td></tr>
