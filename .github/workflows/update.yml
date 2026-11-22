@@ -149,3 +149,12 @@ jobs:
           git push
           # Pushes made with the workflow token may not start a Pages build on their own.
           gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Pages build request failed (the push may still deploy)."
+          # Tell Bing (and the other IndexNow engines) which URLs just changed, once Pages has had time to deploy.
+          # Google doesn't use IndexNow; it reads the sitemap dates. A failed ping never fails the run.
+          n=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("feed/indexnow.json","utf8")).length)')
+          if [ "$n" -gt 0 ]; then
+            sleep 90
+            node -e 'const u=JSON.parse(require("fs").readFileSync("feed/indexnow.json","utf8")).slice(0,10000);process.stdout.write(JSON.stringify({host:"aidriftline.com",key:"54eb6b5c111c1ea73b03a1b98e9d9e17",keyLocation:"https://aidriftline.com/54eb6b5c111c1ea73b03a1b98e9d9e17.txt",urlList:u}))' > "$RUNNER_TEMP/indexnow.json"
+            code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' --data-binary @"$RUNNER_TEMP/indexnow.json" || echo 000)
+            echo "IndexNow: sent $n changed URLs, answer $code (200/202 = accepted)" | tee -a "$GITHUB_STEP_SUMMARY"
+          fi

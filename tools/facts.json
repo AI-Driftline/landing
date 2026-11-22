@@ -1,0 +1,44 @@
+{
+  "_about": "The one place for product facts (source: tools/facts.json in the landing repo). tools/build.mjs writes llms.txt, llms-full.txt, the home page's SoftwareApplication data and /facts.json from it. The build fails if the product gains a CLI command, option or Action input that this file doesn't mention (see 'covers'). Change a fact here, add a line to 'changes', and the next build updates every file.",
+  "name": "Driftline",
+  "tagline": "Know before your AI model disappears.",
+  "summary": "Driftline is a GitHub Action, CLI and MCP server that finds AI model IDs in a codebase (OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq, plus Amazon Bedrock, Google Vertex AI and Azure with their own dates), warns before those models are retired, renames them where a new name is the whole change, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.",
+  "free": [
+    "Scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). `--json` for machine-readable output, `--sarif <file>` for GitHub code scanning. Exit code 1 = a retired model is used in code.",
+    "Fix: `npx -y @aidriftline/driftline fix .` renames retiring model IDs where a new name is the whole change (`--dry-run` to preview). Calls that need more (new parameters, a different API, a choice between two replacements, Bedrock and Azure IDs) are left alone and listed.",
+    "GitHub Action: `uses: AI-Driftline/driftline@v0` (Marketplace: \"Driftline AI Model Check\"). Flags each retiring model on the exact line with a migration note (whether a rename is enough), writes a job summary, can write SARIF (`sarif-file`), open one self-updating issue (`create-issue`) and fail the build (`fail-on`, `warn-days`).",
+    "Fix pull request: with `fix-pr: true` the Action opens one draft pull request with the safe renames and a checklist of what is left for you, with the provider's guide per model. It stays up to date, keeps your ticks, and leaves the pull request alone once people commit to it.",
+    "MCP server for coding agents: `claude mcp add driftline -- npx -y @aidriftline/driftline mcp` (tools: check_models, scan_project, upcoming_retirements).",
+    "Alerts: sign up on any model page for an email, or a Slack, Discord or webhook message, 30 days and 7 days before, on the day, and when a date or replacement changes."
+  ],
+  "pro": {
+    "what": "Drift tests on your prompts (`prompts-file`, default .driftline/prompts.yml). Each prompt runs on the current and the replacement model and gets a similarity score, a hard fail if JSON stops parsing, and optional checks on meaning: `must_include`, `must_not_include` (phrases) and `same_fields` (JSON fields that must keep their value). An answer that gains or loses a \"not\" is never marked same. Results go into the job summary (`show-answers` to include the answers) and, with fix-pr, into the pull request with a verdict.",
+    "price_monthly_usd": 19,
+    "price_yearly_usd": 190,
+    "accounts_per_key": 3,
+    "payments": "Polar (merchant of record)",
+    "activate": "Run `npx -y @aidriftline/driftline activate <license-key>` once per GitHub account and save the code it prints (not the plain key) as the DRIFTLINE_LICENSE_KEY secret (`license-key` input). `deactivate <code>` frees a slot (`--account <name>` to choose the account).",
+    "refund": "Full refund within 14 days of the first payment; cancel any time in the Polar customer portal."
+  },
+  "license": "Elastic License 2.0 (source available)",
+  "contact": "hello@aidriftline.com",
+  "links": {
+    "site": "https://aidriftline.com/",
+    "repo": "https://github.com/AI-Driftline/driftline",
+    "npm": "https://www.npmjs.com/package/@aidriftline/driftline",
+    "marketplace": "https://github.com/marketplace/actions/driftline-ai-model-check",
+    "x": "https://x.com/aidriftline"
+  },
+  "covers": {
+    "_about": "Every CLI command/option and Action input must be named in this file's text or listed in 'internal'. The build checks this against the product's src/cli.js help and action.yml.",
+    "internal": ["path", "registry", "github-token", "help", "version"]
+  },
+  "changes": [
+    { "date": "2026-11-17", "what": "Pro payments and license keys moved from Lemon Squeezy to Polar. Lemon Squeezy is no longer used; Polar is the merchant of record." },
+    { "date": "2026-11-16", "what": "Drift tests gained meaning checks: must_include, must_not_include and same_fields, and a gained or lost \"not\" is never marked same (v0.10.0)." },
+    { "date": "2026-11-15", "what": "Fix pull request (fix-pr): one draft pull request with the safe renames and a checklist for the rest (v0.9.0)." },
+    { "date": "2026-11-15", "what": "Migration notes on every finding: whether moving to the replacement is a rename or needs more." },
+    { "date": "2026-11-14", "what": "SARIF output for GitHub code scanning (--sarif, sarif-file)." },
+    { "date": "2026-11-11", "what": "MCP server and npm package @aidriftline/driftline; listed in the official MCP Registry." }
+  ]
+}

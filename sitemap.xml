@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aidriftline.com/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/agents/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/google-2026-12-01-gemini-2-5-pro-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2026-12-01-gpt-image-1-mini-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2027-01-06-tts-1-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2027-01-14-gpt-4o-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2027-01-20-gpt-realtime-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2027-02-26-whisper-1-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-2027-04-01-gpt-5-3-codex-and-more-retirement/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/blog/openai-gpt-5-o3-retirement/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://aidriftline.com/agents/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/fix-retiring-ai-models-in-one-pull-request/</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/anthropic-2026-11-30-claude-sonnet-4-5-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/google-2026-12-01-gemini-2-5-pro-and-more-retirement/</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2026-12-01-gpt-image-1-mini-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2027-01-06-tts-1-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2027-01-14-gpt-4o-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2027-01-20-gpt-realtime-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2027-02-26-whisper-1-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-2027-04-01-gpt-5-3-codex-and-more-retirement/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/blog/openai-gpt-5-o3-retirement/</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://aidriftline.com/models/code-cushman-001/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/code-cushman-002/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/code-davinci-001/</loc><lastmod>2026-11-20</lastmod></url>
@@ -688,7 +688,11 @@
   <url><loc>https://aidriftline.com/models/cohere/embed-english-light-v2.0/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/cohere/embed-english-v2.0/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/cohere/embed-multilingual-v2.0/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/terms.html</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/privacy.html</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://aidriftline.com/refunds.html</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://aidriftline.com/terms.html</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://aidriftline.com/privacy.html</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://aidriftline.com/refunds.html</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://aidriftline.com/llms.txt</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/llms-full.txt</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://aidriftline.com/models.json</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://aidriftline.com/facts.json</loc><lastmod>2026-11-22</lastmod></url>
 </urlset>

@@ -7,7 +7,9 @@
 //   feed.xml                     RSS: one item per announced retirement (models sharing date + replacement grouped)
 //   retirements.ics              the same as a calendar to subscribe to (all-day events)
 //   status/index.html, status.json  when each source was last read, recent changes, entries under review
-//   sitemap.xml, robots.txt
+//   facts.json                   product facts from tools/facts.json (+ version, counts); also feed llms.txt + home JSON-LD
+//   sitemap.xml, robots.txt      sitemap dates move only when a page's content changed (feed/sitemap-dates.json);
+//                                feed/indexnow.json = URLs changed in this build, sent to IndexNow by the workflow
 // It also refreshes the model count and "checked" date written into index.html and agents/index.html.
 //
 // Run after every registry change:  node tools/build.mjs [path/to/models.json]
@@ -16,6 +18,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://aidriftline.com";
@@ -29,6 +32,26 @@ for (const m of reg.models) if (disputed[m.id]) m.under_review = disputed[m.id];
 const { migrationFor, MIGRATION_LABEL } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "migration.js")).href);
 const { buildRegistry } = await import(pathToFileURL(join(dirname(regPath), "..", "src", "registry.js")).href);
 const { batchArticles, render: renderBlocks } = await import("./articles.mjs");
+
+// ---------- product facts (facts.json): the one place for what Driftline does, costs and changed ----------
+// llms.txt, llms-full.txt, /facts.json and the home page's SoftwareApplication data are written from it.
+const PRODUCT = join(dirname(regPath), "..");
+const FACTS = JSON.parse(readFileSync(join(ROOT, "tools", "facts.json"), "utf8")); // source; /facts.json is the built copy
+const VERSION = JSON.parse(readFileSync(join(PRODUCT, "package.json"), "utf8")).version;
+{
+  // A new CLI command/option or Action input must be described in facts.json before the site builds,
+  // so the files AI assistants read never fall behind the product.
+  const text = JSON.stringify(FACTS);
+  const help = readFileSync(join(PRODUCT, "src", "cli.js"), "utf8").match(/const HELP = `([\s\S]*?)`;/)?.[1] || "";
+  const action = readFileSync(join(PRODUCT, "action.yml"), "utf8").split(/^outputs:/m)[0];
+  const words = new Set([
+    ...[...help.matchAll(/driftline (\w[\w-]*)/g)].map((m) => m[1]),
+    ...[...help.matchAll(/--([a-z][\w-]*)/g)].map((m) => m[1]),
+    ...[...action.matchAll(/^  ([a-z][\w-]*):$/gm)].map((m) => m[1]),
+  ]);
+  const missing = [...words].filter((w) => !FACTS.covers.internal.includes(w) && !text.includes(w));
+  if (missing.length) throw new Error(`facts.json doesn't mention: ${missing.join(", ")}. Describe them (or list them in covers.internal), then build again.`);
+}
 const models = [...reg.models].sort((a, b) => a.retires.localeCompare(b.retires) || a.id.localeCompare(b.id));
 const byId = new Map(models.map((m) => [m.id, m]));
 // Claude short names ("claude-sonnet-4-5") get a page too: people search for those, not the dated snapshot.
@@ -694,15 +717,24 @@ const withMigration = reg.models.map((m) => { const mig = migrationFor(m); retur
 const platformsWithMigration = Object.fromEntries(Object.entries(reg.platforms || {}).map(([k, p]) => [k, { ...p, models: (p.models || []).map((pm) => { const mig = pm.replacement && platMig(k, pm.id); return mig && mig.change !== "rename" && mig.change !== "platform" ? { ...pm, migration: mig } : pm; }) }]));
 writeFileSync(join(ROOT, "models.json"), JSON.stringify({ ...reg, platforms: platformsWithMigration, models: withMigration, url: `${SITE}/models.json`, pages: `${SITE}/models/<id>/` }, null, 2) + "\n");
 
-const LLMS = `# Driftline
+const recent = [...FACTS.changes].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
+const PRO = FACTS.pro;
+const LLMS = `# ${FACTS.name}
 
-> Driftline is a GitHub Action and CLI that finds OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq model IDs (and Amazon Bedrock, Vertex AI and Azure's own dates) in a codebase, warns before those models are retired, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
+> ${FACTS.summary}
 
-- Free scan: \`npx -y @aidriftline/driftline .\` in any repository (no install, no key). Add \`--json\` for machine-readable output. Exit code 1 = a retired model is used in code.
-- GitHub Action: \`uses: AI-Driftline/driftline@v0\` (Marketplace: "Driftline AI Model Check"). Annotates the file and line, writes a job summary, can open one self-updating issue and fail the build.
-- Pro: drift tests on your prompts. Each prompt runs on the current and the replacement model and gets a similarity score, a hard fail if JSON stops parsing, and optional checks on meaning: \`must_include\`, \`must_not_include\` (phrases) and \`same_fields\` (JSON fields that must keep their value). An answer that gains or loses a "not" is never marked same. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations.
+Current version: ${VERSION} (this file was rebuilt on ${new Date().toISOString().slice(0, 10)}; model data checked ${reg.checked}). Facts as JSON: ${SITE}/facts.json
+
+${FACTS.free.map((f) => `- ${f}`).join("\n")}
+- Pro: ${PRO.what} $${PRO.price_monthly_usd}/month or $${PRO.price_yearly_usd}/year, one key covers up to ${PRO.accounts_per_key} GitHub accounts or organizations. Payments: ${PRO.payments}. ${PRO.activate} ${PRO.refund}
 - Tracks ${totalIds} model IDs (checked ${reg.checked}): ${models.length} from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: ${SITE}/status/
-- License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
+- License: ${FACTS.license}. Contact: ${FACTS.contact}
+
+## Recent changes
+
+Newest first. Where an older description of Driftline disagrees with these, these are current.
+
+${recent.map((c) => `- ${c.date}: ${c.what}`).join("\n")}
 
 ## Retirement data
 
@@ -720,7 +752,7 @@ ${DIRECT.map(([key, p, list]) => `- [${p.name} dates](${SITE}/models/${key}/): $
 
 - [Agent guide](${SITE}/agents/): how to check model IDs before you write or keep them, and a snippet for AGENTS.md / CLAUDE.md
 - MCP server: \`claude mcp add driftline -- npx -y @aidriftline/driftline mcp\` (tools: check_models, scan_project, upcoming_retirements)
-- Rule of thumb: before adding or keeping an OpenAI, Anthropic or Google model ID, look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
+- Rule of thumb: before adding or keeping any AI model ID (OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek, Groq, or one called through Bedrock, Vertex AI or Azure), look it up. Do not introduce an ID whose status is retired, or whose date is within 90 days, without telling the user.
 
 ## Docs
 
@@ -731,6 +763,8 @@ ${DIRECT.map(([key, p, list]) => `- [${p.name} dates](${SITE}/models/${key}/): $
 - [Pricing and FAQ](${SITE}/#pricing)
 `;
 writeFileSync(join(ROOT, "llms.txt"), LLMS);
+const { _about, covers, ...publicFacts } = FACTS;
+writeFileSync(join(ROOT, "facts.json"), JSON.stringify({ ...publicFacts, _about, covers, version: VERSION, model_ids: totalIds, data_checked: reg.checked, url: `${SITE}/facts.json` }, null, 2) + "\n");
 
 const line = (m) => `- ${m.id} (${WHO[m.provider]}${m.kind && m.kind !== "text" ? `, ${m.kind}` : ""}): ${dateKind(m).toLowerCase()} ${m.retires}${m.replacement ? `, replacement ${m.replacement}` : ""}${m.routes ? " (requests routed to the replacement)" : ""}`;
 writeFileSync(join(ROOT, "llms-full.txt"), `${LLMS}
@@ -1000,11 +1034,6 @@ writeFileSync(join(ROOT, "status.json"), JSON.stringify({
 }, null, 1) + "\n");
 
 const pages = ["/", "/models/", "/status/", "/agents/", ...(posts.length ? ["/blog/", ...posts.map((p) => `/blog/${p.slug}/`)] : []), ...[...models, ...aliases].map((m) => url(m.id)), ...(bedrock.length ? ["/models/bedrock/", ...bedrock.map((pm) => brUrl(pm.id))] : []), ...(vertex.length ? ["/models/vertex/", ...vertex.map((v) => vxUrl(v.id))] : []), ...(azure.length ? ["/models/azure/", ...azure.map((a) => azUrl(a.id))] : []), ...DIRECT.flatMap(([key, , list]) => [`/models/${key}/`, ...list.map((m) => dUrl(key, m.id))]), "/terms.html", "/privacy.html", "/refunds.html"];
-writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map((p) => `  <url><loc>${SITE}${p}</loc><lastmod>${p.startsWith("/models") || p === "/" ? reg.checked : "2026-10-11"}</lastmod></url>`).join("\n")}
-</urlset>
-`);
 // Everyone, AI crawlers included, is welcome: being quoted by assistants is the point.
 writeFileSync(join(ROOT, "robots.txt"), `User-agent: *
 Allow: /
@@ -1072,7 +1101,27 @@ for (const f of ["index.html", "agents/index.html"]) {
     .replace(/(<(span|b) data-reg="count">)[^<]*(<\/\2>)/g, `$1${models.length}$3`)
     .replace(/(<(span|b) data-reg="total">)[^<]*(<\/\2>)/g, `$1${totalIds}$3`)
     .replace(/(<span data-reg="checked">)[^<]*(<\/span>)/g, `$1${short(reg.checked)}$2`);
-  writeFileSync(p, f === "index.html" ? withFaqLd(s) : s);
+  writeFileSync(p, f === "index.html" ? withAppLd(withFaqLd(s)) : s);
+}
+
+// The home page's SoftwareApplication data, from facts.json (version, prices, description, last change).
+function withAppLd(html) {
+  const app = {
+    "@context": "https://schema.org", "@type": "SoftwareApplication", name: FACTS.name, alternateName: "Driftline AI Model Check",
+    url: SITE + "/", description: FACTS.summary, softwareVersion: VERSION, dateModified: [reg.checked, ...FACTS.changes.map((c) => c.date)].sort().pop(),
+    applicationCategory: "DeveloperApplication", operatingSystem: "GitHub Actions, Linux, macOS, Windows (Node 20+)",
+    codeRepository: FACTS.links.repo, license: "https://www.elastic.co/licensing/elastic-license",
+    offers: [
+      { "@type": "Offer", name: "Free scan, fix and fix pull request", price: "0", priceCurrency: "USD" },
+      { "@type": "Offer", name: "Pro (monthly)", price: String(FACTS.pro.price_monthly_usd), priceCurrency: "USD" },
+      { "@type": "Offer", name: "Pro (yearly)", price: String(FACTS.pro.price_yearly_usd), priceCurrency: "USD" },
+    ],
+    sameAs: [FACTS.links.repo, FACTS.links.marketplace, FACTS.links.npm, FACTS.links.x],
+  };
+  const tag = `<script type="application/ld+json" id="app-ld">${JSON.stringify(app).replace(/</g, "\\u003c")}</script>`;
+  const re = /<script type="application\/ld\+json"(?: id="app-ld")?>\{"@context":"https:\/\/schema\.org","@type":"SoftwareApplication"[\s\S]*?<\/script>/;
+  if (!re.test(html)) throw new Error("index.html: SoftwareApplication data not found");
+  return html.replace(re, tag);
 }
 
 // The home page FAQ, copied into FAQPage structured data so assistants can quote it.
@@ -1084,6 +1133,36 @@ function withFaqLd(html) {
   return /<script type="application\/ld\+json" id="faq-ld">[\s\S]*?<\/script>/.test(html)
     ? html.replace(/<script type="application\/ld\+json" id="faq-ld">[\s\S]*?<\/script>/, tag)
     : html.replace("</head>", `${tag}\n</head>`);
+}
+
+// ---------- sitemap with real dates, and the list of changed URLs for IndexNow ----------
+// feed/sitemap-dates.json keeps a fingerprint per URL; a URL's date moves only when its content changed.
+// feed/indexnow.json lists the URLs that changed in this build (the workflow sends them to IndexNow).
+{
+  const DATES = join(ROOT, "feed", "sitemap-dates.json");
+  const old = existsSync(DATES) ? JSON.parse(readFileSync(DATES, "utf8")) : {};
+  const today = new Date().toISOString().slice(0, 10);
+  const lastCommit = (f) => { try { return execFileSync("git", ["log", "-1", "--format=%cs", "--", f], { cwd: ROOT, encoding: "utf8" }).trim(); } catch { return ""; } };
+  const fileOf = (u) => join(ROOT, u.endsWith("/") ? `${u}index.html` : u);
+  const urls = [...pages, "/llms.txt", "/llms-full.txt", "/models.json", "/facts.json"];
+  const next = {}, changed = [];
+  for (const u of urls) {
+    const f = fileOf(u);
+    if (!existsSync(f)) continue;
+    const hash = createHash("sha256").update(readFileSync(f)).digest("hex").slice(0, 16);
+    const prev = old[u];
+    // First build with this file: keep the old rule's date so nothing pretends to be new.
+    const seed = u.startsWith("/models") || u === "/" ? reg.checked : lastCommit(f) || today;
+    next[u] = prev && prev.hash === hash ? prev : { hash, date: prev ? today : seed };
+    if (!prev || prev.hash !== hash) changed.push(SITE + u);
+  }
+  writeFileSync(DATES, JSON.stringify(next, null, 0).replace(/\},"/g, '},\n"') + "\n");
+  writeFileSync(join(ROOT, "feed", "indexnow.json"), JSON.stringify(changed) + "\n");
+  writeFileSync(join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${Object.entries(next).map(([u, v]) => `  <url><loc>${SITE}${u}</loc><lastmod>${v.date}</lastmod></url>`).join("\n")}
+</urlset>
+`);
 }
 
 console.log(`Built ${models.length} model pages + ${aliases.length} Claude short-name pages, models/index.html, models.json, llms.txt, llms-full.txt, feed.xml (${feedItems.length} items), retirements.ics (${calEvents.length} events), sitemap.xml (${pages.length} URLs), robots.txt. Registry checked ${reg.checked}.`);
