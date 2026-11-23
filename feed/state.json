@@ -266,6 +266,7 @@
     "new:openai:repl:2026-12-11|exact|gpt-6.1-terra||",
     "new:openai:repl:2026-12-11|exact|gpt-6-luna||",
     "new:google:date:2027-03-31|earliest|gemini-3.8-live||",
-    "new:google:date:2026-12-18|earliest|gemini-3.8-flash-tts||"
+    "new:google:date:2026-12-18|earliest|gemini-3.8-flash-tts||",
+    "week:2026-11-30:anthropic"
   ]
 }

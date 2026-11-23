@@ -18,9 +18,9 @@ const REGISTRY_URL = "https://raw.githubusercontent.com/AI-Driftline/driftline/m
 const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google" };
 
 // Backup copy, used until the live registry loads or if GitHub can't be reached.
-// Models with a fixed date and a replacement, from registry/models.json (checked 2026-11-21); written by tools/build.mjs.
+// Models with a fixed date and a replacement, from registry/models.json (checked 2026-11-22); written by tools/build.mjs.
 const SNAPSHOT = {
-  checked: "2026-11-21",
+  checked: "2026-11-22",
   count: 257,
   total: 653,
   models: [

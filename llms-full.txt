@@ -2,7 +2,7 @@
 
 > Driftline is a GitHub Action, CLI and MCP server that finds AI model IDs in a codebase (OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq, plus Amazon Bedrock, Google Vertex AI and Azure with their own dates), warns before those models are retired, renames them where a new name is the whole change, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
-Current version: 0.11.6 (this file was rebuilt on 2026-11-22; model data checked 2026-11-21). Facts as JSON: https://aidriftline.com/facts.json
+Current version: 0.11.6 (this file was rebuilt on 2026-11-23; model data checked 2026-11-22). Facts as JSON: https://aidriftline.com/facts.json
 
 - Scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). `--json` for machine-readable output, `--sarif <file>` for GitHub code scanning. Exit code 1 = a retired model is used in code.
 - Fix: `npx -y @aidriftline/driftline fix .` renames retiring model IDs where a new name is the whole change (`--dry-run` to preview). Calls that need more (new parameters, a different API, a choice between two replacements, Bedrock and Azure IDs) are left alone and listed.
@@ -11,7 +11,7 @@ Current version: 0.11.6 (this file was rebuilt on 2026-11-22; model data checked
 - MCP server for coding agents: `claude mcp add driftline -- npx -y @aidriftline/driftline mcp` (tools: check_models, scan_project, upcoming_retirements).
 - Alerts: sign up on any model page for an email, or a Slack, Discord or webhook message, 30 days and 7 days before, on the day, and when a date or replacement changes.
 - Pro: Drift tests on your prompts (`prompts-file`, default .driftline/prompts.yml). Each prompt runs on the current and the replacement model and gets a similarity score, a hard fail if JSON stops parsing, and optional checks on meaning: `must_include`, `must_not_include` (phrases) and `same_fields` (JSON fields that must keep their value). An answer that gains or loses a "not" is never marked same. Results go into the job summary (`show-answers` to include the answers) and, with fix-pr, into the pull request with a verdict. $19/month or $190/year, one key covers up to 3 GitHub accounts or organizations. Payments: Polar (merchant of record). Run `npx -y @aidriftline/driftline activate <license-key>` once per GitHub account and save the code it prints (not the plain key) as the DRIFTLINE_LICENSE_KEY secret (`license-key` input). `deactivate <code>` frees a slot (`--account <name>` to choose the account). Full refund within 14 days of the first payment; cancel any time in the Polar customer portal.
-- Tracks 653 model IDs (checked 2026-11-21): 257 from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: https://aidriftline.com/status/
+- Tracks 653 model IDs (checked 2026-11-22): 257 from OpenAI, Anthropic and Google, plus Groq, Mistral, xAI, Cohere and DeepSeek, and Amazon Bedrock, Google Vertex AI and Azure with their own dates. Status of every source: https://aidriftline.com/status/
 - License: Elastic License 2.0 (source available). Contact: hello@aidriftline.com
 
 ## Recent changes
@@ -56,7 +56,7 @@ Newest first. Where an older description of Driftline disagrees with these, thes
 - [GitHub Marketplace](https://github.com/marketplace/actions/driftline-ai-model-check)
 - [Pricing and FAQ](https://aidriftline.com/#pricing)
 
-## Upcoming retirements (as of 2026-11-21)
+## Upcoming retirements (as of 2026-11-22)
 
 - claude-opus-4-5-20251101 (Anthropic): not before 2026-11-24
 - claude-sonnet-4-5-20250929 (Anthropic): shutdown 2026-11-30, replacement claude-sonnet-5-5
