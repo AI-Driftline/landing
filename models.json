@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-23",
+  "checked": "2026-11-24",
   "note": "Hand-maintained from the official deprecation pages. Re-check before each release. Entries with a 'kind' other than text are scanned and reported but never drift-tested. gpt-4-1106-preview is listed on OpenAI's page under both 2026-03-26 and 2026-10-23; the later date is used so builds are not failed on a conflicting record. Entries with routes: true keep answering after the date, but the provider sends the requests to the replacement model (Google calls this automatic routing); the 'retires' date is the day routing starts. gemini-3.5-flash and gemini-3.7-flash already route to newer models with no date given, so they are left out. gemini-3.1-flash-live-preview was removed on 2026-11-14: Google now lists it with no shutdown date.",
   "sources": {
     "openai": "https://developers.openai.com/api/docs/deprecations",
@@ -4761,7 +4761,7 @@
     "azure": {
       "name": "Azure",
       "source": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
-      "checked": "2026-11-20",
+      "checked": "2026-11-24",
       "models": [
         {
           "id": "claude-fable-5",
@@ -6680,6 +6680,20 @@
           "retires": "2027-04-16"
         },
         {
+          "id": "kimi-k3.1-pro",
+          "name": "Kimi-K3.1-Pro",
+          "maker": "moonshot",
+          "kind": "text",
+          "versions": [
+            {
+              "version": "2026-11-04",
+              "lifecycle": "GA",
+              "retires": "2027-11-04"
+            }
+          ],
+          "retires": "2027-11-04"
+        },
+        {
           "id": "llama-3.2-11b-vision-instruct",
           "name": "Llama-3.2-11B-Vision-Instruct",
           "maker": "meta",
@@ -6718,10 +6732,10 @@
             {
               "version": "—",
               "lifecycle": "GA",
-              "retires": "2027-01-31"
+              "retires": "2027-02-03"
             }
           ],
-          "retires": "2027-01-31"
+          "retires": "2027-02-03"
         },
         {
           "id": "llama-4-maverick-17b-128e-instruct-fp8",
@@ -6732,10 +6746,10 @@
             {
               "version": "—",
               "lifecycle": "GA",
-              "retires": "2026-11-19"
+              "retires": "2027-02-03"
             }
           ],
-          "retires": "2026-11-19"
+          "retires": "2027-02-03"
         },
         {
           "id": "llama-4-scout-17b-16e-instruct",
@@ -6746,10 +6760,10 @@
             {
               "version": "—",
               "lifecycle": "GA",
-              "retires": "2027-01-31"
+              "retires": "2027-02-03"
             }
           ],
-          "retires": "2027-01-31"
+          "retires": "2027-02-03"
         },
         {
           "id": "mai-image-2",
@@ -7484,7 +7498,7 @@
       "direct": true,
       "maintained": "ai",
       "source": "https://api-docs.deepseek.com/updates",
-      "checked": "2026-11-23",
+      "checked": "2026-11-24",
       "models": [
         {
           "id": "deepseek-chat",
