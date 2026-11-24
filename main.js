@@ -18,11 +18,11 @@ const REGISTRY_URL = "https://raw.githubusercontent.com/AI-Driftline/driftline/m
 const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google" };
 
 // Backup copy, used until the live registry loads or if GitHub can't be reached.
-// Models with a fixed date and a replacement, from registry/models.json (checked 2026-11-22); written by tools/build.mjs.
+// Models with a fixed date and a replacement, from registry/models.json (checked 2026-11-23); written by tools/build.mjs.
 const SNAPSHOT = {
-  checked: "2026-11-22",
+  checked: "2026-11-23",
   count: 257,
-  total: 653,
+  total: 654,
   models: [
     { id: "gpt-3.5-turbo-instruct", provider: "openai", retires: "2026-09-28", replacement: "gpt-5.6-terra" },
     { id: "babbage-002", provider: "openai", retires: "2026-09-28", replacement: "gpt-5.6-terra" },
@@ -96,6 +96,7 @@ const SNAPSHOT = {
     { id: "gpt-realtime-mini-2025-12-15", provider: "openai", retires: "2027-01-20", replacement: "gpt-realtime-2.1-mini", kind: "audio" },
     { id: "gpt-4o-mini-realtime", provider: "openai", retires: "2027-01-20", replacement: "gpt-realtime-2.1-mini", kind: "audio" },
     { id: "gpt-4o-mini-transcribe-2025-03-20", provider: "openai", retires: "2027-01-20", replacement: "gpt-4o-mini-transcribe-2025-12-15", kind: "audio" },
+    { id: "claude-opus-4-5-20251101", provider: "anthropic", retires: "2027-01-22", replacement: "claude-opus-5-5" },
     { id: "gpt-image-2", provider: "openai", retires: "2027-02-10", replacement: "gpt-image-2.6-sunburst", kind: "image" },
     { id: "gpt-image-2-2026-04-21", provider: "openai", retires: "2027-02-10", replacement: "gpt-image-2.6-sunburst", kind: "image" },
     { id: "whisper-1", provider: "openai", retires: "2027-02-26", replacement: "gpt-live-transcribe", kind: "audio" },

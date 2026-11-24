@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-22",
+  "checked": "2026-11-23",
   "note": "Hand-maintained from the official deprecation pages. Re-check before each release. Entries with a 'kind' other than text are scanned and reported but never drift-tested. gpt-4-1106-preview is listed on OpenAI's page under both 2026-03-26 and 2026-10-23; the later date is used so builds are not failed on a conflicting record. Entries with routes: true keep answering after the date, but the provider sends the requests to the replacement model (Google calls this automatic routing); the 'retires' date is the day routing starts. gemini-3.5-flash and gemini-3.7-flash already route to newer models with no date given, so they are left out. gemini-3.1-flash-live-preview was removed on 2026-11-14: Google now lists it with no shutdown date.",
   "sources": {
     "openai": "https://developers.openai.com/api/docs/deprecations",
@@ -757,9 +757,16 @@
     {
       "id": "claude-opus-4-5-20251101",
       "provider": "anthropic",
-      "retires": "2026-11-24",
-      "qualifier": "not-before",
-      "replacement": null
+      "retires": "2027-01-22",
+      "qualifier": "exact",
+      "replacement": "claude-opus-5-5",
+      "announced": "2026-11-23",
+      "migration": {
+        "change": "params",
+        "drop_in": false,
+        "note": "Claude 4.7 and later accept only the default temperature, top_p and top_k: if your code sets them, remove them.",
+        "guide": "https://platform.claude.com/docs/en/api/migration-2026-10-21"
+      }
     },
     {
       "id": "claude-haiku-4-5-20251001",
@@ -2593,7 +2600,7 @@
     "bedrock": {
       "name": "Amazon Bedrock",
       "source": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
-      "checked": "2026-11-16",
+      "checked": "2026-11-24",
       "models": [
         {
           "id": "ai21.jamba-1-5-large-v1:0",
@@ -2889,6 +2896,57 @@
           "retires": "2027-01-08",
           "legacy": "2026-07-08",
           "extended": "2026-10-08"
+        },
+        {
+          "id": "anthropic.claude-opus-4-5-20251101-v1:0",
+          "maker": "anthropic",
+          "name": "Claude Opus 4.5",
+          "kind": "text",
+          "regions": [
+            {
+              "regions": [
+                "af-south-1",
+                "ap-east-2",
+                "ap-northeast-1",
+                "ap-northeast-2",
+                "ap-northeast-3",
+                "ap-south-1",
+                "ap-south-2",
+                "ap-southeast-1",
+                "ap-southeast-2",
+                "ap-southeast-3",
+                "ap-southeast-4",
+                "ap-southeast-5",
+                "ap-southeast-6",
+                "ap-southeast-7",
+                "ca-central-1",
+                "ca-west-1",
+                "eu-central-1",
+                "eu-central-2",
+                "eu-north-1",
+                "eu-south-1",
+                "eu-south-2",
+                "eu-west-1",
+                "eu-west-2",
+                "eu-west-3",
+                "il-central-1",
+                "me-central-1",
+                "me-south-1",
+                "mx-central-1",
+                "sa-east-1",
+                "us-east-1",
+                "us-east-2",
+                "us-west-1",
+                "us-west-2"
+              ],
+              "legacy": "2026-11-23",
+              "retires": "2027-05-23",
+              "extended": "2027-02-23"
+            }
+          ],
+          "retires": "2027-05-23",
+          "legacy": "2026-11-23",
+          "extended": "2027-02-23"
         },
         {
           "id": "anthropic.claude-sonnet-4-20250514-v1:0",
@@ -7426,7 +7484,7 @@
       "direct": true,
       "maintained": "ai",
       "source": "https://api-docs.deepseek.com/updates",
-      "checked": "2026-11-21",
+      "checked": "2026-11-23",
       "models": [
         {
           "id": "deepseek-chat",

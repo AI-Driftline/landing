@@ -37,14 +37,11 @@
     <p class="updated">175 models · read from Microsoft 20 November 2026, checked every 6 hours</p>
     <p class="answer">Azure (Azure OpenAI and Foundry Models) uses OpenAI's model names but sets its own retirement date for every model version, and it differs in both directions: o3 retires on Azure on 19 November 2026, three weeks before OpenAI's 11 December, while gpt-5 lasts on Azure until 9 February 2027. For calls through Azure, only Azure's dates apply. Source: <a href="https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule" rel="noopener">Microsoft model retirement schedule</a>.</p>
     <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Azure's dates in files that call Azure, and reads the model version from Bicep and Terraform deployments.</p>
-    <h2>Retiring (54)</h2>
+    <h2>Retiring (53)</h2>
     <p class="dim">Deprecated or legacy versions, and any model within 90 days of its date.</p>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Next date</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
       <tbody>
-        <tr><td><a href="/models/azure/mai-image-2.5/"><code>mai-image-2.5</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
-        <tr><td><a href="/models/azure/mai-image-2.5-flash/"><code>mai-image-2.5-flash</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
-        <tr><td><a href="/models/azure/mai-image-2.5-pro/"><code>mai-image-2.5-pro</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/claude-sonnet-4-5/"><code>claude-sonnet-4-5</code></a></td><td>Anthropic</td><td>30 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/deepseek-v4-flash-0731/"><code>deepseek-v4-flash-0731</code></a></td><td>DeepSeek</td><td>3 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/mai-transcribe-2-streaming/"><code>mai-transcribe-2-streaming</code></a> <span class="dim">audio</span></td><td>Microsoft</td><td>4 Dec 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
@@ -92,19 +89,19 @@
         <tr><td><a href="/models/azure/cohere-embed-v3-multilingual/"><code>cohere-embed-v3-multilingual</code></a> <span class="dim">embedding</span></td><td>Cohere</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/mistral-document-ai-2512/"><code>mistral-document-ai-2512</code></a></td><td>Mistral AI</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/mistral-small-2503/"><code>mistral-small-2503</code></a></td><td>Mistral AI</td><td>15 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-haiku-4-5/"><code>claude-haiku-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/claude-opus-4-5/"><code>claude-opus-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/gpt-4.1/"><code>gpt-4.1</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-2025-04-14/"><code>gpt-4.1-2025-04-14</code></a> <span class="dim">14 Jan 2027</span></td></tr>
         <tr><td><a href="/models/azure/gpt-4.1-mini/"><code>gpt-4.1-mini</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-mini-2025-04-14/"><code>gpt-4.1-mini-2025-04-14</code></a> <span class="dim">14 Jan 2027</span></td></tr>
         <tr><td><a href="/models/azure/gpt-4.1-nano/"><code>gpt-4.1-nano</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4.1-nano-2025-04-14/"><code>gpt-4.1-nano-2025-04-14</code></a> <span class="dim">23 Oct 2026</span></td></tr>
         <tr><td><a href="/models/azure/gpt-4o-mini/"><code>gpt-4o-mini</code></a></td><td>OpenAI</td><td>14 Apr 2027</td><td>1</td><td><a href="/models/gpt-4o-mini-2024-07-18/"><code>gpt-4o-mini-2024-07-18</code></a> <span class="dim">14 Jan 2027</span></td></tr>
       </tbody>
     </table></div>
-    <h2>Current models with a planned end (79)</h2>
+    <h2>Current models with a planned end (77)</h2>
     <p class="dim">Azure plans an end date for every model ahead of time. These are current (GA or preview).</p>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Next date</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
       <tbody>
-        <tr><td><a href="/models/azure/claude-haiku-4-5/"><code>claude-haiku-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>2</td><td><span class="dim">—</span></td></tr>
-        <tr><td><a href="/models/azure/claude-opus-4-5/"><code>claude-opus-4-5</code></a></td><td>Anthropic</td><td>22 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/gpt-4o-transcribe/"><code>gpt-4o-transcribe</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>26 Feb 2027</td><td>1</td><td><a href="/models/gpt-4o-transcribe/"><code>gpt-4o-transcribe</code></a> <span class="dim">26 Feb 2027</span></td></tr>
         <tr><td><a href="/models/azure/gpt-audio/"><code>gpt-audio</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>2 Mar 2027</td><td>1</td><td><a href="/models/gpt-audio-2025-08-28/"><code>gpt-audio-2025-08-28</code></a> <span class="dim">20 Jan 2027</span></td></tr>
         <tr><td><a href="/models/azure/gpt-realtime/"><code>gpt-realtime</code></a> <span class="dim">audio</span></td><td>OpenAI</td><td>2 Mar 2027</td><td>1</td><td><a href="/models/gpt-realtime-2025-08-28/"><code>gpt-realtime-2025-08-28</code></a> <span class="dim">20 Jan 2027</span></td></tr>
@@ -184,10 +181,13 @@
         <tr><td><a href="/models/azure/gpt-6.1-sol/"><code>gpt-6.1-sol</code></a></td><td>OpenAI</td><td>11 Mar 2028</td><td>1</td><td><span class="dim">—</span></td></tr>
       </tbody>
     </table></div>
-    <h2>Already retired (42)</h2>
+    <h2>Already retired (45)</h2>
     <div class="table-scroll"><table class="list">
       <thead><tr><th scope="col">Model</th><th scope="col">Maker</th><th scope="col">Retired</th><th scope="col">Versions</th><th scope="col">OpenAI's API</th></tr></thead>
       <tbody>
+        <tr><td><a href="/models/azure/mai-image-2.5-pro/"><code>mai-image-2.5-pro</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2.5-flash/"><code>mai-image-2.5-flash</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/mai-image-2.5/"><code>mai-image-2.5</code></a> <span class="dim">image</span></td><td>Microsoft</td><td>24 Nov 2026</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/o4-mini/"><code>o4-mini</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o4-mini-2025-04-16/"><code>o4-mini-2025-04-16</code></a> <span class="dim">23 Oct 2026</span></td></tr>
         <tr><td><a href="/models/azure/o3-pro/"><code>o3-pro</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-pro-2025-06-10/"><code>o3-pro-2025-06-10</code></a> <span class="dim">11 Dec 2026</span></td></tr>
         <tr><td><a href="/models/azure/o3-mini/"><code>o3-mini</code></a></td><td>OpenAI</td><td>19 Nov 2026</td><td>1</td><td><a href="/models/o3-mini-2025-01-31/"><code>o3-mini-2025-01-31</code></a> <span class="dim">23 Oct 2026</span></td></tr>

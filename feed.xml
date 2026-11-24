@@ -6,8 +6,20 @@
   <atom:link href="https://aidriftline.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>When OpenAI, Anthropic and Google retire or re-route their models, from the official deprecation pages, checked daily.</description>
   <language>en</language>
-  <lastBuildDate>Sun, 22 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 00:00:00 GMT</lastBuildDate>
   <ttl>360</ttl>
+  <item>
+    <title>Anthropic retires claude-opus-4-5-20251101 on 22 Jan 2027</title>
+    <link>https://aidriftline.com/models/claude-opus-4-5-20251101/</link>
+    <guid isPermaLink="false">driftline:anthropic|2027-01-22|exact|claude-opus-5-5|</guid>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+    <description>Anthropic shuts these models down on 22 January 2027. Calls to them fail after that.
+Models: claude-opus-4-5-20251101
+Replacement: claude-opus-5-5
+Source: https://platform.claude.com/docs/en/about-claude/model-deprecations
+Details: https://aidriftline.com/models/claude-opus-4-5-20251101/
+Check your code: npx -y @aidriftline/driftline .</description>
+  </item>
   <item>
     <title>OpenAI retires gpt-image-2, gpt-image-2-2026-04-21 on 10 Feb 2027</title>
     <link>https://aidriftline.com/models/gpt-image-2/</link>
@@ -161,16 +173,6 @@ Models: babbage-002, davinci-002, gpt-3.5-turbo-1106, gpt-3.5-turbo-instruct
 Replacement: gpt-5.6-terra
 Source: https://developers.openai.com/api/docs/deprecations
 Details: https://aidriftline.com/models/babbage-002/
-Check your code: npx -y @aidriftline/driftline .</description>
-  </item>
-  <item>
-    <title>OpenAI retires sora-2, sora-2-2025-10-06 and 3 more on 24 Sept 2026</title>
-    <link>https://aidriftline.com/models/sora-2/</link>
-    <guid isPermaLink="false">driftline:openai|2026-09-24|exact||</guid>
-    <description>OpenAI shuts these models down on 24 September 2026. Calls to them fail after that.
-Models: sora-2, sora-2-2025-10-06, sora-2-2025-12-08, sora-2-pro, sora-2-pro-2025-10-06
-Source: https://developers.openai.com/api/docs/deprecations
-Details: https://aidriftline.com/models/sora-2/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>

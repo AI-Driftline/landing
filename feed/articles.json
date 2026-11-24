@@ -70,5 +70,9 @@
    "id": 5060035,
    "drafted": "2026-11-17"
   }
+ },
+ "anthropic-2027-01-22-claude-opus-4-5-retirement": {
+  "date": "2026-11-24",
+  "facts": "[[\"claude-opus-4-5-20251101\",\"2027-01-22\",\"claude-opus-5-5\",null,null]]"
  }
 }
