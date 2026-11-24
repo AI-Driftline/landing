@@ -1,64 +1,63 @@
 {
- "at": "2026-11-24T10:21:32.520Z",
+ "at": "2026-11-24T22:43:24.381Z",
  "sources": {
   "bedrock": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:29.383Z"
+   "at": "2026-11-24T22:43:20.885Z"
   },
   "vertex": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:31.327Z"
+   "at": "2026-11-24T22:43:23.311Z"
   },
   "azure": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:31.543Z"
+   "at": "2026-11-24T22:43:23.570Z"
   },
   "groq": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:32.520Z"
+   "at": "2026-11-24T22:43:24.381Z"
   },
   "mistral": {
-   "result": "ok",
-   "differences": 0,
-   "at": "2026-11-24T10:21:32.520Z"
+   "result": "unreadable",
+   "at": "2026-11-24T22:43:24.381Z"
   },
   "xai": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:32.520Z"
+   "at": "2026-11-24T22:43:24.381Z"
   },
   "cohere": {
    "result": "ok",
    "differences": 0,
-   "at": "2026-11-24T10:21:32.520Z"
+   "at": "2026-11-24T22:43:24.381Z"
   },
   "openai": {
    "result": "ok",
    "differences": 0,
    "new": 0,
-   "at": "2026-11-24T10:21:28.935Z"
+   "at": "2026-11-24T22:43:20.452Z"
   },
   "anthropic": {
    "result": "ok",
    "differences": 0,
    "new": 0,
-   "at": "2026-11-24T10:21:28.935Z"
+   "at": "2026-11-24T22:43:20.452Z"
   },
   "google": {
    "result": "ok",
    "differences": 0,
    "new": 0,
-   "at": "2026-11-24T10:21:28.935Z"
+   "at": "2026-11-24T22:43:20.452Z"
   },
   "deepseek": {
    "result": "ok",
    "differences": 0,
    "new": 0,
-   "at": "2026-11-24T10:21:28.935Z"
+   "at": "2026-11-24T22:43:20.452Z"
   }
  }
 }
