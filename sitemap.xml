@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aidriftline.com/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/models/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://aidriftline.com/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://aidriftline.com/agents/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://aidriftline.com/blog/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://aidriftline.com/blog/anthropic-2027-01-22-claude-opus-4-5-retirement/</loc><lastmod>2026-11-24</lastmod></url>
@@ -622,54 +622,55 @@
   <url><loc>https://aidriftline.com/models/groq/qwen-qwen3.6-27b/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/groq/groq-compound/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/groq/groq-compound-mini/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2407/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/open-mistral-7b/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/open-mixtral-8x22b/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/open-mixtral-8x7b/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/open-codestral-mamba/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/codestral-2405/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2402/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2312/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2402/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-saba-2502/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/codestral-2501/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/devstral-small-2505/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2506/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2507/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/magistral-small-2506/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/magistral-small-2507/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2409/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2501/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2503/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/ministral-3b-2410/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/ministral-8b-2410/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-2503/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/pixtral-12b-2409/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/labs-devstral-small-2512/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/labs-mistral-small-creative/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/devstral-medium-2507/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/devstral-small-2507/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2411/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-2505/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/pixtral-large-2411/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-2507/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/labs-leanstral-2603/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-moderation-2411/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/devstral-2512/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2509/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2506/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/open-mistral-nemo-2407/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2505/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2508/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/labs-leanstral-1-5/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-4-0/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/zai-glm-5-2/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2512/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-3-5/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-2602/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-transcribe-realtime-2602/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-tts-2603/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2407/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/open-mistral-7b/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/open-mixtral-8x22b/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/open-mixtral-8x7b/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/open-codestral-mamba/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/codestral-2405/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2402/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2312/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2402/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-saba-2502/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/codestral-2501/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/devstral-small-2505/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2506/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2507/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-small-2506/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-small-2507/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2409/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2501/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2503/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/ministral-3b-2410/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/ministral-8b-2410/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-2503/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/pixtral-12b-2409/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/labs-devstral-small-2512/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/labs-mistral-small-creative/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/devstral-medium-2507/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/devstral-small-2507/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2411/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-2505/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/pixtral-large-2411/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-2507/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/labs-leanstral-2603/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-moderation-2411/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/devstral-2512/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-medium-2509/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/magistral-small-2509/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-small-2506/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/open-mistral-nemo-2407/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2505/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-2508/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/labs-leanstral-1-5/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-ocr-4-0/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/zai-glm-5-2/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-large-2512/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/mistral-medium-3-5/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-2602/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-transcribe-realtime-2602/</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models/mistral/voxtral-mini-tts-2603/</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://aidriftline.com/models/xai/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/xai/grok-3/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://aidriftline.com/models/xai/grok-4-0709/</loc><lastmod>2026-11-20</lastmod></url>
@@ -695,8 +696,8 @@
   <url><loc>https://aidriftline.com/terms.html</loc><lastmod>2026-11-17</lastmod></url>
   <url><loc>https://aidriftline.com/privacy.html</loc><lastmod>2026-11-17</lastmod></url>
   <url><loc>https://aidriftline.com/refunds.html</loc><lastmod>2026-11-17</lastmod></url>
-  <url><loc>https://aidriftline.com/llms.txt</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/llms-full.txt</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/models.json</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/facts.json</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://aidriftline.com/llms.txt</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/llms-full.txt</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/models.json</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://aidriftline.com/facts.json</loc><lastmod>2026-11-25</lastmod></url>
 </urlset>

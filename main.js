@@ -22,7 +22,7 @@ const WHO = { openai: "OpenAI", anthropic: "Anthropic", google: "Google" };
 const SNAPSHOT = {
   checked: "2026-11-24",
   count: 257,
-  total: 656,
+  total: 657,
   models: [
     { id: "gpt-3.5-turbo-instruct", provider: "openai", retires: "2026-09-28", replacement: "gpt-5.6-terra" },
     { id: "babbage-002", provider: "openai", retires: "2026-09-28", replacement: "gpt-5.6-terra" },
