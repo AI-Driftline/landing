@@ -69,7 +69,7 @@
  },
  {
   "id": "tip-claude-params",
-  "text": "Moving from Claude 4.6 or older to 4.7 or later? If your code sets temperature, top_p or top_k, remove them. Those models accept only the defaults.\n\nFind the calls that set them:\nnpx -y @aidriftline/driftline ."
+  "text": "Moving from Claude 4.6 or older to 4.7 or later? If your code sets temperature, top_p or top_k, remove them. Those models accept only the defaults.\n\nFind the old Claude IDs:\nnpx -y @aidriftline/driftline ."
  },
  {
   "id": "tip-reembed",
