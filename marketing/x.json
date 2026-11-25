@@ -46,5 +46,57 @@
  {
   "id": "free-scan",
   "text": "Driftline's scan is free, with no account and no key: GitHub Action, CLI and MCP server.\n\n{total} model IDs from 8 providers and 3 clouds, each with the replacement its provider recommends.\ngithub.com/AI-Driftline/driftline"
+ },
+ {
+  "id": "checks-must-include",
+  "text": "Word overlap can't tell \"is eligible\" from \"is not eligible\".\n\nIn .driftline/prompts.yml, add must_include and must_not_include to a prompt. If the new model's answer fails a check, the prompt is marked broken.\ngithub.com/AI-Driftline/driftline#checks"
+ },
+ {
+  "id": "checks-same-fields",
+  "text": "Your prompt returns JSON? Add same_fields: [status, total, customer.id].\n\nThose fields must keep the current model's value on the replacement, or the prompt is marked broken. Dots reach nested fields.\ngithub.com/AI-Driftline/driftline#checks"
+ },
+ {
+  "id": "migration-labels",
+  "text": "Not every replacement is a rename. Driftline labels each one: Rename, Parameter changes, API change, Re-embed data, Pick one of two, or Fewer features.\n\nThe label and the provider's guide are on every model page.\naidriftline.com/models/"
+ },
+ {
+  "id": "under-review",
+  "text": "When a provider's page and Driftline's registry disagree, the model is marked \"under review\" and its alerts wait. You never get a date that might be wrong.\n\nSee what is under review right now:\naidriftline.com/status/"
+ },
+ {
+  "id": "routed-models",
+  "text": "Some retirements don't switch the model off. Google routes old Gemini IDs to a newer model, and xAI and DeepSeek often redirect too.\n\nThe call keeps working and the answers change, so Driftline flags these as well.\naidriftline.com/models/"
+ },
+ {
+  "id": "tip-claude-params",
+  "text": "Moving from Claude 4.6 or older to 4.7 or later? If your code sets temperature, top_p or top_k, remove them. Those models accept only the defaults.\n\nFind the old Claude IDs:\nnpx -y @aidriftline/driftline ."
+ },
+ {
+  "id": "tip-reembed",
+  "text": "Moving to a new embedding model? Vectors from different models can't be compared.\n\nRe-embed your stored data with the new model, query with that same model, and check the vector size: it may differ.\nnpx -y @aidriftline/driftline ."
+ },
+ {
+  "id": "tip-fail-on",
+  "text": "Choose when the build fails. In the Action, fail-on takes retired, at-risk or never, and warn-days sets what counts as retiring soon (default 90).\n\nStart with fail-on: never and read the report first.\ngithub.com/AI-Driftline/driftline"
+ },
+ {
+  "id": "tip-agents-md",
+  "text": "Put one rule in AGENTS.md or CLAUDE.md: run npx -y @aidriftline/driftline . --json before choosing a model ID, and never add one marked retired or at-risk.\n\nA ready-made snippet:\naidriftline.com/agents/"
+ },
+ {
+  "id": "numbers-30-days",
+  "text": "{retiring30} AI model IDs retire in the next 30 days, {retiring90} in the next 90.\n\nThe next fixed date is {next_date}: {next_id}.\n\nSee whether any of them are in your repository:\nnpx -y @aidriftline/driftline ."
+ },
+ {
+  "id": "numbers-tracked",
+  "text": "Driftline tracks {total} model IDs across 8 providers, Bedrock, Vertex AI and Azure, each with the replacement its provider names. Cloud platforms keep their own dates.\n\nBrowse them all:\naidriftline.com/models/"
+ },
+ {
+  "id": "retire-gpt-4o-0806",
+  "text": "On 14 Jan 2027 OpenAI retires gpt-4o-2024-08-06, gpt-4o-2024-11-20, gpt-4o-mini-2024-07-18, gpt-4.1-2025-04-14 and gpt-4.1-mini-2025-04-14. OpenAI's replacement for all five is gpt-6-luna.\n\naidriftline.com/models/gpt-4o-2024-08-06/"
+ },
+ {
+  "id": "retire-whisper-1",
+  "text": "On 26 Feb 2027 OpenAI retires whisper-1 and the gpt-4o transcribe models. OpenAI names gpt-transcribe for recorded files and gpt-live-transcribe for live audio.\n\nWord timestamps and subtitles work differently, so check them.\naidriftline.com/models/whisper-1/"
  }
 ]

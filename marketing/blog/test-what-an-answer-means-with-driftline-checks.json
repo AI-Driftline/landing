@@ -1,0 +1,32 @@
+{
+ "order": 4,
+ "title": "Test what an AI answer means, not only how it's worded",
+ "short": "Test what an AI answer means with Driftline checks",
+ "description": "Driftline's drift test scores how close two answers are in wording. Checks (must_include, must_not_include and same_fields) let you say what has to stay true, so a changed meaning fails the test.",
+ "tags": ["ai", "testing", "llm", "githubactions"],
+ "blocks": [
+  { "p": "Driftline's drift test runs each of your prompts on the current model and on its replacement and scores how similar the two answers are. The score reads wording, not meaning: \"is eligible\" and \"is not eligible\" share almost every word. Checks let you say what has to stay true, and a prompt that fails one is marked broken.", "answer": true },
+  { "h2": "The three checks" },
+  { "p": "Add them to any prompt in `.driftline/prompts.yml`:" },
+  { "code": "prompts:\n  - id: refund-reply\n    prompt: ...\n    must_include: [refund, \"5 business days\"]\n    must_not_include: [\"not eligible\"]\n\n  - id: invoice-json\n    expect: json\n    prompt: ...\n    same_fields: [status, total, customer.id]" },
+  { "ul": [
+   "**`must_include`**: each phrase must appear in the new answer.",
+   "**`must_not_include`**: none of these phrases may appear.",
+   "**`same_fields`**: for prompts with `expect: json`, these fields must keep the current model's value. Use dots for nested fields."
+  ] },
+  { "p": "Phrases ignore case and spacing. Lists can also be written with one item per line." },
+  { "h2": "What the results mean" },
+  { "table": [
+   ["Result", "Meaning"],
+   ["Same", "Similarity 0.90 or higher, and every check passed"],
+   ["Changed", "Similarity 0.60 to 0.90, or an answer gains or loses a \"not\", or a check the current model fails too"],
+   ["Broken", "Similarity below 0.60, JSON that no longer parses, or a check the new answer fails"]
+  ] },
+  { "p": "If the current model fails the same check, that isn't drift, so the prompt is marked changed instead of broken." },
+  { "h2": "Why it matters for the fix pull request" },
+  { "p": "With `fix-pr: true`, the pull request carries a verdict from your prompts. It says \"safe to merge\" only when your prompts have checks. Without checks it says the wording stayed close, which is a weaker claim." },
+  { "h2": "How many to write" },
+  { "p": "Start with the 5 to 20 prompts your app really sends, and add a check to the ones where a wrong answer costs something: a refund policy, a label, a total. The drift test makes two API calls per prompt on your own key, so ten prompts on a weekly schedule is 20 calls a week." },
+  { "p": "Checks are part of [Driftline Pro](/#drift). The scan and the fix pull request are free. The [README](https://github.com/AI-Driftline/driftline#checks) has the full syntax." }
+ ]
+}

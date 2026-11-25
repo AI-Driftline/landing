@@ -1,0 +1,29 @@
+{
+ "order": 3,
+ "title": "Moving from Claude Opus 4.5 to Opus 5.5: what to change before 22 January 2027",
+ "short": "Moving from Claude Opus 4.5 to Opus 5.5",
+ "description": "Anthropic retires claude-opus-4-5-20251101 on 22 January 2027 and names claude-opus-5-5 as the replacement. The model name changes, and so may your request: Claude 4.7 and later accept only default sampling parameters. How to find and fix the calls.",
+ "tags": ["ai", "anthropic", "llm", "programming"],
+ "blocks": [
+  { "p": "Anthropic retires `claude-opus-4-5-20251101` on 22 January 2027, and calls to it fail after that. Anthropic's replacement is `claude-opus-5-5`. Changing the model ID is the first step. The second is a request change: Claude 4.7 and later accept only the default `temperature`, `top_p` and `top_k`, so code that sets them needs an edit.", "answer": true },
+  { "h2": "1. Find every use of the old ID" },
+  { "p": "The ID can be in code, config files, environment files and infrastructure templates. A scan lists each one with its file and line:" },
+  { "code": "npx -y @aidriftline/driftline ." },
+  { "p": "It needs no install and no key. Exit code 1 means a retired model is used in code. Until the date passes, the report shows the model as retiring, with the date and the replacement." },
+  { "h2": "2. Change the model name" },
+  { "p": "Where the model name is the only change, Driftline can make it for you. Preview first:" },
+  { "code": "npx -y @aidriftline/driftline fix --dry-run" },
+  { "p": "For this move, expect most calls to be listed rather than changed: the replacement is not a plain rename when your code sets sampling parameters, and `fix` leaves those lines alone and says why." },
+  { "h2": "3. Remove the sampling parameters" },
+  { "p": "Anthropic's migration notes say Claude 4.7 and later accept only the default `temperature`, `top_p` and `top_k`. Search your code for the three names and remove them from requests that go to the new model. Anthropic's own guide has the full list of changes: [Anthropic migration guide](https://platform.claude.com/docs/en/api/migration-2026-10-21)." },
+  { "ul": [
+   "Check shared helper functions and wrapper libraries, since one default `temperature` there can reach every call.",
+   "If a setting was how you made answers more predictable, expect to rely on the prompt instead, and test the result.",
+   "Keep the old and new IDs apart in config until you have tested, so you can switch back before the retirement date."
+  ] },
+  { "h2": "4. Test the answers" },
+  { "p": "A working call is not the same as the same answer. Run the prompts your app really sends on both models and compare. Driftline Pro does this in CI: each prompt in `.driftline/prompts.yml` runs on the current and the replacement model, two API calls per prompt on your own key, and the result says whether the answer stayed close, changed or broke." },
+  { "code": "prompts:\n  - id: ticket-summary\n    model: claude-opus-4-5-20251101\n    compare_to: claude-opus-5-5\n    prompt: \"Summarize this support ticket in one sentence: the printer is jammed again.\"\n    must_include: [printer]" },
+  { "p": "The `must_include` line is a check on meaning: the new answer has to contain that phrase, or the prompt is marked broken. See the [Opus 4.5 model page](/models/claude-opus-4-5-20251101/) for the date and source, where you can also sign up for an alert by email, Slack or webhook." }
+ ]
+}
