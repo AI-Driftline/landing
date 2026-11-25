@@ -17,6 +17,12 @@
    "at": "2026-11-20T20:40:25.725Z",
    "tweet": "2123879159109660876",
    "text": "89 AI model IDs retire in the next 90 days across OpenAI, Anthropic, Google, Mistral, xAI, Groq, Cohere, DeepSeek, Bedrock, Vertex AI and Azure.\n\nFind the ones in your code, no install and no key:\nnpx -y @aidriftline/driftline ."
+  },
+  {
+   "id": "pro-verdict",
+   "at": "2026-11-25T21:56:49.622Z",
+   "tweet": "2125710325181776025",
+   "text": "A rename keeps the API call working. The answers can still change.\n\nDriftline Pro runs your real prompts on the old and the new model and puts a verdict in the fix pull request: safe to merge, read first, or don't merge yet.\naidriftline.com/#drift"
   }
  ],
  "blog": {
