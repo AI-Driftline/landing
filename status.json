@@ -1,13 +1,13 @@
 {
- "built": "2026-11-26T08:50:08.785Z",
- "summary": "1 of 11 sources need a look",
+ "built": "2026-11-26T21:52:30.044Z",
+ "summary": "2 of 11 sources need a look",
  "sources": [
   {
    "id": "openai",
    "name": "OpenAI",
    "page": "https://developers.openai.com/api/docs/deprecations",
    "models": 163,
-   "last_read": "2026-11-26T08:50:04.937Z",
+   "last_read": "2026-11-26T21:52:27.631Z",
    "result": "ok"
   },
   {
@@ -15,7 +15,7 @@
    "name": "Anthropic",
    "page": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
    "models": 37,
-   "last_read": "2026-11-26T08:50:04.937Z",
+   "last_read": "2026-11-26T21:52:27.631Z",
    "result": "ok"
   },
   {
@@ -23,7 +23,7 @@
    "name": "Google",
    "page": "https://ai.google.dev/gemini-api/docs/deprecations",
    "models": 57,
-   "last_read": "2026-11-26T08:50:04.937Z",
+   "last_read": "2026-11-26T21:52:27.631Z",
    "result": "ok"
   },
   {
@@ -31,7 +31,7 @@
    "name": "Amazon Bedrock",
    "page": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
    "models": 57,
-   "last_read": "2026-11-26T08:50:05.611Z",
+   "last_read": "2026-11-26T21:52:27.933Z",
    "result": "ok"
   },
   {
@@ -39,15 +39,15 @@
    "name": "Vertex AI",
    "page": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
    "models": 65,
-   "last_read": "2026-11-26T08:50:07.179Z",
-   "result": "ok"
+   "last_read": "2026-11-26T21:52:28.257Z",
+   "result": "Couldn't read the page"
   },
   {
    "id": "azure",
    "name": "Azure",
    "page": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
    "models": 176,
-   "last_read": "2026-11-26T08:50:07.354Z",
+   "last_read": "2026-11-26T21:52:28.499Z",
    "result": "ok"
   },
   {
@@ -55,7 +55,7 @@
    "name": "Groq",
    "page": "https://console.groq.com/docs/deprecations",
    "models": 30,
-   "last_read": "2026-11-26T08:50:08.211Z",
+   "last_read": "2026-11-26T21:52:29.470Z",
    "result": "ok"
   },
   {
@@ -63,7 +63,7 @@
    "name": "Mistral AI",
    "page": "https://docs.mistral.ai/models",
    "models": 48,
-   "last_read": "2026-11-26T08:50:08.211Z",
+   "last_read": "2026-11-26T21:52:29.470Z",
    "result": "48 differences, held as under review"
   },
   {
@@ -71,7 +71,7 @@
    "name": "xAI",
    "page": "https://docs.x.ai/developers/models",
    "models": 9,
-   "last_read": "2026-11-26T08:50:08.211Z",
+   "last_read": "2026-11-26T21:52:29.470Z",
    "result": "ok"
   },
   {
@@ -79,7 +79,7 @@
    "name": "Cohere",
    "page": "https://docs.cohere.com/docs/deprecations",
    "models": 11,
-   "last_read": "2026-11-26T08:50:08.211Z",
+   "last_read": "2026-11-26T21:52:29.470Z",
    "result": "ok"
   },
   {
@@ -87,7 +87,7 @@
    "name": "DeepSeek",
    "page": "https://api-docs.deepseek.com/updates",
    "models": 4,
-   "last_read": "2026-11-26T08:50:04.937Z",
+   "last_read": "2026-11-26T21:52:27.631Z",
    "result": "ok"
   }
  ],
