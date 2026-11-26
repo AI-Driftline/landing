@@ -1,13 +1,13 @@
 {
- "built": "2026-11-25T21:56:47.316Z",
- "summary": "All 11 sources match the registry",
+ "built": "2026-11-26T08:50:08.785Z",
+ "summary": "1 of 11 sources need a look",
  "sources": [
   {
    "id": "openai",
    "name": "OpenAI",
    "page": "https://developers.openai.com/api/docs/deprecations",
    "models": 163,
-   "last_read": "2026-11-25T21:56:43.462Z",
+   "last_read": "2026-11-26T08:50:04.937Z",
    "result": "ok"
   },
   {
@@ -15,7 +15,7 @@
    "name": "Anthropic",
    "page": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
    "models": 37,
-   "last_read": "2026-11-25T21:56:43.462Z",
+   "last_read": "2026-11-26T08:50:04.937Z",
    "result": "ok"
   },
   {
@@ -23,7 +23,7 @@
    "name": "Google",
    "page": "https://ai.google.dev/gemini-api/docs/deprecations",
    "models": 57,
-   "last_read": "2026-11-25T21:56:43.462Z",
+   "last_read": "2026-11-26T08:50:04.937Z",
    "result": "ok"
   },
   {
@@ -31,7 +31,7 @@
    "name": "Amazon Bedrock",
    "page": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
    "models": 57,
-   "last_read": "2026-11-25T21:56:44.005Z",
+   "last_read": "2026-11-26T08:50:05.611Z",
    "result": "ok"
   },
   {
@@ -39,7 +39,7 @@
    "name": "Vertex AI",
    "page": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
    "models": 65,
-   "last_read": "2026-11-25T21:56:45.525Z",
+   "last_read": "2026-11-26T08:50:07.179Z",
    "result": "ok"
   },
   {
@@ -47,7 +47,7 @@
    "name": "Azure",
    "page": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
    "models": 176,
-   "last_read": "2026-11-25T21:56:45.804Z",
+   "last_read": "2026-11-26T08:50:07.354Z",
    "result": "ok"
   },
   {
@@ -55,7 +55,7 @@
    "name": "Groq",
    "page": "https://console.groq.com/docs/deprecations",
    "models": 30,
-   "last_read": "2026-11-25T21:56:46.888Z",
+   "last_read": "2026-11-26T08:50:08.211Z",
    "result": "ok"
   },
   {
@@ -63,15 +63,15 @@
    "name": "Mistral AI",
    "page": "https://docs.mistral.ai/models",
    "models": 48,
-   "last_read": "2026-11-25T21:56:46.888Z",
-   "result": "ok"
+   "last_read": "2026-11-26T08:50:08.211Z",
+   "result": "48 differences, held as under review"
   },
   {
    "id": "xai",
    "name": "xAI",
    "page": "https://docs.x.ai/developers/models",
    "models": 9,
-   "last_read": "2026-11-25T21:56:46.888Z",
+   "last_read": "2026-11-26T08:50:08.211Z",
    "result": "ok"
   },
   {
@@ -79,7 +79,7 @@
    "name": "Cohere",
    "page": "https://docs.cohere.com/docs/deprecations",
    "models": 11,
-   "last_read": "2026-11-25T21:56:46.888Z",
+   "last_read": "2026-11-26T08:50:08.211Z",
    "result": "ok"
   },
   {
@@ -87,16 +87,73 @@
    "name": "DeepSeek",
    "page": "https://api-docs.deepseek.com/updates",
    "models": 4,
-   "last_read": "2026-11-25T21:56:43.462Z",
+   "last_read": "2026-11-26T08:50:04.937Z",
    "result": "ok"
   }
  ],
  "ai_check": {
-  "last_run": "2026-11-24T00:18:08Z",
-  "late": true
+  "last_run": "2026-11-25T22:11:46Z",
+  "late": false
  },
  "under_review": [],
  "recent_changes": [
+  {
+   "date": "2026-11-26T08:42:47Z",
+   "by": "Page script",
+   "summary": "Azure: 2 changes; Mistral AI: 48 changes at once;  not writing, needs a look:",
+   "details": [
+    "changed: grok-4 (1 2027-01-31 → 1 2027-02-03)",
+    "changed: grok-code-fast-1 (1 2027-01-31 → 1 2027-02-03)",
+    "changed: codestral-2405 (2025-06-16 → 2025-06-16)",
+    "changed: codestral-2501 (2025-11-30 → 2025-11-30, replacement codestral-2508 → codestral-2405)",
+    "changed: devstral-2512 (2026-07-31 → 2026-07-31)",
+    "changed: devstral-medium-2507 (2026-05-31 → 2026-05-31)",
+    "changed: devstral-small-2505 (2025-11-30 → 2025-11-30)",
+    "changed: devstral-small-2507 (2026-05-31 → 2026-05-31)",
+    "changed: labs-devstral-small-2512 (2026-03-31 → 2026-03-31)",
+    "changed: labs-leanstral-1-5 (2026-09-30 → 2026-09-30)",
+    "changed: labs-leanstral-2603 (2026-06-30 → 2026-06-30)",
+    "changed: labs-mistral-small-creative (2026-04-30 → 2026-04-30)",
+    "changed: magistral-medium-2506 (2025-11-30 → 2025-11-30)",
+    "changed: magistral-medium-2507 (2025-11-30 → 2025-11-30)",
+    "changed: magistral-medium-2509 (2026-07-31 → 2026-07-31)",
+    "changed: magistral-small-2506 (2025-11-30 → 2025-11-30)",
+    "changed: magistral-small-2507 (2025-11-30 → 2025-11-30)",
+    "changed: magistral-small-2509 (2026-07-31 → 2026-07-31)",
+    "changed: ministral-3b-2410 (2025-12-31 → 2025-12-31)",
+    "changed: ministral-8b-2410 (2025-12-31 → 2025-12-31)",
+    "changed: mistral-large-2402 (2025-06-16 → 2025-06-16)",
+    "changed: mistral-large-2407 (2025-03-30 → 2025-03-30)",
+    "changed: mistral-large-2411 (2026-05-31 → 2026-05-31)",
+    "changed: mistral-large-2512 (2027-04-30 → 2027-04-30)",
+    "changed: mistral-medium-2312 (2025-06-16 → 2025-06-16)",
+    "changed: mistral-medium-2505 (2026-08-31 → 2026-08-31)",
+    "changed: mistral-medium-2508 (2026-08-31 → 2026-08-31)",
+    "changed: mistral-medium-3-5 (2027-04-30 → 2027-04-30)",
+    "changed: mistral-moderation-2411 (2026-06-30 → 2026-06-30)",
+    "changed: mistral-ocr-2503 (2025-12-31 → 2025-12-31)",
+    "changed: mistral-ocr-2505 (2026-05-31 → 2026-05-31)",
+    "changed: mistral-ocr-4-0 (2026-09-30 → 2026-09-30)",
+    "changed: mistral-saba-2502 (2025-09-30 → 2025-09-30)",
+    "changed: mistral-small-2402 (2025-06-16 → 2025-06-16)",
+    "changed: mistral-small-2409 (2025-11-30 → 2025-11-30)",
+    "changed: mistral-small-2501 (2025-11-30 → 2025-11-30)",
+    "changed: mistral-small-2503 (2025-11-30 → 2025-11-30)",
+    "changed: mistral-small-2506 (2026-07-31 → 2026-07-31)",
+    "changed: open-codestral-mamba (2025-06-06 → 2025-06-06, replacement codestral-2508 → codestral-2405)",
+    "changed: open-mistral-7b (2025-03-30 → 2025-03-30)",
+    "changed: open-mistral-nemo-2407 (2026-07-31 → 2026-07-31)",
+    "changed: open-mixtral-8x22b (2025-03-30 → 2025-03-30)",
+    "changed: open-mixtral-8x7b (2025-03-30 → 2025-03-30)",
+    "changed: pixtral-12b-2409 (2025-12-31 → 2025-12-31)",
+    "changed: pixtral-large-2411 (2026-05-31 → 2026-05-31)",
+    "changed: voxtral-mini-2507 (2026-05-31 → 2026-05-31)",
+    "changed: voxtral-mini-2602 (2027-04-30 → 2027-04-30)",
+    "changed: voxtral-mini-transcribe-realtime-2602 (2027-04-30 → 2027-04-30)",
+    "changed: voxtral-mini-tts-2603 (2027-04-30 → 2027-04-30)",
+    "changed: zai-glm-5-2 (2026-10-31 → 2026-10-31)"
+   ]
+  },
   {
    "date": "2026-11-25T21:53:34Z",
    "by": "Page script",
@@ -203,12 +260,6 @@
    "date": "2026-11-11T16:39:28+09:00",
    "by": "Maintainer",
    "summary": "gpt-5/o3 aliases and 9 snapshots, gpt-image 2.6 replacement, claude-fable/mythos-5-2",
-   "details": []
-  },
-  {
-   "date": "2026-11-11T10:54:40+09:00",
-   "by": "Maintainer",
-   "summary": "Gemini 2.5 routing, gpt-image-2, gpt-5.5-cyber-preview; routed labels; CLI --json",
    "details": []
   }
  ],

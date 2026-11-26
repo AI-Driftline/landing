@@ -270,6 +270,7 @@
     "week:2026-11-30:anthropic",
     "new:anthropic:date:2027-01-22|exact|claude-opus-5-5||",
     "week:2026-12-01:google",
-    "week:2026-12-01:openai"
+    "week:2026-12-01:openai",
+    "week:2026-12-03:google"
   ]
 }

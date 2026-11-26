@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/json" href="/models.json" title="Driftline model retirement registry">
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="AI model retirements (Driftline)">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Azure OpenAI model retirement dates","description":"Retirement dates for 176 Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.","url":"https://aidriftline.com/models/azure/","dateModified":"2026-11-24","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Azure OpenAI model retirement dates","description":"Retirement dates for 176 Azure OpenAI and Foundry models (OpenAI, Claude, Llama, Mistral, xAI, DeepSeek, Cohere and more), per model version, from Microsoft's own schedule. Azure's dates often differ from the model maker's.","url":"https://aidriftline.com/models/azure/","dateModified":"2026-11-26","creator":{"@type":"Organization","name":"Driftline","url":"https://aidriftline.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://aidriftline.com/models.json"}]}</script>
 </head>
 <body>
 <header class="nav scrolled">
@@ -34,7 +34,7 @@
     <p class="crumbs"><a href="/models/">Model retirement dates</a> / Azure</p>
     <span class="eyebrow">Microsoft Azure</span>
     <h1>Azure model retirement dates</h1>
-    <p class="updated">176 models · read from Microsoft 24 November 2026, checked every 6 hours</p>
+    <p class="updated">176 models · read from Microsoft 26 November 2026, checked every 6 hours</p>
     <p class="answer">Azure (Azure OpenAI and Foundry Models) uses OpenAI's model names but sets its own retirement date for every model version, and it differs in both directions: o3 retires on Azure on 19 November 2026, three weeks before OpenAI's 11 December, while gpt-5 lasts on Azure until 9 February 2027. For calls through Azure, only Azure's dates apply. Source: <a href="https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule" rel="noopener">Microsoft model retirement schedule</a>.</p>
     <p>Check your code: <code>npx -y @aidriftline/driftline .</code> uses Azure's dates in files that call Azure, and reads the model version from Bicep and Terraform deployments.</p>
     <h2>Retiring (54)</h2>
@@ -72,9 +72,9 @@
         <tr><td><a href="/models/azure/cohere-embed-v5-pro/"><code>cohere-embed-v5-pro</code></a> <span class="dim">embedding</span></td><td>Cohere</td><td>23 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/kimi-k2.5/"><code>kimi-k2.5</code></a></td><td>Moonshot AI</td><td>26 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/model-router/"><code>model-router</code></a></td><td>Microsoft</td><td>27 Jan 2027</td><td>3</td><td><span class="dim">—</span></td></tr>
-        <tr><td><a href="/models/azure/grok-4/"><code>grok-4</code></a></td><td>xAI</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
-        <tr><td><a href="/models/azure/grok-code-fast-1/"><code>grok-code-fast-1</code></a></td><td>xAI</td><td>31 Jan 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/claude-opus-4-6/"><code>claude-opus-4-6</code></a></td><td>Anthropic</td><td>2 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-4/"><code>grok-4</code></a></td><td>xAI</td><td>3 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
+        <tr><td><a href="/models/azure/grok-code-fast-1/"><code>grok-code-fast-1</code></a></td><td>xAI</td><td>3 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/llama-3.3-70b-instruct/"><code>llama-3.3-70b-instruct</code></a></td><td>Meta</td><td>3 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/llama-4-maverick-17b-128e-instruct-fp8/"><code>llama-4-maverick-17b-128e-instruct-fp8</code></a></td><td>Meta</td><td>3 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
         <tr><td><a href="/models/azure/llama-4-scout-17b-16e-instruct/"><code>llama-4-scout-17b-16e-instruct</code></a></td><td>Meta</td><td>3 Feb 2027</td><td>1</td><td><span class="dim">—</span></td></tr>
