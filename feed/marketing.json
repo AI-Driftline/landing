@@ -23,6 +23,12 @@
    "at": "2026-11-25T21:56:49.622Z",
    "tweet": "2125710325181776025",
    "text": "A rename keeps the API call working. The answers can still change.\n\nDriftline Pro runs your real prompts on the old and the new model and puts a verdict in the fix pull request: safe to merge, read first, or don't merge yet.\naidriftline.com/#drift"
+  },
+  {
+   "id": "webhook-alerts",
+   "at": "2026-11-27T21:35:17.950Z",
+   "tweet": "2126429682551640234",
+   "text": "Retirement alerts for any AI model now go to Slack, Discord or any webhook, as well as email.\n\nOpen the model's page, paste the webhook link, and you get a post 30 days before, 7 days before and on the day.\naidriftline.com/models/"
   }
  ],
  "blog": {
