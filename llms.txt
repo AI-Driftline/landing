@@ -2,7 +2,7 @@
 
 > Driftline is a GitHub Action, CLI and MCP server that finds AI model IDs in a codebase (OpenAI, Anthropic, Google, Mistral, xAI, Cohere, DeepSeek and Groq, plus Amazon Bedrock, Google Vertex AI and Azure with their own dates), warns before those models are retired, renames them where a new name is the whole change, and (Pro) runs your real prompts on the current and the replacement model to show what changes. It runs in your own CI with your own API keys; there is no Driftline server.
 
-Current version: 0.11.7 (this file was rebuilt on 2026-11-27; model data checked 2026-11-26). Facts as JSON: https://aidriftline.com/facts.json
+Current version: 0.11.7 (this file was rebuilt on 2026-11-28; model data checked 2026-11-26). Facts as JSON: https://aidriftline.com/facts.json
 
 - Scan: `npx -y @aidriftline/driftline .` in any repository (no install, no key). `--json` for machine-readable output, `--sarif <file>` for GitHub code scanning. Exit code 1 = a retired model is used in code.
 - Fix: `npx -y @aidriftline/driftline fix .` renames retiring model IDs where a new name is the whole change (`--dry-run` to preview). Calls that need more (new parameters, a different API, a choice between two replacements, Bedrock and Azure IDs) are left alone and listed.

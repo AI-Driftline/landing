@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aidriftline.com/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://aidriftline.com/</loc><lastmod>2026-11-28</lastmod></url>
   <url><loc>https://aidriftline.com/models/</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://aidriftline.com/status/</loc><lastmod>2026-11-28</lastmod></url>
   <url><loc>https://aidriftline.com/agents/</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://aidriftline.com/blog/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://aidriftline.com/blog/anthropic-2027-01-22-claude-opus-4-5-retirement/</loc><lastmod>2026-11-27</lastmod></url>
@@ -409,7 +409,7 @@
   <url><loc>https://aidriftline.com/models/vertex/text-embedding-004/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://aidriftline.com/models/vertex/text-embedding-005/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://aidriftline.com/models/vertex/text-multilingual-embedding-002/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://aidriftline.com/models/azure/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://aidriftline.com/models/azure/</loc><lastmod>2026-11-28</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/grok-3/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/grok-3-mini/</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://aidriftline.com/models/azure/grok-4-fast-non-reasoning/</loc><lastmod>2026-11-26</lastmod></url>
@@ -696,8 +696,8 @@
   <url><loc>https://aidriftline.com/terms.html</loc><lastmod>2026-11-17</lastmod></url>
   <url><loc>https://aidriftline.com/privacy.html</loc><lastmod>2026-11-17</lastmod></url>
   <url><loc>https://aidriftline.com/refunds.html</loc><lastmod>2026-11-17</lastmod></url>
-  <url><loc>https://aidriftline.com/llms.txt</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://aidriftline.com/llms-full.txt</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://aidriftline.com/llms.txt</loc><lastmod>2026-11-28</lastmod></url>
+  <url><loc>https://aidriftline.com/llms-full.txt</loc><lastmod>2026-11-28</lastmod></url>
   <url><loc>https://aidriftline.com/models.json</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://aidriftline.com/facts.json</loc><lastmod>2026-11-27</lastmod></url>
 </urlset>

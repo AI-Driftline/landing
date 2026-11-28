@@ -164,18 +164,6 @@ Details: https://aidriftline.com/models/gpt-4.1-nano/
 Check your code: npx -y @aidriftline/driftline .</description>
   </item>
   <item>
-    <title>OpenAI retires babbage-002, davinci-002 and 2 more on 28 Sept 2026</title>
-    <link>https://aidriftline.com/models/babbage-002/</link>
-    <guid isPermaLink="false">driftline:openai|2026-09-28|exact|gpt-5.6-terra|</guid>
-    <pubDate>Fri, 26 Sep 2025 00:00:00 GMT</pubDate>
-    <description>OpenAI shuts these models down on 28 September 2026. Calls to them fail after that.
-Models: babbage-002, davinci-002, gpt-3.5-turbo-1106, gpt-3.5-turbo-instruct
-Replacement: gpt-5.6-terra
-Source: https://developers.openai.com/api/docs/deprecations
-Details: https://aidriftline.com/models/babbage-002/
-Check your code: npx -y @aidriftline/driftline .</description>
-  </item>
-  <item>
     <title>OpenAI retires gpt-5.4-cyber on 1 Oct 2026</title>
     <link>https://aidriftline.com/models/gpt-5.4-cyber/</link>
     <guid isPermaLink="false">driftline:openai|2026-10-01|exact||</guid>
